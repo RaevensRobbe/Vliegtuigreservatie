@@ -16,7 +16,8 @@ const seedDatabase = async (connection: Connection) => {
     const dbIsSeeded = await getRepository(Config).findOne('seeded');
     if (dbIsSeeded === undefined) {
 
-        await connection.manager.save(plainToClass(User, users)); // Seed users
+        await connection.manager.save(plainToClass(Country, users)); // Seed users
+        await connection.manager.save(plainToClass(User, users));
 
         // Mark as seeded.
         const seeded = new Config();

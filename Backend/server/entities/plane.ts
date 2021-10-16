@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Flight } from "./flight"
 
 @Entity('plane') // The table name
 export class Plane {
@@ -16,4 +17,8 @@ export class Plane {
 
     @Column('int')
     firstClassSeats?: number
+
+    @OneToMany(() => Flight, flight => flight.plane)
+    flights!: Flight[]; 
+
 }

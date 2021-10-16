@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Destination } from "./destination"
 
 @Entity('country') // The table name
 export class Country {
@@ -10,4 +11,7 @@ export class Country {
     
     @Column('text')
     Abbreviation?: string
+
+    @OneToMany(() => Destination, dest => dest.country)
+    dest!: Destination[]
 }

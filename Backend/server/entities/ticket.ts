@@ -1,28 +1,38 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Flight } from "./flight"
+import { User } from "./user"
 
 @Entity('ticket') // The table name
 export class Ticket {
     @PrimaryGeneratedColumn('uuid') // Generated as UUID in the database
-    Ticketid?: string
+    ticketid?: string
 
     @Column('simple-json')
-    Seat?: Record<string,string>
+    seat?: Record<string,string>
 
     @Column()
-    Return?: boolean
+    return?: boolean
 
     @Column()
-    Class?: string
+    class?: string
 
     @Column('date')
-    ReturnDate?: Date
+    returnDate?: Date
 
     @Column('simple-json')
-    Persons?: Record<number, string>
+    persons?: Record<number, string>
 
     @Column('int')
-    Gate?: number
+    gate?: number
 
     @Column('')
-    Rating?: string
+    rating?: string
+
+    @ManyToOne(() => User, user => user.ticket)
+    @JoinColumn({ name: "user_id" })
+    user!: User;
+
+    @ManyToOne(() => Flight, flight => flight.ticket)
+    @JoinColumn({ name: "ticket_id" })
+    flight!: Flight
 }

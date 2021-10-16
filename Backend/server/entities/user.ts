@@ -1,26 +1,30 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Ticket } from "./ticket"
 
 @Entity('user') // The table name
 export class User {
     @PrimaryGeneratedColumn('uuid') // Generated as UUID in the database
-    Userid?: string
+    userid?: string
 
     @Column({length: 30})
-    Name?: string
+    name?: string;
 
     @Column({length: 30})
-    SurName?: string
+    preName?: string;
 
     @Column('int')
-    Age?: number
+    age?: number;
     
     @Column({length: 100})
-    Emails?: string
+    email?: string;
 
     @Column({length: 50})
-    Sex?: string
+    gender?: string;
     
     @Column()
-    Admin?: boolean
+    admin?: boolean;
+
+    @OneToMany(() => Ticket, ticket => ticket.user)
+    ticket!: Ticket[];
 
 }
