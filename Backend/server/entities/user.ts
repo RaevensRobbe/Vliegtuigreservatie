@@ -4,27 +4,27 @@ import { Ticket } from "./ticket"
 @Entity('user') // The table name
 export class User {
     @PrimaryGeneratedColumn('uuid') // Generated as UUID in the database
-    userid?: string
+    Userid?: string
 
     @Column({length: 30})
-    name?: string;
+    Name?: string;
 
     @Column({length: 30})
-    preName?: string;
+    PreName?: string;
 
     @Column('int')
-    age?: number;
+    Age?: number;
     
     @Column({length: 100})
-    email?: string;
+    Email?: string;
 
     @Column({length: 50})
-    gender?: string;
+    Gender?: string;
     
     @Column()
-    admin?: boolean;
+    Admin?: boolean;
 
-    @OneToMany(() => Ticket, ticket => ticket.user)
-    ticket!: Ticket[];
+    @OneToMany(() => Ticket, ticket => ticket.User)
+    Ticket!: Ticket[];
 
 }

@@ -13,12 +13,12 @@ export class Plane {
     Type?: string
     
     @Column('int')
-    businessSeats?: number
+    BusinessSeats?: number
 
     @Column('int')
-    firstClassSeats?: number
+    FirstClassSeats?: number
 
-    @OneToMany(() => Flight, flight => flight.plane)
-    flights!: Flight[]; 
+    @OneToMany(() => Flight, flight => flight.Plane)
+    Flights!: Flight[]; 
 
 }

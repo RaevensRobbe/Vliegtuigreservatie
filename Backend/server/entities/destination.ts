@@ -1,4 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Point } from "geojson"
 import { Country } from "./country"
 import { Flight } from "./flight"
 
@@ -12,17 +13,23 @@ export class Destination {
 
     @Column()
     Populairity?: string
+
+    @Column()
+    Abbreviation?: string
     
     @Column()
     Picture?: string
 
-    @ManyToOne(() => Country , country => country.dest)
+    @Column({ type: 'simple-json' })
+    Coordinates?: Point
+
+    @ManyToOne(() => Country , country => country.Dest)
     @JoinColumn( {name: "country_id"})
-    country!: Country
+    Country!: Country
 
-    @OneToMany(() => Flight, flight => flight.destination)
-    destination!: Flight[]
+    @OneToMany(() => Flight, flight => flight.Destination)
+    Destination!: Flight[]
 
-    @OneToMany(() => Flight, flight => flight.start)
-    start!: Flight[]
+    @OneToMany(() => Flight, flight => flight.Start)
+    Start!: Flight[]
 }

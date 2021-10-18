@@ -38,7 +38,9 @@ import seedDatabase from './seeders/seeder';
       response.send(`Welcome, just know: you matter!`);
     });
 
-    interface IAppControllers {
+    console.log('this far 1')
+
+    interface AppControllers {
       'country': ICountryController
       'destination': IDestinationController
       'flight': IFlightController
@@ -47,7 +49,7 @@ import seedDatabase from './seeders/seeder';
       'user': IUserController
   }
 
-    const controllers: IAppControllers = {
+    const controllers: AppControllers = {
       'country': new CountryController(),
       'destination': new DestinationController(),
       'flight': new FlightController(),
@@ -56,11 +58,15 @@ import seedDatabase from './seeders/seeder';
       'user': new UserController()
     };
 
+    console.log('this far 2')
+
     Object.entries(controllers).forEach((entry: any) => {
         const key = entry[0] as string,
               controller = entry[1] as IController;
         app.use(`/api/v1/${key}`, controller.router);
     });
+
+    console.log('this far 3')
 
     // APP START
     app.listen(port, () => {
