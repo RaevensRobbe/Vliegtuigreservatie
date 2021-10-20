@@ -4,7 +4,10 @@ import { Flight } from "./flight"
 @Entity('plane') // The table name
 export class Plane {
     @PrimaryGeneratedColumn('uuid') // Generated as UUID in the database
-    Planeid?: string
+    uuid?: string
+
+    @Column({unique: true})
+    PlaneId?: number
 
     @Column({unique: true})
     Name?: string
@@ -13,12 +16,12 @@ export class Plane {
     Type?: string
     
     @Column('int')
-    businessSeats?: number
+    BusinessSeats?: number
 
     @Column('int')
-    firstClassSeats?: number
+    FirstClassSeats?: number
 
-    @OneToMany(() => Flight, flight => flight.plane)
-    flights!: Flight[]; 
+    @OneToMany(() => Flight, flight => flight.Plane)
+    Flights!: Flight[]; 
 
 }

@@ -5,34 +5,37 @@ import { User } from "./user"
 @Entity('ticket') // The table name
 export class Ticket {
     @PrimaryGeneratedColumn('uuid') // Generated as UUID in the database
-    ticketid?: string
+    uuid?: string
+
+    @Column({unique: true})
+    TicketId?: number
 
     @Column('simple-json')
-    seat?: Record<string,string>
+    Seat?: [{column:string,row:string}]
 
     @Column()
-    return?: boolean
+    Return?: boolean
 
-    @Column()
-    class?: string
+    @Column('simple-array')
+    Class?: string[]
 
-    @Column('date')
-    returnDate?: Date
+    @Column('datetime',{nullable:true})
+    ReturnDate?: string
 
-    @Column('simple-json')
-    persons?: Record<number, string>
-
-    @Column('int')
-    gate?: number
+    @Column('simple-array')
+    Persons?: string[]
 
     @Column('')
-    rating?: string
+    Rating?: number
 
-    @ManyToOne(() => User, user => user.ticket)
+    @Column({length:256})
+    Review?: string
+
+    @ManyToOne(() => User, user => user.Ticket)
     @JoinColumn({ name: "user_id" })
-    user!: User;
+    User!: User;
 
-    @ManyToOne(() => Flight, flight => flight.ticket)
-    @JoinColumn({ name: "ticket_id" })
-    flight!: Flight
+    @ManyToOne(() => Flight, flight => flight.Ticket)
+    @JoinColumn({ name: "flight_id" })
+    Flight!: Flight
 }

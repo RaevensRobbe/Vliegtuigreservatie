@@ -1,0 +1,182 @@
+[
+  {
+    "DestinationId": "1",
+    "Name": "Colorado Springs",
+    "Popularity": "17",
+    "Abbreviation": "COS",
+    "Picture": "",
+    "Coordinates": [38.83,104.82],
+    "country_Id": "1"
+  },
+  {
+    "DestinationId": "2",
+    "Name": "Jacksonville",
+    "Popularity": "29",
+    "Abbreviation": "JAX",
+    "Picture": "",
+    "Coordinates": [ 30.33, 81.65 ],
+    "country_Id": "2"
+  },
+  {
+    "DestinationId": "3",
+    "Name": "Amarillo",
+    "Popularity": "47",
+    "Abbreviation": "AMA",
+    "Picture": "",
+    "Coordinates": [ 35.22, 101.83 ],
+    "country_Id": "3"
+  },
+  {
+    "DestinationId": "4",
+    "Name": "San Bernardino",
+    "Popularity": "18",
+    "Abbreviation": "SBD",
+    "Picture": "",
+    "Coordinates": [ 34.10, 117.28 ],
+    "country_Id": "4"
+  },
+  {
+    "DestinationId": "5",
+    "Name": "Springfield",
+    "Popularity": "45",
+    "Abbreviation": "SPFD",
+    "Picture": "",
+    "Coordinates": [ 39.78, 89.65 ],
+    "country_Id": "5"
+  },
+  {
+    "DestinationId": "6",
+    "Name": "Charlotte",
+    "Popularity": "35",
+    "Abbreviation": "CTL",
+    "Picture": "",
+    "Coordinates": [ 35.22, 80.84 ],
+    "country_Id": "6"
+  },
+  {
+    "DestinationId": "7",
+    "Name": "Honolulu",
+    "Popularity": "30",
+    "Abbreviation": "HONO",
+    "Picture": "",
+    "Coordinates": [ 21.30, 157.85 ],
+    "country_Id": "7"
+  },
+  {
+    "DestinationId": "8",
+    "Name": "Scottsdale",
+    "Popularity": "46",
+    "Abbreviation": "SCOT",
+    "Picture": "",
+    "Coordinates": [ 33.49, 111.92 ],
+    "country_Id": "8"
+  },
+  {
+    "DestinationId": "9",
+    "Name": "Milwaukee",
+    "Popularity": "25",
+    "Abbreviation": "MKE",
+    "Picture": "",
+    "Coordinates": [ 43.03, 87.90 ],
+    "country_Id": "9"
+  },
+  {
+    "DestinationId": "10",
+    "Name": "Richmond",
+    "Popularity": "22",
+    "Abbreviation": "RVA",
+    "Picture": "",
+    "Coordinates": [ 37.54, 77.43 ],
+    "country_Id": "10"
+  },
+  {
+    "DestinationId": "11",
+    "Name": "Santa Ana",
+    "Popularity": "22",
+    "Abbreviation": "SA",
+    "Picture": "",
+    "Coordinates": [ 33.74, 117.86 ],
+    "country_Id": "10"
+  },
+  {
+    "DestinationId": "12",
+    "Name": "San Jose",
+    "Popularity": "15",
+    "Abbreviation": "SJ",
+    "Picture": "",
+    "Coordinates": [ 37.33, 121.88 ],
+    "country_Id": "2"
+  },
+  {
+    "DestinationId": "13",
+    "Name": "Albuquerque",
+    "Popularity": "15",
+    "Abbreviation": "ALBQ",
+    "Picture": "",
+    "Coordinates": [ 35.08, 106.65 ],
+    "country_Id": "3"
+  },
+  {
+    "DestinationId": "14",
+    "Name": "Norfolk",
+    "Popularity": "42",
+    "Abbreviation": "NK",
+    "Picture": "",
+    "Coordinates": [ 36.85, 76.28 ],
+    "country_Id": "4"
+  },
+  {
+    "DestinationId": "15",
+    "Name": "Kansas City",
+    "Popularity": "20",
+    "Abbreviation": "KS",
+    "Picture": "",
+    "Coordinates": [ 39.09, 94.57 ],
+    "country_Id": "5"
+  },
+  {
+    "DestinationId": "16",
+    "Name": "Oklahoma city",
+    "Popularity": "34",
+    "Abbreviation": "OK",
+    "Picture": "",
+    "Coordinates": [ 35.46, 97.51 ],
+    "country_Id": "6"
+  },
+  {
+    "DestinationId": "17",
+    "Name": "Bakersfield",
+    "Popularity": "47",
+    "Abbreviation": "BFD",
+    "Picture": "",
+    "Coordinates": [ 35.37, 119.01 ],
+    "country_Id": "7"
+  },
+  {
+    "DestinationId": "18",
+    "Name": "Paris",
+    "Popularity": "29",
+    "Abbreviation": "PAR",
+    "Picture": "",
+    "Coordinates": [ 48.85, 2.35 ],
+    "country_Id": "8"
+  },
+  {
+    "DestinationId": "19",
+    "Name": "Chicago",
+    "Popularity": "42",
+    "Abbreviation": "CHI",
+    "Picture": "",
+    "Coordinates": [ 41.87, 87.62 ],
+    "country_Id": "9"
+  },
+  {
+    "DestinationId": "20",
+    "Name": "Berlin",
+    "Popularity": "10",
+    "Abbreviation": "BE",
+    "Picture": "",
+    "Coordinates": [ 52.52, 13.40 ],
+    "country_Id": "10"
+  }
+]
