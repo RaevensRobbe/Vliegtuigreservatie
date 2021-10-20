@@ -1,0 +1,182 @@
+[ 
+  { 
+    "FlightId":"1",
+    "Date":"2021-12-01 05:30:34",
+    "Price": "30.78",
+    "Gate":  1,
+    "Destination_Id":"1",
+    "Start_id":"3",
+    "plane_id":"6"
+  },
+  {
+    "FlightId": "2",
+    "Date": "2021-12-12 17:05:34",
+    "Price": "34.85",
+    "Gate": 2,
+    "Destination_Id": "2",
+    "Start_id": "4",
+    "plane_id": "8"
+  },
+  {
+    "FlightId": "3",
+    "Date": "2021-12-26 12:01:34",
+    "Price": "95.02",
+    "Gate": 3,
+    "Destination_Id": "3",
+    "Start_id": "5",
+    "plane_id": "1"
+  },
+  {
+    "FlightId": "4",
+    "Date": "2021-12-30 03:00:00",
+    "Price": "87.87",
+    "Gate": 4,
+    "Destination_Id": "4",
+    "Start_id": "6",
+    "plane_id": "4"
+  },
+  {
+    "FlightId": "5",
+    "Date": "2021-12-23 16:15:30",
+    "Price": "12.43",
+    "Gate": 5,
+    "Destination_Id": "5",
+    "Start_id": "7",
+    "plane_id": "5"
+  },
+  {
+    "FlightId": "6",
+    "Date": "2021-12-07 05:00:00",
+    "Price": "97.72",
+    "Gate": 6,
+    "Destination_Id": "6",
+    "Start_id": "8",
+    "plane_id": "6"
+  },
+  {
+    "FlightId": "7",
+    "Date": "2021-12-04 23:54:55",
+    "Price": "39.46",
+    "Gate": 7,
+    "Destination_Id": "7",
+    "Start_id": "9",
+    "plane_id": "6"
+  },
+  {
+    "FlightId": "8",
+    "Date": "2021-12-19 21:22:45",
+    "Price": "20.91",
+    "Gate": 8,
+    "Destination_Id": "8",
+    "Start_id": "10",
+    "plane_id": "9"
+  },
+  {
+    "FlightId": "9",
+    "Date": "2021-12-18 17:19:34",
+    "Price": "91.18",
+    "Gate": 9,
+    "Destination_Id": "9",
+    "Start_id": "11",
+    "plane_id": "3"
+  },
+  {
+    "FlightId": "10",
+    "Date": "2021-12-10 10:59:00",
+    "Price": "41.24",
+    "Gate": 10,
+    "Destination_Id": "10",
+    "Start_id": "12",
+    "plane_id": "6"
+  },
+  {
+    "FlightId": "11",
+    "Date": "2021-12-15 08:25:34",
+    "Price": "30.51",
+    "Gate": 11,
+    "Destination_Id": "13",
+    "Start_id": "11",
+    "plane_id": "3"
+  },
+  {
+    "FlightId": "12",
+    "Date": "2021-12-13 15:45:30",
+    "Price": "40.82",
+    "Gate": 12,
+    "Destination_Id": "14",
+    "Start_id": "12",
+    "plane_id": "8"
+  },
+  {
+    "FlightId": "13",
+    "Date": "2021-12-25 11:20:49",
+    "Price": "52.63",
+    "Gate": 13,
+    "Destination_Id": "15",
+    "Start_id": "13",
+    "plane_id": "2"
+  },
+  {
+    "FlightId": "14",
+    "Date": "2021-12-21 06:35:34",
+    "Price": "53.25",
+    "Gate": 14,
+    "Destination_Id": "16",
+    "Start_id": "14",
+    "plane_id": "4"
+  },
+  {
+    "FlightId": "15",
+    "Date": "2021-12-01 01:03:05",
+    "Price": "21.98",
+    "Gate": 15,
+    "Destination_Id": "17",
+    "Start_id": "15",
+    "plane_id": "8"
+  },
+  {
+    "FlightId": "16",
+    "Date": "2021-12-31 07:05:34",
+    "Price": "39.66",
+    "Gate": 16,
+    "Destination_Id": "18",
+    "Start_id": "16",
+    "plane_id": "1"
+  },
+  {
+    "FlightId": "17",
+    "Date": "2021-12-03 05:05:28",
+    "Price": "36.47",
+    "Gate": 17,
+    "Destination_Id": "19",
+    "Start_id": "17",
+    "plane_id": "7"
+  },
+  {
+    "FlightId": "18",
+    "Date": "2021-12-18 12:12:12",
+    "Price": "61.46",
+    "Gate": 18,
+    "Destination_Id": "20",
+    "Start_id": "18",
+    "plane_id": "8"
+  },
+  {
+    "FlightId": "19",
+    "Date": "2021-12-08 13:05:34",
+    "Price": "26.83",
+    "Gate": 19,
+    "Destination_Id": "1",
+    "Start_id": "19",
+    "plane_id": "6"
+  },
+  {
+    "FlightId": "20",
+    "Date": "2021-12-20 08:15:34",
+    "Price": "84.03",
+    "Gate": 20,
+    "Destination_Id": "2",
+    "Start_id": "20",
+    "plane_id": "9"
+  }
+]

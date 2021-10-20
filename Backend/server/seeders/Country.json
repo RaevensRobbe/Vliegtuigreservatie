@@ -1,0 +1,42 @@
+[ 
+    { 
+        "Name":"Cuba",
+        "CountryId":"1"
+    },
+    { 
+        "Name":"El Salvador",
+        "CountryId":"2"
+    },
+    { 
+        "Name":"Romania",
+        "CountryId":"3"
+    },
+    { 
+        "Name":"The Bahamas",
+        "CountryId":"4"
+    },
+    { 
+        "Name":"Congo, Republic of the",
+        "CountryId":"5"
+    },
+    { 
+        "Name":"Congo",
+        "CountryId":"6"
+    },
+    { 
+        "Name":"Israel",
+        "CountryId":"7"
+    },
+    { 
+        "Name":"Grenada",
+        "CountryId":"8"
+    },
+    { 
+        "Name":"Bulgaria",
+        "CountryId":"9"
+    },
+    { 
+        "Name":"Malawi",
+        "CountryId":"10"
+    }
+]

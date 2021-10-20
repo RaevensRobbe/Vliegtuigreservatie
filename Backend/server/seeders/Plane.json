@@ -1,0 +1,37 @@
+[ 
+  { 
+    "PlaneId":"1",
+    "Name": "o2qCSr",
+    "Type": "A220",
+    "BusinessSeats":"120",
+    "FirstClassSeats":"30"
+  },
+  {
+    "PlaneId": "2",
+    "Name": "CeAgog",
+    "Type": "A320",
+    "BusinessSeats": "150",
+    "FirstClassSeats": "30"
+  },
+  {
+    "PlaneId": "3",
+    "Name": "QyYQfD",
+    "Type": "A330",
+    "BusinessSeats": "150",
+    "FirstClassSeats": "30"
+  },
+  {
+    "PlaneId": "4",
+    "Name": "4PBrC8",
+    "Type": "A350",
+    "BusinessSeats": "120",
+    "FirstClassSeats": "30"
+  },
+  {
+    "PlaneId": "5",
+    "Name": "bsU0Ey",
+    "Type": "A380",
+    "BusinessSeats": "150",
+    "FirstClassSeats": "30"
+  }
+]

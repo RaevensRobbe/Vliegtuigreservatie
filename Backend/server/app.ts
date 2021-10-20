@@ -24,7 +24,7 @@ import seedDatabase from './seeders/seeder';
   .then(createConnection)
   .then(async (connection: Connection) => {
 
-    //seedDatabase(connection);
+    seedDatabase(connection);
 
     // APP SETUP
     const app = express(),

@@ -6,13 +6,19 @@ import { Ticket } from "./ticket"
 @Entity('flight') // The table name
 export class Flight {
     @PrimaryGeneratedColumn('uuid') // Generated as UUID in the database
-    Flightid?: string
+    uuid?: string
 
-    @Column('date')
+    @Column({unique: true})
+    FlightId?: number
+
+    @Column('datetime')
     Date?: string
 
     @Column('double')
     Price?: number
+
+    @Column('int')
+    Gate?: number
 
     @OneToMany(() => Ticket, ticket => ticket.Flight)
     Ticket!: Ticket[]

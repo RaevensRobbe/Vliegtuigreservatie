@@ -4,7 +4,10 @@ import { Flight } from "./flight"
 @Entity('plane') // The table name
 export class Plane {
     @PrimaryGeneratedColumn('uuid') // Generated as UUID in the database
-    Planeid?: string
+    uuid?: string
+
+    @Column({unique: true})
+    PlaneId?: number
 
     @Column({unique: true})
     Name?: string
