@@ -1,7 +1,7 @@
 <script>
 </script>
 
-<main class="font-Montserrat bg-whisper-gray">
+<main class="font-Montserrat mx-auto bg-ghost-white text-dim-gray 3xl:max-w-screen-3xl">
     <slot></slot>
 </main>
 

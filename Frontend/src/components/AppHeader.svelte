@@ -6,10 +6,10 @@
     <button class="font-bold text-2xl text-forest-green">MCT airlines</button>
 
     {#if name}
-        <div class="flex text-dim-gray">
-            <button class="px-2">My bookings</button>
-            <button class="px-2">Contact</button>
-            <button class="font-bold text-xl px-2 text-forest-green">{ name }</button>
+        <div class="flex text-dim-gray gap-8">
+            <button>My bookings</button>
+            <button>Contact</button>
+            <button class="font-bold text-xl text-forest-green">{ name }</button>
         </div>
     {:else}
         <div>

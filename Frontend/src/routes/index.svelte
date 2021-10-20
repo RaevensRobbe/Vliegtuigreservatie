@@ -1,5 +1,7 @@
 <script>
     import AppHeader from "../components/AppHeader.svelte";
+    import AppFooter from "../components/AppFooter.svelte";
+    import Intertitle from "../components/Intertitle.svelte";
     export let name = "John Doe";
 </script>
 
@@ -8,4 +10,9 @@
 </svelte:head>
 
 <AppHeader name={name} />
-<h1 class=" text-2xl font-bold">Homepage</h1>
+
+<section class="px-6">
+    <Intertitle titleName="Popular destinations" />
+</section>
+
+<AppFooter />
