@@ -1,14 +1,12 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm"
 import { Point } from "geojson"
 import { Country } from "./country"
 import { Flight } from "./flight"
 
 @Entity('destination') // The table name
 export class Destination {
-    @PrimaryGeneratedColumn('uuid') // Generated as UUID in the database
-    uuid?: string
 
-    @Column({unique: true})
+    @PrimaryColumn({unique: true})
     DestinationId?: number
 
     @Column({unique: true})
@@ -26,13 +24,13 @@ export class Destination {
     @Column({ type: 'simple-json' })
     Coordinates?: Point
 
-    @ManyToOne(() => Country , country => country.Dest)
+    @ManyToOne(() => Country)
     @JoinColumn( {name: "country_id"})
-    Country!: Country
+    Country?: Country
 
     @OneToMany(() => Flight, flight => flight.Destination)
-    Destination!: Flight[]
+    Destination?: Flight[]
 
     @OneToMany(() => Flight, flight => flight.Start)
-    Start!: Flight[]
+    Start?: Flight[]
 }

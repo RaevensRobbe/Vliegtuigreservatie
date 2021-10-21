@@ -1,17 +1,14 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, Index, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm"
 import { Destination } from "./destination"
 
 @Entity('country')
 export class Country{
-    @PrimaryGeneratedColumn('uuid') // Generated as UUID in the database
-    uuid?: string
-
-    @Column({unique: true})
+    @PrimaryColumn({unique: true})
     CountryId?: number
 
     @Column({unique: true})
     Name?: string
 
     @OneToMany(() => Destination, dest => dest.Country)
-    Dest!: Destination[]
+    Dest?: Destination[]
 }

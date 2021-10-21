@@ -6,7 +6,7 @@
     "Abbreviation": "COS",
     "Picture": "",
     "Coordinates": [38.83,104.82],
-    "country_Id": "1"
+    "Country": "1"
   },
   {
     "DestinationId": "2",
@@ -15,7 +15,7 @@
     "Abbreviation": "JAX",
     "Picture": "",
     "Coordinates": [ 30.33, 81.65 ],
-    "country_Id": "2"
+    "Country": "2"
   },
   {
     "DestinationId": "3",
@@ -24,7 +24,7 @@
     "Abbreviation": "AMA",
     "Picture": "",
     "Coordinates": [ 35.22, 101.83 ],
-    "country_Id": "3"
+    "Country": "3"
   },
   {
     "DestinationId": "4",
@@ -33,7 +33,7 @@
     "Abbreviation": "SBD",
     "Picture": "",
     "Coordinates": [ 34.10, 117.28 ],
-    "country_Id": "4"
+    "Country": "4"
   },
   {
     "DestinationId": "5",
@@ -42,7 +42,7 @@
     "Abbreviation": "SPFD",
     "Picture": "",
     "Coordinates": [ 39.78, 89.65 ],
-    "country_Id": "5"
+    "Country": "5"
   },
   {
     "DestinationId": "6",
@@ -51,7 +51,7 @@
     "Abbreviation": "CTL",
     "Picture": "",
     "Coordinates": [ 35.22, 80.84 ],
-    "country_Id": "6"
+    "Country": "6"
   },
   {
     "DestinationId": "7",
@@ -60,7 +60,7 @@
     "Abbreviation": "HONO",
     "Picture": "",
     "Coordinates": [ 21.30, 157.85 ],
-    "country_Id": "7"
+    "Country": "7"
   },
   {
     "DestinationId": "8",
@@ -69,7 +69,7 @@
     "Abbreviation": "SCOT",
     "Picture": "",
     "Coordinates": [ 33.49, 111.92 ],
-    "country_Id": "8"
+    "Country": "8"
   },
   {
     "DestinationId": "9",
@@ -78,7 +78,7 @@
     "Abbreviation": "MKE",
     "Picture": "",
     "Coordinates": [ 43.03, 87.90 ],
-    "country_Id": "9"
+    "Country": "9"
   },
   {
     "DestinationId": "10",
@@ -87,7 +87,7 @@
     "Abbreviation": "RVA",
     "Picture": "",
     "Coordinates": [ 37.54, 77.43 ],
-    "country_Id": "10"
+    "Country": "10"
   },
   {
     "DestinationId": "11",
@@ -96,7 +96,7 @@
     "Abbreviation": "SA",
     "Picture": "",
     "Coordinates": [ 33.74, 117.86 ],
-    "country_Id": "10"
+    "Country": "10"
   },
   {
     "DestinationId": "12",
@@ -105,7 +105,7 @@
     "Abbreviation": "SJ",
     "Picture": "",
     "Coordinates": [ 37.33, 121.88 ],
-    "country_Id": "2"
+    "Country": "2"
   },
   {
     "DestinationId": "13",
@@ -114,7 +114,7 @@
     "Abbreviation": "ALBQ",
     "Picture": "",
     "Coordinates": [ 35.08, 106.65 ],
-    "country_Id": "3"
+    "Country": "3"
   },
   {
     "DestinationId": "14",
@@ -123,7 +123,7 @@
     "Abbreviation": "NK",
     "Picture": "",
     "Coordinates": [ 36.85, 76.28 ],
-    "country_Id": "4"
+    "Country": "4"
   },
   {
     "DestinationId": "15",
@@ -132,7 +132,7 @@
     "Abbreviation": "KS",
     "Picture": "",
     "Coordinates": [ 39.09, 94.57 ],
-    "country_Id": "5"
+    "Country": "5"
   },
   {
     "DestinationId": "16",
@@ -141,7 +141,7 @@
     "Abbreviation": "OK",
     "Picture": "",
     "Coordinates": [ 35.46, 97.51 ],
-    "country_Id": "6"
+    "Country": "6"
   },
   {
     "DestinationId": "17",
@@ -150,7 +150,7 @@
     "Abbreviation": "BFD",
     "Picture": "",
     "Coordinates": [ 35.37, 119.01 ],
-    "country_Id": "7"
+    "Country": "7"
   },
   {
     "DestinationId": "18",
@@ -159,7 +159,7 @@
     "Abbreviation": "PAR",
     "Picture": "",
     "Coordinates": [ 48.85, 2.35 ],
-    "country_Id": "8"
+    "Country": "8"
   },
   {
     "DestinationId": "19",
@@ -168,7 +168,7 @@
     "Abbreviation": "CHI",
     "Picture": "",
     "Coordinates": [ 41.87, 87.62 ],
-    "country_Id": "9"
+    "Country": "9"
   },
   {
     "DestinationId": "20",
@@ -177,6 +177,6 @@
     "Abbreviation": "BE",
     "Picture": "",
     "Coordinates": [ 52.52, 13.40 ],
-    "country_Id": "10"
+    "Country": "10"
   }
 ]
