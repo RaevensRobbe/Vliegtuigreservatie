@@ -22,10 +22,10 @@ const seedDatabase = async (connection: Connection) => {
 
         await connection.manager.save(plainToClass(Country, countries));
         await connection.manager.save(plainToClass(Destination, destinations));
-        await connection.manager.save(plainToClass(Flight, flights));
         await connection.manager.save(plainToClass(Plane, planes));
-        await connection.manager.save(plainToClass(Ticket, tickets));
         await connection.manager.save(plainToClass(User, users));
+        await connection.manager.save(plainToClass(Flight, flights));
+        await connection.manager.save(plainToClass(Ticket, tickets));
         
         // Mark as seeded.
         const seeded = new Config();

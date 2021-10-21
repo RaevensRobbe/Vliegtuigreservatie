@@ -1,19 +1,16 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryColumn } from "typeorm"
 import { Flight } from "./flight"
 import { User } from "./user"
 
 @Entity('ticket') // The table name
 export class Ticket {
-    @PrimaryGeneratedColumn('uuid') // Generated as UUID in the database
-    uuid?: string
-
-    @Column({unique: true})
+    @PrimaryColumn({unique: true})
     TicketId?: number
 
     @Column('simple-json')
     Seat?: [{column:string,row:string}]
 
-    @Column()
+    @Column('bool')
     Return?: boolean
 
     @Column('simple-array')
@@ -31,11 +28,11 @@ export class Ticket {
     @Column({length:256})
     Review?: string
 
-    @ManyToOne(() => User, user => user.Ticket)
+    @ManyToOne(() => User)
     @JoinColumn({ name: "user_id" })
-    User!: User;
+    User?: User;
 
-    @ManyToOne(() => Flight, flight => flight.Ticket)
+    @ManyToOne(() => Flight)
     @JoinColumn({ name: "flight_id" })
-    Flight!: Flight
+    Flight?: Flight
 }

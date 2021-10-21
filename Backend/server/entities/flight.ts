@@ -1,14 +1,11 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn} from "typeorm"
 import { Destination } from "./destination"
 import { Plane } from "./plane"
 import { Ticket } from "./ticket"
 
 @Entity('flight') // The table name
 export class Flight {
-    @PrimaryGeneratedColumn('uuid') // Generated as UUID in the database
-    uuid?: string
-
-    @Column({unique: true})
+    @PrimaryColumn({unique: true})
     FlightId?: number
 
     @Column('datetime')
@@ -23,16 +20,15 @@ export class Flight {
     @OneToMany(() => Ticket, ticket => ticket.Flight)
     Ticket!: Ticket[]
 
-    @ManyToOne(() => Destination, dest => dest.Destination)
+    @ManyToOne(() => Destination)
     @JoinColumn({ name: "destination_id"})
-    Destination!: Destination
+    Destination?: Destination
 
-    @ManyToOne(() => Destination, dest => dest.Start)
+    @ManyToOne(() => Destination)
     @JoinColumn({ name: "start_id"})
-    Start!: Destination
+    Start?: Destination
     
-
-    @ManyToOne(() => Plane, plane => plane.Flights)
+    @ManyToOne(() => Plane)
     @JoinColumn({ name: "plane_id" })
-    Plane!: Plane
+    Plane?: Plane
 }

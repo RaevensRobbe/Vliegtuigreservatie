@@ -1,12 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm"
 import { Flight } from "./flight"
 
 @Entity('plane') // The table name
 export class Plane {
-    @PrimaryGeneratedColumn('uuid') // Generated as UUID in the database
-    uuid?: string
-
-    @Column({unique: true})
+    @PrimaryColumn({unique: true})
     PlaneId?: number
 
     @Column({unique: true})
@@ -22,6 +19,6 @@ export class Plane {
     FirstClassSeats?: number
 
     @OneToMany(() => Flight, flight => flight.Plane)
-    Flights!: Flight[]; 
+    Flight?: Flight[]; 
 
 }

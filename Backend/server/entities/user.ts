@@ -1,12 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm"
 import { Ticket } from "./ticket"
 
 @Entity('user') // The table name
 export class User {
-    @PrimaryGeneratedColumn('uuid') // Generated as UUID in the database
-    uuid?: string
-
-    @Column({unique: true})
+    @PrimaryColumn({unique: true})
     UserId?: number
 
     @Column({length: 30})
@@ -28,6 +25,6 @@ export class User {
     Admin?: boolean;
 
     @OneToMany(() => Ticket, ticket => ticket.User)
-    Ticket!: Ticket[];
+    Ticket?: Ticket[];
 
 }
