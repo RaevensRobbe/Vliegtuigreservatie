@@ -1,7 +1,7 @@
 <script>
 </script>
 
-<main class="flex flex-col h-screen justify-between font-Montserrat bg-ghost-white text-dim-gray 3xl:max-w-screen-3xl">
+<main class="flex flex-col h-screen font-Montserrat bg-ghost-white text-dim-gray 3xl:max-w-screen-3xl 3xl:mx-auto">
     <slot></slot>
 </main>
 
