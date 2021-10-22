@@ -2,6 +2,7 @@
     import AppHeader from "../components/AppHeader.svelte";
     import AppFooter from "../components/AppFooter.svelte";
     import Intertitle from "../components/Intertitle.svelte";
+    import FlightSearch from "../components/FlightSearch.svelte";
     export let name = "John Doe";
 </script>
 
@@ -11,7 +12,11 @@
 
 <AppHeader name={name} />
 
-<section class="px-6 align-start mb-auto">
+<section class=" bg-image-mainpage bg-cover w-full h-auto bg-bottom py-36">
+    <FlightSearch />
+</section>
+
+<section class="p-6 align-start mb-auto">
     <Intertitle titleName="Popular destinations" />
 </section>
 
