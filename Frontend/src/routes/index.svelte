@@ -10,7 +10,9 @@
 </svelte:head>
 
 <AppHeader name={name} />
+<section class=" bg-image-mainpage bg-cover w-full h-auto bg-bottom">
 
+</section>
 <section class="px-6 align-start mb-auto">
     <Intertitle titleName="Popular destinations" />
 </section>
