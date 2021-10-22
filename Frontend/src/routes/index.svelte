@@ -11,7 +11,7 @@
 
 <AppHeader name={name} />
 
-<section class="px-6">
+<section class="px-6 align-start mb-auto">
     <Intertitle titleName="Popular destinations" />
 </section>
 

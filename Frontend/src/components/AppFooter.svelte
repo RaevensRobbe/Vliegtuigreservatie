@@ -2,7 +2,7 @@
 
 </script>
 
-<footer class="bg-white flex py-8 px-6 justify-between">
+<footer class="bg-white flex py-8 px-6 justify-between flex-end">
     <section class="flex gap-8 items-baseline">
         <article class="text-sm">
             <h1 class="text-forest-green font-bold text-2xl pb-2">MCT airlines</h1>
