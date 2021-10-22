@@ -3,7 +3,7 @@
     import AppFooter from "../components/AppFooter.svelte";
     import Intertitle from "../components/Intertitle.svelte";
     import FlightSearch from "../components/FlightSearch.svelte";
-    export let name = "John Doe";
+    export let name = "Robbe Raevens";
 </script>
 
 <svelte:head>

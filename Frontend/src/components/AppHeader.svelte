@@ -8,7 +8,6 @@
     {#if name}
         <div class="flex text-dim-gray gap-8">
             <button>My bookings</button>
-            <button>Contact</button>
             <button class="font-bold text-xl text-forest-green">{ name }</button>
         </div>
     {:else}
