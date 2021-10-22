@@ -1,5 +1,5 @@
-<script>
-    export let titleName = undefined;
+<script lang="ts">
+    export let titleName : string;
 </script>
 
 <main class="flex gap-2">

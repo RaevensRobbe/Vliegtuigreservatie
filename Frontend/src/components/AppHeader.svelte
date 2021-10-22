@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     export let name = undefined;
 </script>
 
@@ -13,7 +13,7 @@
         </div>
     {:else}
         <div>
-            <button class="font-bold text-forest-green">Log in</button>
+            <button class="font-bold text-xl text-forest-green">Log in</button>
         </div>
     {/if}
 </header>

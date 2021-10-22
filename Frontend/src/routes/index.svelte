@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import AppHeader from "../components/AppHeader.svelte";
     import AppFooter from "../components/AppFooter.svelte";
     import Intertitle from "../components/Intertitle.svelte";
