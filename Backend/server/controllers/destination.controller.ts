@@ -18,7 +18,6 @@ export class DestinationController extends CrudController<Destination> implement
         super(Destination); // Initialize the parent constructor
 
         this.router.get('/all', this.all);
-        //this.router.get("/flightinfo/:Sid/:Did",this.flightTimes);
         this.router.get('/test',this.testing);
         this.router.get('/:id', this.one);
         this.router.post('', this.save);
@@ -29,24 +28,6 @@ export class DestinationController extends CrudController<Destination> implement
         .select(["dest.Name","dest.DestinationId"])
         .getMany();
         response.send(data); 
-    }
-
-    flightTimes = async (request: Request, response: Response, next: NextFunction) => {
-        const startID = request.params.Sid;
-        const destinationID = request.params.Did;
-
-        console.log(startID)
-        console.log(destinationID)
-
-        const data = await this.repository.createQueryBuilder("dest")
-        .select(["flight.FlightId","flight.Date","flight.Price","flight.Name","flightS.Name"])
-        .innerJoin("dest.Destination","flight")
-        .innerJoin("dest.Start","flightS")
-        .where("flight.Start = :id",{id:startID})
-        .andWhere("flight.Destination = :id",{id:destinationID})
-        .limit(1)
-        .getMany();
-        response.send(data);
     }
 
     testing = async (request: Request, response: Response, next: NextFunction) => {
