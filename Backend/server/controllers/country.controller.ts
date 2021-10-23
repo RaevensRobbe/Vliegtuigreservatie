@@ -21,7 +21,8 @@ export class CountryController extends CrudController<Country> implements ICount
 
         this.router.get('/all', this.all);
         this.router.get('/popular', this.popularDestinations);
-        this.router.get('/destination/:id', this.destinations);
+        this.router.get('/destination/:id', this.destination);
+        this.router.get('/countries/destinations',this.countiesDestinations);
         this.router.get('/:id', this.one);
         this.router.post('', this.save);
     }
@@ -47,13 +48,21 @@ export class CountryController extends CrudController<Country> implements ICount
         response.send(data);
     }
 
-    destinations = async (request: Request, response: Response, next: NextFunction) => {
+    destination = async (request: Request, response: Response, next: NextFunction) => {
         const countryID = request.params.id
         console.log(countryID)
         const data = await this.repository.createQueryBuilder("country")
         .select(["country.Name","dest.Name","dest.DestinationId"])
         .leftJoin("country.Dest", "dest")
         .where("country.CountryId = :id", {id: 1})
+        .getMany();
+        response.send(data);
+    }
+
+    countiesDestinations = async (request: Request, response: Response, next: NextFunction) => {
+        const data = await this.repository.createQueryBuilder("c")
+        .select(["c.CountryId","c.Name","d.DestinationId","d.Name"])
+        .leftJoin("c.Dest","d")
         .getMany();
         response.send(data);
     }

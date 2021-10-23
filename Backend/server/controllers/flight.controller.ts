@@ -19,5 +19,23 @@ export class FlightController extends CrudController<Flight> implements IFlightC
         this.router.get('/all', this.all);
         this.router.get('/:id', this.one);
         this.router.post('', this.save);
+        this.router.get('/hehe/:Sid/:Did',this.hehe)
+    }
+
+    hehe = async (request: Request, response: Response, next: NextFunction) => {
+        const startID = request.params.Sid;
+        const destinationID = request.params.Did;
+
+        console.log(startID)
+        console.log(destinationID)
+
+        const data = await this.repository.createQueryBuilder("f")
+        .select(["f.FlightId","f.Date","f.StartId","f.DestinationId","d.Name","s.Name"])
+        // .innerJoinAndSelect("flight.Destination", "destD")
+        // .innerJoinAndSelect("flight.Start", "Start")
+        .innerJoin("f.Destination", "d")
+        .innerJoin("f.Start", "s")
+        .getMany();
+        response.send(data);
     }
 }

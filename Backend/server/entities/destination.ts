@@ -25,7 +25,7 @@ export class Destination {
     Coordinates?: Point
 
     @ManyToOne(() => Country)
-    @JoinColumn( {name: "country_id"})
+    @JoinColumn( {name: "countryId"})
     Country?: Country
 
     @OneToMany(() => Flight, flight => flight.Destination)
