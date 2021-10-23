@@ -5,7 +5,7 @@
 <main class="flex justify-center">
     <form class="flex flex-col justify-between gap-4 w-1/2">
         <div class="grid grid-cols-1 bg-white rounded-xl lg:grid-cols-2"> <!--upper row -->
-            <div class="flex flex-col p-4 border-b-2 sm:border-r-2 lg:border-b-0"> <!--departure box -->
+            <div class="flex flex-col p-4 border-b-2 lg:border-r-2 lg:border-b-0"> <!--departure box -->
                 <p class="font-light text-xs">From</p>
                 <div class="flex mt-1">
                     <svg id="flight_takeoff_black_24dp" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="fill-current text-forest-green mr-2 h-6 w-6">
@@ -56,7 +56,7 @@
                     <span>2 Adults, 2 Children</span>
                 </div>
             </div>
-            <button type="submit" class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-b-xl xl:rounded-b-none xl:rounded-br-xl 2xl:rounded-b-none 2xl:rounded-r-xl"> <!--submit button -->
+            <button type="submit" class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-b-xl xl:rounded-b-xl 2xl:rounded-b-none 2xl:rounded-r-xl"> <!--submit button -->
                 Search
             </button>
         </div>
