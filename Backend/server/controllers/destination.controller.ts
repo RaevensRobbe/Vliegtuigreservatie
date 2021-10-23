@@ -1,4 +1,5 @@
-import { Request, Response, NextFunction, Router } from 'express';
+import { Request, Response, NextFunction, Router, response } from 'express';
+import { Country } from '../entities/country';
 import { Destination } from "../entities/destination"; 
 import { CrudController, IController, ICrudController } from './crud.controller';
 
@@ -20,4 +21,12 @@ export class DestinationController extends CrudController<Destination> implement
         this.router.get('/:id', this.one);
         this.router.post('', this.save);
     }
+
+    all = async (request: Request, response: Response, next: NextFunction) => {
+        const data = await this.repository.createQueryBuilder("dest")
+        .select(["dest.Name","dest.DestinationId"])
+        .getMany();
+        response.send(data); 
+    }
+
 }

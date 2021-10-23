@@ -1,7 +1,8 @@
-import { Request, Response, NextFunction, Router } from 'express';
+import { Request, Response, NextFunction, Router, request } from 'express';
 // import { Country } from "../entities/country"; 
 // import { CrudController, IController, ICrudController } from './crud.controller';
 import { Country } from '../entities/country';
+import { Destination } from '../entities/destination';
 import { CrudController, IController, ICrudController } from './crud.controller';
 
 /**
@@ -19,7 +20,41 @@ export class CountryController extends CrudController<Country> implements ICount
         super(Country); // Initialize the parent constructor
 
         this.router.get('/all', this.all);
+        this.router.get('/popular', this.popularDestinations);
+        this.router.get('/destination/:id', this.destinations);
         this.router.get('/:id', this.one);
         this.router.post('', this.save);
+    }
+
+    all = async (request: Request, response: Response, next: NextFunction) => {
+        const data = await this.repository.createQueryBuilder("country")
+        .select(["country.Name","country.CountryId"])
+        .getMany();
+        response.send(data); 
+    }
+
+    // popularDestinations = async (request:Request, response:Response, next:NextFunction) => {
+    //     const test = await this.repository.find({select:["Name"], join:{alias:"country", leftJoinAndSelect:{Destination:"country.Dest"}},});
+    //     response.send(test);
+    // }
+
+    popularDestinations = async (request: Request, response: Response, next: NextFunction) => {
+        const data = await this.repository.createQueryBuilder("country")
+        .select(["country.Name","dest.Name","dest.Picture","dest.DestinationId"])
+        .leftJoin("country.Dest", "dest")
+        .limit(6)
+        .getMany();
+        response.send(data);
+    }
+
+    destinations = async (request: Request, response: Response, next: NextFunction) => {
+        const countryID = request.params.id
+        console.log(countryID)
+        const data = await this.repository.createQueryBuilder("country")
+        .select(["country.Name","dest.Name","dest.DestinationId"])
+        .leftJoin("country.Dest", "dest")
+        .where("country.CountryId = :id", {id: 1})
+        .getMany();
+        response.send(data);
     }
 }
