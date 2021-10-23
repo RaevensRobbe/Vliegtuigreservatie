@@ -35,8 +35,8 @@ export class FlightController extends CrudController<Flight> implements IFlightC
         .innerJoin("f.Destination", "d")
         .innerJoin("f.Start", "s")
         .where("f.StartId = :id",{id:startID})
-        .andWhere("f.DestinationId = :id",{id:destinationID})
-        .getMany();
+        .andWhere("f.DestinationId = :id2",{id2:destinationID})
+        .getOne();
         response.send(data);
     }
 
@@ -49,6 +49,7 @@ export class FlightController extends CrudController<Flight> implements IFlightC
         .select(["f.FlightId","p.EconomySeats","p.BusinessSeats","t.Seat"])
         .innerJoin("f.Plane", "p")
         .innerJoin("f.Ticket", "t")
+        .where("f.FlightId = :id",{id:flightID})
         .getMany();
         response.send(data);
     }
