@@ -41,7 +41,7 @@ export class CountryController extends CrudController<Country> implements ICount
 
     popularDestinations = async (request: Request, response: Response, next: NextFunction) => {
         const data = await this.repository.createQueryBuilder("country")
-        .select(["country.Name","dest.Name","dest.Picture","dest.DestinationId","dest.Popularity"])
+        .select(["country.Name","dest.Name","dest.Picture","dest.DestinationId","dest.Popularity","dest.Coordinates"])
         .leftJoin("country.Dest", "dest")
         .orderBy("dest.Popularity")
         .limit(6)
