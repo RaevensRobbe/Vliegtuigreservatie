@@ -1,6 +1,9 @@
 <script>
+    let children = 0;
+    let adults = 0;
+    let toggleTravelers = false;
 	function showTravelers() {
-		console.log('clicked')
+		toggleTravelers = !toggleTravelers;
 	}
 </script>
 
@@ -49,14 +52,56 @@
                     <span>No retour</span>   
                 </div>
             </div>
-            <div class="flex flex-col p-4 2xl:col-span-2 cursor-pointer" on:click={showTravelers}> <!--passenger box -->
+            <div class="relative flex flex-col p-4 2xl:col-span-2" > <!--passenger box -->
                 <p class="font-light text-xs">Travelers</p>
-                <div class="flex mt-1">
+                <div class="flex mt-1 cursor-pointer" on:click={showTravelers}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="fill-current text-forest-green mr-2 h-6 w-6" viewBox="0 0 27 25.199">
                         <path id="group" d="M8.339,12.6a4.849,4.849,0,0,0-3.727,1.8H2.728a3.224,3.224,0,0,1-1.94-.569A1.927,1.927,0,0,1,0,12.164Q0,7.2,1.744,7.2a2.7,2.7,0,0,1,.612.3,9.27,9.27,0,0,0,1.371.6A4.932,4.932,0,0,0,5.4,8.4a5.655,5.655,0,0,0,1.87-.323A7,7,0,0,0,7.2,9a6.192,6.192,0,0,0,1.139,3.6ZM23.4,21.557a3.5,3.5,0,0,1-1.027,2.665,3.793,3.793,0,0,1-2.728.977H7.354a3.791,3.791,0,0,1-2.728-.977A3.507,3.507,0,0,1,3.6,21.557q0-.745.049-1.456a14.363,14.363,0,0,1,.2-1.533,12,12,0,0,1,.372-1.525,7.184,7.184,0,0,1,.6-1.371,4.966,4.966,0,0,1,.871-1.139,3.656,3.656,0,0,1,1.2-.752A4.228,4.228,0,0,1,8.465,13.5a1.652,1.652,0,0,1,.6.3q.463.3,1.027.675a6.177,6.177,0,0,0,1.5.675,6.527,6.527,0,0,0,5.3-.675q.563-.373,1.027-.675a1.652,1.652,0,0,1,.6-.3,4.224,4.224,0,0,1,1.568.281,3.667,3.667,0,0,1,1.2.752,4.939,4.939,0,0,1,.871,1.139,7.247,7.247,0,0,1,.6,1.371,11.912,11.912,0,0,1,.373,1.525,14.363,14.363,0,0,1,.2,1.533q.049.71.049,1.456ZM9,3.6A3.47,3.47,0,0,1,7.945,6.145,3.465,3.465,0,0,1,5.4,7.2,3.472,3.472,0,0,1,2.854,6.145,3.467,3.467,0,0,1,1.8,3.6,3.467,3.467,0,0,1,2.854,1.054,3.472,3.472,0,0,1,5.4,0,3.465,3.465,0,0,1,7.945,1.054,3.47,3.47,0,0,1,9,3.6ZM18.9,9a5.2,5.2,0,0,1-1.582,3.818A5.2,5.2,0,0,1,13.5,14.4a5.207,5.207,0,0,1-3.818-1.582A5.2,5.2,0,0,1,8.1,9,5.2,5.2,0,0,1,9.681,5.182,5.207,5.207,0,0,1,13.5,3.6a5.2,5.2,0,0,1,3.818,1.582A5.2,5.2,0,0,1,18.9,9ZM27,12.164a1.928,1.928,0,0,1-.787,1.666,3.217,3.217,0,0,1-1.94.569H22.388a4.849,4.849,0,0,0-3.727-1.8A6.192,6.192,0,0,0,19.8,9a7,7,0,0,0-.07-.928,5.655,5.655,0,0,0,1.87.323,4.937,4.937,0,0,0,1.673-.3,9.223,9.223,0,0,0,1.371-.6,2.675,2.675,0,0,1,.612-.3Q27,7.2,27,12.163ZM25.2,3.6a3.47,3.47,0,0,1-1.054,2.545,3.6,3.6,0,0,1-5.091,0A3.467,3.467,0,0,1,18,3.6a3.467,3.467,0,0,1,1.054-2.545,3.6,3.6,0,0,1,5.091,0A3.47,3.47,0,0,1,25.2,3.6Z"/>
                     </svg>
-                    <span>2 Adults, 2 Children</span>
+                    <span>{adults} Adults, {children} Children</span>
                 </div>
+                {#if !toggleTravelers}
+                    <div class="absolute top-20 justify-center">
+                        <div class="flex flex-col align-center shadow-md">
+                            <div class="w-6 overflow-hidden inline-block self-center">
+                                <div class=" h-4 w-4 bg-white rotate-45 transform origin-bottom-left"></div>
+                            </div>
+                            <div class="bg-white rounded-xl p-2">
+                                <div class="flex justify-between items-end mb-2">
+                                    <div class="mr-4">
+                                        <p class="text-lg font-bold text-forest-green">Adults</p>
+                                        <p class="text-xs">16+ years at the time of flight</p>
+                                    </div>
+                                    <div class="flex gap-2 align-bottom">
+                                        <div class="flex justify-center self-center border-forest-green border h-6 w-6 rounded-full hover:bg-forest-green hover:text-white">
+                                            <button class="text-xl text-forest-green self-center hover:text-white"> - </button>
+                                        </div>
+                                        <span class="justify-center text-xl font-bold text-forest-green">{ adults }</span>
+                                        <div class="flex justify-center self-center border-forest-green border h-6 w-6 rounded-full hover:bg-forest-green ">
+                                            <button class="text-xl text-forest-green self-center hover:text-white"> + </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-end mb-2">
+                                    <div>
+                                        <p class="text-lg font-bold text-forest-green">Children</p>
+                                        <p class="text-xs">-16 at the time of flight</p>
+                                    </div>
+                                    <div class="flex gap-2 align-bottom">
+                                        <div class="flex justify-center self-center border-forest-green border h-6 w-6 rounded-full hover:bg-forest-green hover:text-white">
+                                            <button class="text-xl text-forest-green self-center hover:text-white"> - </button>
+                                        </div>
+                                        <span class="justify-center text-xl font-bold text-forest-green">{ children }</span>
+                                        <div class="flex justify-center self-center border-forest-green border h-6 w-6 rounded-full hover:bg-forest-green ">
+                                            <button class="text-xl text-forest-green self-center hover:text-white"> + </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="flex justify-end pr-2 text-lg font-bold text-forest-green cursor-pointer" on:click={showTravelers}>Done</p>
+                            </div>
+                        </div>
+                    </div>
+                {/if}
             </div>
             <button type="submit" class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-b-xl xl:rounded-b-xl 2xl:rounded-b-none 2xl:rounded-r-xl hover:bg-cyprus-green"> <!--submit button -->
                 Search
