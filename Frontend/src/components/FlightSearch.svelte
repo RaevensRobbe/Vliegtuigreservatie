@@ -58,7 +58,7 @@
                     <span>2 Adults, 2 Children</span>
                 </div>
             </div>
-            <button type="submit" class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-b-xl xl:rounded-b-xl 2xl:rounded-b-none 2xl:rounded-r-xl"> <!--submit button -->
+            <button type="submit" class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-b-xl xl:rounded-b-xl 2xl:rounded-b-none 2xl:rounded-r-xl hover:bg-cyprus-green"> <!--submit button -->
                 Search
             </button>
         </div>
