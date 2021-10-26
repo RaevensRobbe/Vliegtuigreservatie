@@ -62,11 +62,11 @@
                 </div>
                 {#if !toggleTravelers}
                     <div class="absolute top-20 justify-center">
-                        <div class="flex flex-col align-center shadow-md">
+                        <div class="flex flex-col align-center">
                             <div class="w-6 overflow-hidden inline-block self-center">
                                 <div class=" h-4 w-4 bg-white rotate-45 transform origin-bottom-left"></div>
                             </div>
-                            <div class="bg-white rounded-xl p-2">
+                            <div class="bg-white rounded-xl shadow-md p-2">
                                 <div class="flex justify-between items-end mb-2">
                                     <div class="mr-4">
                                         <p class="text-lg font-bold text-forest-green">Adults</p>
