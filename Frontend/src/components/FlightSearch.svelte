@@ -5,6 +5,26 @@
 	function showTravelers() {
 		toggleTravelers = !toggleTravelers;
 	}
+    function calculateTravelers(operation, travler){
+        console.log(operation + " " + travler);
+        if (travler == "children") {
+            if (operation == "+") {
+                children++;
+            } else {
+                if (children > 0) {
+                    children--;
+                }
+            }
+        } else {
+            if (operation == "+") {
+                adults++;
+            } else {
+                if (adults > 0) {
+                    adults--;
+                }
+            }
+        }
+    }
 </script>
 
 <main class="flex justify-center">
@@ -74,11 +94,11 @@
                                     </div>
                                     <div class="flex gap-2 align-bottom">
                                         <div class="flex justify-center self-center border-forest-green border h-6 w-6 rounded-full hover:bg-forest-green hover:text-white">
-                                            <button class="text-xl text-forest-green self-center hover:text-white"> - </button>
+                                            <div class="text-xl text-forest-green self-center hover:text-white cursor-pointer" on:click={() => calculateTravelers("-", "adults")}> - </div>
                                         </div>
                                         <span class="justify-center text-xl font-bold text-forest-green">{ adults }</span>
                                         <div class="flex justify-center self-center border-forest-green border h-6 w-6 rounded-full hover:bg-forest-green ">
-                                            <button class="text-xl text-forest-green self-center hover:text-white"> + </button>
+                                            <div class="text-xl text-forest-green self-center hover:text-white cursor-pointer" on:click={() => calculateTravelers("+", "adults")}> + </div>
                                         </div>
                                     </div>
                                 </div>
@@ -88,12 +108,12 @@
                                         <p class="text-xs">-16 at the time of flight</p>
                                     </div>
                                     <div class="flex gap-2 align-bottom">
-                                        <div class="flex justify-center self-center border-forest-green border h-6 w-6 rounded-full hover:bg-forest-green hover:text-white">
-                                            <button class="text-xl text-forest-green self-center hover:text-white"> - </button>
+                                        <div class="flex justify-center self-center border-forest-green border h-6 w-6 rounded-full hover:bg-forest-green hover:text-white cursor-pointer" on:click={() => calculateTravelers("-", "children")}>
+                                            <div class="text-xl text-forest-green self-center hover:text-white"> - </div>
                                         </div>
                                         <span class="justify-center text-xl font-bold text-forest-green">{ children }</span>
-                                        <div class="flex justify-center self-center border-forest-green border h-6 w-6 rounded-full hover:bg-forest-green ">
-                                            <button class="text-xl text-forest-green self-center hover:text-white"> + </button>
+                                        <div class="flex justify-center self-center border-forest-green border h-6 w-6 rounded-full hover:bg-forest-green cursor-pointer" on:click={() => calculateTravelers("+", "children")}>
+                                            <div class="text-xl text-forest-green self-center hover:text-white"> + </div>
                                         </div>
                                     </div>
                                 </div>
