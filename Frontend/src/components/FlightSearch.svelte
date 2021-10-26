@@ -1,5 +1,7 @@
 <script>
-
+	function showTravelers() {
+		console.log('clicked')
+	}
 </script>
 
 <main class="flex justify-center">
@@ -47,7 +49,7 @@
                     <span>No retour</span>   
                 </div>
             </div>
-            <div class="flex flex-col p-4 2xl:col-span-2"> <!--passenger box -->
+            <div class="flex flex-col p-4 2xl:col-span-2 cursor-pointer" on:click={showTravelers}> <!--passenger box -->
                 <p class="font-light text-xs">Travelers</p>
                 <div class="flex mt-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="fill-current text-forest-green mr-2 h-6 w-6" viewBox="0 0 27 25.199">
