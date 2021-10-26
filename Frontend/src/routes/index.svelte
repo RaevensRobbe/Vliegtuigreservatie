@@ -16,7 +16,7 @@
             DestinationId:20,
             Name:"Berlin",
             Popularity:"10",
-            Picture:""
+            Picture:"https://images.unsplash.com/photo-1469796466635-455ede028aca?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHNhbnRvcmluaXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
          }
       ]
    },
@@ -27,7 +27,7 @@
             DestinationId:13,
             Name:"Albuquerque",
             Popularity:"15",
-            Picture:""
+            Picture:"https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80"
          }
       ]
    },
@@ -38,7 +38,7 @@
             DestinationId:12,
             Name:"San Jose",
             Popularity:"15",
-            Picture:""
+            Picture:"https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80"
          }
       ]
    },
@@ -49,7 +49,7 @@
             DestinationId:1,
             Name:"Colorado Springs",
             Popularity:"17",
-            Picture:""
+            Picture:"https://images.unsplash.com/photo-1517882823369-e638bfcc33e9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80"
          }
       ]
    },
@@ -76,8 +76,6 @@
       ]
    }
  ] ;
-
- console.log(populardestinations);
 </script>
 
 <svelte:head>
@@ -90,10 +88,10 @@
     <FlightSearch />
 </section>
 
-<section class="p-6 align-start mb-auto">
+<section class="p-4 px-6 align-start">
     <Intertitle titleName="Popular destinations" />
     <section class="grid grid-cols-1 md:grid-cols-2  
-    lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mb-4 auto-cols-fr">
         {#each populardestinations as destination}
         <PopularDestinationCard popularDestination={destination} />
         {/each}
