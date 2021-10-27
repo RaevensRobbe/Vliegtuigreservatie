@@ -4,7 +4,6 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
 }, 'verifyToken')

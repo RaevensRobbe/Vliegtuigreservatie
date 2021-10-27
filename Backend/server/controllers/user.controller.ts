@@ -34,7 +34,7 @@ export class UserController extends CrudController<User> implements IUserControl
         result = "user already exists"
       }else{
         const newUser:User ={
-          UserId : 11 ,
+          UserId : req.body.id ,
           Name: req.body.name,
           Email: req.body.email,
           Admin: false
