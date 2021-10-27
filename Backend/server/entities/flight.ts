@@ -20,15 +20,24 @@ export class Flight {
     @OneToMany(() => Ticket, ticket => ticket.Flight)
     Ticket!: Ticket[]
 
-    @ManyToOne(() => Destination)
-    @JoinColumn({ name: "destination_id"})
-    Destination?: Destination
+    @Column({ name: 'destinationId' })
+    DestinationId?: number;
 
     @ManyToOne(() => Destination)
-    @JoinColumn({ name: "start_id"})
+    @JoinColumn({ name: "destinationId"})
+    Destination?: Destination
+
+    @Column({ name: 'startId' })
+    StartId?: number;
+
+    @ManyToOne(() => Destination)
+    @JoinColumn({ name: "startId"})
     Start?: Destination
+
+    @Column({ name: 'planeId' })
+    PlaneId?: number;
     
     @ManyToOne(() => Plane)
-    @JoinColumn({ name: "plane_id" })
+    @JoinColumn({ name: "planeId" })
     Plane?: Plane
 }

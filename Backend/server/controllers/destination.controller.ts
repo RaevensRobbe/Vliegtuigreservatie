@@ -1,4 +1,5 @@
-import { Request, Response, NextFunction, Router } from 'express';
+import { Request, Response, NextFunction, Router, response } from 'express';
+import { Country } from '../entities/country';
 import { Destination } from "../entities/destination"; 
 import { CrudController, IController, ICrudController } from './crud.controller';
 
@@ -17,7 +18,25 @@ export class DestinationController extends CrudController<Destination> implement
         super(Destination); // Initialize the parent constructor
 
         this.router.get('/all', this.all);
+        this.router.get('/test',this.testing);
         this.router.get('/:id', this.one);
         this.router.post('', this.save);
     }
+
+    all = async (request: Request, response: Response, next: NextFunction) => {
+        const data = await this.repository.createQueryBuilder("dest")
+        .select(["dest.Name","dest.DestinationId"])
+        .getMany();
+        response.send(data); 
+    }
+
+    testing = async (request: Request, response: Response, next: NextFunction) => {
+        const data = await this.repository.createQueryBuilder("dest")
+        .select(["dest.Name"])
+        .innerJoinAndSelect("dest.Destination","flight")
+        .innerJoinAndSelect("dest.Start","flightS")
+        .getMany();
+        response.send(data);
+    }
+
 }

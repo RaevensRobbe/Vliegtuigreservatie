@@ -14,6 +14,15 @@ import { UserController, IUserController } from './controllers/user.controller'
 
 import seedDatabase from './seeders/seeder';
 
+import admin from 'firebase-admin'
+import dotenv from 'dotenv'
+import authMiddleware from './auth/firebaseAuthMiddleware';
+
+dotenv.config() // This will load in the GOOGLE_APPLICATION_CREDENTIALS
+
+admin.initializeApp({
+  credential: admin.credential.applicationDefault()
+});
 
 (async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions();
@@ -32,10 +41,14 @@ import seedDatabase from './seeders/seeder';
 
     // MIDDLEWARE
     app.use(express.json()); // for parsing application/json
-    app.use(middlewareDemo);
+    //app.use(authMiddleware);
     // ROUTES
     app.get('/', (request: Request, response: Response) => {
-      response.send(`Welcome, just know: you matter!`);
+      response.send('Welcome, just know: you matter!');
+    });
+
+    app.get('/test-auth', (request: Request, response: Response) => {
+      response.send('authenticated !!!!!');
     });
 
     console.log('this far 1')
