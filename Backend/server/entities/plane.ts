@@ -13,10 +13,10 @@ export class Plane {
     Type?: string
     
     @Column('int')
-    BusinessSeats?: number
+    EconomySeats?: number
 
     @Column('int')
-    FirstClassSeats?: number
+    BusinessSeats?: number
 
     @OneToMany(() => Flight, flight => flight.Plane)
     Flight?: Flight[]; 

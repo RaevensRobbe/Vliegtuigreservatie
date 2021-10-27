@@ -19,5 +19,38 @@ export class FlightController extends CrudController<Flight> implements IFlightC
         this.router.get('/all', this.all);
         this.router.get('/:id', this.one);
         this.router.post('', this.save);
+        this.router.get('/flightInfo/:Sid/:Did',this.flightInfo)
+        this.router.get('/seats/:id', this.seats)
+    }
+
+    flightInfo = async (request: Request, response: Response, next: NextFunction) => {
+        const startID = request.params.Sid;
+        const destinationID = request.params.Did;
+
+        console.log(startID)
+        console.log(destinationID)
+
+        const data = await this.repository.createQueryBuilder("f")
+        .select(["f.FlightId","f.Date","f.StartId","f.DestinationId","d.Name","s.Name"])
+        .innerJoin("f.Destination", "d")
+        .innerJoin("f.Start", "s")
+        .where("f.StartId = :id",{id:startID})
+        .andWhere("f.DestinationId = :id2",{id2:destinationID})
+        .getOne();
+        response.send(data);
+    }
+
+    seats = async (request: Request, response: Response, next: NextFunction) => {
+        const flightID = request.params.id;
+
+        console.log(flightID)
+
+        const data = await this.repository.createQueryBuilder("f")
+        .select(["f.FlightId","p.EconomySeats","p.BusinessSeats","t.Seat"])
+        .innerJoin("f.Plane", "p")
+        .innerJoin("f.Ticket", "t")
+        .where("f.FlightId = :id",{id:flightID})
+        .getMany();
+        response.send(data);
     }
 }

@@ -29,10 +29,10 @@ export class Ticket {
     Review?: string
 
     @ManyToOne(() => User)
-    @JoinColumn({ name: "user_id" })
+    @JoinColumn({ name: "userId" })
     User?: User;
 
     @ManyToOne(() => Flight)
-    @JoinColumn({ name: "flight_id" })
+    @JoinColumn({ name: "flightId" })
     Flight?: Flight
 }
