@@ -1,29 +1,11 @@
 <script>
+    import SelectTravelers from "./flightSearchComponents/SelectTravelers.svelte";
+
     let children = 0;
     let adults = 0;
     let toggleTravelers = false;
 	function showTravelers() {
 		toggleTravelers = !toggleTravelers;
-	}
-    function calculateTravelers(operation, travler){
-        console.log(operation + " " + travler);
-        if (travler == "children") {
-            if (operation == "+") {
-                children++;
-            } else {
-                if (children > 0) {
-                    children--;
-                }
-            }
-        } else {
-            if (operation == "+") {
-                adults++;
-            } else {
-                if (adults > 0) {
-                    adults--;
-                }
-            }
-        }
     }
 </script>
 
@@ -80,8 +62,9 @@
                     </svg>
                     <span>{adults} Adults, {children} Children</span>
                 </div>
-                {#if !toggleTravelers}
-                    <div class="absolute top-20 justify-center">
+                {#if toggleTravelers}
+                    <SelectTravelers bind:children bind:adults bind:toggleTravelers />
+                    <!-- <div class="absolute top-20 justify-center">
                         <div class="flex flex-col align-center">
                             <div class="w-6 overflow-hidden inline-block self-center">
                                 <div class=" h-4 w-4 bg-white rotate-45 transform origin-bottom-left"></div>
@@ -120,7 +103,7 @@
                                 <p class="flex justify-end pr-2 text-lg font-bold text-forest-green cursor-pointer" on:click={showTravelers}>Done</p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 {/if}
             </div>
             <button type="submit" class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-b-xl xl:rounded-b-xl 2xl:rounded-b-none 2xl:rounded-r-xl hover:bg-cyprus-green"> <!--submit button -->
