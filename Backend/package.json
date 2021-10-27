@@ -20,6 +20,8 @@
     "@types/geojson": "^7946.0.8",
     "class-transformer": "^0.4.0",
     "express": "^4.17.1",
+    "firebase-admin": "^10.0.0",
+    "guid-typescript": "^1.0.9",
     "mysql": "^2.18.1",
     "typeorm": "^0.2.38",
     "typeorm-extension": "^0.3.0"
