@@ -4,6 +4,7 @@
   export let departureCity
   export let departureCountry
   export let toggleDestination
+
   function showDestination() {
     console.log(toggleDestination)
     toggleDestination = !toggleDestination
@@ -339,7 +340,7 @@
   // destinationsArray.forEach(destination => console.log(destination))
 </script>
 
-<div class="absolute top-20 justify-center z-10">
+<div class="absolute top-18 justify-center z-10">
   <div class="flex flex-col align-center">
     <div class="w-6 overflow-hidden inline-block self-center">
       <div
@@ -348,7 +349,7 @@
     </div>
     <div class="flex rounded-xl bg-white-500 shadow-md flex-grow">
       <!-- Choose country -->
-      <div class="bg-ghost-white p-2 rounded-l-xl">
+      <div class="bg-ghost-white p-4 rounded-l-xl">
         <h1 class="font-bold text-forest-green text-xl mb-2">
           Choose a country
         </h1>
@@ -356,7 +357,9 @@
           {#each destinationsArray as destination}
             <div
               class="hover:bg-gray-300"
-              on:click={() => (departureCountry = destination.Name)}
+              on:click={() => (
+                (departureCountry = destination.Name), (departureCity = null)
+              )}
             >
               <label key={destination.CountryId}>
                 <input
@@ -373,7 +376,34 @@
         </div>
       </div>
       <!-- Choose airport -->
-      <div class="p-2 bg-white font-bold rounded-r-lg">Pick an airport</div>
+      <div class="p-4 bg-white rounded-r-lg">
+        <h1 class="font-bold mb-2">Pick an airport</h1>
+        {#if !departureCountry}
+          <p>Pick a country first</p>
+        {:else}
+          {#each destinationsArray as destination}
+            {#if destination.Name == departureCountry}
+              {#each destination.Dest as city}
+                <div
+                  class="hover:bg-gray-300"
+                  on:click={() => (departureCity = city.Name)}
+                >
+                  <label key={city.DestinationId}>
+                    <input
+                      type="radio"
+                      name="city"
+                      id={city.DestinationId}
+                      value={city.DestinationId}
+                      class="peer hidden"
+                    />
+                    <p class="peer-checked:font-bold">{city.Name}</p>
+                  </label>
+                </div>
+              {/each}
+            {/if}
+          {/each}
+        {/if}
+      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  //@ts-nocheck
   import AppHeader from '../components/AppHeader.svelte'
   import AppFooter from '../components/AppFooter.svelte'
   import Intertitle from '../components/Intertitle.svelte'
@@ -7,7 +8,7 @@
   import type PopularDestination from '../models/PopularDestinationModel.type'
 
   export let name = 'Robbe Raevens'
-  //@ts-ignore
+
   export const populardestinations: PopularDestination = [
     {
       Name: 'Malawi',

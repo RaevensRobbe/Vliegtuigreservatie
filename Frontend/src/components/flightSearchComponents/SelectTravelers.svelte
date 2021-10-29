@@ -28,7 +28,7 @@
   }
 </script>
 
-<div class="absolute top-20 justify-center">
+<div class="absolute top-18 justify-center">
   <div class="flex flex-col align-center">
     <div class="w-6 overflow-hidden inline-block self-center">
       <div class=" h-4 w-4 bg-white rotate-45 transform origin-bottom-left" />

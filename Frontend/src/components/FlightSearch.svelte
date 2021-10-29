@@ -1,8 +1,8 @@
 <script>
   import SelectLocation from './flightSearchComponents/SelectLocation.svelte'
   import SelectTravelers from './FlightSearchComponents/SelectTravelers.svelte'
-  let departureCity = ''
-  let departureCountry = ''
+  let departureCity = null
+  let departureCountry = null
   let children = 0
   let adults = 0
   let toggleTravelers = false
@@ -52,6 +52,8 @@
           </svg>
           {#if !departureCountry}
             <span>Departure</span>
+          {:else if !departureCity}
+            <span>{departureCountry}</span>
           {:else}
             <span>{departureCountry}, {departureCity}</span>
           {/if}

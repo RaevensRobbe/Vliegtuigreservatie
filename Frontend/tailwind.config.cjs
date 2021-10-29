@@ -1,10 +1,10 @@
 module.exports = {
   mode: 'jit',
   purge: ['./src/**/*.svelte'],
-  theme:{
-    extend:{
-      fontFamily:{
-        'Montserrat': ['Montserrat']
+  theme: {
+    extend: {
+      fontFamily: {
+        Montserrat: ['Montserrat'],
       },
       colors: {
         'forest-green': '#008066',
@@ -17,9 +17,13 @@ module.exports = {
       screens: {
         '3xl': '1921px',
       },
-      backgroundImage:{
-        'image-mainpage': "url('./public/pietro-de-grandi-T7K4aEPoGGk-unsplash.jpg')"
-      }
-    }
-  }
+      backgroundImage: {
+        'image-mainpage':
+          "url('./public/pietro-de-grandi-T7K4aEPoGGk-unsplash.jpg')",
+      },
+      spacing: {
+        18: '4.5rem',
+      },
+    },
+  },
 }
