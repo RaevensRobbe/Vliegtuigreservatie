@@ -1,11 +1,6 @@
-export default interface Dest{
-    DestinationId: string,
-    Name: string,
-    Popularity: number,
-    Picture:string,
-}
+import type Dest from './DestinationModel.type'
 
 export default interface PopularDestination {
-    Name: string;
-    Dest: Dest;
+  Name: string
+  Dest: Dest
 }
