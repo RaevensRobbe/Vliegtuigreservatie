@@ -1,14 +1,53 @@
-import { initializeApp, FirebaseOptions, FirebaseApp } from 'firebase/app'
-import { Auth, browserLocalPersistence,createUserWithEmailAndPassword, getAuth, setPersistence, signInWithEmailAndPassword, signOut, User } from 'firebase/auth'
+import {  getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from 'firebase/auth';
+import { readable } from 'svelte/store';
 
-const firebaseConfig:FirebaseOptions = {
-    apiKey: "AIzaSyDL9CZAEQy8dWqXTS_A6pGLDOApTU1kl7M",
-    authDomain: "express-server-auth-5455e.firebaseapp.com",
-    projectId: "express-server-auth-5455e",
-    storageBucket: "express-server-auth-5455e.appspot.com",
-    messagingSenderId: "560074154452",
-    appId: "1:560074154452:web:00f9c5c307c4d6da35f641"
-}
+const userMapper = claims => ({
+  id: claims.user_id,
+  name: claims.name,
+  email: claims.email,
+  picture: claims.picture
+});
 
-const app: FirebaseApp = initializeApp(firebaseConfig);
-const auth: Auth = getAuth();
+// construction function. need to call it after we
+// initialize our firebase app
+export const initAuth = (useRedirect = false) => {
+    const auth = getAuth()
+
+  const loginWithEmailPassword = (email, password) =>{
+    signInWithEmailAndPassword(auth ,email, password);
+  }
+    
+  const loginWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+
+    if (useRedirect) {
+      return signInWithRedirect(auth, provider);
+    } else {
+      return signInWithPopup(auth, provider);
+    }
+  };
+
+  const logout = () => auth.signOut();
+
+  // wrap Firebase user in a Svelte readable store
+  const user = readable(null, set => {
+    const unsub = auth.onAuthStateChanged(async fireUser => {
+      if (fireUser) {
+        const token = await fireUser.getIdTokenResult();
+        const user = userMapper(token.claims);
+        set(user);
+      } else {
+        set(null);
+      }
+    });
+
+    return unsub;
+  });
+
+  return {
+    user,
+    loginWithGoogle,
+    loginWithEmailPassword,
+    logout
+  };
+};
