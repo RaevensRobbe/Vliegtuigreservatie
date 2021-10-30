@@ -174,6 +174,7 @@
         </h1>
         <div class="grid md:grid-cols-4 grid-flow-row grid-rows-4 gap-1">
           {#each destinationsArray as destination}
+            <!-- Set departure city = null => otherwise city in wrong country -->
             <div
               class="hover:bg-gray-300"
               on:click={() => (
