@@ -165,7 +165,7 @@
       />
     </div>
     <div
-      class="grid md:grid-rows-2 md:grid-cols-5 rounded-xl bg-white-500 shadow-md flex-grow"
+      class="grid md:grid-rows-1 md:grid-cols-5 rounded-xl bg-white-500 shadow-lg flex-grow"
     >
       <!-- Choose country -->
       <div class="bg-ghost-white p-4 md:rounded-l-xl  md:col-span-4">
