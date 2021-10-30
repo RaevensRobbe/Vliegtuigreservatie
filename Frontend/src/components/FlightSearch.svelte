@@ -10,12 +10,16 @@
   let toggleDeparture = false
 
   function showItem(item) {
-    if (item == 'travelers') {
-      toggleTravelers = !toggleTravelers
-    } else if (item == 'departure') {
-      toggleDeparture = !toggleDeparture
-    } else if (item == 'destination') {
-      toggleDestination = !toggleDestination
+    switch (item) {
+      case 'travelers':
+        toggleTravelers = !toggleTravelers
+        break
+      case 'departure':
+        toggleDeparture = !toggleDeparture
+        break
+      case 'destination':
+        toggleDestination = !toggleDestination
+        break
     }
   }
 </script>
@@ -85,11 +89,11 @@
           <span>Destination</span>
         </div>
       </div>
-      {#if !toggleDeparture}
+      {#if toggleDeparture}
         <SelectLocation
+          bind:toggleDestination
           bind:departureCity
           bind:departureCountry
-          bind:toggleDestination
         />
       {/if}
     </div>

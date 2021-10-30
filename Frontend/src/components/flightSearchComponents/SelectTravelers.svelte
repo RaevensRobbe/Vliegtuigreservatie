@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
   export let children
   export let adults
   export let toggleTravelers
+
   function showTravelers() {
     console.log(toggleTravelers)
-    toggleTravelers = !toggleTravelers
+    toggleTravelers = false
   }
   function calculateTravelers(operation, travler) {
     console.log(operation + ' ' + travler)
