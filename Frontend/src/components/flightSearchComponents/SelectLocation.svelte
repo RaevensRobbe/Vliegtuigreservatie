@@ -1,12 +1,15 @@
 <script lang="ts">
   // @ts-nocheck
   import type Dest from './../../models/DestinationModel.type'
+
+  // export so parent receives the changes
   export let departureCity
   export let departureCountry
   export let toggleDestination = true
 
   function showDestination() {
     toggleDestination = false
+    console.log('toggle')
   }
 
   export const destinationsArray: Dest = [
@@ -178,6 +181,7 @@
               )}
             >
               <label key={destination.CountryId}>
+                <!-- bind:group makes chosen country bold -->
                 <input
                   type="radio"
                   name="country"
@@ -199,15 +203,17 @@
           <p>Pick a country first</p>
         {:else}
           {#each destinationsArray as destination}
+            <!-- If chosen country -->
             {#if destination.Name == departureCountry}
+              <!-- Loop city/airport in chosen country -->
               {#each destination.Dest as city}
                 <div
                   class="hover:bg-gray-300"
                   on:click={(() => (departureCity = city.Name),
                   showDestination)}
-                  on:click={() => (toggleDestination = false)}
                 >
                   <label key={city.DestinationId}>
+                    <!-- bind:group makes chosen city bold -->
                     <input
                       type="radio"
                       name="city"
