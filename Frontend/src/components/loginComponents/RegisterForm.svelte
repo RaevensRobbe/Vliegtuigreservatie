@@ -3,12 +3,15 @@
     import { getAuth } from "firebase/auth";
     import loginCompStore from "../../stores/loginCompStore";
     import authStore from "../../stores/authStore";
+    import { requiredValidator, emailValidator, strenghtValidator, confirmValidator } from '../../composables/inputValidator';
 
      let email:string;
      let firstName:string
      let lastName:string
      let pw:string
      let cpw:string
+
+     let errors:any = {};
 
      let result = null
 
@@ -60,10 +63,76 @@
         });
     }
 
+    const onSubmit = () => {
+        if(requiredValidator(email) && requiredValidator(firstName) && requiredValidator(lastName) && requiredValidator(pw) && requiredValidator(cpw)){
+            errors.email = "Email is required"
+            errors.firstname = "Firstname is required"
+            errors.lastname = "Lastname is required"
+            errors.pw = "Password is required"
+            errors.cpw = "Confirm Password is required"
+            return
+        }
+
+        if(requiredValidator(email)){
+            errors.email = "Email is required"
+            return
+        }else{
+            if(!emailValidator(email)){
+                errors.email = "Invalid Email"
+                return
+            }else
+                errors.email = ""
+        }
+
+        if(requiredValidator(firstName)){
+            errors.firstname = "Firstname is required"
+            return
+        }else   
+            errors.firstname = ""
+
+        if(requiredValidator(lastName)){
+            errors.lastname = "Lastname is required"
+            return
+        }else   
+            errors.lastname = ""
+
+        if(requiredValidator(pw)){
+            errors.pw = "Password is required"
+            return
+        }else{
+            if(strenghtValidator(pw) == 1){
+                errors.pw = "Password is too short"
+                return
+            }else if(strenghtValidator(pw) == 2){
+                errors.pw = "Password is commonly used"
+                return
+            }else if(strenghtValidator(pw) == 3){
+                errors.pw =" Password is too weak"
+                return
+            }else{
+                errors.pw = ""
+            }
+        }
+
+        if(requiredValidator(cpw)){
+            errors.cpw = "Confirm password is required"
+            return
+        }else{
+            if(!confirmValidator(pw,cpw)){
+                errors.cpw = "Passwords don't match"
+                return
+            }else{
+                errors.cpw = ""
+            }
+        }
+            
+    }
+
 </script>
 
 <div class="absolute inset-x-1/3 inset-y-1/4 w-screen ">
-    <div
+    <form
+        on:submit|preventDefault={onSubmit}
         class="fixed w-1/3 z-10 bg-white p-8 flex flex-col"
     >
         <div class="flex justify-between mb-4">
@@ -83,14 +152,21 @@
             placeholder="name@acme.com"
             class="w-full border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green" 
         />
+        {#if errors.email}
+            <p class="text-red-600 -mt-2 mb-2">{errors.email}</p>
+        {/if}
 
         <label for="firstName" class="mb-2">First Name</label>
         <input
             bind:value={firstName}
             type="text" 
             id="firstName"
-            class="w-full border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green"
+            class=
+            "w-full border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green"
         />
+        {#if errors.firstname}
+            <p class="text-red-600 -mt-2 mb-2">{errors.firstname}</p>
+        {/if}
 
         <label for="lastName" class="mb-2">Last Name</label>
         <input
@@ -99,6 +175,9 @@
             id="lastName"
             class="w-full border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green"
         />
+        {#if errors.lastname}
+            <p class="text-red-600 -mt-2 mb-2">{errors.lastname}</p>
+        {/if}
 
         <label for="pw" class="mb-2">Password</label>
         <input
@@ -107,6 +186,9 @@
             id="pw"
             class="w-full border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green"
         />
+        {#if errors.pw}
+            <p class="text-red-600 -mt-2 mb-2">{errors.pw}</p>
+        {/if}
 
         <label for="cpw" class="mb-2">Confirm Password</label>
         <input
@@ -115,13 +197,24 @@
             id="cpw"
             class="w-full border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green"
         />
+        {#if errors.cpw}
+            <p class="text-red-600 -mt-2 mb-2">{errors.cpw}</p>
+        {/if}
 
-        <button
+        <!-- <button
             on:click={register}
             type="button"
             class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white" 
         >
             Register
+        </button> -->
+
+        
+        <button
+            type="submit"
+            class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white" 
+        >
+            Register
         </button>
-    </div>
+    </form>
 </div>

@@ -1,11 +1,17 @@
 <script lang='ts'>
     import {  getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
+    import { afterUpdate, onMount } from 'svelte';
+    import { form } from 'svelte-forms';
     import {fade} from 'svelte/transition';
+
+    import { requiredValidator, emailValidator } from '../../composables/inputValidator';
     import loginCompStore from '../../stores/loginCompStore'
 
-    let email:string;
-    let pw:string;
-    let error = null;    
+    let validationError:boolean = true
+    let email:string = '';
+    let pw:string = '';
+
+    let errors:any = {};   
 
     const auth = getAuth();
 
@@ -54,11 +60,38 @@
         });
     }
 
+    const onSubmit = () => {
+        if(requiredValidator(email) && requiredValidator(pw)){
+            errors.email = "Email is required"
+            errors.pw = "Password is required"
+            return
+        }
+        
+        if(requiredValidator(email)){
+            errors.email = "Email is required"
+            return
+        }else{
+            if(!emailValidator(email)){
+                errors.email = "Invalid Email"
+                return
+            }else
+                errors.email = ""
+        }
 
+        if(requiredValidator(pw)){
+            errors.pw = "Password is required"
+            return
+        }else errors.pw = ""
+
+        loginWithEmail()
+        console.log('onSubmit')
+    }
 </script>
 
 <div class="absolute inset-x-1/3 inset-y-1/4 w-screen ">
+    <!-- svelte-ignore component-name-lowercase -->
     <form
+        on:submit|preventDefault ={onSubmit}
         class="fixed w-1/3 z-10 bg-white p-8 flex flex-col"
     >
         <div class="flex justify-between mb-4">
@@ -73,24 +106,34 @@
         <input  
             bind:value={email}
             id="email"
-            type="email"
+            type="text"
             placeholder="name@acme.com"
-            class="w-full border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green" 
+            class="w-full border-b mb-2 h-8 focus:outline-none focus:ring focus:ring-forest-green" 
         />
+        {#if errors.email}
+            <p class="text-red-600 -mt-2 mb-2">{errors.email}</p>
+        {/if}
 
-        <label for="pw" class="mb-2">Password</label>
+        <label for="pw" class="mb-2 mt-2">Password</label>
         <input
             bind:value={pw}
             type="password" 
             id="pw"
             class="w-full border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green"
         />
-        {#if error}
-            <div transition:fade class="p-2 mb-6 bg-red-300">{error.message}</div>
+        {#if errors.pw}
+            <p class="text-red-600 -mt-2 mb-2">{errors.pw}</p>
         {/if}
-        <button
+        <!-- <button
             on:click={loginWithEmail}
             type="button"
+            class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white" 
+        >
+            Login
+        </button> -->
+
+        <button
+            type="submit"
             class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white" 
         >
             Login
