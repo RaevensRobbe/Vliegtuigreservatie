@@ -5,17 +5,25 @@
     import LoginForm from "../components/loginComponents/LoginForm.svelte";
     import FormSelector from '../components/loginComponents/formSelector.svelte';
     import authStore from '../stores/authStore';
+    import loginCompStore from '../stores/loginCompStore'
+    import RegisterForm from '../components/loginComponents/RegisterForm.svelte';
 
     let menuToggle = false;
-    let loginToggle = false;
+     //false
 
     function toggler() {
         menuToggle = !menuToggle;
     }
 
     function showLoginForm(){
+        let loginToggle = $loginCompStore.showLogin;
+        console.log(`Voor aanpassen Appheader ${loginToggle}`)
         loginToggle = !loginToggle;
-        console.log(loginToggle)
+        console.log(`Na aanpassen Appheader ${loginToggle}`);
+        loginCompStore.set({
+            showRegister: false,
+            showLogin: loginToggle
+        });
     }
 
     function logout(){
@@ -41,11 +49,11 @@
         {:else}
             <button
                 class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200">
-                <div
-                    on:click="{showLoginForm}">
-                    <p>Log in</p>
-                </div>
-            </button>
+            <div
+                on:click="{showLoginForm}">
+                <p>Log in</p>
+            </div>
+        </button>
         {/if}
     {:else}
         <button class="justify-self-end">
@@ -70,9 +78,11 @@
         <div>
             <button class="font-bold text-xl text-forest-green" on:click="{showLoginForm}">Log in</button>
         </div>
-        {#if loginToggle}
-            <!-- <LoginForm /> -->
-            <FormSelector></FormSelector>
+        {#if $loginCompStore.showLogin}
+            <!-- <FormSelector></FormSelector> -->
+            <LoginForm/>
+        {:else if $loginCompStore.showRegister}
+            <RegisterForm/>
         {/if}
     {/if}
 </header>

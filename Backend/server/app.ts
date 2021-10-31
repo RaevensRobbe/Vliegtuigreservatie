@@ -39,9 +39,15 @@ admin.initializeApp({
     const app = express(),
       port = process.env.PORT || 3001;
 
+
     // MIDDLEWARE
     app.use(express.json()); // for parsing application/json
     //app.use(authMiddleware);
+
+    app.use(function (req,res,next){
+      res.setHeader("Acces-Control-Allow-Origin","http://localhost:5000");
+      next();
+    })
     // ROUTES
     app.get('/', (request: Request, response: Response) => {
       response.send('Welcome, just know: you matter!');

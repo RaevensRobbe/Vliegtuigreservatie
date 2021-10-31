@@ -41,19 +41,6 @@ export class UserController extends CrudController<User> implements IUserControl
         } 
         const newDbUser = await this.repository.create(newUser);
         result = await this.repository.save(newDbUser); 
-
-        const newFirebaseUser = await admin.auth().createUser({
-          email:  req.body.email,
-          password: req.body.password,
-          displayName: req.body.name
-        })
-        .then((userRecord) => {
-          // See the UserRecord reference doc for the contents of userRecord.
-          console.log('Successfully created new user:', userRecord.uid);
-        })
-        .catch((error) => {
-          console.log('Error creating new user:', error);
-        });
       }
 
       return res.send(result)
