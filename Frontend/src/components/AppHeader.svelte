@@ -1,11 +1,13 @@
 <script lang="ts">
-import { debug } from "svelte/internal";
-import LoginForm from "./LoginForm.svelte";
+    import {  getAuth } from 'firebase/auth';
+    import { debug } from "svelte/internal";
 
-    //export let name = undefined;
-    let name = undefined
+    import LoginForm from "../components/loginComponents/LoginForm.svelte";
+    import FormSelector from '../components/loginComponents/formSelector.svelte';
+    import authStore from '../stores/authStore';
+
     let menuToggle = false;
-    let loginToggle = false
+    let loginToggle = false;
 
     function toggler() {
         menuToggle = !menuToggle;
@@ -14,6 +16,12 @@ import LoginForm from "./LoginForm.svelte";
     function showLoginForm(){
         loginToggle = !loginToggle;
         console.log(loginToggle)
+    }
+
+    function logout(){
+        const auth = getAuth();
+        console.log("pressed")
+        auth.signOut()
     }
 
 </script>
@@ -27,10 +35,10 @@ import LoginForm from "./LoginForm.svelte";
                 </svg>
             </div>
         </button>
-        {#if name}
+        {#if $authStore.isLoggedIn}
             <button class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200">My bookings</button>
-            <button class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200">{ name }</button>
-            {:else}
+            <button class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200">{ $authStore.user.email }</button>
+        {:else}
             <button
                 class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200">
                 <div
@@ -39,7 +47,7 @@ import LoginForm from "./LoginForm.svelte";
                 </div>
             </button>
         {/if}
-        {:else}
+    {:else}
         <button class="justify-self-end">
             <div on:click="{toggler}">
                 <svg class=" text-forest-green stroke-current h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
@@ -53,17 +61,18 @@ import LoginForm from "./LoginForm.svelte";
 <header class="flex-col justify-between py-8 px-6 gap-8 bg-white hidden md:flex">
     <div class="flex flex-row justify-between">
         <button class="font-bold text-2xl text-forest-green">MCT airlines</button>
-    {#if name}
+    {#if $authStore.isLoggedIn}
         <div class="flex text-dim-gray gap-8">
             <button>My bookings</button>
-            <button class="font-bold text-xl text-forest-green">{ name }</button>
+            <button on:click={logout} class="font-bold text-xl text-forest-green">{ $authStore.user.displayName }</button>
         </div>
     {:else}
         <div>
             <button class="font-bold text-xl text-forest-green" on:click="{showLoginForm}">Log in</button>
         </div>
         {#if loginToggle}
-            <LoginForm />
+            <!-- <LoginForm /> -->
+            <FormSelector></FormSelector>
         {/if}
     {/if}
 </header>

@@ -18,7 +18,7 @@ module.exports = {
         '3xl': '1921px',
       },
       backgroundImage:{
-        'image-mainpage': "url('./public/pietro-de-grandi-T7K4aEPoGGk-unsplash.jpg')"
+        'image-mainpage': "url('/HomePageImage.jpg')"
       }
     }
   }
