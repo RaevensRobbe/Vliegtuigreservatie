@@ -1,18 +1,69 @@
 <script>
+  //@ts-nocheck
+  import { FlightStore } from './../stores/flightStore'
   import SelectTravelers from './flightSearchComponents/SelectTravelers.svelte'
+  import { goto } from '$app/navigation'
 
-  let children = 0
-  let adults = 0
+  let validFlight = false
+
+  let flight = $FlightStore
+  console.log(flight)
+
+  let children = flight.children
+  let adults = flight.adults
   let toggleTravelers = false
-  let departureDate
-  let retourDate
+  let departureDate = flight.departureDate
+  let retourDate = flight.retourDate
+  let departureLocation = flight.departureLocation
+  let destinationLocation = flight.destinationLocation
+
+  function flightValidator() {
+    console.log($FlightStore)
+    if (!$FlightStore.departureLocation) {
+      console.log('no departure location set')
+      return
+    }
+    if (!$FlightStore.destinationLocation) {
+      console.log('no destination location set')
+      return
+    }
+    if (!$FlightStore.departureDate) {
+      console.log('no departure date set')
+      return
+    }
+    if ($FlightStore.retourDate) {
+      if ($FlightStore.departureDate > $FlightStore.retourDate) {
+        console.log('kan niet in het verleden terug keren')
+        return
+      } else if ($FlightStore.departureDate == $FlightStore.retourDate) {
+        console.log('retour kan niet op dezelfde dag zijn')
+        return
+      }
+    }
+
+    if ($FlightStore.children == 0 && $FlightStore.adulst == 0) {
+      console.log('geen passagiers')
+      return
+    }
+
+    goto('/flight/flightDate')
+  }
 
   function showTravelers() {
     toggleTravelers = !toggleTravelers
   }
 
   const handleSubmit = () => {
-    console.log('Submit')
+    FlightStore.set({
+      departureLocation: 'Rome, Italy',
+      destinationLocation: 'Paris, France',
+      departureDate: departureDate,
+      retourDate: retourDate,
+      children: children,
+      adults: adults,
+    })
+
+    flightValidator()
   }
 </script>
 
@@ -47,7 +98,11 @@
               transform="translate(0 0)"
             />
           </svg>
-          <span>Departure</span>
+          {#if departureLocation}
+            <span>{departureLocation}</span>
+          {:else}
+            <span>Departure</span>
+          {/if}
         </div>
       </div>
       <div class="flex flex-col p-4">
@@ -73,7 +128,11 @@
               transform="translate(0 0)"
             />
           </svg>
-          <span>Destination</span>
+          {#if destinationLocation}
+            <span>{destinationLocation}</span>
+          {:else}
+            <span>Destination</span>
+          {/if}
         </div>
       </div>
     </div>
@@ -106,7 +165,7 @@
             />
           </svg>
           <div class="flex-grow">
-            <input type="date" />
+            <input type="date" bind:value={departureDate} />
           </div>
         </div>
       </div>
@@ -137,7 +196,7 @@
             />
           </svg>
           <div class="flex-grow">
-            <input type="date" />
+            <input type="date" bind:value={retourDate} />
           </div>
         </div>
       </div>
