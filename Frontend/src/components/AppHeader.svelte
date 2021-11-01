@@ -1,6 +1,7 @@
 <script lang="ts">
     import {  getAuth } from 'firebase/auth';
     import { debug } from "svelte/internal";
+    import { goto } from '$app/navigation';
 
     import LoginForm from "../components/loginComponents/LoginForm.svelte";
     import authStore from '../stores/authStore';
@@ -8,7 +9,7 @@
     import RegisterForm from '../components/loginComponents/RegisterForm.svelte';
 
     let menuToggle = false;
-     //false
+    let accountdropDown = false;
 
     function toggler() {
         menuToggle = !menuToggle;
@@ -25,11 +26,22 @@
         });
     }
 
+    function toggleAccountTab(){
+        accountdropDown = !accountdropDown;
+        console.log(accountdropDown)
+    }
+
     function logout(){
         const auth = getAuth();
         console.log("pressed")
         auth.signOut()
     }
+
+    const goToAccountInfo = async() => {
+        console.log("Go to accountInfoPage")
+        await goto('/user/accountInfo')
+    }
+
 
 </script>
 
@@ -65,20 +77,29 @@
 </header>
 
 
-<header class="flex-col justify-between py-8 px-6 gap-8 bg-white hidden md:flex">
+<header class="flex-col justify-between px-6 py-8 gap-8 bg-white hidden md:flex">
     <div class="flex flex-row justify-between">
         <button class="font-bold text-2xl text-forest-green">MCT airlines</button>
     {#if $authStore.isLoggedIn}
         <div class="flex text-dim-gray gap-8">
             <button>My bookings</button>
-            <button on:click={logout} class="font-bold text-xl text-forest-green">{ $authStore.user.displayName }</button>
+            <!-- <button on:click={logout} class="font-bold text-xl text-forest-green">{ $authStore.user.displayName }</button> -->
+            <button on:click={toggleAccountTab} class="font-bold text-xl text-forest-green">{ $authStore.user.displayName }</button>
+            {#if accountdropDown}
+                <div class="absolute right-0">
+                    <div class="relative bg-white top-16 z-10 flex flex-col items-center px-6">
+                        <button class="text-lg text-forest-green py-4" on:click={goToAccountInfo}>Edit Account</button>
+                        <button class="text-lg text-forest-green py-4" on:click={logout}>Sign out</button>
+                    </div>
+                </div>
+            {/if}
         </div>
+        
     {:else}
         <div>
             <button class="font-bold text-xl text-forest-green" on:click="{showLoginForm}">Log in</button>
         </div>
         {#if $loginCompStore.showLogin}
-            <!-- <FormSelector></FormSelector> -->
             <LoginForm/>
         {:else if $loginCompStore.showRegister}
             <RegisterForm/>
