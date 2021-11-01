@@ -1,6 +1,5 @@
 <script>
   import SelectTravelers from './flightSearchComponents/SelectTravelers.svelte'
-  import { Datefield } from 'svelte-mui/src'
 
   let children = 0
   let adults = 0
@@ -107,7 +106,7 @@
             />
           </svg>
           <div class="flex-grow">
-            <Datefield format="DD-MM-YYYY" bind:value={departureDate} />
+            <input type="date" />
           </div>
         </div>
       </div>
@@ -138,7 +137,7 @@
             />
           </svg>
           <div class="flex-grow">
-            <Datefield format="DD-MM-YYYY" bind:value={retourDate} />
+            <input type="date" />
           </div>
         </div>
       </div>
