@@ -7,13 +7,21 @@
   let toggleTravelers = false
   let departureDate
   let retourDate
+
   function showTravelers() {
     toggleTravelers = !toggleTravelers
+  }
+
+  const handleSubmit = () => {
+    console.log('Submit')
   }
 </script>
 
 <main class="flex justify-center">
-  <form class="flex flex-col justify-between gap-4 w-3/4 lg:w-3/5 xl:w-1/2">
+  <form
+    class="flex flex-col justify-between gap-4 w-3/4 lg:w-3/5 xl:w-1/2"
+    on:submit|preventDefault={handleSubmit}
+  >
     <div class="grid grid-cols-1 bg-white rounded-xl lg:grid-cols-2">
       <!--upper row -->
       <div class="flex flex-col p-4 border-b-2 lg:border-r-2 lg:border-b-0">
