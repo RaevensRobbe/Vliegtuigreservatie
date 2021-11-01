@@ -17,9 +17,7 @@
 
     function showLoginForm(){
         let loginToggle = $loginCompStore.showLogin;
-        console.log(`Voor aanpassen Appheader ${loginToggle}`)
         loginToggle = !loginToggle;
-        console.log(`Na aanpassen Appheader ${loginToggle}`);
         loginCompStore.set({
             showRegister: false,
             showLogin: loginToggle
@@ -83,7 +81,6 @@
     {#if $authStore.isLoggedIn}
         <div class="flex text-dim-gray gap-8">
             <button>My bookings</button>
-            <!-- <button on:click={logout} class="font-bold text-xl text-forest-green">{ $authStore.user.displayName }</button> -->
             <button on:click={toggleAccountTab} class="font-bold text-xl text-forest-green">{ $authStore.user.displayName }</button>
             {#if accountdropDown}
                 <div class="absolute right-0">

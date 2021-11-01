@@ -35,7 +35,7 @@ export const strenghtValidator = (pw:string) => {
         numberOfElements = /[^a-zA-Z0-9]/.test(pw) ? ++numberOfElements : numberOfElements;   // Special characters (inc. space)
 
         // Check then strenth of this password using some simple rules
-        if (numberOfElements === 0 || numberOfElements === 1 || numberOfElements === 2 || numberOfElements === 3){
+        if (numberOfElements === 0 || numberOfElements === 1 || numberOfElements === 2 || numberOfElements === 4){
             return true
         }
         

@@ -43,7 +43,7 @@
      }
 
      async function post(data) {
-         console.log("post functie")
+         console.log(`post functie ${data}`)
          const res = await fetch('http://localhost:3001/api/v1/user/createUser',{
              method:'POST',
              headers: { "Content-Type": "application/json" },
