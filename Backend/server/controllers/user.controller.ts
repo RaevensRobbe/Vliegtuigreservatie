@@ -27,21 +27,17 @@ export class UserController extends CrudController<User> implements IUserControl
 
     createUser = async (req: Request, res: Response, next: NextFunction) => {
       console.log(`data van frontend ${req.body}`);
-      const check = await this.repository.findOne({Email:req.body.email})
-      let result:any = ''
-
-      if(check){
-        result = "user already exists"
-      }else{
-        const newUser:User ={
-          UserId : req.body.data.id ,
-          Name: req.body.data.name,
-          Email: req.body.data.email,
-          Admin: false
-        } 
-        const newDbUser = await this.repository.create(newUser);
-        result = await this.repository.save(newDbUser); 
-      }
+      let result:any
+      
+      const newUser:User ={
+        UserId : req.body.data.id,
+        Name: req.body.data.name,
+        Email: req.body.data.email,
+        Admin: false
+      } 
+      const newDbUser = await this.repository.create(newUser);
+      result = await this.repository.save(newDbUser); 
+      
 
       return res.send(result)
     }

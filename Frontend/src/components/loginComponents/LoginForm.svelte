@@ -90,7 +90,7 @@
     >
         <div class="flex justify-between mb-4">
             <h1 class=" text-2xl text-forest-green">Login</h1>
-            <svg on:click={showLoginForm}  xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current text-forest-green" viewBox="0 0 32 32">
+            <svg on:click={showLoginForm}  xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current text-forest-green cursor-pointer" viewBox="0 0 32 32">
                 <path id="Icon_material-close" data-name="Icon material-close" d="M39.5,10.723,36.277,7.5,23.5,20.277,10.723,7.5,7.5,10.723,20.277,23.5,7.5,36.277,10.723,39.5,23.5,26.723,36.277,39.5,39.5,36.277,26.723,23.5Z" transform="translate(-7.5 -7.5)"/>
             </svg>
         </div>
@@ -102,7 +102,7 @@
             id="email"
             type="text"
             placeholder="name@acme.com"
-            class="w-full border-b mb-2 h-8 focus:outline-none focus:ring focus:ring-forest-green" 
+            class="w-full border-b mb-2 h-8 focus:outline-none focus:ring focus:ring-forest-green shadow-md bg-gray-100" 
         />
         {#if errors.email}
             <p class="text-red-600 -mt-2 mb-2">{errors.email}</p>
@@ -113,7 +113,8 @@
             bind:value={pw}
             type="password" 
             id="pw"
-            class="w-full border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green"
+            placeholder="enter password"
+            class="w-full border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green shadow-md bg-gray-100"
         />
         {#if errors.pw}
             <p class="text-red-600 -mt-2 mb-2">{errors.pw}</p>
