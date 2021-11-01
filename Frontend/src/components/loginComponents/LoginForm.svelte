@@ -39,9 +39,7 @@
 
     function showLoginForm(){
         let loginToggle = $loginCompStore.showLogin
-        console.log(`Voor aanpassen LoginForm ${loginToggle}`)
         loginToggle = !loginToggle;
-        console.log(`Na aanpassen LoginForm ${loginToggle}`);
         loginCompStore.set({
             showRegister: false,
             showLogin: loginToggle
@@ -49,11 +47,8 @@
     }
 
     const showRegisterForm = () => {
-        console.log('test')
         let registerToggle = $loginCompStore.showRegister
-        console.log(`Voor aanpassen LoginForm ${registerToggle}`)
         registerToggle = !registerToggle;
-        console.log(`Na aanpassen LoginForm ${registerToggle}`);
         loginCompStore.set({
             showRegister: registerToggle,
             showLogin: false
@@ -84,7 +79,6 @@
         }else errors.pw = ""
 
         loginWithEmail()
-        console.log('onSubmit')
     }
 </script>
 

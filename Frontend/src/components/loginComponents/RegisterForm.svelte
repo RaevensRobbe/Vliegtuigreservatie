@@ -20,11 +20,10 @@
         createUserWithEmailAndPassword(auth, email, pw)
         .then((userCredential) => {
             const user = userCredential.user
-            console.log('Yeey aanmaken gelukt')
-
+            
+            $authStore.user.displayName = firstName;
             updateProfile(user , {displayName: firstName})
             .then(() =>{
-                console.log('yeey updaten gelukt')
                 const data = {
                     id : 20,
                     name : firstName,
