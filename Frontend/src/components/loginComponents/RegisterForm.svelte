@@ -125,6 +125,8 @@
                 errors.cpw = ""
             }
         }
+
+        register()
             
     }
 

@@ -3,7 +3,6 @@
     import { debug } from "svelte/internal";
 
     import LoginForm from "../components/loginComponents/LoginForm.svelte";
-    import FormSelector from '../components/loginComponents/formSelector.svelte';
     import authStore from '../stores/authStore';
     import loginCompStore from '../stores/loginCompStore'
     import RegisterForm from '../components/loginComponents/RegisterForm.svelte';
