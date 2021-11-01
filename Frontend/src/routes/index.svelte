@@ -104,10 +104,3 @@
 </section>
 
 <AppFooter />
-
-<style>
-  :global(:root) {
-    /* Color accent datepicker */
-    --primary: #008066;
-  }
-</style>
