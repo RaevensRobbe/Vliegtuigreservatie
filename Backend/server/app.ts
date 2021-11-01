@@ -17,6 +17,7 @@ import seedDatabase from './seeders/seeder';
 import admin from 'firebase-admin'
 import dotenv from 'dotenv'
 import authMiddleware from './auth/firebaseAuthMiddleware';
+import cors from 'cors'; // vergeet niet npm install CORS en npm install @types/cors te doen. Volgens mij heb je enkel @types/cors geïnstalleerd 
 
 dotenv.config() // This will load in the GOOGLE_APPLICATION_CREDENTIALS
 
@@ -43,11 +44,12 @@ admin.initializeApp({
     // MIDDLEWARE
     app.use(express.json()); // for parsing application/json
     //app.use(authMiddleware);
-
-    app.use(function (req,res,next){
-      res.setHeader("Acces-Control-Allow-Origin","http://localhost:5000");
-      next();
-    })
+    app.use(cors()) //-> nu kan je hier de middleware activeren
+    //-> je maakte hier een typo het is accesS
+    // app.use(function (req,res,next){
+    //   res.setHeader("Acces-Control-Allow-Origin","http://localhost:5000");
+    //   next();
+    // })
     // ROUTES
     app.get('/', (request: Request, response: Response) => {
       response.send('Welcome, just know: you matter!');
