@@ -18,6 +18,7 @@
 </script>
 
 <main class="flex justify-center">
+  <!-- svelte-ignore component-name-lowercase -->
   <form
     class="flex flex-col justify-between gap-4 w-3/4 lg:w-3/5 xl:w-1/2"
     on:submit|preventDefault={handleSubmit}
