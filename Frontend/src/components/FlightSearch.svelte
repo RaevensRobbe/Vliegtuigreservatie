@@ -35,36 +35,38 @@
     console.log($FlightStore)
     if (!$FlightStore.departureLocation) {
       errorDepartureLocation = 'No departure location set'
-      return
     }
     if (!$FlightStore.destinationLocation) {
       errorDestinationLocation = 'No destination location set'
-      return
     }
     if ($FlightStore.departureLocation == $FlightStore.destinationLocation) {
       destinationLocation =
         "Destination can't be the same as departure location"
-      return
     }
     if (!$FlightStore.departureDate) {
       errorDepartureDate = 'No departure date set'
-      return
     }
     if ($FlightStore.retourDate) {
       if ($FlightStore.departureDate > $FlightStore.retourDate) {
         errorRetourDate = 'Retour date cant be before your departure'
-        return
       } else if ($FlightStore.departureDate == $FlightStore.retourDate) {
         errorRetourDate = 'Retour date cant be the same as departure date'
-        return
       }
     }
     if ($FlightStore.children == 0 && $FlightStore.adults == 0) {
       errorPassengers = 'You need at least one passenger'
-      return
     }
 
-    goto('/flight/flightDate')
+    if (
+      !errorDepartureLocation &&
+      !errorDestinationLocation &&
+      !errorRetourDate &&
+      !errorDepartureDate &&
+      !errorDestinationDate &&
+      !errorPassengers
+    ) {
+      goto('/flight/flightDate')
+    }
   }
 
   function showTravelers() {
@@ -189,7 +191,7 @@
           </div>
         </div>
         {#if errorDepartureDate}
-          <p class="text-red-500">{errorDepartureDate}</p>
+          <p class="text-red-500 text-sm">{errorDepartureDate}</p>
         {/if}
       </div>
       <div
@@ -223,7 +225,7 @@
           </div>
         </div>
         {#if errorRetourDate}
-          <p class="text-red-500">{errorRetourDate}</p>
+          <p class="text-red-500 text-sm">{errorRetourDate}</p>
         {/if}
       </div>
       <div class="relative flex flex-col p-4 2xl:col-span-3">
@@ -249,7 +251,7 @@
           <SelectTravelers bind:children bind:adults bind:toggleTravelers />
         {/if}
         {#if errorPassengers}
-          <p class="text-red-500">{errorPassengers}</p>
+          <p class="text-red-500 text-sm">{errorPassengers}</p>
         {/if}
       </div>
       <button
