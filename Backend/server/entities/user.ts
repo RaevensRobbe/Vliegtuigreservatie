@@ -1,10 +1,11 @@
+import { Guid } from "guid-typescript";
 import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm"
 import { Ticket } from "./ticket"
 
 @Entity('user') // The table name
 export class User {
     @PrimaryColumn({unique: true})
-    UserId?: number
+    UserId?: string
 
     @Column({length: 30})
     Name?: string;
