@@ -26,35 +26,18 @@ export class UserController extends CrudController<User> implements IUserControl
     }
 
     createUser = async (req: Request, res: Response, next: NextFunction) => {
-      console.log(req.body);
-      const check = await this.repository.findOne({Email:req.body.email})
-      let result:any = ''
-
-      if(check){
-        result = "user already exists"
-      }else{
-        const newUser:User ={
-          UserId : 11 ,
-          Name: req.body.name,
-          Email: req.body.email,
-          Admin: false
-        } 
-        const newDbUser = await this.repository.create(newUser);
-        result = await this.repository.save(newDbUser); 
-
-        const newFirebaseUser = await admin.auth().createUser({
-          email:  req.body.email,
-          password: req.body.password,
-          displayName: req.body.name
-        })
-        .then((userRecord) => {
-          // See the UserRecord reference doc for the contents of userRecord.
-          console.log('Successfully created new user:', userRecord.uid);
-        })
-        .catch((error) => {
-          console.log('Error creating new user:', error);
-        });
-      }
+      console.log(`data van frontend ${req.body}`);
+      let result:any
+      
+      const newUser:User ={
+        UserId : req.body.data.id,
+        Name: req.body.data.name,
+        Email: req.body.data.email,
+        Admin: false
+      } 
+      const newDbUser = await this.repository.create(newUser);
+      result = await this.repository.save(newDbUser); 
+      
 
       return res.send(result)
     }

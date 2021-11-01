@@ -7,9 +7,8 @@
   import PopularDestinationCard from '../components/PopularDestinationCard.svelte'
   import type PopularDestination from '../models/PopularDestinationModel.type'
 
-  export let name = 'Robbe Raevens'
-  //@ts-ignore
-  export const populardestinations: PopularDestination = [
+    //@ts-ignore
+    export const populardestinations: PopularDestination = [
     {
       Name: 'Malawi',
       Dest: [
@@ -86,11 +85,10 @@
 <svelte:head>
   <title>MCT Airlines</title>
 </svelte:head>
+<AppHeader></AppHeader>
 
-<AppHeader {name} />
-
-<section class=" bg-image-mainpage bg-cover w-full h-auto bg-bottom py-36">
-  <FlightSearch />
+<section class="bg-image-mainpage bg-cover w-full h-auto bg-bottom py-36">
+    <FlightSearch />
 </section>
 
 <section class="p-4 px-6 align-start">
