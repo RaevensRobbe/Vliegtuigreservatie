@@ -5,8 +5,6 @@
   import Intertitle from './../../components/Intertitle.svelte'
   import { FlightStore } from './../../stores/flightStore'
 
-  let name = 'Raevens Robbe'
-
   let flight = $FlightStore
 </script>
 
@@ -14,9 +12,9 @@
   <title>MCT Airlines - Flight Date</title>
 </svelte:head>
 
-<AppHeader {name} />
+<AppHeader />
 
-<section class=" bg-image-mainpage bg-cover w-full h-auto bg-bottom py-16">
+<section class="bg-image-mainpage bg-cover w-full h-auto bg-bottom py-16">
   <FlightSearch />
 </section>
 
