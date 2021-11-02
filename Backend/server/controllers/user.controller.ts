@@ -31,7 +31,8 @@ export class UserController extends CrudController<User> implements IUserControl
       
       const newUser:User ={
         UserId : req.body.data.id,
-        Name: req.body.data.name,
+        Firstname: req.body.data.firstname,
+        Lastname: req.body.data.lastname,
         Email: req.body.data.email,
         Admin: false
       } 

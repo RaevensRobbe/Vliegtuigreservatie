@@ -85,7 +85,6 @@
 <svelte:head>
   <title>MCT Airlines</title>
 </svelte:head>
-<AppHeader></AppHeader>
 
 <section class="bg-image-mainpage bg-cover w-full h-auto bg-bottom py-36">
     <FlightSearch />
