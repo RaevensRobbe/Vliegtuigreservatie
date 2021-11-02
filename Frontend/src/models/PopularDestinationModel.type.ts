@@ -3,6 +3,7 @@ export default interface Dest{
     Name: string,
     Popularity: number,
     Picture:string,
+    Coordinates:[number, number]
 }
 
 export default interface PopularDestination {
