@@ -1,18 +1,91 @@
 <script>
+  //@ts-nocheck
+  import { FlightStore } from './../stores/flightStore'
   import SelectTravelers from './flightSearchComponents/SelectTravelers.svelte'
+  import { goto } from '$app/navigation'
 
-  let children = 0
-  let adults = 0
+  let validFlight = false
+
+  let flight = $FlightStore
+  console.log(flight)
+
+  let children = flight.children
+  let adults = flight.adults
   let toggleTravelers = false
-  let departureDate
-  let retourDate
+  let departureDate = flight.departureDate
+  let retourDate = flight.retourDate
+  let departureLocation = flight.departureLocation
+  let destinationLocation = flight.destinationLocation
+
+  let errorDepartureLocation
+  let errorDestinationLocation
+  let errorDepartureDate
+  let errorRetourDate
+  let errorDestinationDate
+  let errorPassengers
+
+  function flightValidator() {
+    errorDepartureLocation,
+      errorDestinationLocation,
+      errorRetourDate,
+      errorDepartureDate,
+      errorDestinationDate,
+      (errorPassengers = null)
+
+    console.log($FlightStore)
+    if (!$FlightStore.departureLocation) {
+      errorDepartureLocation = 'No departure location set'
+    }
+    if (!$FlightStore.destinationLocation) {
+      errorDestinationLocation = 'No destination location set'
+    }
+    if ($FlightStore.departureLocation == $FlightStore.destinationLocation) {
+      destinationLocation =
+        "Destination can't be the same as departure location"
+    }
+    if (!$FlightStore.departureDate) {
+      errorDepartureDate = 'No departure date set'
+    }
+    if ($FlightStore.retourDate) {
+      if ($FlightStore.departureDate > $FlightStore.retourDate) {
+        errorRetourDate = 'Retour date cant be before your departure'
+      } else if ($FlightStore.departureDate == $FlightStore.retourDate) {
+        errorRetourDate = 'Retour date cant be the same as departure date'
+      }
+    }
+    if ($FlightStore.children == 0 && $FlightStore.adults == 0) {
+      errorPassengers = 'You need at least one passenger'
+    }
+
+    if (
+      !errorDepartureLocation &&
+      !errorDestinationLocation &&
+      !errorRetourDate &&
+      !errorDepartureDate &&
+      !errorDestinationDate &&
+      !errorPassengers
+    ) {
+      goto('/flight/flightDate')
+    }
+  }
 
   function showTravelers() {
     toggleTravelers = !toggleTravelers
   }
 
   const handleSubmit = () => {
-    console.log('Submit')
+    toggleTravelers = false
+
+    FlightStore.set({
+      departureLocation: 'Rome, Italy',
+      destinationLocation: 'Paris, France',
+      departureDate: departureDate,
+      retourDate: retourDate,
+      children: children,
+      adults: adults,
+    })
+
+    flightValidator()
   }
 </script>
 
@@ -47,7 +120,11 @@
               transform="translate(0 0)"
             />
           </svg>
-          <span>Departure</span>
+          {#if departureLocation}
+            <span>{departureLocation}</span>
+          {:else}
+            <span>Departure</span>
+          {/if}
         </div>
       </div>
       <div class="flex flex-col p-4">
@@ -73,7 +150,11 @@
               transform="translate(0 0)"
             />
           </svg>
-          <span>Destination</span>
+          {#if destinationLocation}
+            <span>{destinationLocation}</span>
+          {:else}
+            <span>Destination</span>
+          {/if}
         </div>
       </div>
     </div>
@@ -106,9 +187,12 @@
             />
           </svg>
           <div class="flex-grow">
-            <input type="date" />
+            <input type="date" bind:value={departureDate} />
           </div>
         </div>
+        {#if errorDepartureDate}
+          <p class="text-red-500 text-sm">{errorDepartureDate}</p>
+        {/if}
       </div>
       <div
         class="flex flex-col 2xl:col-span-3 p-4 border-b-2 2xl:border-b-0 2xl:border-r-2 2xl:border-gray-200 sm:border-b-2"
@@ -137,9 +221,12 @@
             />
           </svg>
           <div class="flex-grow">
-            <input type="date" />
+            <input type="date" bind:value={retourDate} />
           </div>
         </div>
+        {#if errorRetourDate}
+          <p class="text-red-500 text-sm">{errorRetourDate}</p>
+        {/if}
       </div>
       <div class="relative flex flex-col p-4 2xl:col-span-3">
         <!--passenger box -->
@@ -162,6 +249,9 @@
         </div>
         {#if toggleTravelers}
           <SelectTravelers bind:children bind:adults bind:toggleTravelers />
+        {/if}
+        {#if errorPassengers}
+          <p class="text-red-500 text-sm">{errorPassengers}</p>
         {/if}
       </div>
       <button

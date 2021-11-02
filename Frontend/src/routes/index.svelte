@@ -93,14 +93,14 @@
 
 <section class="p-4 px-6 align-start">
   <Intertitle titleName="Popular destinations" />
-  <section
+  <article
     class="grid grid-cols-1 md:grid-cols-2  
     lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mb-4 auto-cols-fr"
   >
     {#each populardestinations as destination}
       <PopularDestinationCard popularDestination={destination} />
     {/each}
-  </section>
+  </article>
 </section>
 
 <AppFooter />
