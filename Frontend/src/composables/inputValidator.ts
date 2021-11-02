@@ -1,5 +1,4 @@
-
-
+//Login validator
 export const requiredValidator = (input:string) => {
     if(input === undefined || input.trim() === ''){
         return true
@@ -49,3 +48,5 @@ export const strenghtValidator = (pw:string) => {
         return 3
     }
 }
+
+// Flight search validator
