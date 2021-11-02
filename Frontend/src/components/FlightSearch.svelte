@@ -1,14 +1,12 @@
-<script>
+<script lang="ts">
   //@ts-nocheck
   import { FlightStore } from './../stores/flightStore'
   import SelectTravelers from './flightSearchComponents/SelectTravelers.svelte'
   import { goto } from '$app/navigation'
 
-  let validFlight = false
-
   let flight = $FlightStore
-  console.log(flight)
 
+  //default set whats in storage
   let children = flight.children
   let adults = flight.adults
   let toggleTravelers = false
@@ -16,55 +14,37 @@
   let retourDate = flight.retourDate
   let departureLocation = flight.departureLocation
   let destinationLocation = flight.destinationLocation
-
-  let errorDepartureLocation
-  let errorDestinationLocation
-  let errorDepartureDate
-  let errorRetourDate
-  let errorDestinationDate
-  let errorPassengers
+  
+  let errors:any = {};
 
   function flightValidator() {
-    errorDepartureLocation,
-      errorDestinationLocation,
-      errorRetourDate,
-      errorDepartureDate,
-      errorDestinationDate,
-      (errorPassengers = null)
 
-    console.log($FlightStore)
+
     if (!$FlightStore.departureLocation) {
-      errorDepartureLocation = 'No departure location set'
+      errors.departureLocation = 'No departure location set'
     }
     if (!$FlightStore.destinationLocation) {
-      errorDestinationLocation = 'No destination location set'
+      errors.destinationLocation = 'No destination location set'
     }
     if ($FlightStore.departureLocation == $FlightStore.destinationLocation) {
-      destinationLocation =
+      errors.destinationLocation =
         "Destination can't be the same as departure location"
     }
     if (!$FlightStore.departureDate) {
-      errorDepartureDate = 'No departure date set'
+      errors.departureDate = 'No departure date set'
     }
     if ($FlightStore.retourDate) {
       if ($FlightStore.departureDate > $FlightStore.retourDate) {
-        errorRetourDate = 'Retour date cant be before your departure'
+        errors.retourDate = 'Retour date cant be before your departure'
       } else if ($FlightStore.departureDate == $FlightStore.retourDate) {
-        errorRetourDate = 'Retour date cant be the same as departure date'
+        errors.retourDate = 'Retour date cant be the same as departure date'
       }
     }
     if ($FlightStore.children == 0 && $FlightStore.adults == 0) {
-      errorPassengers = 'You need at least one passenger'
+      errors.passengers = 'You need at least one passenger'
     }
-
-    if (
-      !errorDepartureLocation &&
-      !errorDestinationLocation &&
-      !errorRetourDate &&
-      !errorDepartureDate &&
-      !errorDestinationDate &&
-      !errorPassengers
-    ) {
+    console.log(errors);
+    if (Object.keys(errors).length === 0) {
       goto('/flight/flightDate')
     }
   }
@@ -190,8 +170,8 @@
             <input type="date" bind:value={departureDate} />
           </div>
         </div>
-        {#if errorDepartureDate}
-          <p class="text-red-500 text-sm">{errorDepartureDate}</p>
+        {#if errors.departureDate}
+          <p class="text-red-500 text-sm">{errors.departureDate}</p>
         {/if}
       </div>
       <div
@@ -224,8 +204,8 @@
             <input type="date" bind:value={retourDate} />
           </div>
         </div>
-        {#if errorRetourDate}
-          <p class="text-red-500 text-sm">{errorRetourDate}</p>
+        {#if errors.retourDate}
+          <p class="text-red-500 text-sm">{errors.retourDate}</p>
         {/if}
       </div>
       <div class="relative flex flex-col p-4 2xl:col-span-3">
@@ -250,8 +230,8 @@
         {#if toggleTravelers}
           <SelectTravelers bind:children bind:adults bind:toggleTravelers />
         {/if}
-        {#if errorPassengers}
-          <p class="text-red-500 text-sm">{errorPassengers}</p>
+        {#if errors.passengers}
+          <p class="text-red-500 text-sm">{errors.passengers}</p>
         {/if}
       </div>
       <button
