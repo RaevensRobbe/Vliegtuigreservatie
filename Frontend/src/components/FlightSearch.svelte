@@ -43,7 +43,7 @@
     if ($FlightStore.children == 0 && $FlightStore.adults == 0) {
       errors.passengers = 'You need at least one passenger'
     }
-    console.log(errors);
+    //if no errors then you can go to the next page
     if (Object.keys(errors).length === 0) {
       goto('/flight/flightDate')
     }
