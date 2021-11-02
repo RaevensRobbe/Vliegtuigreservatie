@@ -15,14 +15,12 @@
   onMount(async () => {      
     popDestinations = await get('http://localhost:3001/api/v1/country/popular')
   })
-
-
+  
 </script>
 
 <svelte:head>
   <title>MCT Airlines</title>
 </svelte:head>
-<AppHeader></AppHeader>
 
 <section class="bg-image-mainpage bg-cover w-full h-auto bg-bottom py-36">
     <FlightSearch />
@@ -43,5 +41,3 @@
   {/if}
   </article>
 </section>
-
-<AppFooter />
