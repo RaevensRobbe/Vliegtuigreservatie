@@ -22,7 +22,7 @@ export class UserController extends CrudController<User> implements IUserControl
         this.router.get('/all', this.all);
         this.router.get('/:id', this.one);
         this.router.post('/createUser', this.createUser);
-
+        this.router.put('/updateUser/:id', this.updateUser);
     }
 
     createUser = async (req: Request, res: Response, next: NextFunction) => {
@@ -41,5 +41,11 @@ export class UserController extends CrudController<User> implements IUserControl
       
 
       return res.send(result)
+    }
+
+    updateUser = async (req: Request, res: Response, next: NextFunction) => {
+      console.log()
+      const update = await this.repository.update({UserId: req.params.id},{Firstname: req.body.data.firstname, Lastname: req.body.data.lastname, Email: req.body.data.email})
+      return res.send(update);
     }
 }

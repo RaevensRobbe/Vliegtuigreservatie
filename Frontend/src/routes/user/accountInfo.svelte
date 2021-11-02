@@ -1,40 +1,87 @@
 <script lang="ts">
     import { emailValidator, requiredValidator } from '../../composables/inputValidator';
     import Intertitle from '../../components/Intertitle.svelte'
+    import { onMount } from 'svelte';
+    import { get } from '../../composables/useApi';
+    import authStore from '../../stores/authStore'
+    import { updateCurrentUser, updateEmail, updateProfile } from '@firebase/auth';
+    import { getAuth } from "firebase/auth";
+
+    const auth = getAuth();
+    const user = auth.currentUser;
 
     let errors:any = {};
+    let userdata:any = {}
 
-    let email:string;
-    let firstName:string
-    let lastName:string
+    onMount(async () => {
+        const getData = await get(`http://localhost:3001/api/v1/user/${$authStore.user.uid}`)
+        userdata = getData
+        console.log(userdata)
+    })
+
+    async function post(data) {
+         console.log(`post functie ${data}`)
+         const res = await fetch(`http://localhost:3001/api/v1/user/updateUser/${$authStore.user.uid}`,{
+             method:'PUT',
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify({
+                data
+             })
+         })
+     } 
+
+    const changeUserData = () => {
+        console.log(user)
+        updateProfile(user, {displayName: userdata.Firstname, photoURL: userdata.Picture
+        }).then(() => {
+            updateEmail(user, userdata.Email
+            ).then(() => {
+                //Goed gegaan
+                const data = {
+                    firstname : userdata.Firstname,
+                    lastname: userdata.Lastname,
+                    email :  userdata.Email
+                }
+                post(data)
+            }).catch((error) => {
+                console.error(error)
+                errors.update = "Something went wrong"
+            })  
+        }).catch((error) => {
+            console.error(error)
+            errors.update = "Something went wrong"
+        });
+    }
 
     const onSubmit = () => {
-        if(requiredValidator(email) && requiredValidator(firstName) && requiredValidator(lastName)){
+        if(requiredValidator(userdata.Email) && requiredValidator(userdata.Firstname) && requiredValidator(userdata.Lastname)){
             errors.firstname = "Firstname is required"
             errors.lastname = "Lastname is required"
             errors.email = "Email is required"
             return
         }
 
-        if(requiredValidator(email)){
+        if(requiredValidator(userdata.Firstname)){
             errors.firstname = "Firstname is required"
             return
         }else errors.firstname = ""
 
-        if(requiredValidator(firstName)){
+        if(requiredValidator(userdata.Lastname)){
             errors.lastname = "Lastname is required"
             return
         }else errors.lastname = ""
 
-        if(requiredValidator(email)){
+        if(requiredValidator(userdata.Email)){
             errors.email = "Email is required"
             return
         }else{
-            if(!emailValidator(email)){
+            if(!emailValidator(userdata.Email)){
                 errors.email = "Invalid email"
                 return
             }else errors.email = ""
         }
+
+        changeUserData()
     }
 
 
@@ -51,7 +98,7 @@
                         First name
                     </label>
                     <input  
-                        bind:value={firstName}
+                        bind:value={userdata.Firstname}
                         id="firstname"
                         type="text"
                         class="border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green shadow-md bg-gray-100" 
@@ -66,7 +113,7 @@
                         Last name
                     </label>
                     <input  
-                        bind:value={lastName}
+                        bind:value={userdata.Lastname}
                         id="lastname"
                         type="text"
                         class="border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green shadow-md bg-gray-100" 
@@ -81,7 +128,7 @@
                         Email
                     </label>
                     <input  
-                        bind:value={email}
+                        bind:value={userdata.Email}
                         id="email"
                         type="email"
                         class="border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green shadow-md bg-gray-100" 
@@ -96,6 +143,7 @@
                         Picture
                     </label>
                     <input  
+                        bind:value={userdata.Picture}
                         id="picture"
                         type="file"
                         class="border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green shadow-md bg-gray-100" 
@@ -113,6 +161,9 @@
                 >
                     Change
                 </button>
+                {#if errors.update}
+                    <p class="text-red-600 -mt-2 mb-2">{errors.update}</p>
+                {/if}
             </div>
 
         </form>  

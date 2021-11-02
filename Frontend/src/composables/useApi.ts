@@ -13,3 +13,11 @@ export async function post(url:string,data:any) {
     .then(res => res.json())
     .catch(error => console.error({ error }))
 }
+
+export async function get(url:string){
+    const res = await fetch(url)
+    .then(res => res.json())
+    .catch(error => console.error({ error }))
+    // console.log(res)
+    return res
+}
