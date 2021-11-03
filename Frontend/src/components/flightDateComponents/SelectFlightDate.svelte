@@ -1,7 +1,7 @@
 <script lang="ts">
   //@ts-nocheck
 import { get } from "./../../composables/useApi";
-
+import { FlightStore } from './../../stores/flightStore'
 import { onMount } from "svelte";
 
   let givenflights;
@@ -9,6 +9,7 @@ import { onMount } from "svelte";
   let position;
   let flights = new Array();
   let loaded = false;
+
 
   onMount(async()=>{
     givenflights = await get("http://localhost:3001/api/v1/flight/flightInfo/3/1")
@@ -38,22 +39,27 @@ import { onMount } from "svelte";
       }
       i++
     }
-    console.log(flights)
 
-    flights.sort(function(a, b) {
+    flights.sort(function(a:Date, b:Date) {
         var c = new Date(a.Date);
         var d = new Date(b.Date);
         return c-d;
     });
 
-    console.log(flights)
     loaded = true
   })
 
-  function calculatedayname(date) {
+  function calculatedayname(date:Date) {
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     var d = new Date(date);
     return days[d.getDay()]
+  }
+
+  function calculatePrice(price:number){
+    let childrenPrice = (price*0.75)*$FlightStore.children;
+    let adultPrice = price*$FlightStore.adults
+    let totalprice = Math.round((childrenPrice + adultPrice) * 100) /100;
+    return totalprice;
   }
 </script>
 
@@ -65,14 +71,15 @@ import { onMount } from "svelte";
       type="radio"
       name="city"
       id={flight.FlightId}
-      value={flight.Date}
+      value={flight.Date.split("T")[0]}
       class="peer hidden"
+      bind:group={storageDate}
       />
       <div class="bg-white border-forest-green peer-checked:border-t-8 align-bottom">
         <div class="bg-white border-r-1 border-l-1 flex flex-col justify-items-end  text-center shadow-md justify-end hover:bg-gray-200">
           <p class="text-forest-green font-bold m-2 text-xl">{calculatedayname(flight.Date.split("T")[0])}</p>
           <p class="">{flight.Date.split("T")[0]}</p>
-          <p class="text-cyprus-green font-bold m-2 text-xl">€{flight.Price}</p>
+          <p class="text-cyprus-green font-bold m-2 text-xl">€{calculatePrice(flight.Price)}</p>
         </div>
       </div>
     </label>
