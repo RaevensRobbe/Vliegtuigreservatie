@@ -6,6 +6,7 @@ import { onMount } from "svelte";
 
   let givenflights;
   let storageDate = "2021-11-30"
+  let chosenflight;
   let position;
   let flights = new Array();
   let loaded = false;
@@ -13,7 +14,7 @@ import { onMount } from "svelte";
 
   onMount(async()=>{
     givenflights = await get("http://localhost:3001/api/v1/flight/flightInfo/3/1")
-    // console.log(givenflights)
+    console.log(givenflights)
 
     let i = 0;
 
@@ -74,6 +75,7 @@ import { onMount } from "svelte";
       value={flight.Date.split("T")[0]}
       class="peer hidden"
       bind:group={storageDate}
+      on:click={(() => (chosenflight = flight.FlightId))}
       />
       <div class="bg-white border-forest-green peer-checked:border-t-8 align-bottom">
         <div class="bg-white border-r-1 border-l-1 flex flex-col justify-items-end  text-center shadow-md justify-end hover:bg-gray-200">
