@@ -44,7 +44,6 @@ export class UserController extends CrudController<User> implements IUserControl
     }
 
     updateUser = async (req: Request, res: Response, next: NextFunction) => {
-      console.log()
       const update = await this.repository.update({UserId: req.params.id},{Firstname: req.body.data.firstname, Lastname: req.body.data.lastname, Email: req.body.data.email})
       return res.send(update);
     }

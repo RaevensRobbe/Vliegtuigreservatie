@@ -11,6 +11,7 @@
     const user = auth.currentUser;
 
     let errors:any = {};
+    let succes:any = {};
     let userdata:any = {}
 
     onMount(async () => {
@@ -19,7 +20,7 @@
         console.log(userdata)
     })
 
-    async function post(data) {
+    async function put(data) {
          console.log(`post functie ${data}`)
          const res = await fetch(`http://localhost:3001/api/v1/user/updateUser/${$authStore.user.uid}`,{
              method:'PUT',
@@ -31,18 +32,21 @@
      } 
 
     const changeUserData = () => {
+        succes.update = ""
         console.log(user)
         updateProfile(user, {displayName: userdata.Firstname, photoURL: userdata.Picture
         }).then(() => {
             updateEmail(user, userdata.Email
             ).then(() => {
+                console.log($authStore.user)
                 //Goed gegaan
                 const data = {
                     firstname : userdata.Firstname,
                     lastname: userdata.Lastname,
                     email :  userdata.Email
                 }
-                post(data)
+                put(data)
+                succes.update = "User data updated"
             }).catch((error) => {
                 console.error(error)
                 errors.update = "Something went wrong"
@@ -161,8 +165,13 @@
                 >
                     Change
                 </button>
+            </div>
+            <div class="flex justify-center">
                 {#if errors.update}
-                    <p class="text-red-600 -mt-2 mb-2">{errors.update}</p>
+                    <p class="text-red-600 mt-4 mb-2">{errors.update}</p>
+                {/if}
+                {#if succes.update}
+                    <p class="text-forest-green mt-4 mb-2">{succes.update}</p>
                 {/if}
             </div>
 
