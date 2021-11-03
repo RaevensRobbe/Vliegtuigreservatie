@@ -1,4 +1,5 @@
 <script lang="ts">
+  //@ts-nocheck
 import { get } from "./../../composables/useApi";
 
 import { onMount } from "svelte";
@@ -38,6 +39,14 @@ import { onMount } from "svelte";
       i++
     }
     console.log(flights)
+
+    flights.sort(function(a, b) {
+        var c = new Date(a.Date);
+        var d = new Date(b.Date);
+        return c-d;
+    });
+
+    console.log(flights)
     loaded = true
   })
 
@@ -60,7 +69,7 @@ import { onMount } from "svelte";
       class="peer hidden"
       />
       <div class="bg-white border-forest-green peer-checked:border-t-8 align-bottom">
-        <div class="bg-white border-r-1 border-l-1 flex flex-col justify-items-end  text-center shadow-md justify-end">
+        <div class="bg-white border-r-1 border-l-1 flex flex-col justify-items-end  text-center shadow-md justify-end hover:bg-gray-200">
           <p class="text-forest-green font-bold m-2 text-xl">{calculatedayname(flight.Date.split("T")[0])}</p>
           <p class="">{flight.Date.split("T")[0]}</p>
           <p class="text-cyprus-green font-bold m-2 text-xl">€{flight.Price}</p>
