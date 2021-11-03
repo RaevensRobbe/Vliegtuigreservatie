@@ -5,7 +5,7 @@
   import { goto } from '$app/navigation'
 
   let flight = $FlightStore
-
+  console.log(flight)
   //default set whats in storage
   let children = flight.children
   let adults = flight.adults
@@ -14,35 +14,35 @@
   let retourDate = flight.retourDate
   let departureLocation = flight.departureLocation
   let destinationLocation = flight.destinationLocation
-  
-  let errors:any = {};
+
+  let errors: any = {}
 
   function flightValidator() {
-
-
     if (!$FlightStore.departureLocation) {
       errors.departureLocation = 'No departure location set'
-    }
+    } else delete errors['departureLocation']
     if (!$FlightStore.destinationLocation) {
       errors.destinationLocation = 'No destination location set'
-    }
-    if ($FlightStore.departureLocation == $FlightStore.destinationLocation) {
+    } else if (
+      $FlightStore.departureLocation == $FlightStore.destinationLocation
+    ) {
       errors.destinationLocation =
         "Destination can't be the same as departure location"
-    }
+    } else delete errors['destinationLocation']
     if (!$FlightStore.departureDate) {
       errors.departureDate = 'No departure date set'
-    }
+    } else delete errors['departureDate']
     if ($FlightStore.retourDate) {
       if ($FlightStore.departureDate > $FlightStore.retourDate) {
         errors.retourDate = 'Retour date cant be before your departure'
       } else if ($FlightStore.departureDate == $FlightStore.retourDate) {
         errors.retourDate = 'Retour date cant be the same as departure date'
-      }
+      } else delete errors['retourDate']
     }
     if ($FlightStore.children == 0 && $FlightStore.adults == 0) {
       errors.passengers = 'You need at least one passenger'
-    }
+    } else delete errors['passengers']
+
     //if no errors then you can go to the next page
     if (Object.keys(errors).length === 0) {
       goto('/flight/flightDate')
@@ -55,7 +55,7 @@
 
   const handleSubmit = () => {
     toggleTravelers = false
-
+    //! voor te testen hardcoded moet nog dynamisch gezet worden
     FlightStore.set({
       departureLocation: 'Rome, Italy',
       destinationLocation: 'Paris, France',
@@ -63,6 +63,8 @@
       retourDate: retourDate,
       children: children,
       adults: adults,
+      departureLocationId: 3,
+      destinationLocationId: 1,
     })
 
     flightValidator()
