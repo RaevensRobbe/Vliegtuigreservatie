@@ -200,7 +200,7 @@
   }
 </script>
 
-<section class="grid grid-cols-7 border-r-0 items-end">
+<section class="grid grid-cols-7 grid- border-r-0 items-end">
   {#if loaded}
     {#each flights as flight}
       {#if flight.FlightId != null}
@@ -232,10 +232,10 @@
         </label>
       {:else}
         <div
-          class="bg-white border-forest-green peer-checked:border-t-8 align-bottom"
+          class="bg-white border-forest-green peer-checked:border-t-8 align-bottom flex flex-col h-full"
         >
           <div
-            class="bg-white border-r-1 border-l-1 flex flex-col justify-items-end  text-center shadow-md justify-end hover:bg-gray-200"
+            class="bg-white border-r-1 border-l-1 flex flex-col text-center shadow-md justify-end hover:bg-gray-200  h-full justify-center"
           >
             <p class="text-forest-green font-bold m-2 text-xl" />
             <p class="">No flight</p>
