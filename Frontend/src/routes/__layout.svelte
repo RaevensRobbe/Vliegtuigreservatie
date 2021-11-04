@@ -4,6 +4,7 @@
     import { onMount } from "svelte";
     import authStore from '../stores/authStore';
     import { getAuth, User } from "firebase/auth";
+    import AppFooter from "../components/AppFooter.svelte";
 
     onMount(() => {
         const firebaseConfig = {
@@ -31,9 +32,10 @@
 </script>
     
     <main class="flex flex-col h-full font-Montserrat bg-ghost-white text-dim-gray 3xl:max-w-screen-3xl 3xl:mx-auto">
-        <slot>
-            
-        </slot>
+        <AppHeader/>
+        <slot/>
+        <AppFooter/>
+        
     </main>
     
     <style>

@@ -26,7 +26,8 @@
             .then(() =>{
                 const data = {
                     id : user.uid,
-                    name : firstName,
+                    firstname : firstName,
+                    lastname: lastName,
                     email :  email
                 }
                 post(data)

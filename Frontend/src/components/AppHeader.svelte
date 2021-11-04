@@ -37,6 +37,10 @@
 
     const goToAccountInfo = async() => {
         console.log("Go to accountInfoPage")
+        loginCompStore.set({
+            showRegister: false,
+            showLogin: false
+        });
         await goto('/user/accountInfo')
     }
 
@@ -44,7 +48,7 @@
 </script>
 
 <header class="grid grid-cols-2 py-8 px-6 text-dim-gray bg-white md:hidden">
-    <button class="font-bold text-2xl text-forest-green justify-self-start">MCT airlines</button>
+    <button on:click={async() => {await goto('/')}} class="font-bold text-2xl text-forest-green justify-self-start">MCT airlines</button>
     {#if menuToggle}
         <button class="justify-self-end">
             <div on:click="{toggler}">
@@ -77,14 +81,14 @@
 
 <header class="flex-col justify-between px-6 py-8 gap-8 bg-white hidden md:flex">
     <div class="flex flex-row justify-between">
-        <button class="font-bold text-2xl text-forest-green">MCT airlines</button>
+        <button on:click={async() => {await goto('/')}} class="font-bold text-2xl text-forest-green">MCT airlines</button>
     {#if $authStore.isLoggedIn}
         <div class="flex text-dim-gray gap-8">
             <button>My bookings</button>
             <button on:click={toggleAccountTab} class="font-bold text-xl text-forest-green">{ $authStore.user.displayName }</button>
             {#if accountdropDown}
-                <div class="absolute right-0">
-                    <div class="relative bg-white top-16 z-10 flex flex-col items-center px-6">
+                <div class="absolute top-24 right-0">
+                    <div class="relative bg-white  z-10 flex flex-col items-center px-6">
                         <button class="text-lg text-forest-green py-4" on:click={goToAccountInfo}>Edit Account</button>
                         <button class="text-lg text-forest-green py-4" on:click={logout}>Sign out</button>
                     </div>

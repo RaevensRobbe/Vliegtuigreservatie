@@ -8,19 +8,13 @@ export class User {
     UserId?: string
 
     @Column({length: 30})
-    Name?: string;
+    Firstname?: string;
 
-    // @Column({length: 30})
-    // PreName?: string;
-
-    // @Column('int')
-    // Age?: number;
+    @Column({length: 50})
+    Lastname?: string;
     
     @Column({length: 100})
     Email?: string;
-
-    // @Column({length: 50})
-    // Gender?: string;
     
     @Column()
     Admin?: boolean;
