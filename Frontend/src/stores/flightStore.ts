@@ -19,6 +19,8 @@ export const FlightStore = writable<{
   retourDate: Date
   children: number
   adults: number
+  departureFlight: number
+  retourFlight: number
 }>({
   departureLocation: 'Brussel, Belgium',
   departureLocationId: 3, //voor te testen
@@ -28,4 +30,6 @@ export const FlightStore = writable<{
   retourDate: null,
   children: 0,
   adults: 0,
+  departureFlight: null,
+  retourFlight: null,
 })

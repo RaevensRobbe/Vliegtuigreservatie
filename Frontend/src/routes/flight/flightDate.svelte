@@ -2,15 +2,29 @@
   import { goto } from '$app/navigation'
 
   import SelectFlightDate from './../../components/flightDateComponents/SelectFlightDate.svelte'
-  import FlightSearch from './../../components/FlightSearch.svelte'
+  import PassengerInput from './../../components/flightDateComponents/PassengerInput.svelte'
   import Intertitle from './../../components/Intertitle.svelte'
   import { FlightStore } from './../../stores/flightStore'
 
   let flight = $FlightStore
-  console.log(flight)
 
   function goBack() {
     goto('/')
+  }
+
+  let showTravelers = false
+
+  if ($FlightStore.retourDate) {
+    if ($FlightStore.retourFlight && $FlightStore.departureFlight) {
+      console.log(
+        $FlightStore.retourFlight + ' + ' + $FlightStore.departureFlight,
+      )
+      showTravelers = true
+    }
+  } else {
+    if ($FlightStore.departureFlight) {
+      showTravelers = true
+    }
   }
 </script>
 
@@ -48,9 +62,10 @@
       ' - ' +
       flight.destinationLocation.split(',')[0]}
   />
-  <h1 class="text-xl mb-6">Choose your departure flight</h1>
+  <h1 class="text-sm mb-6 md:text-xl">Choose your departure flight</h1>
   <SelectFlightDate
     url={`http://localhost:3001/api/v1/flight/flightInfo/${flight.departureLocationId}/${flight.destinationLocationId}`}
+    retour={false}
   />
 </section>
 
@@ -61,9 +76,29 @@
         ' - ' +
         flight.departureLocation.split(',')[0]}
     />
-    <h1 class="text-xl mb-6">Choose your departure flight</h1>
+    <h1 class="text-sm md:text-xl mb-6">Choose your departure flight</h1>
     <SelectFlightDate
       url={`http://localhost:3001/api/v1/flight/flightInfo/${flight.destinationLocationId}/${flight.departureLocationId}`}
+      retour={true}
     />
   </section>
 {/if}
+
+<section class="p-4 px-6 align-start">
+  <Intertitle titleName="Passengers" />
+  <p class="text-sm mb-2 md:text-xl">
+    Please enter names as they appear on passport or travel documentation
+  </p>
+  {#if $FlightStore.adults}
+    <h1 class="text-forest-green font-bold text-xl">Adults</h1>
+    {#each { length: $FlightStore.adults } as _, i}
+      <PassengerInput adult={true} personnumber={i} />
+    {/each}
+  {/if}
+  {#if $FlightStore.children}
+    <h1 class="text-forest-green font-bold text-xl mt-2">Children</h1>
+    {#each { length: $FlightStore.children } as _, i}
+      <PassengerInput adult={false} personnumber={i} />
+    {/each}
+  {/if}
+</section>

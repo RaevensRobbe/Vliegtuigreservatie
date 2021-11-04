@@ -5,15 +5,25 @@
   import { onMount } from 'svelte'
 
   let givenflights
-  let storageDate = '2021-11-05'
+  let storageDate = '2021-11-30'
   let retourDate = '2021-12-17'
+  let controldate
   let chosenflight
   let position
   let flights = new Array()
   let loaded = false
   let flightTime
   let departureTime
+
   export let url
+  export let retour
+
+  let radiobuttonName
+  if (retour === true) {
+    radiobuttonName = 'retour'
+  } else {
+    radiobuttonName = 'departure'
+  }
 
   onMount(async () => {
     givenflights = await get(url)
@@ -29,14 +39,18 @@
 
     givenflights.forEach(flight => {
       let dateTime = flight.Date.split('T')[0]
-      if (dateTime == storageDate) {
+      if (retour === true) {
+        controldate = retourDate
+      } else {
+        controldate = storageDate
+      }
+      if (dateTime == controldate) {
         position = i
         exactdate = true
-        console.log('true')
       } else if (exactdate == false) {
         // To set two dates to two variables
         let date1 = new Date(dateTime)
-        let date2 = new Date(storageDate)
+        let date2 = new Date(controldate)
         // To calculate the time difference of two dates
         let Difference_In_Time = date2.getTime() - date1.getTime()
         // To calculate the number of days between two dates
@@ -51,15 +65,12 @@
       i++
     })
 
-    console.log(givenflights)
-
     for (let j = -3; j < 4; j++) {
       if (j === 0) {
-        console.log(position)
         let flightInfo = await get(
           `http://localhost:3001/api/v1/flight/${givenflights[position].FlightId}`,
         )
-        chosenflight = flightInfo
+        setChosenFlight(flightInfo.FlightId)
         flights.push(flightInfo)
       } else {
         if (givenflights[position + j]?.FlightId !== undefined) {
@@ -77,8 +88,6 @@
       }
       i++
     }
-
-    console.log(flights)
 
     loaded = true
   })
@@ -98,16 +107,25 @@
   }
 
   function calculatePrice(price: number) {
+    // children pay 0.75 of the full price
     let childrenPrice = price * 0.75 * $FlightStore.children
     let adultPrice = price * $FlightStore.adults
+    // calculate total price
     let totalprice = Math.round((childrenPrice + adultPrice) * 100) / 100
     return totalprice
   }
 
   function setChosenFlight(flightId: number) {
+    //set chosenflight to flight to show the time of flight
     flights.forEach(flight => {
       if (flight.FlightId == flightId) {
         chosenflight = flight
+        // set flightId in store
+        if (retour === false) {
+          $FlightStore.departureFlight = chosenflight.FlightId
+        } else {
+          $FlightStore.retourFlight = chosenflight.FlightId
+        }
       }
     })
   }
@@ -201,18 +219,20 @@
   }
 </script>
 
-<section class="grid grid-cols-7 grid- border-r-0 items-end">
+<section
+  class="grid grid-cols-3  md:grid-cols-4 lg:grid-cols-7 grid- border-r-0 items-end"
+>
   {#if loaded}
     {#each flights as flight}
       {#if flight.FlightId != null}
-        <label key={flight.FlightId}>
+        <label key={flight.FlightId} class="mb-2 lg:mb-0">
           <input
             type="radio"
-            name="city"
+            name={radiobuttonName}
             id={flight.FlightId}
             value={flight.Date.split('T')[0]}
             class="peer hidden"
-            bind:group={storageDate}
+            bind:group={controldate}
             on:click={() => setChosenFlight(flight.FlightId)}
           />
           <div
@@ -221,11 +241,11 @@
             <div
               class="bg-white border-r-1 border-l-1 flex flex-col justify-items-end  text-center shadow-md justify-end hover:bg-gray-200"
             >
-              <p class="text-forest-green font-bold m-2 text-xl">
+              <p class="text-forest-green font-bold m-2 text-sm md:text-xl">
                 {calculateDayName(flight.Date.split('T')[0])}
               </p>
-              <p class="">{flight.Date.split('T')[0]}</p>
-              <p class="text-cyprus-green font-bold m-2 text-xl">
+              <p class="text-sm md:text-md">{flight.Date.split('T')[0]}</p>
+              <p class="text-cyprus-green font-bold m-2 text-sm md:text-xl">
                 €{calculatePrice(flight.Price)}
               </p>
             </div>
@@ -253,15 +273,15 @@
 {#if chosenflight}
   <section class="mt-6 grid grid-cols-3 bg-white shadow-md text-center p-4">
     <div>
-      <p class="font-bold text-2xl text-forest-green">
+      <p class="font-bold text-md md:text-2xl text-forest-green">
         {getDepartureTime(chosenflight.Date)}
       </p>
-      <p>{chosenflight.Start.Name}</p>
+      <p class="text-sm md:text-md">{chosenflight.Start.Name}</p>
     </div>
     <div class="flex justify-center flex-col">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="fill-current text-forest-green h-4"
+        class="fill-current text-forest-green h-3 md:h-4"
         viewBox="0 0 44 22.458"
       >
         <g
@@ -276,11 +296,13 @@
           />
         </g>
       </svg>
-      <p>Duration {calculateFlightTime()}</p>
+      <p class="text-sm md" text-md>Duration {calculateFlightTime()}</p>
     </div>
     <div>
-      <p class="font-bold text-2xl text-forest-green">{getTouchdownTime()}</p>
-      <p>{chosenflight.Destination.Name}</p>
+      <p class="font-bold text-md md:text-2xl text-forest-green">
+        {getTouchdownTime()}
+      </p>
+      <p class="text-sm md:text-md">{chosenflight.Destination.Name}</p>
     </div>
   </section>
 {/if}

@@ -70,16 +70,15 @@
     toggleTravelers = false
 
     //! voor te testen hardcoded moet nog dynamisch gezet worden
-    FlightStore.set({
-      departureLocation: 'Rome, Italy',
-      destinationLocation: 'Paris, France',
-      departureDate: departureDate,
-      retourDate: retourDate,
-      children: children,
-      adults: adults,
-      departureLocationId: 3,
-      destinationLocationId: 1,
-    })
+
+    $FlightStore.departureLocation = 'Rome, Italy'
+    $FlightStore.destinationLocation = 'Paris, France'
+    $FlightStore.departureDate = departureDate
+    $FlightStore.retourDate = retourDate
+    $FlightStore.children = children
+    $FlightStore.adults = adults
+    $FlightStore.departureLocationId = 3
+    $FlightStore.destinationLocationId = 1
 
     //go to next page in validator
     flightValidator()
