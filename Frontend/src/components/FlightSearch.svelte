@@ -5,8 +5,11 @@
   import { goto } from '$app/navigation'
 
   let flight = $FlightStore
-  console.log(flight)
-  //default set whats in storage
+
+  // set today date => check if departure date
+  let today = new Date().toISOString().split('T')[0]
+
+  //default set what's in storage
   let children = flight.children
   let adults = flight.adults
   let toggleTravelers = false
@@ -15,12 +18,15 @@
   let departureLocation = flight.departureLocation
   let destinationLocation = flight.destinationLocation
 
+  //object errors add errors in here otherwise delete them
   let errors: any = {}
 
   function flightValidator() {
+    //Check if there is a departure location set
     if (!$FlightStore.departureLocation) {
       errors.departureLocation = 'No departure location set'
     } else delete errors['departureLocation']
+    //Check if there is a destination location set or if it isnt the same as departure location
     if (!$FlightStore.destinationLocation) {
       errors.destinationLocation = 'No destination location set'
     } else if (
@@ -29,9 +35,14 @@
       errors.destinationLocation =
         "Destination can't be the same as departure location"
     } else delete errors['destinationLocation']
+    //Check if there is a departure date set or not older / the same as today
     if (!$FlightStore.departureDate) {
       errors.departureDate = 'No departure date set'
+    } else if ($FlightStore.departureDate <= today) {
+      console.log('error departureDate')
+      errors.departureDate = "Departure can't be today or in the past"
     } else delete errors['departureDate']
+    //Check if there is a retour date => if so check if it is later than departure date
     if ($FlightStore.retourDate) {
       if ($FlightStore.departureDate > $FlightStore.retourDate) {
         errors.retourDate = 'Retour date cant be before your departure'
@@ -39,6 +50,7 @@
         errors.retourDate = 'Retour date cant be the same as departure date'
       } else delete errors['retourDate']
     }
+    //Check if there are passengers
     if ($FlightStore.children == 0 && $FlightStore.adults == 0) {
       errors.passengers = 'You need at least one passenger'
     } else delete errors['passengers']
@@ -54,7 +66,9 @@
   }
 
   const handleSubmit = () => {
+    // set all toggles false
     toggleTravelers = false
+
     //! voor te testen hardcoded moet nog dynamisch gezet worden
     FlightStore.set({
       departureLocation: 'Rome, Italy',
@@ -67,6 +81,7 @@
       destinationLocationId: 1,
     })
 
+    //go to next page in validator
     flightValidator()
   }
 </script>

@@ -6,6 +6,7 @@
 
   let givenflights
   let storageDate = '2021-11-05'
+  let retourDate = '2021-12-17'
   let chosenflight
   let position
   let flights = new Array()
