@@ -11,21 +11,6 @@
   function goBack() {
     goto('/')
   }
-
-  let showTravelers = false
-
-  if ($FlightStore.retourDate) {
-    if ($FlightStore.retourFlight && $FlightStore.departureFlight) {
-      console.log(
-        $FlightStore.retourFlight + ' + ' + $FlightStore.departureFlight,
-      )
-      showTravelers = true
-    }
-  } else {
-    if ($FlightStore.departureFlight) {
-      showTravelers = true
-    }
-  }
 </script>
 
 <svelte:head>

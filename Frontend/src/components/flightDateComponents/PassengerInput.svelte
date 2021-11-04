@@ -14,9 +14,9 @@
 
 {#if adult}
   <div
-    class="grid grid-rows-3 sm:grid-cols-3 sm:gap-4 sm:grid-rows-0 bg-white shadow-md p-2 mt-2 focus:ring-forest-green"
+    class="grid grid-rows-3 sm:grid-cols-3 sm:gap-4 sm:grid-rows-1 bg-white shadow-md p-2 mt-2 focus:ring-forest-green"
   >
-    <div>
+    <div class="flex flex-col">
       <p class="font-bold">Title</p>
       <select
         value={selected}
@@ -57,7 +57,7 @@
   </div>
 {:else}
   <div
-    class="grid grid-rows-2 sm:grid-cols-2 sm:gap-4 sm:grid-rows-0 bg-white shadow-md p-2 mt-2 focus:ring-forest-green"
+    class="grid grid-rows-2 sm:grid-cols-2 sm:gap-4 sm:grid-rows-1 bg-white shadow-md p-2 mt-2 focus:ring-forest-green"
   >
     <div>
       <div>

@@ -66,12 +66,13 @@
     })
 
     for (let j = -3; j < 4; j++) {
+      // if j == 0 => middlepoint selected date / closest to selected date
       if (j === 0) {
         let flightInfo = await get(
           `http://localhost:3001/api/v1/flight/${givenflights[position].FlightId}`,
         )
-        setChosenFlight(flightInfo.FlightId)
         flights.push(flightInfo)
+        setChosenFlight(flightInfo.FlightId)
       } else {
         if (givenflights[position + j]?.FlightId !== undefined) {
           let flightInfo = await get(
@@ -118,8 +119,10 @@
   function setChosenFlight(flightId: number) {
     //set chosenflight to flight to show the time of flight
     flights.forEach(flight => {
+      console.log(flight.FlightId + ' = ' + flightId)
       if (flight.FlightId == flightId) {
         chosenflight = flight
+        console.log('chosenflight set')
         // set flightId in store
         if (retour === false) {
           $FlightStore.departureFlight = chosenflight.FlightId
