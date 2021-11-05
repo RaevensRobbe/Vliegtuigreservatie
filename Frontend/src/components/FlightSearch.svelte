@@ -39,7 +39,7 @@
     if (!$FlightStore.departureDate) {
       errors.departureDate = 'No departure date set'
     } else if ($FlightStore.departureDate <= today) {
-      console.log('error departureDate')
+      // console.log('error departureDate')
       errors.departureDate = "Departure can't be today or in the past"
     } else delete errors['departureDate']
     //Check if there is a retour date => if so check if it is later than departure date

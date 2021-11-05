@@ -119,10 +119,10 @@
   function setChosenFlight(flightId: number) {
     //set chosenflight to flight to show the time of flight
     flights.forEach(flight => {
-      console.log(flight.FlightId + ' = ' + flightId)
+      // console.log(flight.FlightId + ' = ' + flightId)
       if (flight.FlightId == flightId) {
         chosenflight = flight
-        console.log('chosenflight set')
+        // console.log('chosenflight set')
         // set flightId in store
         if (retour === false) {
           $FlightStore.departureFlight = chosenflight.FlightId
