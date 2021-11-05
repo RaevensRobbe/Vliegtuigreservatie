@@ -42,5 +42,3 @@
   {/if}
   </article>
 </section>
-
-<AppFooter />

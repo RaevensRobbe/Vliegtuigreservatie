@@ -24,6 +24,7 @@ export class FlightController
     this.router.post('', this.save)
     this.router.get('/flightInfo/:Sid/:Did', this.flightInfo)
     this.router.get('/seats/:id', this.seats)
+    this.router.get('/plane/:id', this.getPlane)
   }
 
   flightInfo = async (
@@ -68,5 +69,17 @@ export class FlightController
       .where('f.FlightId = :id', { id: flightID })
       .getMany()
     response.send(data)
+  }
+
+  getPlane = async (request: Request, response: Response, next: NextFunction) => {
+    const flightID = request.params.id
+    console.log(flightID)
+
+    const data = await this.repository.createQueryBuilder('f')
+    .select(['f.PlaneId', 'p.EconomySeats', 'p.BusinessSeats',])
+    .innerJoin('f.Plane','p')
+    .where('f.FlightId = :id', { id: flightID })
+    .getOne();
+    response.send(data);
   }
 }
