@@ -4,34 +4,34 @@
     "Name": "o2qCSr",
     "Type": "A220",
     "EconomySeats":"120",
-    "BusinessSeats":"30"
+    "BusinessSeats":"32"
   },
   {
     "PlaneId": "2",
     "Name": "CeAgog",
     "Type": "A320",
     "EconomySeats": "150",
-    "BusinessSeats": "30"
+    "BusinessSeats": "32"
   },
   {
     "PlaneId": "3",
     "Name": "QyYQfD",
-    "Type": "A330",
+    "Type": "A332",
     "EconomySeats": "150",
-    "BusinessSeats": "30"
+    "BusinessSeats": "32"
   },
   {
     "PlaneId": "4",
     "Name": "4PBrC8",
     "Type": "A350",
     "EconomySeats": "120",
-    "BusinessSeats": "30"
+    "BusinessSeats": "32"
   },
   {
     "PlaneId": "5",
     "Name": "bsU0Ey",
     "Type": "A380",
     "EconomySeats": "150",
-    "BusinessSeats": "30"
+    "BusinessSeats": "32"
   }
 ]

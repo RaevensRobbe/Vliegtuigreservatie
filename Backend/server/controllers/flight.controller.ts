@@ -73,7 +73,6 @@ export class FlightController
 
   getPlane = async (request: Request, response: Response, next: NextFunction) => {
     const flightID = request.params.id
-    console.log(flightID)
 
     const data = await this.repository.createQueryBuilder('f')
     .select(['f.PlaneId', 'p.EconomySeats', 'p.BusinessSeats',])
