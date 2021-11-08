@@ -4,9 +4,11 @@
   import { FlightStore } from './../../stores/flightStore'
   import { onMount } from 'svelte'
 
-  let givenflights
+  //!!!!!!!!! veranderen naar dynamische data niet hier maar in de foreach van givenflights
   let storageDate = '2021-11-30'
   let retourDate = '2021-12-17'
+
+  let givenflights
   let controldate
   let chosenflight
   let position
@@ -40,8 +42,10 @@
     givenflights.forEach(flight => {
       let dateTime = flight.Date.split('T')[0]
       if (retour === true) {
+        //DYAMISCH MAKEN!!!!!!!!
         controldate = retourDate
       } else {
+        //DYAMISCH MAKEN!!!!!!!!
         controldate = storageDate
       }
       if (dateTime == controldate) {
