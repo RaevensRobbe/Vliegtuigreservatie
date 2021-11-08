@@ -92,96 +92,146 @@
 
 </script>
 
-<section class="grid grid-cols-3 grid-rows-1">
-    <Intertitle titleName = "Select your seat"/>
-    <div class="flex justify-between">
-        <p>Unavailable</p>
-        <p>Available</p>
-        <p>Selected</p>
+<body class="mx-12">
+    <div>
+        <button>Go back</button>
     </div>
-</section>
-
-<section>
-    {#if busGrid != [0,0]}
-        <div class="grid grid-rows-1 grid-cols-2">
-            <div class="container grid grid-cols-{busGrid[1]} grid-rows-{busGrid[0]}">
-                {#each {length: busGrid[0]} as _, i (i)}
-                    {#each {length: busGrid[1]} as _, j (j)}
-                        <div class:active={is_activeBus[i][j]}>
-                            <Seat row={i} column= {j} />
-                        </div>
-                    {/each}
-                {/each}
+    <section class="grid grid-cols-3 grid-rows-1">
+        <Intertitle titleName = "Select your seat"/>
+        <div class="flex justify-between">
+            <div class="flex items-center">
+                <div class="w-12 h-12 bg-gray-300 mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 " viewBox="0 0 24 24" stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </div>
+                <p>Unavailable</p>
+            </div>
+            <div class="flex items-center">
+                <div class="w-12 h-12 bg-white border border-forest-green mr-2"/>
+                <p>Available</p>
             </div>
 
-        
-            <div class="container grid grid-cols-{busGrid[1]} grid-rows-{busGrid[0]}">
-                {#each {length: busGrid[0]} as _, i (i)}
-                    {#each {length: busGrid[1]} as _, j (j)}
-                        <div class:active={is_activeBus[i][j]}>
-                            <Seat row={i} column= {j} />
-                        </div>
-                    {/each}
-                {/each}
+            <div class="flex items-center">
+                <div class="w-12 h-12 bg-forest-green border mr-2"/>
+                <p>Selected</p>
             </div>
         </div>
-    {/if}
+    </section>
+    
+    <section class="grid grid-rows-2 grid-cols-3 mt-8">
 
-    <div class="mt-8 mb-8"></div>
+        <div class="flex flex-col w-3/4 justify-between">
+            <div class="bg-white flex flex-col items-center">
+                <h1 class="text-forest-green">Business Class</h1>
+                <p>You get a private space, recline seats, unlimited food and drinks, early boarding and spacious seats</p>
+                <h2>PRICING</h2>
+            </div>
 
-    {#if ecoGrid != [0,0]}
-        <div class="grid grid-rows-1 grid-cols-{ecoParts}">
-            {#if ecoParts === 2}
-                <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} w-1/2">
-                    {#each {length: ecoGrid[0]} as _, i (i)}
-                        {#each {length: ecoGrid[1]} as _, j (j)}
-                            <div class:active={is_activeEco[i][j]}>
-                                <Seat row={i} column= {j} />
-                            </div>
-                        {/each}
-                    {/each}
-                </div>
+            <div class="bg-white flex flex-col items-center">
+                <h1 class="text-forest-green">Economy Class</h1>
+                <p>You get your preferred seat, food and drinks and early boarding</p>
+                <h2>PRICING</h2>
+            </div>
 
-                <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} w-1/2">
-                    {#each {length: ecoGrid[0]} as _, i (i)}
-                        {#each {length: ecoGrid[1]} as _, j (j)}
-                            <div class:active={is_activeEco[i][j]}>
-                                <Seat row={i} column= {j} />
-                            </div>
-                        {/each}
-                    {/each}
-                </div>
-            {:else if ecoParts === 3}
-                <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]}">
-                    {#each {length: ecoGrid[0]} as _, i (i)}
-                        {#each {length: ecoGrid[1]} as _, j (j)}
-                            <div class:active={is_activeEco[i][j]}>
-                                <Seat row={i} column= {j} />
-                            </div>
-                        {/each}
-                    {/each}
-                </div>
+            <div></div>
+        </div>
 
-                <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]}">
-                    {#each {length: ecoGrid[0]} as _, i (i)}
-                        {#each {length: ecoGrid[1]} as _, j (j)}
-                            <div class:active={is_activeEco[i][j]}>
-                                <Seat row={i} column= {j} />
-                            </div>
+        <section >
+            {#if busGrid != [0,0]}
+                <div class="grid grid-rows-1 grid-cols-2">
+                    <div class="container grid grid-cols-{busGrid[1]} grid-rows-{busGrid[0]} place-items-start gap-2">
+                        {#each {length: busGrid[0]} as _, i (i)}
+                            {#each {length: busGrid[1]} as _, j (j)}
+                                <div class:active={is_activeBus[i][j]}>
+                                    <Seat row={i} column= {j} />
+                                </div>
+                            {/each}
                         {/each}
-                    {/each}
-                </div>
-
-                <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]}">
-                    {#each {length: ecoGrid[0]} as _, i (i)}
-                        {#each {length: ecoGrid[1]} as _, j (j)}
-                            <div class:active={is_activeEco[i][j]}>
-                                <Seat row={i} column= {j} />
-                            </div>
+                    </div>
+        
+                    <div class="container grid grid-cols-{busGrid[1]} grid-rows-{busGrid[0]} place-items-end gap-2">
+                        {#each {length: busGrid[0]} as _, i (i)}
+                            {#each {length: busGrid[1]} as _, j (j)}
+                                <div class:active={is_activeBus[i][j]}>
+                                    <Seat row={i} column= {j} />
+                                </div>
+                            {/each}
                         {/each}
-                    {/each}
+                    </div>
                 </div>
             {/if}
-        </div>
-    {/if}
-</section>
+        
+    
+            <div class="mt-8 mb-8"></div>
+    
+            {#if ecoGrid != [0,0]}
+                <div class="grid grid-rows-1 grid-cols-{ecoParts}">
+                    {#if ecoParts === 2}
+                        <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-start gap-y-2 ">
+                            {#each {length: ecoGrid[0]} as _, i (i)}
+                                {#each {length: ecoGrid[1]} as _, j (j)}
+                                    <div class:active={is_activeEco[i][j]}>
+                                        <Seat row={i} column= {j} />
+                                    </div>
+                                {/each}
+                            {/each}
+                        </div>
+        
+                        <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-end gap-y-2 ">
+                            {#each {length: ecoGrid[0]} as _, i (i)}
+                                {#each {length: ecoGrid[1]} as _, j (j)}
+                                    <div class:active={is_activeEco[i][j]}>
+                                        <Seat row={i} column= {j} />
+                                    </div>
+                                {/each}
+                            {/each}
+                        </div>
+                    {:else if ecoParts === 3}
+                        <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-start gap-y-2 ">
+                            {#each {length: ecoGrid[0]} as _, i (i)}
+                                {#each {length: ecoGrid[1]} as _, j (j)}
+                                    <div class:active={is_activeEco[i][j]}>
+                                        <Seat row={i} column= {j} />
+                                    </div>
+                                {/each}
+                            {/each}
+                        </div>
+        
+                        <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-center gap-y-2">
+                            {#each {length: ecoGrid[0]} as _, i (i)}
+                                {#each {length: ecoGrid[1]} as _, j (j)}
+                                    <div class:active={is_activeEco[i][j]}>
+                                        <Seat row={i} column= {j} />
+                                    </div>
+                                {/each}
+                            {/each}
+                        </div>
+        
+                        <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-end gap-y-2 ">
+                            {#each {length: ecoGrid[0]} as _, i (i)}
+                                {#each {length: ecoGrid[1]} as _, j (j)}
+                                    <div class:active={is_activeEco[i][j]}>
+                                        <Seat row={i} column= {j} />
+                                    </div>
+                                {/each}
+                            {/each}
+                        </div>
+                    {/if}
+                </div>
+            {/if}
+        </section>
+
+        <!-- <section>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="44.58" height="31.855" viewBox="0 0 44.58 31.855">
+                    <path id="bxs-plane-take-off" d="M45.3,36.3H4.348v4.551H45.3ZM3.189,14.749a3.663,3.663,0,0,1,4.633-2.318L18,15.826,36.2,9l4.551,2.275L27.1,20.377l9.1,4.551,9.1-4.551,2.275,2.275-9.1,9.1L5.378,19.341A3.666,3.666,0,0,1,3.189,14.749Z" transform="translate(-3 -9)" fill="#008066"/>
+                  </svg>
+                  <h1>flight to flight</h1>
+            </div>
+
+            <div>
+                 
+            </div>
+        </section> -->
+
+    </section>
+</body>

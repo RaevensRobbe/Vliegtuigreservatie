@@ -3,6 +3,6 @@
     export let column:number;
 </script>
 
-<div class="w-8 h-8 bg-white border border-forest-green">
+<div class="w-12 h-12 bg-white border border-forest-green flex items-center">
     <p></p>
 </div>
