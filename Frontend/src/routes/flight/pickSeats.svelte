@@ -4,6 +4,7 @@
     import { get } from '../../composables/useApi';
     import seatsStore from '../../stores/pickSeatsStore'
     import Intertitle from '../../components/Intertitle.svelte'
+    import Seat from '../../components/SeatComponent.svelte'
 
     let economySeats: number  = 0
     let businessSeats: number = 0
@@ -106,10 +107,9 @@
             <div class="container grid grid-cols-{busGrid[1]} grid-rows-{busGrid[0]}">
                 {#each {length: busGrid[0]} as _, i (i)}
                     {#each {length: busGrid[1]} as _, j (j)}
-                        <div class:active={is_activeBus[i][j]}
-                            on:click={() => select(i, j)}
-                            on:mouseover={() => hover(i, j)}
-                        >{i}</div>
+                        <div class:active={is_activeBus[i][j]}>
+                            <Seat row={i} column= {j} />
+                        </div>
                     {/each}
                 {/each}
             </div>
@@ -118,10 +118,9 @@
             <div class="container grid grid-cols-{busGrid[1]} grid-rows-{busGrid[0]}">
                 {#each {length: busGrid[0]} as _, i (i)}
                     {#each {length: busGrid[1]} as _, j (j)}
-                        <div class:active={is_activeBus[i][j]}
-                                on:click={() => select(i, j)}
-                                on:mouseover={() => hover(i, j)}
-                            >{i}</div>
+                        <div class:active={is_activeBus[i][j]}>
+                            <Seat row={i} column= {j} />
+                        </div>
                     {/each}
                 {/each}
             </div>
@@ -136,10 +135,9 @@
                 <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} w-1/2">
                     {#each {length: ecoGrid[0]} as _, i (i)}
                         {#each {length: ecoGrid[1]} as _, j (j)}
-                            <div class:active={is_activeEco[i][j]}
-                                    on:click={() => select(i, j)}
-                                    on:mouseover={() => hover(i, j)}
-                                >{i}</div>
+                            <div class:active={is_activeEco[i][j]}>
+                                <Seat row={i} column= {j} />
+                            </div>
                         {/each}
                     {/each}
                 </div>
@@ -147,10 +145,9 @@
                 <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} w-1/2">
                     {#each {length: ecoGrid[0]} as _, i (i)}
                         {#each {length: ecoGrid[1]} as _, j (j)}
-                            <div class:active={is_activeEco[i][j]}
-                                    on:click={() => select(i, j)}
-                                    on:mouseover={() => hover(i, j)}
-                                >{i}</div>
+                            <div class:active={is_activeEco[i][j]}>
+                                <Seat row={i} column= {j} />
+                            </div>
                         {/each}
                     {/each}
                 </div>
@@ -158,10 +155,9 @@
                 <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]}">
                     {#each {length: ecoGrid[0]} as _, i (i)}
                         {#each {length: ecoGrid[1]} as _, j (j)}
-                            <div class:active={is_activeEco[i][j]}
-                                    on:click={() => select(i, j)}
-                                    on:mouseover={() => hover(i, j)}
-                                >test</div>
+                            <div class:active={is_activeEco[i][j]}>
+                                <Seat row={i} column= {j} />
+                            </div>
                         {/each}
                     {/each}
                 </div>
@@ -169,10 +165,9 @@
                 <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]}">
                     {#each {length: ecoGrid[0]} as _, i (i)}
                         {#each {length: ecoGrid[1]} as _, j (j)}
-                            <div class:active={is_activeEco[i][j]}
-                                    on:click={() => select(i, j)}
-                                    on:mouseover={() => hover(i, j)}
-                                >test</div>
+                            <div class:active={is_activeEco[i][j]}>
+                                <Seat row={i} column= {j} />
+                            </div>
                         {/each}
                     {/each}
                 </div>
@@ -180,10 +175,9 @@
                 <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]}">
                     {#each {length: ecoGrid[0]} as _, i (i)}
                         {#each {length: ecoGrid[1]} as _, j (j)}
-                            <div class:active={is_activeEco[i][j]}
-                                    on:click={() => select(i, j)}
-                                    on:mouseover={() => hover(i, j)}
-                                >test</div>
+                            <div class:active={is_activeEco[i][j]}>
+                                <Seat row={i} column= {j} />
+                            </div>
                         {/each}
                     {/each}
                 </div>
