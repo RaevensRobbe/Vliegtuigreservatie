@@ -3,8 +3,10 @@
 
   export let adult: boolean
   export let personnumber: number
+  //object errors add errors in here otherwise delete them
+  let errors: any = {}
 
-  let titles = [`Mr`, `Mrs`, `Ms`]
+  let titles: Array<string> = [`Mr`, `Mrs`, `Ms`]
 
   let value: string = ''
 
@@ -54,28 +56,6 @@
         }
       }
     }
-    console.log('adults')
-    console.log($adultStore)
-    console.log('children')
-    console.log($childrenStore)
-    // switch (type) {
-    //   case 'FirstName':
-    //     adult
-    //       ? ($travelerStore.adults[personnumber].firstName = firstName)
-    //       : ($travelerStore.children[personnumber].firstName = firstName)
-    //     console.log(firstName)
-    //     break
-    //   case 'LastName':
-    //     adult
-    //       ? ($travelerStore.adults[personnumber].lastName = lastName)
-    //       : ($travelerStore.children[personnumber].lastName = lastName)
-    //     console.log(lastName)
-    //     break
-    //   case 'Title':
-    //     console.log(value)
-    //     $travelerStore.adults[personnumber].title = value
-    //     break
-    // }
   }
 </script>
 
@@ -89,6 +69,7 @@
         bind:value
         on:change={() => setStorage('Title')}
         class="border-2 w-full text-sm md:text-md"
+        required
       >
         <option value="null" selected disabled class="bg-gray-100"
           >Select your title</option
@@ -112,6 +93,7 @@
           type="text"
           placeholder="insert your first name"
           class="w-full  focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          required
         />
       </div>
     </div>
@@ -125,6 +107,7 @@
           type="text"
           placeholder="insert your last name"
           class="w-full  focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          required
         />
       </div>
     </div>

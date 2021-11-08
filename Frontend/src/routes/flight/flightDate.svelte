@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { goto } from '$app/navigation'
 
   import SelectFlightDate from './../../components/flightDateComponents/SelectFlightDate.svelte'
@@ -8,11 +8,14 @@
 
   let flight = $FlightStore
 
+  let submitClicked: boolean = false
+
   function goBack() {
     goto('/')
   }
 
   function handleSubmit() {
+    submitClicked = true
     console.log('submit')
   }
 </script>
