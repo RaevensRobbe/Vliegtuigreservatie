@@ -91,9 +91,9 @@
       </div>
       {#if toggleDeparture}
         <SelectLocation
-          bind:toggleDestination
           bind:departureCity
           bind:departureCountry
+          bind:toggleDeparture
         />
       {/if}
     </div>

@@ -5,10 +5,11 @@
   // export so parent receives the changes
   export let departureCity
   export let departureCountry
-  export let toggleDestination = true
+  export let toggleDeparture = true
 
-  function showDestination() {
-    toggleDestination = false
+  function showDestination(cityName: string) {
+    departureCity = cityName
+    toggleDeparture = false
     console.log('toggle')
   }
 
@@ -210,8 +211,7 @@
               {#each destination.Dest as city}
                 <div
                   class="hover:bg-gray-300"
-                  on:click={(() => (departureCity = city.Name),
-                  showDestination)}
+                  on:click={() => showDestination(city.Name)}
                 >
                   <label key={city.DestinationId}>
                     <!-- bind:group makes chosen city bold -->
