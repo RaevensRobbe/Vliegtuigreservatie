@@ -3,6 +3,9 @@ module.exports = {
   purge: ['./src/**/*.svelte'],
   theme:{
     extend:{
+      borderWidth:{
+        '1' : '1px'
+      },
       fontFamily:{
         'Montserrat': ['Montserrat']
       },
