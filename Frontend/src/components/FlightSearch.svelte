@@ -3,6 +3,8 @@
   import SelectTravelers from './FlightSearchComponents/SelectTravelers.svelte'
   let departureCity = null
   let departureCountry = null
+  let destinationCity = null
+  let destinationCountry = null
   let children = 0
   let adults = 0
   let toggleTravelers = false
@@ -13,12 +15,18 @@
     switch (item) {
       case 'travelers':
         toggleTravelers = !toggleTravelers
+        toggleDeparture = false
+        toggleDestination = false
         break
       case 'departure':
         toggleDeparture = !toggleDeparture
+        toggleTravelers = false
+        toggleDestination = false
         break
       case 'destination':
         toggleDestination = !toggleDestination
+        toggleTravelers = false
+        toggleDeparture = false
         break
     }
   }
@@ -66,7 +74,10 @@
       <div class="flex flex-col p-4">
         <!--destination box -->
         <p class="font-light text-xs">To</p>
-        <div class="flex mt-1">
+        <div
+          class="flex mt-1 cursor-pointer"
+          on:click={() => showItem('destination')}
+        >
           <svg
             id="flight_land_black_24dp"
             xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +97,13 @@
               transform="translate(0 0)"
             />
           </svg>
-          <span>Destination</span>
+          {#if !destinationCountry}
+            <span>Destination</span>
+          {:else if !destinationCity}
+            <span>{destinationCountry}</span>
+          {:else}
+            <span>{destinationCountry}, {destinationCity}</span>
+          {/if}
         </div>
       </div>
       {#if toggleDeparture}
@@ -94,6 +111,14 @@
           bind:departureCity
           bind:departureCountry
           bind:toggleDeparture
+          isDeparture={true}
+        />
+      {:else if toggleDestination}
+        <SelectLocation
+          bind:departureCity={destinationCity}
+          bind:departureCountry={destinationCountry}
+          bind:toggleDeparture={toggleDestination}
+          isDeparture={false}
         />
       {/if}
     </div>

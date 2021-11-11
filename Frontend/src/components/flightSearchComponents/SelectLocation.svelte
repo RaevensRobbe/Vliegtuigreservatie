@@ -6,6 +6,7 @@
   export let departureCity
   export let departureCountry
   export let toggleDeparture = true
+  export let isDeparture
 
   function showDestination(cityName: string) {
     departureCity = cityName
@@ -158,15 +159,23 @@
   // destinationsArray.forEach(destination => console.log(destination))
 </script>
 
-<div class="absolute top-18 z-10 w-full ">
+<div
+  class="absolute {isDeparture ? 'top-18' : 'top-38 md:top-18'} z-10 w-full "
+>
   <div class="flex flex-col align-center">
-    <div class="w-6 overflow-hidden inline-block self-center">
+    <div
+      class="w-6 overflow-hidden inline-block {isDeparture
+        ? 'self-center ml-0 md:self-start md:ml-10'
+        : 'self-center mr-0 md:self-end md:mr-10'} "
+    >
       <div
-        class=" h-4 w-4 bg-ghost-white rotate-45 transform origin-bottom-left"
+        class=" h-4 w-4 bg-ghost-white {isDeparture
+          ? 'md:bg-ghost-white'
+          : 'md:bg-white'} rotate-45 transform origin-bottom-left shadow-lg"
       />
     </div>
     <div
-      class="grid md:grid-rows-1 md:grid-cols-5 rounded-xl bg-white-500 shadow-lg flex-grow"
+      class="grid grid-rows-1 md:grid-cols-5 rounded-xl bg-white-500 shadow-lg flex-grow"
     >
       <!-- Choose country -->
       <div class="bg-ghost-white p-4 md:rounded-l-xl  md:col-span-4">
