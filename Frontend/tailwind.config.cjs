@@ -1,13 +1,13 @@
 module.exports = {
   mode: 'jit',
   purge: ['./src/**/*.svelte'],
-  theme:{
-    extend:{
-      borderWidth:{
-        '1' : '1px'
+  theme: {
+    extend: {
+      borderWidth: {
+        1: '1px',
       },
-      fontFamily:{
-        'Montserrat': ['Montserrat']
+      fontFamily: {
+        Montserrat: ['Montserrat'],
       },
       colors: {
         'forest-green': '#008066',
@@ -20,9 +20,13 @@ module.exports = {
       screens: {
         '3xl': '1921px',
       },
-      backgroundImage:{
-        'image-mainpage': "url('/HomePageImage.jpg')"
-      }
-    }
-  }
+      backgroundImage: {
+        'image-mainpage': "url('/HomePageImage.jpg')",
+      },
+      spacing: {
+        18: '4.5rem',
+        38: '9.5rem',
+      },
+    },
+  },
 }
