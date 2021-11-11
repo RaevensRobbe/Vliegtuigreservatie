@@ -10,9 +10,10 @@
     let businessSeats: number = 0
 
     let ecoRows 
-    let ecoCols = 7
+    let ecoCols = 0
     let busRows 
     let busCols = 5
+    let ecoRowLenght = 3
 
     let ecoParts = 0
 
@@ -23,12 +24,14 @@
     const gridLayout = (eco, bus) => {
         if(eco >=  120){
             ecoParts = 2
-            ecoRows = eco / (ecoParts * 3)
+            ecoRows = eco / (ecoParts * ecoRowLenght)
+            ecoCols = ecoParts * ecoRowLenght + 1             
              
         }else{
             console.log('120+')
             ecoParts = 3
-            ecoRows = (eco / ecoParts) /3
+            ecoRows = eco / (ecoParts * ecoRowLenght)
+            ecoCols = ecoParts * ecoRowLenght + 2 
         }
 
         busRows = bus / 4
@@ -162,11 +165,11 @@
                         {#each {length: busGrid[0]} as _, i (i)}
                             {#each {length: busGrid[1]} as _, j (j)}
                                 {#if  j == 2}
-                                    <div></div>
+                                    <div>{i}</div>
                                 {:else}
                                     <div class:active={is_activeBus[i][j]}
                                         on:click={() => select(i,j)}>
-                                        <Seat row={i} column= {j} taken = {false}/>
+                                        <Seat row={i} column= {j} status = 'free'/>
                                     </div>
                                 {/if}
                             {/each}
@@ -186,11 +189,12 @@
                             {#each {length: ecoGrid[0]} as _, i (i)}
                                 {#each {length: ecoGrid[1]} as _, j (j)}
                                     {#if  j == 3}
-                                        <div></div>
+                                        <div>{i}</div>
                                     {:else}
                                         <div class:active={is_activeEco[i][j]}
-                                            on:click={() => select(i,j)}>
-                                            <Seat row={i} column= {j} taken = {false}/>
+                                        on:click={() => selectEco(i,j)}>
+                                            <Seat row={i} column= {j} status = 'free'
+                                            />
                                         </div>
                                     {/if}
                                 {/each}
