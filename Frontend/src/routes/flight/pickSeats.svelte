@@ -10,9 +10,9 @@
     let businessSeats: number = 0
 
     let ecoRows 
-    let ecoCols = 3
+    let ecoCols = 7
     let busRows 
-    let busCols = 2
+    let busCols = 5
 
     let ecoParts = 0
 
@@ -23,7 +23,7 @@
     const gridLayout = (eco, bus) => {
         if(eco >=  120){
             ecoParts = 2
-            ecoRows = (eco / ecoParts) / 3
+            ecoRows = eco / (ecoParts * 3)
              
         }else{
             console.log('120+')
@@ -31,7 +31,7 @@
             ecoRows = (eco / ecoParts) /3
         }
 
-        busRows = (bus / busCols) / 2
+        busRows = bus / 4
 
         busGrid = [busRows, busCols]
         ecoGrid = [ecoRows, ecoCols]
@@ -48,6 +48,7 @@
             ecoSeats: economySeats,
             bussSeats: businessSeats
         })
+        console.log(economySeats)
 
         if( economySeats !== 0){
             gridLayout(economySeats, businessSeats)
@@ -71,7 +72,20 @@
 		}
 		
 		clicked = !clicked;
+        console.log([i,j])
 		check_active([i, j]);
+	}
+
+    function selectEco(i, j) {
+		if (clicked) {
+			end = [i, j];
+		} else { 
+			start = [i, j];
+		}
+		
+		clicked = !clicked;
+        console.log([i,j])
+		check_activeEco([i, j]);
 	}
 	
 	function hover(i, j) {
@@ -86,7 +100,12 @@
 	}
 	
 	function check_active (end) {
-		is_active = is_active.map(
+		is_activeBus = is_activeBus.map(
+			(a, i) => a.map((_, j) => is_in_range([i, j], end)));
+	}
+
+    function check_activeEco (end) {
+		is_activeBus = is_activeBus.map(
 			(a, i) => a.map((_, j) => is_in_range([i, j], end)));
 	}
 
@@ -117,7 +136,7 @@
         </div>
     </section>
     
-    <section class="grid grid-rows-2 grid-cols-3 mt-8">
+    <section class="grid grid-rows-1 grid-cols-3 mt-8">
 
         <div class="flex flex-col w-3/4 justify-between">
             <div class="bg-white flex flex-col items-center">
@@ -137,85 +156,47 @@
 
         <section >
             {#if busGrid != [0,0]}
-                <div class="grid grid-rows-1 grid-cols-2">
-                    <div class="container grid grid-cols-{busGrid[1]} grid-rows-{busGrid[0]} place-items-start gap-2">
+                
+                <div>
+                    <div class="grid grid-cols-{busGrid[1]} grid-rows-{busGrid[0]} place-items-center gap-2">
                         {#each {length: busGrid[0]} as _, i (i)}
                             {#each {length: busGrid[1]} as _, j (j)}
-                                <div class:active={is_activeBus[i][j]}>
-                                    <Seat row={i} column= {j} />
-                                </div>
-                            {/each}
-                        {/each}
-                    </div>
-        
-                    <div class="container grid grid-cols-{busGrid[1]} grid-rows-{busGrid[0]} place-items-end gap-2">
-                        {#each {length: busGrid[0]} as _, i (i)}
-                            {#each {length: busGrid[1]} as _, j (j)}
-                                <div class:active={is_activeBus[i][j]}>
-                                    <Seat row={i} column= {j} />
-                                </div>
+                                {#if  j == 2}
+                                    <div></div>
+                                {:else}
+                                    <div class:active={is_activeBus[i][j]}
+                                        on:click={() => select(i,j)}>
+                                        <Seat row={i} column= {j} taken = {false}/>
+                                    </div>
+                                {/if}
                             {/each}
                         {/each}
                     </div>
                 </div>
+
             {/if}
         
     
             <div class="mt-8 mb-8"></div>
     
             {#if ecoGrid != [0,0]}
-                <div class="grid grid-rows-1 grid-cols-{ecoParts}">
-                    {#if ecoParts === 2}
-                        <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-start gap-y-2 ">
+                <div>
+                    <div>
+                        <div class="grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-center gap-2">
                             {#each {length: ecoGrid[0]} as _, i (i)}
                                 {#each {length: ecoGrid[1]} as _, j (j)}
-                                    <div class:active={is_activeEco[i][j]}>
-                                        <Seat row={i} column= {j} />
-                                    </div>
+                                    {#if  j == 3}
+                                        <div></div>
+                                    {:else}
+                                        <div class:active={is_activeEco[i][j]}
+                                            on:click={() => select(i,j)}>
+                                            <Seat row={i} column= {j} taken = {false}/>
+                                        </div>
+                                    {/if}
                                 {/each}
                             {/each}
                         </div>
-        
-                        <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-end gap-y-2 ">
-                            {#each {length: ecoGrid[0]} as _, i (i)}
-                                {#each {length: ecoGrid[1]} as _, j (j)}
-                                    <div class:active={is_activeEco[i][j]}>
-                                        <Seat row={i} column= {j} />
-                                    </div>
-                                {/each}
-                            {/each}
-                        </div>
-                    {:else if ecoParts === 3}
-                        <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-start gap-y-2 ">
-                            {#each {length: ecoGrid[0]} as _, i (i)}
-                                {#each {length: ecoGrid[1]} as _, j (j)}
-                                    <div class:active={is_activeEco[i][j]}>
-                                        <Seat row={i} column= {j} />
-                                    </div>
-                                {/each}
-                            {/each}
-                        </div>
-        
-                        <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-center gap-y-2">
-                            {#each {length: ecoGrid[0]} as _, i (i)}
-                                {#each {length: ecoGrid[1]} as _, j (j)}
-                                    <div class:active={is_activeEco[i][j]}>
-                                        <Seat row={i} column= {j} />
-                                    </div>
-                                {/each}
-                            {/each}
-                        </div>
-        
-                        <div class="container grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-end gap-y-2 ">
-                            {#each {length: ecoGrid[0]} as _, i (i)}
-                                {#each {length: ecoGrid[1]} as _, j (j)}
-                                    <div class:active={is_activeEco[i][j]}>
-                                        <Seat row={i} column= {j} />
-                                    </div>
-                                {/each}
-                            {/each}
-                        </div>
-                    {/if}
+                    </div>
                 </div>
             {/if}
         </section>
