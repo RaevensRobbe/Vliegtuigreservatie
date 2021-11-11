@@ -63,11 +63,11 @@ export class FlightController
 
     const data = await this.repository
       .createQueryBuilder('f')
-      .select(['f.FlightId', 'p.EconomySeats', 'p.BusinessSeats', 't.Seat'])
+      .select(['f.FlightId', 'p.EconomySeats', 'p.BusinessSeats', 't.Seat', 't.Class'])
       .innerJoin('f.Plane', 'p')
       .innerJoin('f.Ticket', 't')
       .where('f.FlightId = :id', { id: flightID })
-      .getMany()
+      .getOne()
     response.send(data)
   }
 

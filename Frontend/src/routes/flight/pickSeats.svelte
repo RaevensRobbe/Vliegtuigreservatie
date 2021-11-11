@@ -43,15 +43,19 @@
     }
 
     onMount(async () => {
-        const getDataPlane:any = await get(`http://localhost:3001/api/v1/flight/plane/1`)
-        economySeats = getDataPlane.Plane.EconomySeats;
-        businessSeats = getDataPlane.Plane.BusinessSeats;
+        // const getDataPlane:any = await get(`http://localhost:3001/api/v1/flight/plane/1`)
+    
+
+
+        const getData:any = await get(`http://localhost:3001/api/v1/flight/seats/1`)
+        console.log(getData.Plane)
+        economySeats = getData.Plane.EconomySeats;
+        businessSeats = getData.Plane.BusinessSeats;
 
         if( economySeats !== 0){
             gridLayout(economySeats, businessSeats)
         }
-
-        const getDataSeats:any = await get(`http://localhost:3001/api/v1/flight/seats/1`)
+        
     })
 
     $: is_activeBus = Array(busGrid[0]).fill(0).map(_ => Array(busGrid[1]).fill(false))
