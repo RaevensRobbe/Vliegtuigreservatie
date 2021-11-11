@@ -1,6 +1,5 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-	import Grid from './Grid.svelte';
     import { get } from '../../composables/useApi';
     import seatsStore from '../../stores/pickSeatsStore'
     import Intertitle from '../../components/Intertitle.svelte'
@@ -44,18 +43,15 @@
     }
 
     onMount(async () => {
-        const getData:any = await get(`http://localhost:3001/api/v1/flight/plane/1`)
-        economySeats = getData.Plane.EconomySeats;
-        businessSeats = getData.Plane.BusinessSeats;
-        seatsStore.set({
-            ecoSeats: economySeats,
-            bussSeats: businessSeats
-        })
-        console.log(economySeats)
+        const getDataPlane:any = await get(`http://localhost:3001/api/v1/flight/plane/1`)
+        economySeats = getDataPlane.Plane.EconomySeats;
+        businessSeats = getDataPlane.Plane.BusinessSeats;
 
         if( economySeats !== 0){
             gridLayout(economySeats, businessSeats)
         }
+
+        const getDataSeats:any = await get(`http://localhost:3001/api/v1/flight/seats/1`)
     })
 
     $: is_activeBus = Array(busGrid[0]).fill(0).map(_ => Array(busGrid[1]).fill(false))
@@ -89,12 +85,6 @@
 		clicked = !clicked;
         console.log([i,j])
 		check_activeEco([i, j]);
-	}
-	
-	function hover(i, j) {
-		if (!clicked) return;
-		hover_end = [i, j];
-		check_active(hover_end);
 	}
 	
 	function is_in_range([i, j], [i2, j2]) {
@@ -161,6 +151,11 @@
             {#if busGrid != [0,0]}
                 
                 <div>
+                    <div class="grid grid-cols-{busGrid[1]} grid-rows-1 place-items-center gap-2 mb-2">
+                        {#each {length: busGrid[1]} as _, i (i)}
+                            <p>{i}</p>
+                        {/each}
+                    </div>
                     <div class="grid grid-cols-{busGrid[1]} grid-rows-{busGrid[0]} place-items-center gap-2">
                         {#each {length: busGrid[0]} as _, i (i)}
                             {#each {length: busGrid[1]} as _, j (j)}
@@ -185,6 +180,11 @@
             {#if ecoGrid != [0,0]}
                 <div>
                     <div>
+                        <div class="grid grid-cols-{ecoGrid[1]} grid-rows-1 place-items-center gap-2 mb-2">
+                            {#each {length: ecoGrid[1]} as _, i (i)}
+                                <p>{i}</p>
+                            {/each}
+                        </div>
                         <div class="grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-center gap-2">
                             {#each {length: ecoGrid[0]} as _, i (i)}
                                 {#each {length: ecoGrid[1]} as _, j (j)}
