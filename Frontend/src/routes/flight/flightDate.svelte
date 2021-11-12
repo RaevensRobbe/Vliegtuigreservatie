@@ -64,7 +64,7 @@
     <Intertitle
       titleName={flight.destinationCity + ' - ' + flight.departureCity}
     />
-    <h1 class="text-sm md:text-xl mb-4">Choose your departure flight</h1>
+    <h1 class="text-sm md:text-xl mb-4">Choose your retour flight</h1>
     <SelectFlightDate
       url={`http://localhost:3001/api/v1/flight/flightInfo/${flight.destinationLocationId}/${flight.departureLocationId}`}
       retour={true}
