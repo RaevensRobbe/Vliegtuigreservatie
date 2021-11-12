@@ -1,4 +1,6 @@
-<script>
+<script lang='ts'>
+import { each } from "svelte/internal";
+
 	export let grid = [8, 4];
 	
 	$: col = `repeat(${grid[1]}, 1fr)`;
@@ -9,6 +11,8 @@
 	let end = [];
 	let hover_end = []
 	let clicked = false;
+
+	let columnsLetterBus:string[] = ['A','B','C','D']
 	
 	function select(i, j) {
 		if (clicked) {
@@ -36,6 +40,12 @@
 		is_active = is_active.map(
 			(a, i) => a.map((_, j) => is_in_range([i, j], end)));
 	}
+
+	console.log({length:grid[0]})
+
+	
+    const includesMultiDimension = (arr, coords) =>
+        JSON.stringify(arr).includes(coords);
 	
 	
 </script>
@@ -43,15 +53,16 @@
 <div class="container" style="grid-template-rows: {row}; grid-template-columns: {col};">
 
 	{#each {length: grid[0]} as _, i (i)}
-	  {#each {length: grid[1]} as _, j (j)}
-			<div class:active={is_active[i][j]}
-					 on:click={() => select(i, j)}
-					 on:mouseover={() => hover(i, j)}
+	  {#each columnsLetterBus as item , j (j)}
+			<div class:active={is_active[i][item]}
+					 on:click={() => select(i+1, item)}
+					 on:mouseover ={() => hover(i, j)}	
 				></div>
 		{/each}
 	{/each}
 
 </div>
+<p></p>
 <strong>Current: </strong>{hover_end}<br>
 <strong>Coords:</strong> {start} {end[0] ? '-' : ''} {end}
 <style>

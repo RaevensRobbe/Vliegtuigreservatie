@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
 
     export let row:number;
-    export let column:number;
+    export let column:string;
     export let status:string;
 
     let style:string 
@@ -19,6 +19,7 @@
     let clicked = false
 
     const setStyle = () => {
+        console.log(`row: ${row} colum: ${column}`)
         clicked =! clicked
 
         if(clicked == false){

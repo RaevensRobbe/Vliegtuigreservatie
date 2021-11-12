@@ -4,6 +4,7 @@
     import seatsStore from '../../stores/pickSeatsStore'
     import Intertitle from '../../components/Intertitle.svelte'
     import Seat from '../../components/SeatComponent.svelte'
+import { debug, each } from 'svelte/internal';
 
     let economySeats: number  = 0
     let businessSeats: number = 0
@@ -19,18 +20,26 @@
     let busGrid = [0,0]
     let ecoGrid = [0,0]
 
+    let takenSeatsEco:any = {}
+    let takenSeatsBus:any[] = []
+
+    let columnsLetterBus:string[] = ['A','B','','C','D']
+    let columnsLetterEco:string[] = [] 
+
 
     const gridLayout = (eco, bus) => {
         if(eco >=  120){
             ecoParts = 2
             ecoRows = eco / (ecoParts * ecoRowLenght)
-            ecoCols = ecoParts * ecoRowLenght + 1             
+            ecoCols = ecoParts * ecoRowLenght + 1   
+            columnsLetterEco = ['A','B','C','','D','E','F']        
              
         }else{
             console.log('120+')
             ecoParts = 3
             ecoRows = eco / (ecoParts * ecoRowLenght)
             ecoCols = ecoParts * ecoRowLenght + 2 
+            columnsLetterEco = ['A','B','C','','D','E','F','','G','H','I']
         }
 
         busRows = bus / 4
@@ -43,14 +52,27 @@
     }
 
     onMount(async () => {
-        // const getDataPlane:any = await get(`http://localhost:3001/api/v1/flight/plane/1`)
-    
-
-
         const getData:any = await get(`http://localhost:3001/api/v1/flight/seats/1`)
-        console.log(getData.Plane)
+        //console.log(getData.Ticket)
         economySeats = getData.Plane.EconomySeats;
         businessSeats = getData.Plane.BusinessSeats;
+
+        let i:any
+        let j:any
+
+        for(i of getData.Ticket){
+            //console.log(i)
+            for(j of i.Seat){
+                if(j.class == "Business"){
+                    takenSeatsBus.push([j.row,j.column])
+
+                }else if(j.class == "Economy"){
+                    takenSeatsEco.push([j.row,j.column])
+                }
+            }
+        }
+
+        console.log(takenSeatsBus)
 
         if( economySeats !== 0){
             gridLayout(economySeats, businessSeats)
@@ -106,6 +128,9 @@
 			(a, i) => a.map((_, j) => is_in_range([i, j], end)));
 	}
 
+    const includesMultiDimension = (arr, coords) =>
+        JSON.stringify(arr).includes(coords);
+
 </script>
 
 <body class="mx-12">
@@ -156,21 +181,26 @@
                 
                 <div>
                     <div class="grid grid-cols-{busGrid[1]} grid-rows-1 place-items-center gap-2 mb-2">
-                        {#each {length: busGrid[1]} as _, i (i)}
-                            <p>{i}</p>
+                        {#each columnsLetterBus as colNr}
+                            <p>{colNr}</p>
                         {/each}
                     </div>
+
                     <div class="grid grid-cols-{busGrid[1]} grid-rows-{busGrid[0]} place-items-center gap-2">
                         {#each {length: busGrid[0]} as _, i (i)}
-                            {#each {length: busGrid[1]} as _, j (j)}
-                                {#if  j == 2}
+                            {#each columnsLetterBus as colNr}
+                                {#if colNr == ''}
                                     <div>{i}</div>
                                 {:else}
-                                    <div class:active={is_activeBus[i][j]}
-                                        on:click={() => select(i,j)}>
-                                        <Seat row={i} column= {j} status = 'free'/>
+                                    <div class:active={is_activeBus[i][colNr]}
+                                    on:click={() => select(i,colNr)}>
+                                        {#if includesMultiDimension(takenSeatsBus,`[${i},${colNr}]`)}
+                                            <Seat row={i} column= {colNr} status = 'taken'/>
+                                        {:else}
+                                            <Seat row={i} column= {colNr} status = 'free'/>
+                                        {/if}
                                     </div>
-                                {/if}
+                                {/if}   
                             {/each}
                         {/each}
                     </div>
@@ -178,7 +208,6 @@
 
             {/if}
         
-    
             <div class="mt-8 mb-8"></div>
     
             {#if ecoGrid != [0,0]}
@@ -186,19 +215,22 @@
                     <div>
                         <div class="grid grid-cols-{ecoGrid[1]} grid-rows-1 place-items-center gap-2 mb-2">
                             {#each {length: ecoGrid[1]} as _, i (i)}
-                                <p>{i}</p>
+                                <p>{columnsLetterEco[i]}</p>
                             {/each}
                         </div>
                         <div class="grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-center gap-2">
                             {#each {length: ecoGrid[0]} as _, i (i)}
-                                {#each {length: ecoGrid[1]} as _, j (j)}
-                                    {#if  j == 3}
+                                {#each columnsLetterEco as colNr }
+                                    {#if  colNr == ''}
                                         <div>{i}</div>
                                     {:else}
-                                        <div class:active={is_activeEco[i][j]}
-                                        on:click={() => selectEco(i,j)}>
-                                            <Seat row={i} column= {j} status = 'free'
-                                            />
+                                        <div class:active={is_activeEco[i][colNr]}
+                                        on:click={() => selectEco(i,colNr)}>
+                                            {#if includesMultiDimension(takenSeatsEco,`[${i},${colNr}]`)}
+                                                <Seat row={i} column={colNr} status = 'taken'/>
+                                            {:else}
+                                                <Seat row={i} column={colNr} status = 'free'/>
+                                            {/if}
                                         </div>
                                     {/if}
                                 {/each}
@@ -207,6 +239,9 @@
                     </div>
                 </div>
             {/if}
+
+            <div class="mt-8 mb-8"></div>
+            
         </section>
 
         <!-- <section>

@@ -59,11 +59,9 @@ export class FlightController
   seats = async (request: Request, response: Response, next: NextFunction) => {
     const flightID = request.params.id
 
-    console.log(flightID)
-
     const data = await this.repository
       .createQueryBuilder('f')
-      .select(['f.FlightId', 'p.EconomySeats', 'p.BusinessSeats', 't.Seat', 't.Class'])
+      .select(['f.FlightId', 'p.EconomySeats', 'p.BusinessSeats', 't.Seat'])
       .innerJoin('f.Plane', 'p')
       .innerJoin('f.Ticket', 't')
       .where('f.FlightId = :id', { id: flightID })

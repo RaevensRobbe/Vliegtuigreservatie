@@ -13,9 +13,6 @@ export class Ticket {
     @Column('bool')
     Return?: boolean
 
-    @Column('simple-array')
-    Class?: string[]
-
     @Column('datetime',{nullable:true})
     ReturnDate?: string
 

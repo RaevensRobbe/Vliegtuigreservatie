@@ -3,16 +3,17 @@
    "TicketId": "1",
    "Seat": [
       {
+        "class": "Business",
         "column": 1,
         "row": 1
       },
       {
+        "class": "Business",
         "column": 2,
         "row": 1
       }
     ],
    "Return": 1,
-   "Class": ["First Class","First Class"],
    "ReturnDate": "2021-12-08 05:30:34",
    "Persons": [ "Naruto", "Hinata" ],
    "Rating": "6",
@@ -24,20 +25,22 @@
     "TicketId": "2",
     "Seat": [
       {
+        "class": "Economy",
         "column": 2,
         "row": 2
       },
       {
+        "class": "Economy",
         "column": 3,
         "row": 2
       },
       {
+        "class": "Economy",
         "column": 4,
         "row": 2
       }
     ],
     "Return": 1,
-    "Class": [ "First Class", "First Class","First Class" ],
     "ReturnDate": "2021-12-14 20:05:34",
     "Persons": [ "Shikamaru", "Choji","Ino" ],
     "Rating": "9",
@@ -49,20 +52,22 @@
     "TicketId": "3",
     "Seat": [
       {
+        "class": "Economy",
         "column": 3,
         "row": 10
       },
       {
+        "class": "Economy",
         "column": 4,
         "row": 10
       },
       {
+        "class": "Economy",
         "column": 5,
         "row": 10
       }
     ],
     "Return": 0,
-    "Class": [ "Business", "Business", "Business" ],
     "ReturnDate": null,
     "Persons": [ "Hinata", "Chino", "Kiba" ],
     "Rating": "8",
@@ -74,12 +79,12 @@
     "TicketId": "4",
     "Seat": [
       {
+        "class": "Economy",
         "column": 4,
         "row": 12
       }
     ],
     "Return": 0,
-    "Class": [ "Business"],
     "ReturnDate": null,
     "Persons": [ "Sasuke"],
     "Rating": "2",
@@ -91,12 +96,12 @@
     "TicketId": "5",
     "Seat": [
       {
+        "class": "Business",
         "column": 4,
         "row": 2
       }
     ],
     "Return": 0,
-    "Class": [ "First class" ],
     "ReturnDate": null,
     "Persons": [ "Tsunade" ],
     "Rating": "9",
@@ -108,16 +113,17 @@
     "TicketId": "6",
     "Seat": [
       {
+        "class": "Business",
         "column": 4,
         "row": 2
       },
       {
+        "class": "Business",
         "column": 5,
         "row": 2
       }
     ],
     "Return": 1,
-    "Class": [ "First class","First class" ],
     "ReturnDate": "2021-12-18 07:00:00",
     "Persons": [ "Tsunade","Shizune" ],
     "Rating": "7",
@@ -129,20 +135,22 @@
     "TicketId": "7",
     "Seat": [
       {
+        "class": "Economy",
         "column": 4,
         "row": 9
       },
       {
+        "class": "Economy",
         "column": 5,
         "row": 9
       },
       {
+        "class": "Economy",
         "column": 6,
         "row": 9
       }
     ],
     "Return": 1,
-    "Class": [ "Business", "Business", "Business" ],
     "ReturnDate": "2021-12-06 01:30:30",
     "Persons": [ "Naruto", "Sasuke","Sakura" ],
     "Rating": "9",
@@ -154,16 +162,17 @@
     "TicketId": "8",
     "Seat": [
       {
+        "class": "Business",
         "column": 4,
         "row": 9
       },
       {
+        "class": "Business",
         "column": 5,
         "row": 9
       }
     ],
     "Return": 1,
-    "Class": [ "First class","First class" ],
     "ReturnDate": "2021-12-29 22:21:45",
     "Persons": [ "Kurenai","Asuma" ],
     "Rating": "7",
@@ -175,24 +184,27 @@
     "TicketId": "9",
     "Seat": [
       {
+        "class": "Business",
         "column": 1,
         "row": 1
       },
       {
+        "class": "Business",
         "column": 2,
         "row": 1
       },
       {
+        "class": "Business",
         "column": 1,
         "row": 1
       },
       {
+        "class": "Business",
         "column": 1,
         "row": 1
       }
     ],
     "Return": 0,
-    "Class": [ "First class", "First class", "First class", "First class" ],
     "ReturnDate": null,
     "Persons": [ "Hokage", "Raikage","Mizukage","Kazekage" ],
     "Rating": "1",
@@ -204,12 +216,12 @@
     "TicketId": "10",
     "Seat": [
       {
+        "class": "Business",
         "column": 6,
         "row": 13
       }
     ],
     "Return": 0,
-    "Class": [ "Business" ],
     "ReturnDate": null,
     "Persons": [ "Kakashi" ],
     "Rating": "4",
@@ -221,20 +233,22 @@
     "TicketId": "11",
     "Seat": [
       {
+        "class": "Business",
         "column": 1,
         "row": 3
       },
       {
+        "class": "Business",
         "column": 2,
         "row": 3
       },
       {
+        "class": "Business",
         "column": 4,
         "row": 3
       }
     ],
     "Return": 1,
-    "Class": [ "First Class", "First Class","First Class" ],
     "ReturnDate": "2021-12-14 20:05:34",
     "Persons": [ "Shikamaru", "Choji","Ino" ],
     "Rating": "9",
@@ -246,20 +260,22 @@
     "TicketId": "12",
     "Seat": [
       {
+        "class": "Business",
         "column": 1,
         "row": 5
       },
       {
+        "class": "Business",
         "column": 2,
         "row": 5
       },
       {
+        "class": "Business",
         "column": 4,
         "row": 5
       }
     ],
     "Return": 1,
-    "Class": [ "First Class", "First Class","First Class" ],
     "ReturnDate": "2021-12-14 20:05:34",
     "Persons": [ "Shikamaru", "Choji","Ino" ],
     "Rating": "9",
