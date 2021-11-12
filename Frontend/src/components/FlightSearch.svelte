@@ -1,6 +1,9 @@
 <script lang="ts">
   //@ts-nocheck
+  import { onMount } from 'svelte'
+  import { get } from './../composables/useApi'
   import { FlightStore } from './../stores/flightStore'
+  import SelectLocation from './flightSearchComponents/SelectLocation.svelte'
   import SelectTravelers from './flightSearchComponents/SelectTravelers.svelte'
   import { goto } from '$app/navigation'
 
@@ -9,32 +12,72 @@
   // set today date => check if departure date
   let today = new Date().toISOString().split('T')[0]
 
+  //toggle states => show item when true
+  let toggleTravelers = false
+  let toggleDestination = false
+  let toggleDeparture = false
+
   //default set what's in storage
   let children = flight.children
   let adults = flight.adults
-  let toggleTravelers = false
+
+  //dates of flights
   let departureDate = flight.departureDate
   let retourDate = flight.retourDate
-  let departureLocation = flight.departureLocation
-  let destinationLocation = flight.destinationLocation
+
+  //departure and destination city and country
+  let departureCity = flight.departureCity
+  let departureCountry = flight.departureCountry
+  let destinationCity = flight.destinationCity
+  let destinationCountry = flight.destinationCountry
 
   //object errors add errors in here otherwise delete them
   let errors: any = {}
 
+  let destinationsArray: Dest = []
+
+  onMount(async () => {
+    destinationsArray = await get(
+      'http://localhost:3001/api/v1/country/countries/destinations',
+    )
+  })
+
+  function showItem(item) {
+    switch (item) {
+      case 'travelers':
+        toggleTravelers = !toggleTravelers
+        toggleDeparture = false
+        toggleDestination = false
+        break
+      case 'departure':
+        toggleDeparture = !toggleDeparture
+        toggleTravelers = false
+        toggleDestination = false
+        break
+      case 'destination':
+        toggleDestination = !toggleDestination
+        toggleTravelers = false
+        toggleDeparture = false
+        break
+    }
+  }
+
   function flightValidator() {
     //Check if there is a departure location set
-    if (!$FlightStore.departureLocation) {
-      errors.departureLocation = 'No departure location set'
-    } else delete errors['departureLocation']
+    if (!$FlightStore.departureCity) {
+      errors.departureCity = 'No departure location set'
+    } else delete errors['departureCity']
+
     //Check if there is a destination location set or if it isnt the same as departure location
-    if (!$FlightStore.destinationLocation) {
-      errors.destinationLocation = 'No destination location set'
+    if (!$FlightStore.destinationCity) {
+      errors.destinationCity = 'No destination location set'
     } else if (
-      $FlightStore.departureLocation == $FlightStore.destinationLocation
+      $FlightStore.departureLocationId == $FlightStore.destinationLocationId
     ) {
-      errors.destinationLocation =
+      errors.destinationCity =
         "Destination can't be the same as departure location"
-    } else delete errors['destinationLocation']
+    } else delete errors['destinationCity']
+
     //Check if there is a departure date set or not older / the same as today
     if (!$FlightStore.departureDate) {
       errors.departureDate = 'No departure date set'
@@ -42,6 +85,7 @@
       // console.log('error departureDate')
       errors.departureDate = "Departure can't be today or in the past"
     } else delete errors['departureDate']
+
     //Check if there is a retour date => if so check if it is later than departure date
     if ($FlightStore.retourDate) {
       if ($FlightStore.departureDate > $FlightStore.retourDate) {
@@ -50,6 +94,7 @@
         errors.retourDate = 'Retour date cant be the same as departure date'
       } else delete errors['retourDate']
     }
+
     //Check if there are passengers
     if ($FlightStore.children == 0 && $FlightStore.adults == 0) {
       errors.passengers = 'You need at least one passenger'
@@ -57,12 +102,9 @@
 
     //if no errors then you can go to the next page
     if (Object.keys(errors).length === 0) {
+      // console.log(flight)
       goto('/flight/flightDate')
     }
-  }
-
-  function showTravelers() {
-    toggleTravelers = !toggleTravelers
   }
 
   const handleSubmit = () => {
@@ -70,15 +112,10 @@
     toggleTravelers = false
 
     //! voor te testen hardcoded moet nog dynamisch gezet worden
-
-    $FlightStore.departureLocation = 'Rome, Italy'
-    $FlightStore.destinationLocation = 'Paris, France'
     $FlightStore.departureDate = departureDate
     $FlightStore.retourDate = retourDate
     $FlightStore.children = children
     $FlightStore.adults = adults
-    $FlightStore.departureLocationId = 3
-    $FlightStore.destinationLocationId = 1
 
     //go to next page in validator
     flightValidator()
@@ -91,12 +128,15 @@
     class="flex flex-col justify-between gap-4 w-3/4 lg:w-3/5 xl:w-1/2"
     on:submit|preventDefault={handleSubmit}
   >
-    <div class="grid grid-cols-1 bg-white rounded-xl lg:grid-cols-2">
+    <div class="grid relative grid-cols-1 bg-white rounded-xl lg:grid-cols-2">
       <!--upper row -->
       <div class="flex flex-col p-4 border-b-2 lg:border-r-2 lg:border-b-0">
         <!--departure box -->
         <p class="font-light text-xs">From</p>
-        <div class="flex mt-1">
+        <div
+          class="flex mt-1 cursor-pointer"
+          on:click={() => showItem('departure')}
+        >
           <svg
             id="flight_takeoff_black_24dp"
             xmlns="http://www.w3.org/2000/svg"
@@ -116,17 +156,25 @@
               transform="translate(0 0)"
             />
           </svg>
-          {#if departureLocation}
-            <span>{departureLocation}</span>
-          {:else}
+          {#if !departureCountry}
             <span>Departure</span>
+          {:else if !departureCity}
+            <span>{departureCountry}</span>
+          {:else}
+            <span>{departureCountry}, {departureCity}</span>
           {/if}
         </div>
+        {#if errors.departureCity}
+          <p class="text-red-500 text-sm">{errors.departureCity}</p>
+        {/if}
       </div>
       <div class="flex flex-col p-4">
         <!--destination box -->
         <p class="font-light text-xs">To</p>
-        <div class="flex mt-1">
+        <div
+          class="flex mt-1 cursor-pointer"
+          on:click={() => showItem('destination')}
+        >
           <svg
             id="flight_land_black_24dp"
             xmlns="http://www.w3.org/2000/svg"
@@ -146,13 +194,35 @@
               transform="translate(0 0)"
             />
           </svg>
-          {#if destinationLocation}
-            <span>{destinationLocation}</span>
-          {:else}
+          {#if !destinationCountry}
             <span>Destination</span>
+          {:else if !destinationCity}
+            <span>{destinationCountry}</span>
+          {:else}
+            <span>{destinationCountry}, {destinationCity}</span>
           {/if}
         </div>
+        {#if errors.destinationCity}
+          <p class="text-red-500 text-sm">{errors.destinationCity}</p>
+        {/if}
       </div>
+      {#if toggleDeparture}
+        <SelectLocation
+          bind:departureCity
+          bind:departureCountry
+          bind:toggleDeparture
+          bind:destinationsArray
+          isDeparture={true}
+        />
+      {:else if toggleDestination}
+        <SelectLocation
+          bind:departureCity={destinationCity}
+          bind:departureCountry={destinationCountry}
+          bind:toggleDeparture={toggleDestination}
+          bind:destinationsArray
+          isDeparture={false}
+        />
+      {/if}
     </div>
     <div class="grid grid-cols-1 2xl:grid-cols-11 bg-white rounded-xl">
       <!-- lower row -->
@@ -229,7 +299,7 @@
         <p class="font-light text-xs">Travelers</p>
         <div
           class="flex mt-1 cursor-pointer flex-grow items-center"
-          on:click={showTravelers}
+          on:click={() => showItem('travelers')}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

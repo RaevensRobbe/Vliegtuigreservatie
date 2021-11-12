@@ -4,16 +4,13 @@
   import { FlightStore } from './../../stores/flightStore'
   import { onMount } from 'svelte'
 
-  //!!!!!!!!! veranderen naar dynamische data niet hier maar in de foreach van givenflights
-  let storageDate = '2021-11-30'
-  let retourDate = '2021-12-17'
-
   let givenflights
   let controldate
   let chosenflight
   let position
   let flights = new Array()
   let loaded = false
+  let noData = false
   let flightTime
   let departureTime
 
@@ -29,72 +26,81 @@
 
   onMount(async () => {
     givenflights = await get(url)
+
+    console.log(url)
+    console.log(givenflights)
+
     let i = 0
     let exactdate = false
     let closestAmountOfDays = 360
 
-    givenflights.sort(function (a: Date, b: Date) {
-      var c = new Date(a.Date)
-      var d = new Date(b.Date)
-      return c - d
-    })
+    // check if there are flights
+    if (givenflights.length > 0) {
+      noData = false
+      givenflights.sort(function (a: Date, b: Date) {
+        var c = new Date(a.Date)
+        var d = new Date(b.Date)
+        return c - d
+      })
 
-    givenflights.forEach(flight => {
-      let dateTime = flight.Date.split('T')[0]
-      if (retour === true) {
-        //DYAMISCH MAKEN!!!!!!!!
-        controldate = retourDate
-      } else {
-        //DYAMISCH MAKEN!!!!!!!!
-        controldate = storageDate
-      }
-      if (dateTime == controldate) {
-        position = i
-        exactdate = true
-      } else if (exactdate == false) {
-        // To set two dates to two variables
-        let date1 = new Date(dateTime)
-        let date2 = new Date(controldate)
-        // To calculate the time difference of two dates
-        let Difference_In_Time = date2.getTime() - date1.getTime()
-        // To calculate the number of days between two dates
-        let Difference_In_Days = Math.abs(
-          Difference_In_Time / (1000 * 3600 * 24),
-        )
-        if (Difference_In_Days < closestAmountOfDays) {
-          closestAmountOfDays = Difference_In_Days
-          position = i
+      givenflights.forEach(flight => {
+        let dateTime = flight.Date.split('T')[0]
+        if (retour === true) {
+          //DYAMISCH MAKEN!!!!!!!!
+          controldate = $FlightStore.retourDate
+        } else {
+          //DYAMISCH MAKEN!!!!!!!!
+          controldate = $FlightStore.departureDate
         }
-      }
-      i++
-    })
+        if (dateTime == controldate) {
+          position = i
+          exactdate = true
+        } else if (exactdate == false) {
+          // To set two dates to two variables
+          let date1 = new Date(dateTime)
+          let date2 = new Date(controldate)
+          // To calculate the time difference of two dates
+          let Difference_In_Time = date2.getTime() - date1.getTime()
+          // To calculate the number of days between two dates
+          let Difference_In_Days = Math.abs(
+            Difference_In_Time / (1000 * 3600 * 24),
+          )
+          if (Difference_In_Days < closestAmountOfDays) {
+            closestAmountOfDays = Difference_In_Days
+            position = i
+          }
+        }
+        i++
+      })
 
-    for (let j = -3; j < 4; j++) {
-      // if j == 0 => middlepoint selected date / closest to selected date
-      if (j === 0) {
-        let flightInfo = await get(
-          `http://localhost:3001/api/v1/flight/${givenflights[position].FlightId}`,
-        )
-        flights.push(flightInfo)
-        setChosenFlight(flightInfo.FlightId)
-      } else {
-        if (givenflights[position + j]?.FlightId !== undefined) {
+      for (let j = -3; j < 4; j++) {
+        // if j == 0 => middlepoint selected date / closest to selected date
+        if (j === 0) {
           let flightInfo = await get(
-            `http://localhost:3001/api/v1/flight/${
-              givenflights[position + j].FlightId
-            }`,
+            `http://localhost:3001/api/v1/flight/${givenflights[position].FlightId}`,
           )
           flights.push(flightInfo)
+          setChosenFlight(flightInfo.FlightId)
         } else {
-          flights.push({
-            flightId: null,
-          })
+          if (givenflights[position + j]?.FlightId !== undefined) {
+            let flightInfo = await get(
+              `http://localhost:3001/api/v1/flight/${
+                givenflights[position + j].FlightId
+              }`,
+            )
+            flights.push(flightInfo)
+          } else {
+            flights.push({
+              flightId: null,
+            })
+          }
         }
+        i++
       }
-      i++
+      loaded = true
+    } else {
+      noData = true
     }
-
-    loaded = true
   })
 
   function calculateDayName(date: Date) {
@@ -227,7 +233,7 @@
 </script>
 
 <section
-  class="grid grid-cols-3  md:grid-cols-4 lg:grid-cols-7 grid- border-r-0 items-end"
+  class="grid grid-cols-3  md:grid-cols-4 lg:grid-cols-7 border-r-0 items-end"
 >
   {#if loaded}
     {#each flights as flight}
@@ -272,6 +278,12 @@
         </div>
       {/if}
     {/each}
+  {:else if noData}
+    <div
+      class="p-4 justify-center font-bold text-forest-green flex bg-white shadow-md col-span-3 md:col-span-4 lg:col-span-7"
+    >
+      <p>No flights found</p>
+    </div>
   {:else}
     <p>loading</p>
   {/if}
