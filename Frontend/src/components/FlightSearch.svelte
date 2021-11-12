@@ -63,14 +63,55 @@
     }
   }
 
+  function flightValidator() {
+    //Check if there is a departure location set
+    if (!$FlightStore.departureCity) {
+      errors.departureCity = 'No departure location set'
+    } else delete errors['departureCity']
+
+    //Check if there is a destination location set or if it isnt the same as departure location
+    if (!$FlightStore.destinationCity) {
+      errors.destinationCity = 'No destination location set'
+    } else if (
+      $FlightStore.departureLocationId == $FlightStore.destinationLocationId
+    ) {
+      errors.destinationCity =
+        "Destination can't be the same as departure location"
+    } else delete errors['destinationCity']
+
+    //Check if there is a departure date set or not older / the same as today
+    if (!$FlightStore.departureDate) {
+      errors.departureDate = 'No departure date set'
+    } else if ($FlightStore.departureDate <= today) {
+      // console.log('error departureDate')
+      errors.departureDate = "Departure can't be today or in the past"
+    } else delete errors['departureDate']
+
+    //Check if there is a retour date => if so check if it is later than departure date
+    if ($FlightStore.retourDate) {
+      if ($FlightStore.departureDate > $FlightStore.retourDate) {
+        errors.retourDate = 'Retour date cant be before your departure'
+      } else if ($FlightStore.departureDate == $FlightStore.retourDate) {
+        errors.retourDate = 'Retour date cant be the same as departure date'
+      } else delete errors['retourDate']
+    }
+
+    //Check if there are passengers
+    if ($FlightStore.children == 0 && $FlightStore.adults == 0) {
+      errors.passengers = 'You need at least one passenger'
+    } else delete errors['passengers']
+
+    //if no errors then you can go to the next page
+    if (Object.keys(errors).length === 0) {
+      goto('/flight/flightDate')
+    }
+  }
+
   const handleSubmit = () => {
     // set all toggles false
     toggleTravelers = false
 
     //! voor te testen hardcoded moet nog dynamisch gezet worden
-
-    $FlightStore.departureLocation = 'Rome, Italy'
-    $FlightStore.destinationLocation = 'Paris, France'
     $FlightStore.departureDate = departureDate
     $FlightStore.retourDate = retourDate
     $FlightStore.children = children

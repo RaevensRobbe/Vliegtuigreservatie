@@ -11,12 +11,10 @@ import { writable } from 'svelte/store'
 // )
 
 export const FlightStore = writable<{
-  departureLocation: string
   departureCountry: string
   departureCity: string
   departureLocationId: number
 
-  destinationLocation: string
   destinationCountry: string
   destinationCity: string
   destinationLocationId: number
@@ -30,22 +28,20 @@ export const FlightStore = writable<{
   departureFlight: number
   retourFlight: number
 }>({
-  departureLocation: 'Brussel, Belgium',
   departureCountry: null,
   departureCity: null,
   departureLocationId: 3, //voor te testen
 
-  destinationLocation: null,
   destinationCountry: null,
   destinationCity: null,
   destinationLocationId: 1, //voor test data
-  
+
   departureDate: null,
   retourDate: null,
-  
+
   children: 0,
   adults: 0,
-  
+
   departureFlight: null,
   retourFlight: null,
 })

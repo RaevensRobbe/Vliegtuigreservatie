@@ -1,18 +1,29 @@
 <script lang="ts">
   // @ts-nocheck
   import type Dest from './../../models/DestinationModel.type'
+  import { FlightStore } from './../../stores/flightStore'
   // export so parent receives the changes
   export let departureCity
   export let departureCountry
   export let toggleDeparture = true
   export let isDeparture
-  function showDestination(cityName: string) {
+
+  function showDestination(cityName: string, destinationId: number) {
     departureCity = cityName
+    if (isDeparture) {
+      $FlightStore.departureCountry = departureCountry
+      $FlightStore.departureCity = departureCity
+      $FlightStore.departureLocationId = destinationId
+    } else {
+      $FlightStore.destinationCountry = departureCountry
+      $FlightStore.destinationCity = departureCity
+      $FlightStore.destinationLocationId = destinationId
+    }
+
     toggleDeparture = false
-    console.log('toggle')
   }
+
   export let destinationsArray: Dest
-  // destinationsArray.forEach(destination => console.log(destination))
 </script>
 
 <div
@@ -76,7 +87,8 @@
               {#each destination.Dest as city}
                 <div
                   class="hover:bg-gray-300"
-                  on:click={() => showDestination(city.Name)}
+                  on:click={() =>
+                    showDestination(city.Name, city.DestinationId)}
                 >
                   <label key={city.DestinationId}>
                     <!-- bind:group makes chosen city bold -->

@@ -50,9 +50,7 @@
 
 <section class="p-4 px-6 align-start">
   <Intertitle
-    titleName={flight.departureLocation.split(',')[0] +
-      ' - ' +
-      flight.destinationLocation.split(',')[0]}
+    titleName={flight.departureCity + ' - ' + flight.destinationCity}
   />
   <h1 class="text-sm mb-4 md:text-xl">Choose your departure flight</h1>
   <SelectFlightDate
@@ -64,9 +62,7 @@
 {#if $FlightStore.retourDate}
   <section class="p-4 px-6 align-start">
     <Intertitle
-      titleName={flight.destinationLocation.split(',')[0] +
-        ' - ' +
-        flight.departureLocation.split(',')[0]}
+      titleName={flight.destinationCity + ' - ' + flight.departureCity}
     />
     <h1 class="text-sm md:text-xl mb-4">Choose your departure flight</h1>
     <SelectFlightDate
