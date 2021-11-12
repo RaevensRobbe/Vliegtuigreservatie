@@ -40,7 +40,6 @@
     destinationsArray = await get(
       'http://localhost:3001/api/v1/country/countries/destinations',
     )
-    console.log(destinationsArray)
   })
 
   function showItem(item) {
@@ -103,6 +102,7 @@
 
     //if no errors then you can go to the next page
     if (Object.keys(errors).length === 0) {
+      // console.log(flight)
       goto('/flight/flightDate')
     }
   }
@@ -116,8 +116,6 @@
     $FlightStore.retourDate = retourDate
     $FlightStore.children = children
     $FlightStore.adults = adults
-    $FlightStore.departureLocationId = 3
-    $FlightStore.destinationLocationId = 1
 
     //go to next page in validator
     flightValidator()
@@ -166,6 +164,9 @@
             <span>{departureCountry}, {departureCity}</span>
           {/if}
         </div>
+        {#if errors.departureCity}
+          <p class="text-red-500 text-sm">{errors.departureCity}</p>
+        {/if}
       </div>
       <div class="flex flex-col p-4">
         <!--destination box -->
@@ -201,6 +202,9 @@
             <span>{destinationCountry}, {destinationCity}</span>
           {/if}
         </div>
+        {#if errors.destinationCity}
+          <p class="text-red-500 text-sm">{errors.destinationCity}</p>
+        {/if}
       </div>
       {#if toggleDeparture}
         <SelectLocation

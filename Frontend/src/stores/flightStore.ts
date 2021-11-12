@@ -30,11 +30,11 @@ export const FlightStore = writable<{
 }>({
   departureCountry: null,
   departureCity: null,
-  departureLocationId: 3, //voor te testen
+  departureLocationId: null,
 
   destinationCountry: null,
   destinationCity: null,
-  destinationLocationId: 1, //voor test data
+  destinationLocationId: null,
 
   departureDate: null,
   retourDate: null,

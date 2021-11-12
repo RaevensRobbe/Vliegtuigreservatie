@@ -8,16 +8,20 @@
   export let toggleDeparture = true
   export let isDeparture
 
-  function showDestination(cityName: string, destinationId: number) {
+  function showDestination(cityName: string, locationId: number) {
     departureCity = cityName
     if (isDeparture) {
       $FlightStore.departureCountry = departureCountry
       $FlightStore.departureCity = departureCity
-      $FlightStore.departureLocationId = destinationId
+      $FlightStore.departureLocationId = locationId
+      console.log('departure: ' + locationId)
+      console.log($FlightStore.departureLocationId)
     } else {
       $FlightStore.destinationCountry = departureCountry
       $FlightStore.destinationCity = departureCity
-      $FlightStore.destinationLocationId = destinationId
+      $FlightStore.destinationLocationId = locationId
+      console.log('destination: ' + locationId)
+      console.log($FlightStore.destinationLocationId)
     }
 
     toggleDeparture = false
