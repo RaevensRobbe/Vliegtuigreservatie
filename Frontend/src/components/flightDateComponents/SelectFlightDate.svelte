@@ -4,18 +4,18 @@
   import { FlightStore } from './../../stores/flightStore'
   import { onMount } from 'svelte'
 
-  let givenflights
-  let controldate
-  let chosenflight
-  let position
+  let givenflights: any
+  let controldate: Date
+  let chosenflight: any
+  let position: number
   let flights = new Array()
-  let loaded = false
-  let noData = false
+  let loaded: boolean = false
+  let noData: boolean = false
   let flightTime
   let departureTime
 
-  export let url
-  export let retour
+  export let url: string
+  export let retour: boolean
 
   let radiobuttonName
   if (retour === true) {
