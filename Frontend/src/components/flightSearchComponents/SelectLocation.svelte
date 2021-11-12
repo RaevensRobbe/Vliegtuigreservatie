@@ -11,148 +11,7 @@
     toggleDeparture = false
     console.log('toggle')
   }
-  export const destinationsArray: Dest = [
-    {
-      CountryId: 5,
-      Name: 'Belgium',
-      Dest: [
-        {
-          DestinationId: 5,
-          Name: 'Springfield',
-        },
-        {
-          DestinationId: 15,
-          Name: 'Kansas City',
-        },
-      ],
-    },
-    {
-      CountryId: 9,
-      Name: 'Bulgaria',
-      Dest: [
-        {
-          DestinationId: 9,
-          Name: 'Milwaukee',
-        },
-        {
-          DestinationId: 19,
-          Name: 'Chicago',
-        },
-      ],
-    },
-    {
-      CountryId: 6,
-      Name: 'Congo',
-      Dest: [
-        {
-          DestinationId: 6,
-          Name: 'Charlotte',
-        },
-        {
-          DestinationId: 16,
-          Name: 'Oklahoma city',
-        },
-      ],
-    },
-    {
-      CountryId: 1,
-      Name: 'Cuba',
-      Dest: [
-        {
-          DestinationId: 1,
-          Name: 'Colorado Springs',
-        },
-      ],
-    },
-    {
-      CountryId: 2,
-      Name: 'El Salvador',
-      Dest: [
-        {
-          DestinationId: 2,
-          Name: 'Jacksonville',
-        },
-        {
-          DestinationId: 12,
-          Name: 'San Jose',
-        },
-      ],
-    },
-    {
-      CountryId: 8,
-      Name: 'Grenada',
-      Dest: [
-        {
-          DestinationId: 8,
-          Name: 'Scottsdale',
-        },
-        {
-          DestinationId: 18,
-          Name: 'Paris',
-        },
-      ],
-    },
-    {
-      CountryId: 7,
-      Name: 'Israel',
-      Dest: [
-        {
-          DestinationId: 7,
-          Name: 'Honolulu',
-        },
-        {
-          DestinationId: 17,
-          Name: 'Bakersfield',
-        },
-      ],
-    },
-    {
-      CountryId: 10,
-      Name: 'Malawi',
-      Dest: [
-        {
-          DestinationId: 10,
-          Name: 'Richmond',
-        },
-        {
-          DestinationId: 11,
-          Name: 'Santa Ana',
-        },
-        {
-          Name: 'Berlin',
-          DestinationId: 20,
-        },
-      ],
-    },
-    {
-      CountryId: 3,
-      Name: 'Romania',
-      Dest: [
-        {
-          DestinationId: 3,
-          Name: 'Amarillo',
-        },
-        {
-          DestinationId: 13,
-          Name: 'Albuquerque',
-        },
-      ],
-    },
-    {
-      CountryId: 4,
-      Name: 'The Bahamas',
-      Dest: [
-        {
-          DestinationId: 4,
-          Name: 'San Bernardino',
-        },
-        {
-          DestinationId: 14,
-          Name: 'Norfolk',
-        },
-      ],
-    },
-  ]
+  export let destinationsArray: Dest
   // destinationsArray.forEach(destination => console.log(destination))
 </script>
 
@@ -205,7 +64,7 @@
         </div>
       </div>
       <!-- Choose airport -->
-      <div class="p-4 bg-white rounded-b-lg md:rounded-r-lg">
+      <div class="p-4 bg-white rounded-b-lg md:rounded-r-lg md:rounded-bl-none">
         <h1 class="font-bold mb-2 text-forest-green">Pick an airport</h1>
         {#if !departureCountry}
           <p>Pick a country first</p>

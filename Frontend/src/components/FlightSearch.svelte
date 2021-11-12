@@ -1,5 +1,7 @@
 <script lang="ts">
   //@ts-nocheck
+  import { onMount } from 'svelte'
+  import { get } from './../composables/useApi'
   import { FlightStore } from './../stores/flightStore'
   import SelectLocation from './flightSearchComponents/SelectLocation.svelte'
   import SelectTravelers from './flightSearchComponents/SelectTravelers.svelte'
@@ -31,6 +33,15 @@
 
   //object errors add errors in here otherwise delete them
   let errors: any = {}
+
+  let destinationsArray: Dest = []
+
+  onMount(async () => {
+    destinationsArray = await get(
+      'http://localhost:3001/api/v1/country/countries/destinations',
+    )
+    console.log(destinationsArray)
+  })
 
   function showItem(item) {
     switch (item) {
@@ -155,6 +166,7 @@
           bind:departureCity
           bind:departureCountry
           bind:toggleDeparture
+          bind:destinationsArray
           isDeparture={true}
         />
       {:else if toggleDestination}
@@ -162,6 +174,7 @@
           bind:departureCity={destinationCity}
           bind:departureCountry={destinationCountry}
           bind:toggleDeparture={toggleDestination}
+          bind:destinationsArray
           isDeparture={false}
         />
       {/if}
