@@ -20,6 +20,10 @@
 
     const setStyle = () => {
         console.log(`selected [${row},${column}]`)
+        if(status === 'taken'){
+            return
+        }
+        
         clicked =! clicked
 
         if(clicked == false){
