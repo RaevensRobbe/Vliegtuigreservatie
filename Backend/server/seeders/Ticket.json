@@ -4,12 +4,12 @@
    "Seat": [
       {
         "class": "Business",
-        "column": 1,
+        "column": "A",
         "row": 1
       },
       {
         "class": "Business",
-        "column": 2,
+        "column": "B",
         "row": 1
       }
     ],
@@ -234,17 +234,17 @@
     "Seat": [
       {
         "class": "Business",
-        "column": 1,
+        "column": "B",
         "row": 3
       },
       {
         "class": "Business",
-        "column": 2,
+        "column": "C",
         "row": 3
       },
       {
         "class": "Business",
-        "column": 4,
+        "column": "D",
         "row": 3
       }
     ],
@@ -261,17 +261,17 @@
     "Seat": [
       {
         "class": "Business",
-        "column": 1,
+        "column": "A",
         "row": 5
       },
       {
         "class": "Business",
-        "column": 2,
+        "column": "B",
         "row": 5
       },
       {
         "class": "Business",
-        "column": 4,
+        "column": "C",
         "row": 5
       }
     ],

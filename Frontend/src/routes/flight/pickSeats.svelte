@@ -1,10 +1,8 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { get } from '../../composables/useApi';
-    import seatsStore from '../../stores/pickSeatsStore'
     import Intertitle from '../../components/Intertitle.svelte'
     import Seat from '../../components/SeatComponent.svelte'
-import { debug, each } from 'svelte/internal';
 
     let economySeats: number  = 0
     let businessSeats: number = 0
@@ -47,7 +45,7 @@ import { debug, each } from 'svelte/internal';
             }
         }
 
-        //console.log(takenSeatsBus)
+        console.log(takenSeatsBus)
 
         if( economySeats !== 0){
             gridLayout(economySeats, businessSeats)
@@ -78,32 +76,32 @@ import { debug, each } from 'svelte/internal';
 
         test()
         test2()
-    }
-
-    const includesMultiDimension = (arr, coords) =>
-        JSON.stringify(arr).includes(coords);
+    }  
 
     let arrayBus:number[] = []
     let arrayEco:number[] = []
     const test = () => {
 
 		let i = 0
-        console.log(`busRows ${busRows}`)
+        // console.log(`busRows ${busRows}`)
 		while (i < busRows){
 			i = i+1
 			arrayBus.push(i)
 		}
-		console.log(`arrayBuss ${arrayBus}`)
+		// console.log(`arrayBuss ${arrayBus}`)
 	}
 
     const test2 = () => {
 
-        console.log(`ecoRows ${ecoRows}`)
+        // console.log(`ecoRows ${ecoRows}`)
         for(let i = 1; i <= ecoRows; i++){
             arrayEco.push(i)
         }
-        console.log(`arrayEco ${arrayEco}`)
+        // console.log(`arrayEco ${arrayEco}`)
     }
+
+    const includesMultiDimension = (arr, coords) => 
+        JSON.stringify(arr).includes(JSON.stringify(coords))
 
 </script>
 
@@ -168,7 +166,7 @@ import { debug, each } from 'svelte/internal';
                                         <div>{tellerBus}</div>
                                     {:else}
                                         <div>
-                                            {#if includesMultiDimension(takenSeatsBus,`[${tellerBus},${colNr}]`)}
+                                            {#if includesMultiDimension(takenSeatsBus, [tellerBus, colNr])}
                                                 <Seat row={tellerBus} column= {colNr} status = 'taken'/>
                                             {:else}
                                                 <Seat row={tellerBus} column= {colNr} status = 'free'/>
@@ -199,7 +197,7 @@ import { debug, each } from 'svelte/internal';
                                             <div>{tellerEco}</div>
                                         {:else}
                                             <div>
-                                                {#if includesMultiDimension(takenSeatsEco,`[${tellerEco},${colNr}]`)}
+                                                {#if includesMultiDimension(takenSeatsEco,`[${tellerEco},'${colNr}']`)}
                                                     <Seat row={tellerEco} column={colNr} status = 'taken'/>
                                                 {:else}
                                                     <Seat row={tellerEco} column={colNr} status = 'free'/>

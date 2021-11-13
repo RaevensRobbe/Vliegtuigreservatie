@@ -4,12 +4,14 @@
     import seatsStore from '../../stores/pickSeatsStore'
     import Intertitle from '../../components/Intertitle.svelte'
     import Seat from '../../components/SeatComponent.svelte'
-import { debug, each } from 'svelte/internal';
+    import { debug, each } from 'svelte/internal';
+
+    let loaded = false
 
     let businessSeats: number = 0
 
-    let busRows:number = 0
-    let busCols:number = 5
+    $: busRows = 0
+    $: busCols = 5
 
     let busGrid:number[] = [0,0]
 
@@ -29,7 +31,7 @@ import { debug, each } from 'svelte/internal';
         if( businessSeats !== 0){
             gridLayout(businessSeats)
         }
-        
+        loaded = true
     })
 
     const gridLayout = (bus) => {
@@ -60,20 +62,48 @@ import { debug, each } from 'svelte/internal';
 		console.log(`array ${array}`)
 	}
 
+    const testArray:any[] = [
+        [1,'A'],
+        [1, 'A'],
+        [1, 'C']
+    ]
+
+    const coords = [1, 'A']
+
+    const includesMultiDimension = (arr, coords) => {
+        // console.log(arr)
+        console.log(JSON.stringify(coords))
+
+        console.log(JSON.stringify(arr))
+
+        if(JSON.stringify(arr).includes(JSON.stringify(coords))){
+            console.log(true)
+            return true
+        }else{
+            console.log(false)
+            return false
+        }   
+        
+    }
+    
+    includesMultiDimension(testArray, coords)
+
 </script>
 
 <body class="mx-12">
     
+   {#if loaded}
     <section >
+            
         {#if busCols !== 0 && busRows !== 0}
             <div>
-                <div class="grid grid-cols-{busCols} grid-rows-1 place-items-center gap-2 mb-2">
+                <div class="grid grid-rows-1 grid-cols-{busCols} grid-flow-col place-items-center gap-2 mb-2">
                     {#each columnsLetterBus as colNr}
                         <p>{colNr}</p>
                     {/each}
                 </div>
-    
-                <div class="grid grid-cols-{busCols} grid-rows-{busRows} place-items-center gap-2">
+
+                <div class="grid grid-flow-col grid-cols-{busCols} grid-rows-{busRows} grid-flow-row place-items-center gap-2">
                     {#each array as teller}
                         {#each columnsLetterBus as colNr}
                             {#if colNr == ''}
@@ -89,4 +119,5 @@ import { debug, each } from 'svelte/internal';
             </div>
         {/if}              
     </section>
+   {/if}
 </body>
