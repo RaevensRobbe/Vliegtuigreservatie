@@ -19,7 +19,7 @@
     let clicked = false
 
     const setStyle = () => {
-        console.log(`row: ${row} colum: ${column}`)
+        console.log(`selected [${row},${column}]`)
         clicked =! clicked
 
         if(clicked == false){
@@ -27,7 +27,6 @@
         }else{
             style = 'bg-forest-green'
         }
-        console.log(style)
     }
 </script>
 

@@ -9,47 +9,22 @@ import { debug, each } from 'svelte/internal';
     let economySeats: number  = 0
     let businessSeats: number = 0
 
-    let ecoRows 
-    let ecoCols = 0
-    let busRows 
-    let busCols = 5
-    let ecoRowLenght = 3
+    let ecoRows:number = 0
+    let ecoCols:number = 0
+    let busRows:number = 0
+    let busCols:number = 5
+    let ecoRowLenght:number = 3
 
-    let ecoParts = 0
+    let ecoParts:number = 0
 
-    let busGrid = [0,0]
-    let ecoGrid = [0,0]
+    let busGrid:number[] = [0,0]
+    let ecoGrid:number[] = [0,0]
 
     let takenSeatsEco:any = {}
     let takenSeatsBus:any[] = []
 
     let columnsLetterBus:string[] = ['A','B','','C','D']
     let columnsLetterEco:string[] = [] 
-
-
-    const gridLayout = (eco, bus) => {
-        if(eco >=  120){
-            ecoParts = 2
-            ecoRows = eco / (ecoParts * ecoRowLenght)
-            ecoCols = ecoParts * ecoRowLenght + 1   
-            columnsLetterEco = ['A','B','C','','D','E','F']        
-             
-        }else{
-            console.log('120+')
-            ecoParts = 3
-            ecoRows = eco / (ecoParts * ecoRowLenght)
-            ecoCols = ecoParts * ecoRowLenght + 2 
-            columnsLetterEco = ['A','B','C','','D','E','F','','G','H','I']
-        }
-
-        busRows = bus / 4
-
-        busGrid = [busRows, busCols]
-        ecoGrid = [ecoRows, ecoCols]
-
-        console.log(`business grid ${busGrid}`)
-        console.log(`economy grid ${ecoGrid}`)
-    }
 
     onMount(async () => {
         const getData:any = await get(`http://localhost:3001/api/v1/flight/seats/1`)
@@ -72,7 +47,7 @@ import { debug, each } from 'svelte/internal';
             }
         }
 
-        console.log(takenSeatsBus)
+        //console.log(takenSeatsBus)
 
         if( economySeats !== 0){
             gridLayout(economySeats, businessSeats)
@@ -80,56 +55,55 @@ import { debug, each } from 'svelte/internal';
         
     })
 
-    $: is_activeBus = Array(busGrid[0]).fill(0).map(_ => Array(busGrid[1]).fill(false))
-    $: is_activeEco = Array(ecoGrid[0]).fill(0).map(_ => Array(ecoGrid[1]).fill(false))
+    const gridLayout = (eco, bus) => {
+        //console.log('test')
+        if(eco >=  120){
+            ecoParts = 2
+            ecoRows = eco / (ecoParts * ecoRowLenght)
+            ecoCols = ecoParts * ecoRowLenght + 1   
+            columnsLetterEco = ['A','B','C','','D','E','F']        
+             
+        }else{
+            console.log('120+')
+            ecoParts = 3
+            ecoRows = eco / (ecoParts * ecoRowLenght)
+            ecoCols = ecoParts * ecoRowLenght + 2 
+            columnsLetterEco = ['A','B','C','','D','E','F','','G','H','I']
+        }
 
+        busRows = bus / 4
+        
+        busGrid = [busRows, busCols]
+        ecoGrid = [ecoRows, ecoCols]
 
-    let start = [];
-	let end = [];
-	let hover_end = []
-	let clicked = false;
-	
-	function select(i, j) {
-		if (clicked) {
-			end = [i, j];
-		} else { 
-			start = [i, j];
-		}
-		
-		clicked = !clicked;
-        console.log([i,j])
-		check_active([i, j]);
-	}
-
-    function selectEco(i, j) {
-		if (clicked) {
-			end = [i, j];
-		} else { 
-			start = [i, j];
-		}
-		
-		clicked = !clicked;
-        console.log([i,j])
-		check_activeEco([i, j]);
-	}
-	
-	function is_in_range([i, j], [i2, j2]) {
-		return ((i - start[0]) * (i - i2) <= 0) && 
-			((j - start[1]) * (j - j2)<= 0)
-	}
-	
-	function check_active (end) {
-		is_activeBus = is_activeBus.map(
-			(a, i) => a.map((_, j) => is_in_range([i, j], end)));
-	}
-
-    function check_activeEco (end) {
-		is_activeBus = is_activeBus.map(
-			(a, i) => a.map((_, j) => is_in_range([i, j], end)));
-	}
+        test()
+        test2()
+    }
 
     const includesMultiDimension = (arr, coords) =>
         JSON.stringify(arr).includes(coords);
+
+    let arrayBus:number[] = []
+    let arrayEco:number[] = []
+    const test = () => {
+
+		let i = 0
+        console.log(`busRows ${busRows}`)
+		while (i < busRows){
+			i = i+1
+			arrayBus.push(i)
+		}
+		console.log(`arrayBuss ${arrayBus}`)
+	}
+
+    const test2 = () => {
+
+        console.log(`ecoRows ${ecoRows}`)
+        for(let i = 1; i <= ecoRows; i++){
+            arrayEco.push(i)
+        }
+        console.log(`arrayEco ${arrayEco}`)
+    }
 
 </script>
 
@@ -177,71 +151,67 @@ import { debug, each } from 'svelte/internal';
         </div>
 
         <section >
-            {#if busGrid != [0,0]}
-                
-                <div>
-                    <div class="grid grid-cols-{busGrid[1]} grid-rows-1 place-items-center gap-2 mb-2">
-                        {#each columnsLetterBus as colNr}
-                            <p>{colNr}</p>
-                        {/each}
-                    </div>
-
-                    <div class="grid grid-cols-{busGrid[1]} grid-rows-{busGrid[0]} place-items-center gap-2">
-                        {#each {length: busGrid[0]} as _, i (i)}
-                            {#each columnsLetterBus as colNr}
-                                {#if colNr == ''}
-                                    <div>{i}</div>
-                                {:else}
-                                    <div class:active={is_activeBus[i][colNr]}
-                                    on:click={() => select(i,colNr)}>
-                                        {#if includesMultiDimension(takenSeatsBus,`[${i},${colNr}]`)}
-                                            <Seat row={i} column= {colNr} status = 'taken'/>
-                                        {:else}
-                                            <Seat row={i} column= {colNr} status = 'free'/>
-                                        {/if}
-                                    </div>
-                                {/if}   
-                            {/each}
-                        {/each}
-                    </div>
-                </div>
-
-            {/if}
-        
-            <div class="mt-8 mb-8"></div>
-    
-            {#if ecoGrid != [0,0]}
-                <div>
+            <section >
+                {#if busCols !== 0 && busRows !== 0}
+                    
                     <div>
-                        <div class="grid grid-cols-{ecoGrid[1]} grid-rows-1 place-items-center gap-2 mb-2">
-                            {#each {length: ecoGrid[1]} as _, i (i)}
-                                <p>{columnsLetterEco[i]}</p>
+                        <div class="grid grid-cols-{busCols} grid-rows-1 place-items-center gap-2 mb-2">
+                            {#each columnsLetterBus as colNrBus}
+                                <p>{colNrBus}</p>
                             {/each}
                         </div>
-                        <div class="grid grid-cols-{ecoGrid[1]} grid-rows-{ecoGrid[0]} place-items-center gap-2">
-                            {#each {length: ecoGrid[0]} as _, i (i)}
-                                {#each columnsLetterEco as colNr }
-                                    {#if  colNr == ''}
-                                        <div>{i}</div>
+    
+                        <div class="grid grid-cols-{busCols} grid-rows-{busRows} place-items-center gap-2">
+                            {#each arrayBus as tellerBus}
+                                {#each columnsLetterBus as colNr}
+                                    {#if colNr == ''}
+                                        <div>{tellerBus}</div>
                                     {:else}
-                                        <div class:active={is_activeEco[i][colNr]}
-                                        on:click={() => selectEco(i,colNr)}>
-                                            {#if includesMultiDimension(takenSeatsEco,`[${i},${colNr}]`)}
-                                                <Seat row={i} column={colNr} status = 'taken'/>
+                                        <div>
+                                            {#if includesMultiDimension(takenSeatsBus,`[${tellerBus},${colNr}]`)}
+                                                <Seat row={tellerBus} column= {colNr} status = 'taken'/>
                                             {:else}
-                                                <Seat row={i} column={colNr} status = 'free'/>
+                                                <Seat row={tellerBus} column= {colNr} status = 'free'/>
                                             {/if}
                                         </div>
-                                    {/if}
+                                    {/if}   
                                 {/each}
                             {/each}
                         </div>
                     </div>
-                </div>
-            {/if}
-
-            <div class="mt-8 mb-8"></div>
+    
+                {/if}
             
+                <div class="mt-8 mb-8"></div>
+        
+                {#if ecoCols !== 0 && ecoRows !== 0}
+                    <div>
+                        <div>
+                            <div class="grid grid-cols-{ecoCols} grid-rows-1 place-items-center gap-2 mb-2">
+                                {#each columnsLetterEco as colNrEco}
+                                    <p>{colNrEco}</p>
+                                {/each}
+                            </div>
+                            <div class="grid grid-cols-{ecoCols} grid-rows-{ecoRows} place-items-center gap-2">
+                                {#each arrayEco as tellerEco}
+                                    {#each columnsLetterEco as colNr }
+                                        {#if  colNr == ''}
+                                            <div>{tellerEco}</div>
+                                        {:else}
+                                            <div>
+                                                {#if includesMultiDimension(takenSeatsEco,`[${tellerEco},${colNr}]`)}
+                                                    <Seat row={tellerEco} column={colNr} status = 'taken'/>
+                                                {:else}
+                                                    <Seat row={tellerEco} column={colNr} status = 'free'/>
+                                                {/if}
+                                            </div>
+                                        {/if}
+                                    {/each}
+                                {/each}
+                            </div>
+                        </div>
+                    </div>
+                {/if}     
         </section>
 
         <!-- <section>

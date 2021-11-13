@@ -5,7 +5,7 @@ import { each } from "svelte/internal";
 	
 	$: col = `repeat(${grid[1]}, 1fr)`;
 	$: row = `repeat(${grid[0]}, 1fr)`;
-	$: is_active = Array(grid[0]).fill(0).map(_ => Array(grid[1]).fill(false));
+	// $: is_active = Array(grid[0]).fill(0).map(_ => Array(grid[1]).fill(false));
 	
 	let start = [];
 	let end = [];
@@ -22,26 +22,24 @@ import { each } from "svelte/internal";
 		}
 		
 		clicked = !clicked;
-		check_active([i, j]);
 	}
 	
-	function hover(i, j) {
-		if (!clicked) return;
-		hover_end = [i, j];
-		check_active(hover_end);
-	}
-	
-	function is_in_range([i, j], [i2, j2]) {
-		return ((i - start[0]) * (i - i2) <= 0) && 
-			((j - start[1]) * (j - j2)<= 0)
-	}
-	
-	function check_active (end) {
-		is_active = is_active.map(
-			(a, i) => a.map((_, j) => is_in_range([i, j], end)));
+
+	let array:number[] = []
+
+	const test = () => {
+		let lenght = {length: grid[0]}
+		let i = 0
+		
+		console.log(lenght.length)
+		while (i < lenght.length){
+			i = i+1
+			array.push(i)
+		}
+		console.log(array)
 	}
 
-	console.log({length:grid[0]})
+	test()
 
 	
     const includesMultiDimension = (arr, coords) =>
@@ -51,14 +49,8 @@ import { each } from "svelte/internal";
 </script>
 
 <div class="container" style="grid-template-rows: {row}; grid-template-columns: {col};">
-
-	{#each {length: grid[0]} as _, i (i)}
-	  {#each columnsLetterBus as item , j (j)}
-			<div class:active={is_active[i][item]}
-					 on:click={() => select(i+1, item)}
-					 on:mouseover ={() => hover(i, j)}	
-				></div>
-		{/each}
+	{#each array as teller}
+		<p>{teller}</p>
 	{/each}
 
 </div>
