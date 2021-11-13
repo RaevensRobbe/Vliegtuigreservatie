@@ -38,5 +38,8 @@
     {#if status === 'taken'}
         <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 " viewBox="0 0 24 24" stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     {/if}
+    {#if clicked}
+        <h1 class="w-full h-full align-middle text-white font-bold text-center text-xl">{row} {column}</h1>
+    {/if}
 </div>
 

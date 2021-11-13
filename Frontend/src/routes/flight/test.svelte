@@ -71,7 +71,7 @@
     const coords = [1, 'A']
 
     const includesMultiDimension = (arr, coords) => {
-        // console.log(arr)
+        console.log(arr)
         console.log(JSON.stringify(coords))
 
         console.log(JSON.stringify(arr))

@@ -130,28 +130,25 @@
         </div>
     </section>
     
-    <section class="grid grid-rows-1 grid-cols-3 mt-8">
+    <section class="grid grid-cols-2 grid-rows-1 mt-8">
 
-        <div class="flex flex-col w-3/4 justify-between">
-            <div class="bg-white flex flex-col items-center">
-                <h1 class="text-forest-green">Business Class</h1>
-                <p>You get a private space, recline seats, unlimited food and drinks, early boarding and spacious seats</p>
-                <h2>PRICING</h2>
+        <div>
+            <div class="flex flex-row">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mr-2" viewBox="0 0 44.58 31.855">
+                    <path id="bxs-plane-take-off" d="M45.3,36.3H4.348v4.551H45.3ZM3.189,14.749a3.663,3.663,0,0,1,4.633-2.318L18,15.826,36.2,9l4.551,2.275L27.1,20.377l9.1,4.551,9.1-4.551,2.275,2.275-9.1,9.1L5.378,19.341A3.666,3.666,0,0,1,3.189,14.749Z" transform="translate(-3 -9)" fill="#008066"/>
+                  </svg>
+                  <h1 class="font-bold text-2xl text-forest-green">Take-off to Destination</h1>
             </div>
 
-            <div class="bg-white flex flex-col items-center">
-                <h1 class="text-forest-green">Economy Class</h1>
-                <p>You get your preferred seat, food and drinks and early boarding</p>
-                <h2>PRICING</h2>
+            <div class="grid grid-cols-4 grid-rows-4">
+                 
             </div>
-
-            <div></div>
         </div>
 
         <section >
             <section >
                 {#if busCols !== 0 && busRows !== 0}
-                    
+                    <h2 class ="h-6 text-white bg-forest-green text-center my-2">Business Class - prijs</h2>
                     <div>
                         <div class="grid grid-cols-{busCols} grid-rows-1 place-items-center gap-2 mb-2">
                             {#each columnsLetterBus as colNrBus}
@@ -183,6 +180,7 @@
                 <div class="mt-8 mb-8"></div>
         
                 {#if ecoCols !== 0 && ecoRows !== 0}
+                    <h2 class ="h-6 text-white bg-forest-green text-center my-2">Economy Class - prijs</h2>
                     <div>
                         <div>
                             <div class="grid grid-cols-{ecoCols} grid-rows-1 place-items-center gap-2 mb-2">
@@ -212,18 +210,7 @@
                 {/if}     
         </section>
 
-        <!-- <section>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="44.58" height="31.855" viewBox="0 0 44.58 31.855">
-                    <path id="bxs-plane-take-off" d="M45.3,36.3H4.348v4.551H45.3ZM3.189,14.749a3.663,3.663,0,0,1,4.633-2.318L18,15.826,36.2,9l4.551,2.275L27.1,20.377l9.1,4.551,9.1-4.551,2.275,2.275-9.1,9.1L5.378,19.341A3.666,3.666,0,0,1,3.189,14.749Z" transform="translate(-3 -9)" fill="#008066"/>
-                  </svg>
-                  <h1>flight to flight</h1>
-            </div>
-
-            <div>
-                 
-            </div>
-        </section> -->
+        
 
     </section>
 </body>
