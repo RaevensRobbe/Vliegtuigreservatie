@@ -1,6 +1,10 @@
 module.exports = {
   mode: 'jit',
-  purge: ['./src/**/*.svelte'],
+  purge: {content:[
+    './src/**/*.svelte'],
+    safelist: ['grid-cols-5','grid-cols-7','grid-cols-11']
+  },
+  
   theme:{
     extend:{
       fontFamily:{
