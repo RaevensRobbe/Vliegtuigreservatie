@@ -140,9 +140,50 @@
                   <h1 class="font-bold text-2xl text-forest-green">Take-off to Destination</h1>
             </div>
 
-            <div class="grid grid-cols-4 grid-rows-4">
-                 
+            <div class="grid grid-cols-3 grid-rows-1">
+                <h2 class="font-bold text-lg my-auto">Passengers</h2>
+                <div class="flex flex-col justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="22.866" viewBox="0 0 32 22.866">
+                        <path id="bxs-plane-take-off" d="M4.633,28.6h29.4v3.267H4.633ZM34.864,13.127a2.63,2.63,0,0,0-3.325-1.664L24.233,13.9,11.166,9,7.9,10.633l9.8,6.533-6.533,3.267L4.633,17.166,3,18.8l6.533,6.533,23.76-8.91A2.632,2.632,0,0,0,34.864,13.127Z" transform="translate(-3 -9)" fill="#008066"/>
+                      </svg>
+                    <p>Abbr - Abrr</p> 
+                </div>
+                <div class="flex flex-col justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="22.866" viewBox="0 0 32 22.866">
+                        <path id="bxs-plane-take-off" d="M33.367,28.6H3.968v3.267h29.4ZM3.136,13.127a2.63,2.63,0,0,1,3.325-1.664L13.767,13.9,26.834,9,30.1,10.633l-9.8,6.533,6.533,3.267,6.533-3.267L35,18.8l-6.533,6.533-23.76-8.91A2.632,2.632,0,0,1,3.136,13.127Z" transform="translate(-3 -9)" fill="#686868"/>
+                    </svg>
+                    <p>Abbr - Abrr</p> 
+                </div>
             </div>
+
+            <div class="grid grid-cols-3 grid-rows-1 mt-4">
+                <div class="flex flex-col">
+                    <h1 class="font-bold text-lg text-forest-green">Name</h1>
+                    <p>Select your seat</p>
+                </div>
+
+                <div class="flex justify-center">
+                    <div class="w-12 h-12 bg-forest-green">
+                        <h1
+                        class="w-full flex h-full items-center justify-center text-white font-bold text-center text-xl"
+                      >
+                        4F
+                      </h1>
+                    </div>
+                </div>
+
+               <div class="flex justify-center">
+                <div class="w-12 h-12 bg-white border border-forest-green ">
+                    <h1
+                    class="w-full flex h-full items-center justify-center text-white font-bold text-center text-xl"
+                  >
+                    4F
+                  </h1>
+                </div>
+               </div>
+            </div>
+
+            
         </div>
 
         <section >
