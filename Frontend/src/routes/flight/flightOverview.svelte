@@ -1,11 +1,10 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
   import FlightOverviewItem from './../../components/flightOverviewComponents/FlightOverviewItem.svelte'
-  import FlightSeats from './../../components/flightOverviewComponents/FlightSeats.svelte'
-  import FligthDateTime from '../../components/flightOverviewComponents/FlightDateTime.svelte'
   import Intertitle from './../../components/Intertitle.svelte'
 
   //@ts-nocheck
+  const retour = true
 
   function goBack() {
     goto('/')
@@ -42,15 +41,15 @@
 
 <section class="p-4 px-6 align-start">
   <Intertitle titleName="Overview" />
-  <div class="p-4 flex flex-col bg-white shadow-md">
-    <div class="grid grid-cols-2 justify-center text-center">
-      <FlightOverviewItem />
-      <div>
-        <p>Milan - Brussel</p>
-      </div>
+  <div class="flex flex-col bg-white shadow-md">
+    <div class="grid {retour ? 'lg:grid-cols-2' : 'lg:grid-cols-1'} ">
+      <FlightOverviewItem retour={false} />
+      {#if retour}
+        <FlightOverviewItem retour={true} />
+      {/if}
     </div>
-    <div class="p-4">
-      <p class="text-2xl text-cyprus-green font-bold">Total: €898.36</p>
+    <div class="border-t-1">
+      <p class="m-4 text-2xl text-cyprus-green font-bold">Total: €898.36</p>
     </div>
   </div>
 </section>

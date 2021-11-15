@@ -1,16 +1,30 @@
 <script lang="ts">
+  export let retour: boolean
+
+  let startLocation: string
+  let endLocation: string
+
+  if (retour) {
+    startLocation = 'Milan Malpensa'
+    endLocation = 'Brussel-Zaventem'
+  } else {
+    startLocation = 'Brussel-Zaventem'
+    endLocation = 'Milan Malpensa'
+  }
 </script>
 
-<section class="flex flex-col my-4">
+<section class="flex flex-col my-4 text-center">
   <h1 class="font-bold text-forest-green text-lg">09 October</h1>
   <div class="my-2">
     <p class="font-bold text-cyprus-green">08:20</p>
-    <p>Brussel-Zaventem</p>
+    <p>{startLocation}</p>
   </div>
   <div class="self-center">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="fill-current text-cyprus-green h-3 md:h-4"
+      class="fill-current text-cyprus-green h-3 md:h-4 {retour
+        ? 'scale-x-[-1]'
+        : ''}"
       viewBox="0 0 44 22.458"
     >
       <g
@@ -28,6 +42,6 @@
   </div>
   <div class="my-2">
     <p class="font-bold text-cyprus-green">09:50</p>
-    <p>Milan Malpensa</p>
+    <p>{endLocation}</p>
   </div>
 </section>
