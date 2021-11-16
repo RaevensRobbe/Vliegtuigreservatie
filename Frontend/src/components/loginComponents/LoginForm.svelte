@@ -127,7 +127,7 @@
         <p class="text-red-600 -mt-2 mb-2">{errors.email}</p>
       {/if}
 
-      <label for="pw" class="font-bold mt-2">Password</label>
+      <label for="pw" class="font-bold">Password</label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={pw}

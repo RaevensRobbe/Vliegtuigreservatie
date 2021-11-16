@@ -24,6 +24,15 @@
 
   let result = null
 
+  function showLoginForm() {
+    let loginToggle = $loginCompStore.showLogin
+    loginToggle = !loginToggle
+    loginCompStore.set({
+      showRegister: false,
+      showLogin: loginToggle,
+    })
+  }
+
   const register = () => {
     const auth = getAuth()
     createUserWithEmailAndPassword(auth, email, pw)
@@ -245,6 +254,14 @@
       >
         Register
       </button>
+
+      <div class="mt-4 flex">
+        <p>Already have an account?</p>
+        <button
+          on:click={showLoginForm}
+          class="ml-1 font-bold text-forest-green">Login</button
+        >
+      </div>
     </form>
   </div>
 </div>
