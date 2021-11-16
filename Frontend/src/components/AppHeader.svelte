@@ -15,6 +15,11 @@
     menuToggle = !menuToggle
   }
 
+  function goToHomepage() {
+    console.log('clicked')
+    goto('../')
+  }
+
   function showLoginForm() {
     let loginToggle = $loginCompStore.showLogin
     loginToggle = !loginToggle
@@ -41,10 +46,13 @@
   }
 </script>
 
+<!-- Mobile -->
 <header class="grid grid-cols-2 py-8 px-6 text-dim-gray bg-white md:hidden">
-  <button class="font-bold text-2xl text-forest-green justify-self-start"
-    >MCT airlines</button
-  >
+  <button
+    class="font-bold text-2xl text-forest-green justify-self-start"
+    on:click={goToHomepage}
+    >MCT airlines
+  </button>
   {#if menuToggle}
     <button class="justify-self-end">
       <div on:click={toggler}>
@@ -106,11 +114,14 @@
   {/if}
 </header>
 
+<!-- large screen -->
 <header
   class="flex-col justify-between px-6 py-8 gap-8 bg-white hidden md:flex"
 >
   <div class="flex flex-row justify-between">
-    <button class="font-bold text-2xl text-forest-green">MCT airlines</button>
+    <button class="font-bold text-2xl text-forest-green" on:click={goToHomepage}
+      >MCT airlines</button
+    >
     {#if $authStore.isLoggedIn}
       <div class="flex text-dim-gray gap-8">
         <button>My bookings</button>

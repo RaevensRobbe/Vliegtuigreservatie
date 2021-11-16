@@ -53,3 +53,12 @@
     </div>
   </div>
 </section>
+
+<section class="flex justify-center mb-4">
+  <button
+    type="submit"
+    class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+  >
+    Go to payment
+  </button>
+</section>
