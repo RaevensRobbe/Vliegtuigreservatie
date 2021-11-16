@@ -4,18 +4,18 @@
   import { FlightStore } from './../../stores/flightStore'
   import { onMount } from 'svelte'
 
-  let givenflights
-  let controldate
-  let chosenflight
-  let position
+  let givenflights: any
+  let controldate: Date
+  let chosenflight: any
+  let position: number
   let flights = new Array()
-  let loaded = false
-  let noData = false
+  let loaded: boolean = false
+  let noData: boolean = false
   let flightTime
   let departureTime
 
-  export let url
-  export let retour
+  export let url: string
+  export let retour: boolean
 
   let radiobuttonName
   if (retour === true) {
@@ -233,7 +233,7 @@
 </script>
 
 <section
-  class="grid grid-cols-3  md:grid-cols-4 lg:grid-cols-7 border-r-0 items-end"
+  class="grid grid-cols-3  md:grid-cols-4 lg:grid-cols-7 border-r-0 items-end gap-y-4"
 >
   {#if loaded}
     {#each flights as flight}
@@ -266,10 +266,10 @@
         </label>
       {:else}
         <div
-          class="bg-white border-forest-green peer-checked:border-t-8 align-bottom flex flex-col h-full"
+          class="bg-white border-forest-green align-bottom flex flex-col h-full"
         >
           <div
-            class="bg-white border-r-1 border-l-1 flex flex-col text-center shadow-md justify-end hover:bg-gray-200  h-full justify-center"
+            class="bg-white border-r-1 border-l-1 flex flex-col text-center shadow-md hover:bg-gray-200  h-full justify-center"
           >
             <p class="text-forest-green font-bold m-2 text-xl" />
             <p class="">No flight</p>

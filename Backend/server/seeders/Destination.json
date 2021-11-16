@@ -4,8 +4,8 @@
     "Name": "Colorado Springs",
     "Popularity": "17",
     "Abbreviation": "COS",
-    "Picture": "",
-    "Coordinates": [38.83,104.82],
+    "Picture": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1473&q=80",
+    "Coordinates": [38.83, 104.82],
     "Country": "1"
   },
   {
@@ -14,7 +14,7 @@
     "Popularity": "29",
     "Abbreviation": "JAX",
     "Picture": "",
-    "Coordinates": [ 30.33, 81.65 ],
+    "Coordinates": [30.33, 81.65],
     "Country": "2"
   },
   {
@@ -23,7 +23,7 @@
     "Popularity": "47",
     "Abbreviation": "AMA",
     "Picture": "",
-    "Coordinates": [ 35.22, 101.83 ],
+    "Coordinates": [35.22, 101.83],
     "Country": "3"
   },
   {
@@ -31,8 +31,8 @@
     "Name": "San Bernardino",
     "Popularity": "18",
     "Abbreviation": "SBD",
-    "Picture": "",
-    "Coordinates": [ 34.10, 117.28 ],
+    "Picture": "https://images.unsplash.com/photo-1511316169965-fc8285861894?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80",
+    "Coordinates": [34.1, 117.28],
     "Country": "4"
   },
   {
@@ -41,7 +41,7 @@
     "Popularity": "45",
     "Abbreviation": "SPFD",
     "Picture": "",
-    "Coordinates": [ 39.78, 89.65 ],
+    "Coordinates": [39.78, 89.65],
     "Country": "5"
   },
   {
@@ -50,7 +50,7 @@
     "Popularity": "35",
     "Abbreviation": "CTL",
     "Picture": "",
-    "Coordinates": [ 35.22, 80.84 ],
+    "Coordinates": [35.22, 80.84],
     "Country": "6"
   },
   {
@@ -59,7 +59,7 @@
     "Popularity": "30",
     "Abbreviation": "HONO",
     "Picture": "",
-    "Coordinates": [ 21.30, 157.85 ],
+    "Coordinates": [21.3, 157.85],
     "Country": "7"
   },
   {
@@ -68,7 +68,7 @@
     "Popularity": "46",
     "Abbreviation": "SCOT",
     "Picture": "",
-    "Coordinates": [ 33.49, 111.92 ],
+    "Coordinates": [33.49, 111.92],
     "Country": "8"
   },
   {
@@ -77,7 +77,7 @@
     "Popularity": "25",
     "Abbreviation": "MKE",
     "Picture": "",
-    "Coordinates": [ 43.03, 87.90 ],
+    "Coordinates": [43.03, 87.9],
     "Country": "9"
   },
   {
@@ -86,7 +86,7 @@
     "Popularity": "22",
     "Abbreviation": "RVA",
     "Picture": "",
-    "Coordinates": [ 37.54, 77.43 ],
+    "Coordinates": [37.54, 77.43],
     "Country": "10"
   },
   {
@@ -95,7 +95,7 @@
     "Popularity": "22",
     "Abbreviation": "SA",
     "Picture": "",
-    "Coordinates": [ 33.74, 117.86 ],
+    "Coordinates": [33.74, 117.86],
     "Country": "10"
   },
   {
@@ -103,8 +103,8 @@
     "Name": "San Jose",
     "Popularity": "15",
     "Abbreviation": "SJ",
-    "Picture": "",
-    "Coordinates": [ 37.33, 121.88 ],
+    "Picture": "https://images.unsplash.com/photo-1611601221408-bd276421a1dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+    "Coordinates": [37.33, 121.88],
     "Country": "2"
   },
   {
@@ -112,8 +112,8 @@
     "Name": "Albuquerque",
     "Popularity": "15",
     "Abbreviation": "ALBQ",
-    "Picture": "",
-    "Coordinates": [ 35.08, 106.65 ],
+    "Picture": "https://images.unsplash.com/photo-1543906965-f9520aa2ed8a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    "Coordinates": [35.08, 106.65],
     "Country": "3"
   },
   {
@@ -122,7 +122,7 @@
     "Popularity": "42",
     "Abbreviation": "NK",
     "Picture": "",
-    "Coordinates": [ 36.85, 76.28 ],
+    "Coordinates": [36.85, 76.28],
     "Country": "4"
   },
   {
@@ -130,8 +130,8 @@
     "Name": "Kansas City",
     "Popularity": "20",
     "Abbreviation": "KS",
-    "Picture": "",
-    "Coordinates": [ 39.09, 94.57 ],
+    "Picture": "https://images.unsplash.com/photo-1491557345352-5929e343eb89?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    "Coordinates": [39.09, 94.57],
     "Country": "5"
   },
   {
@@ -140,7 +140,7 @@
     "Popularity": "34",
     "Abbreviation": "OK",
     "Picture": "",
-    "Coordinates": [ 35.46, 97.51 ],
+    "Coordinates": [35.46, 97.51],
     "Country": "6"
   },
   {
@@ -149,7 +149,7 @@
     "Popularity": "47",
     "Abbreviation": "BFD",
     "Picture": "",
-    "Coordinates": [ 35.37, 119.01 ],
+    "Coordinates": [35.37, 119.01],
     "Country": "7"
   },
   {
@@ -158,7 +158,7 @@
     "Popularity": "29",
     "Abbreviation": "PAR",
     "Picture": "",
-    "Coordinates": [ 48.85, 2.35 ],
+    "Coordinates": [48.85, 2.35],
     "Country": "8"
   },
   {
@@ -167,7 +167,7 @@
     "Popularity": "42",
     "Abbreviation": "CHI",
     "Picture": "",
-    "Coordinates": [ 41.87, 87.62 ],
+    "Coordinates": [41.87, 87.62],
     "Country": "9"
   },
   {
@@ -175,8 +175,8 @@
     "Name": "Berlin",
     "Popularity": "10",
     "Abbreviation": "BE",
-    "Picture": "",
-    "Coordinates": [ 52.52, 13.40 ],
+    "Picture": "https://images.unsplash.com/photo-1509136561942-7d8663edaaa2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1476&q=80",
+    "Coordinates": [52.52, 13.4],
     "Country": "10"
   }
 ]

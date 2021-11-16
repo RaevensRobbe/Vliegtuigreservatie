@@ -34,7 +34,8 @@
   class="flex flex-col min-h-screen font-Montserrat bg-ghost-white text-dim-gray 3xl:max-w-screen-3xl 3xl:mx-auto"
 >
   <AppHeader />
-  <slot class="flex-grow" />
+  <slot />
+
   <AppFooter />
 </main>
 

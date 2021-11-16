@@ -56,6 +56,8 @@
         }
       }
     }
+    console.log($adultStore)
+    console.log($childrenStore)
   }
 </script>
 
