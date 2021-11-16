@@ -95,7 +95,7 @@
         class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
       >
         <div on:click={showLoginForm}>
-          <p>Log in</p>
+          <p>Login</p>
         </div>
       </button>
     {/if}
@@ -123,49 +123,50 @@
 </header>
 
 <!-- large screen -->
-<header
-  class="flex-col justify-between px-6 py-8 gap-8 bg-white hidden md:flex"
->
-  <div class="flex flex-row justify-between">
-    <button class="font-bold text-2xl text-forest-green" on:click={goToHomepage}
-      >MCT airlines</button
-    >
-    {#if $authStore.isLoggedIn}
-      <div class="flex text-dim-gray gap-8">
-        <button>My bookings</button>
-        <button
-          on:click={toggleAccountTab}
-          class="font-bold text-xl text-forest-green"
-          >{$authStore.user.displayName}</button
-        >
-        {#if accountdropDown}
-          <div class="absolute right-0">
-            <div
-              class="relative bg-white top-16 z-10 flex flex-col items-center px-6"
-            >
-              <button
-                class="text-lg text-forest-green py-4"
-                on:click={goToAccountInfo}>Edit Account</button
+<header>
+  {#if $loginCompStore.showLogin}
+    <LoginForm />
+  {:else if $loginCompStore.showRegister}
+    <RegisterForm />
+  {/if}
+  <div class="flex-col justify-between px-6 py-8 gap-8 bg-white hidden md:flex">
+    <div class="flex flex-row justify-between">
+      <button
+        class="font-bold text-2xl text-forest-green"
+        on:click={goToHomepage}>MCT airlines</button
+      >
+      {#if $authStore.isLoggedIn}
+        <div class="flex text-dim-gray gap-8">
+          <button>My bookings</button>
+          <button
+            on:click={toggleAccountTab}
+            class="font-bold text-xl text-forest-green"
+            >{$authStore.user.displayName}</button
+          >
+          {#if accountdropDown}
+            <div class="absolute right-0">
+              <div
+                class="relative bg-white top-16 z-10 flex flex-col items-center px-6"
               >
-              <button class="text-lg text-forest-green py-4" on:click={logout}
-                >Sign out</button
-              >
+                <button
+                  class="text-lg text-forest-green py-4"
+                  on:click={goToAccountInfo}>Edit Account</button
+                >
+                <button class="text-lg text-forest-green py-4" on:click={logout}
+                  >Sign out</button
+                >
+              </div>
             </div>
-          </div>
-        {/if}
-      </div>
-    {:else}
-      <div>
-        <button
-          class="font-bold text-xl text-forest-green"
-          on:click={showLoginForm}>Log in</button
-        >
-      </div>
-      {#if $loginCompStore.showLogin}
-        <LoginForm />
-      {:else if $loginCompStore.showRegister}
-        <RegisterForm />
+          {/if}
+        </div>
+      {:else}
+        <div>
+          <button
+            class="font-bold text-xl text-forest-green"
+            on:click={showLoginForm}>Login</button
+          >
+        </div>
       {/if}
-    {/if}
+    </div>
   </div>
 </header>
