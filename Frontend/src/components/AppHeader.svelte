@@ -34,23 +34,19 @@
     // console.log(accountdropDown)
   }
 
-    const goToAccountInfo = async() => {
-        console.log("Go to accountInfoPage")
-        loginCompStore.set({
-            showRegister: false,
-            showLogin: false
-        });
-        await goto('/user/accountInfo')
-    }
+  const goToAccountInfo = async () => {
+    console.log('Go to accountInfoPage')
+    loginCompStore.set({
+      showRegister: false,
+      showLogin: false,
+    })
+    await goto('/user/accountInfo')
+  }
+
   function logout() {
     const auth = getAuth()
     // console.log("pressed")
     auth.signOut()
-  }
-
-  const goToAccountInfo = async () => {
-    // console.log("Go to accountInfoPage")
-    await goto('/user/accountInfo')
   }
 </script>
 
