@@ -8,7 +8,13 @@ module.exports = {
   theme:{
     extend:{
       fontFamily:{
-        'Montserrat': ['Montserrat']
+        'Montserrat': ['Montserrat'],
+        },
+      borderWidth: {
+        1: '1px',
+      },
+      fontFamily: {
+        Montserrat: ['Montserrat'],
       },
       colors: {
         'forest-green': '#008066',
@@ -21,9 +27,13 @@ module.exports = {
       screens: {
         '3xl': '1921px',
       },
-      backgroundImage:{
-        'image-mainpage': "url('/HomePageImage.jpg')"
-      }
-    }
-  }
+      backgroundImage: {
+        'image-mainpage': "url('/HomePageImage.jpg')",
+      },
+      spacing: {
+        18: '4.5rem',
+        38: '9.5rem',
+      },
+    },
+  },
 }

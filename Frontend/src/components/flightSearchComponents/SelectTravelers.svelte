@@ -6,7 +6,7 @@
   export let adults
 
   function showTravelers() {
-    console.log(toggleTravelers)
+    // console.log(toggleTravelers)
     toggleTravelers = !toggleTravelers
   }
   function calculateTravelers(operation, travler) {

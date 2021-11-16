@@ -56,6 +56,34 @@ export class FlightController
     response.send(data)
   }
 
+  one = async (request: Request, response: Response, next: NextFunction) => {
+    const flightId = request.params.id
+    console.log(flightId)
+
+    const data = await this.repository
+      .createQueryBuilder('f')
+      .select([
+        'f.FlightId',
+        'f.Date',
+        'f.Gate',
+        'f.Price',
+        'f.StartId',
+        'f.PlaneId',
+        'f.DestinationId',
+        'd.Name',
+        'd.Coordinates',
+        'd.Abbreviation',
+        's.Name',
+        's.Coordinates',
+        's.Abbreviation',
+      ])
+      .innerJoin('f.Destination', 'd')
+      .innerJoin('f.Start', 's')
+      .where('f.FlightId = :id', { id: flightId })
+      .getOne()
+    response.send(data)
+  }
+
   seats = async (request: Request, response: Response, next: NextFunction) => {
     const flightID = request.params.id
 
