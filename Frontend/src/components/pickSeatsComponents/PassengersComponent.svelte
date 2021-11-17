@@ -3,10 +3,33 @@
     export let lN:string
     export let seatNr:string
     console.log(`${fN}`)
+
+    let clicked = false
+
+    export let selectedPerson:{
+        fn:string,
+        ln:string
+    } = {
+        fn : '',
+        ln : ''
+    }
+
+    const selectPassenger = () => {
+        clicked = !clicked
+        if(clicked == true) {
+            selectedPerson.fn = fN
+            selectedPerson.ln = lN
+        }else{
+            selectedPerson.fn = ''
+            selectedPerson.ln = ''
+        }
+        console.log(clicked)
+        console.log(selectedPerson)
+    }
 </script>
 
-<div class="flex flex-col">
-    <h1 class="font-bold text-lg text-forest-green">{fN} {lN}</h1>
+<div class="flex flex-col" >
+    <h1 class="font-bold text-lg text-forest-green" on:click={selectPassenger}>{fN} {lN}</h1>
     <p>Select your seat</p>
 </div>
 

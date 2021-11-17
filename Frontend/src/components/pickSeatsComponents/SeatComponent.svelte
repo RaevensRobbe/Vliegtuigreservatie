@@ -1,9 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  import {adultStore, adultStore, childrenStore} from '../../stores/travelerStore'
 
   export let row: number
   export let column: string
   export let status: string
+  export let person:{
+    fn:string,
+    ln:string
+  }
 
   let style: string
 
@@ -18,7 +23,8 @@
   let clicked = false
 
   const setStyle = () => {
-    console.log(`selected [${row},${column}]`)
+    //console.log(`selected [${row},${column}]`)
+    console.log(person)
     if (status === 'taken') {
       return
     }
@@ -30,7 +36,23 @@
     } else {
       style = 'bg-forest-green'
     }
+
+    seatSelection()
   }
+
+  const seatSelection = () =>{
+    let index:number = $adultStore.findIndex(x => x.firstName === person.fn)
+    let selectedSeat:string = `${row}${column}`
+    let prevData = $adultStore[index]
+    $adultStore[index] = {
+      title: prevData.title,
+      firstName: prevData.firstName,
+      lastName: prevData.lastName,
+      seatNr: selectedSeat
+    }
+  } 
+
+  
 </script>
 
 <div class="w-12 h-12 {style}" on:click={setStyle}>

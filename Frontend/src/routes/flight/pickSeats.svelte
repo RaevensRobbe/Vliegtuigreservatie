@@ -6,8 +6,7 @@
     import PassengerGrid from '../../components/pickSeatsComponents/PassengersComponent.svelte'
     import {adultStore,  childrenStore} from '../../stores/travelerStore'
     import {FlightStore} from '../../stores/flightStore'
-import PassengersComponent from '../../components/pickSeatsComponents/PassengersComponent.svelte';
-import PassengersComponent from '../../components/pickSeatsComponents/PassengersComponent.svelte';
+    import PassengersComponent from '../../components/pickSeatsComponents/PassengersComponent.svelte';
 
     let economySeats: number  = 0
     let businessSeats: number = 0
@@ -108,8 +107,19 @@ import PassengersComponent from '../../components/pickSeatsComponents/Passengers
     const includesMultiDimension = (arr, coords) => 
         JSON.stringify(arr).includes(JSON.stringify(coords))
 
-    $adultStore = [{'title':'test','firstName':'test','lastName':'test', 'seatNr':'A1'},{'title':'test','firstName':'test','lastName':'test', 'seatNr':'B1'}]
+    
+    $adultStore = [{'title':'Mr','firstName':'Jelle','lastName':'test', 'seatNr':'A1'},{'title':'Mr','firstName':'Robbe','lastName':'test', 'seatNr':'B1'}]
     console.log($adultStore)
+
+    let selectedSeat:{
+        row:number,
+        column:string
+    }
+    let selectedPerson:{
+        fn:string,
+        ln:string
+    };
+
 </script>
 
 <body class="mx-12">
@@ -165,15 +175,14 @@ import PassengersComponent from '../../components/pickSeatsComponents/Passengers
 
             <div class="grid grid-cols-3 grid-rows-1 mt-4">
                 {#each $adultStore as adult}
-                    <PassengersComponent fN = {adult.firstName} lN={adult.lastName} seatNr = {adult.seatNr}/>
+                    <PassengersComponent 
+                    bind:selectedPerson = {selectedPerson}
+                    fN = {adult.firstName} 
+                    lN={adult.lastName} 
+                    seatNr = {adult.seatNr}/>
                 {/each}
-
-                <!-- {#each $childrenStore as child}
-                <PassengersComponent fN = {child.firstName} lN={child.lastName} seatNr = {child.seatNr}/>
-                {/each} -->
             </div>
 
-            
         </div>
 
         <section >
@@ -195,9 +204,9 @@ import PassengersComponent from '../../components/pickSeatsComponents/Passengers
                                     {:else}
                                         <div>
                                             {#if includesMultiDimension(takenSeatsBus, [tellerBus, colNr])}
-                                                <Seat row={tellerBus} column= {colNr} status = 'taken'/>
+                                                <Seat row={tellerBus} column= {colNr} status = 'taken' person = {selectedPerson}/>
                                             {:else}
-                                                <Seat row={tellerBus} column= {colNr} status = 'free'/>
+                                                <Seat row={tellerBus} column= {colNr} status = 'free' person = {selectedPerson}/>
                                             {/if}
                                         </div>
                                     {/if}   
@@ -210,7 +219,7 @@ import PassengersComponent from '../../components/pickSeatsComponents/Passengers
             
                 <div class="mt-8 mb-8"></div>
         
-                {#if ecoCols !== 0 && ecoRows !== 0}
+                <!-- {#if ecoCols !== 0 && ecoRows !== 0}
                     <h2 class ="h-6 text-white bg-forest-green text-center my-2">Economy Class - prijs</h2>
                     <div>
                         <div>
@@ -227,7 +236,9 @@ import PassengersComponent from '../../components/pickSeatsComponents/Passengers
                                         {:else}
                                             <div>
                                                 {#if includesMultiDimension(takenSeatsEco,`[${tellerEco},'${colNr}']`)}
-                                                    <Seat row={tellerEco} column={colNr} status = 'taken'/>
+                                                    <Seat
+                                                    bind:selectedSeat = {selectedSeat} 
+                                                    row={tellerEco} column={colNr} status = 'taken'/>
                                                 {:else}
                                                     <Seat row={tellerEco} column={colNr} status = 'free'/>
                                                 {/if}
@@ -238,7 +249,7 @@ import PassengersComponent from '../../components/pickSeatsComponents/Passengers
                             </div>
                         </div>
                     </div>
-                {/if}     
+                {/if}      -->
         </section>
 
         
