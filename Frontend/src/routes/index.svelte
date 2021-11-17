@@ -25,7 +25,7 @@
   <FlightSearch />
 </section>
 
-<section class="p-4 px-6 align-start">
+<section class="m-4 px-6 align-start">
   <Intertitle titleName="Popular destinations" />
   <article
     class="grid grid-cols-1 md:grid-cols-2  

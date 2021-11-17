@@ -15,8 +15,11 @@
     menuToggle = !menuToggle
   }
 
+  function goToBookings() {
+    goto('../bookings/bookingOverview')
+  }
+
   function goToHomepage() {
-    console.log('clicked')
     goto('../')
   }
 
@@ -35,7 +38,6 @@
   }
 
   const goToAccountInfo = async () => {
-    console.log('Go to accountInfoPage')
     loginCompStore.set({
       showRegister: false,
       showLogin: false,
@@ -80,7 +82,7 @@
     {#if $authStore.isLoggedIn}
       <button
         class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
-        >My bookings</button
+        on:click={goToBookings}>My bookings</button
       >
       <button
         class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
@@ -133,7 +135,7 @@
       >
       {#if $authStore.isLoggedIn}
         <div class="flex text-dim-gray gap-8">
-          <button>My bookings</button>
+          <button on:click={goToBookings}>My bookings</button>
           <button
             on:click={toggleAccountTab}
             class="font-bold text-xl text-forest-green"

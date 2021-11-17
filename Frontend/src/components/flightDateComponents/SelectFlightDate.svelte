@@ -3,6 +3,10 @@
   import { get } from './../../composables/useApi'
   import { FlightStore } from './../../stores/flightStore'
   import { onMount } from 'svelte'
+  import {
+    calculateFlightTimeLong,
+    getTouchdownTime,
+  } from './../../utils/calculateDistance'
 
   let givenflights: any
   let controldate: Date
@@ -104,17 +108,13 @@
   })
 
   function calculateDayName(date: Date) {
-    var days = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ]
-    var d = new Date(date)
-    return days[d.getDay()]
+    let d = new Date(date)
+    return d.toLocaleString('default', { weekday: 'long' })
+  }
+
+  function dateFormat(date: Date) {
+    let datum = new Date(date)
+    return datum.toLocaleString('default', { day: '2-digit', month: 'long' })
   }
 
   function calculatePrice(price: number) {
@@ -150,86 +150,6 @@
     departureTime = dateHour + ':' + dateMinute
     return dateHour + ':' + dateMinute
   }
-
-  function getTouchdownTime() {
-    let flightPartOne = flightTime.split(':')[0]
-    let flightPartTwo = flightTime.split(':')[1]
-
-    let departureTimePartOne = departureTime.split(':')[0]
-    let departureTimePartTwo = departureTime.split(':')[1]
-
-    let touchdownTimePartOne =
-      parseInt(Number(flightPartOne)) + parseInt(Number(departureTimePartOne))
-
-    let touchdownTimePartTwo =
-      parseInt(Number(flightPartTwo)) + parseInt(Number(departureTimePartTwo))
-
-    if (touchdownTimePartOne == 24) {
-      touchdownTimePartOne = 0
-    } else if (touchdownTimePartOne > 24) {
-      touchdownTimePartOne = touchdownTimePartOne - 24
-    }
-    if (touchdownTimePartOne < 10) {
-      touchdownTimePartOne = '0' + touchdownTimePartOne
-    }
-    if (touchdownTimePartTwo == 60) {
-      touchdownTimePartTwo = 0
-    } else if (touchdownTimePartTwo > 60) {
-      touchdownTimePartTwo = touchdownTimePartTwo - 60
-    }
-    if (touchdownTimePartTwo < 10) {
-      touchdownTimePartTwo = '0' + touchdownTimePartTwo
-    }
-
-    // return 'test'
-    return touchdownTimePartOne + ':' + touchdownTimePartTwo
-  }
-
-  function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-    let radius = 6371 // Radius of the earth in km
-    let dLat = deg2rad(lat2 - lat1) // deg2rad below
-    let dLon = deg2rad(lon2 - lon1)
-    let a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(deg2rad(lat1)) *
-        Math.cos(deg2rad(lat2)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2)
-    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-    let d = radius * c // Distance in km
-    return d
-  }
-
-  function deg2rad(deg) {
-    return deg * (Math.PI / 180)
-  }
-
-  function calculateFlightTime() {
-    let distance = getDistanceFromLatLonInKm(
-      chosenflight.Start.Coordinates[0],
-      chosenflight.Start.Coordinates[1],
-      chosenflight.Destination.Coordinates[0],
-      chosenflight.Start.Coordinates[1],
-    )
-    //format to hours and minutes
-    let time = distance / 850
-    let hours = parseInt(Number(time))
-    let minutes = Math.round((Number(time) - hours) * 60)
-    flightTime = hours + ':' + minutes
-    let returnSentence
-    if (hours == 1) {
-      if (minutes == 1) {
-        returnSentence = hours + ' hour ' + minutes + ' minute'
-      } else {
-        returnSentence = hours + ' hour ' + minutes + ' minutes'
-      }
-    } else if (minutes == 1) {
-      returnSentence = hours + ' hours ' + minutes + ' minute'
-    } else {
-      returnSentence = hours + ' hours ' + minutes + ' minutes'
-    }
-    return returnSentence
-  }
 </script>
 
 <section
@@ -257,7 +177,9 @@
               <p class="text-forest-green font-bold m-2 text-sm md:text-xl">
                 {calculateDayName(flight.Date.split('T')[0])}
               </p>
-              <p class="text-sm md:text-md">{flight.Date.split('T')[0]}</p>
+              <p class="text-sm md:text-md">
+                {dateFormat(flight.Date)}
+              </p>
               <p class="text-cyprus-green font-bold m-2 text-sm md:text-xl">
                 €{calculatePrice(flight.Price)}
               </p>
@@ -315,11 +237,20 @@
           />
         </g>
       </svg>
-      <p class="text-sm md" text-md>Duration {calculateFlightTime()}</p>
+      <p class="text-sm md" text-md>
+        Duration {calculateFlightTimeLong(
+          chosenflight.Start.Coordinates,
+          chosenflight.Destination.Coordinates,
+        )}
+      </p>
     </div>
     <div>
       <p class="font-bold text-md md:text-2xl text-forest-green">
-        {getTouchdownTime()}
+        {getTouchdownTime(
+          chosenflight.Start.Coordinates,
+          chosenflight.Destination.Coordinates,
+          departureTime,
+        )}
       </p>
       <p class="text-sm md:text-md">{chosenflight.Destination.Name}</p>
     </div>
