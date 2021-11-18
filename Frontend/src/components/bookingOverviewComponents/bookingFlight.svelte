@@ -1,8 +1,27 @@
 <script lang="ts">
+  import {
+    calculateFlightTimeLong,
+    getTouchdownTime,
+  } from './../../utils/calculateDistance'
+
   export let bookingData: any
 
   let date = new Date(bookingData.Date)
-  console.log(date.toLocaleString('default', { day: '2-digit' }))
+  let departureTime = getDepartureTime()
+
+  function getDepartureTime() {
+    let datePartTwo = bookingData.Date.split('T')[1]
+    let dateHour = datePartTwo.split(':')[0]
+    let dateMinute = datePartTwo.split(':')[1]
+    console.log(
+      date.toLocaleString('default', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      }),
+    )
+    return dateHour + ':' + dateMinute
+  }
 </script>
 
 <div class="mt-6 grid grid-cols-6 bg-white shadow-md text-center">
@@ -15,11 +34,7 @@
   <div class="col-span-4 grid grid-cols-3 border-l-1 border-r-1 my-auto">
     <div>
       <p class="font-bold text-md md:text-2xl text-forest-green">
-        {date.toLocaleString('default', {
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false,
-        })}
+        {getDepartureTime()}
       </p>
       <p class="text-md md:text-lg">{bookingData.Start.Name}</p>
     </div>
@@ -41,10 +56,21 @@
           />
         </g>
       </svg>
-      <p class="text-sm md" text-md>Duration 1 hour 30 minutes</p>
+      <p class="text-sm md" text-md>
+        {calculateFlightTimeLong(
+          bookingData.Start.Coordinates,
+          bookingData.Destination.Coordinates,
+        )}
+      </p>
     </div>
     <div>
-      <p class="font-bold text-md md:text-2xl text-forest-green">09:50</p>
+      <p class="font-bold text-md md:text-2xl text-forest-green">
+        {getTouchdownTime(
+          bookingData.Start.Coordinates,
+          bookingData.Destination.Coordinates,
+          departureTime,
+        )}
+      </p>
       <p class="text-md md:text-lg">{bookingData.Destination.Name}</p>
     </div>
   </div>

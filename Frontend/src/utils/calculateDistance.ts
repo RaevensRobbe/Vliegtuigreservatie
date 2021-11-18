@@ -74,40 +74,51 @@ export function getTouchdownTime(
     coordinateDeparture,
     coordinateDestination,
   )
+  console.log(departureTime + ' + ' + flightTime)
   flightTime = flightTime.toString()
+
   let flightPartOne = flightTime.split(':')[0]
   let flightPartTwo = flightTime.split(':')[1]
 
   let departureTimePartOne = departureTime.split(':')[0]
   let departureTimePartTwo = departureTime.split(':')[1]
 
-  let touchdownTimePartOneNumber =
+  let touchdownHourNummer =
     Math.floor(Number(flightPartOne)) + Math.floor(Number(departureTimePartOne))
-  let touchdownTimePartOne = touchdownTimePartOneNumber.toString()
+  let touchdownTimePartOne = touchdownHourNummer.toString()
 
-  let touchdownTimePartTwoNumber =
+  let touchdownTimePartMinutesNumber =
     Math.floor(Number(flightPartTwo)) + Math.floor(Number(departureTimePartTwo))
-  let touchdownTimePartTwo = touchdownTimePartTwoNumber.toString()
+  let touchdownTimePartTwo = touchdownTimePartMinutesNumber.toString()
 
-  if (touchdownTimePartOneNumber == 24) {
-    touchdownTimePartOne = '00'
-  } else if (touchdownTimePartOneNumber > 24) {
-    touchdownTimePartOneNumber = touchdownTimePartOneNumber - 24
-    touchdownTimePartOne = touchdownTimePartOneNumber.toString()
-  }
-  if (touchdownTimePartOneNumber < 10) {
-    touchdownTimePartOne = '0' + touchdownTimePartOne
-  }
-  if (touchdownTimePartTwoNumber == 60) {
+  // MINUTES
+  if (touchdownTimePartMinutesNumber == 60) {
     touchdownTimePartTwo = '00'
-  } else if (touchdownTimePartTwoNumber > 60) {
-    touchdownTimePartTwoNumber = touchdownTimePartTwoNumber - 60
-    touchdownTimePartTwo = touchdownTimePartTwoNumber.toString()
+    // uur + 1
+    touchdownHourNummer += 1
+  } else if (touchdownTimePartMinutesNumber > 60) {
+    touchdownTimePartMinutesNumber = touchdownTimePartMinutesNumber - 60
+    touchdownTimePartTwo = touchdownTimePartMinutesNumber.toString()
+    // uur + 1
+    touchdownHourNummer += 1
   }
-  if (touchdownTimePartTwoNumber < 10) {
+  if (touchdownTimePartMinutesNumber < 10) {
+    // If number lower than 10 it show ex:8 should show ex:08
     touchdownTimePartTwo = '0' + touchdownTimePartTwo
   }
 
-  // return 'test'
+  // HOURS
+  if (touchdownHourNummer == 24) {
+    touchdownTimePartOne = '00'
+  } else if (touchdownHourNummer > 24) {
+    //hour ex:26 should return ex:02
+    touchdownHourNummer = touchdownHourNummer - 24
+    touchdownTimePartOne = touchdownHourNummer.toString()
+  }
+  if (touchdownHourNummer < 10) {
+    // If number lower than 10 it show ex:8 should show ex:08
+    touchdownTimePartOne = '0' + touchdownHourNummer
+  }
+
   return touchdownTimePartOne + ':' + touchdownTimePartTwo
 }
