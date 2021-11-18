@@ -74,7 +74,6 @@ export function getTouchdownTime(
     coordinateDeparture,
     coordinateDestination,
   )
-  console.log(departureTime + ' + ' + flightTime)
   flightTime = flightTime.toString()
 
   let flightPartOne = flightTime.split(':')[0]
@@ -112,12 +111,15 @@ export function getTouchdownTime(
     touchdownTimePartOne = '00'
   } else if (touchdownHourNummer > 24) {
     //hour ex:26 should return ex:02
+    console.log(touchdownHourNummer)
     touchdownHourNummer = touchdownHourNummer - 24
     touchdownTimePartOne = touchdownHourNummer.toString()
   }
   if (touchdownHourNummer < 10) {
     // If number lower than 10 it show ex:8 should show ex:08
     touchdownTimePartOne = '0' + touchdownHourNummer
+  } else {
+    touchdownTimePartOne = touchdownHourNummer.toString()
   }
 
   return touchdownTimePartOne + ':' + touchdownTimePartTwo
