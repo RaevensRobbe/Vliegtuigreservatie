@@ -25,6 +25,7 @@ export class FlightController
     this.router.get('/flightInfo/:Sid/:Did', this.flightInfo)
     this.router.get('/seats/:id', this.seats)
     this.router.get('/plane/:id', this.getPlane)
+    this.router.get('/userFlights/:id', this.getUserFlights)
   }
 
   flightInfo = async (
@@ -97,14 +98,45 @@ export class FlightController
     response.send(data)
   }
 
-  getPlane = async (request: Request, response: Response, next: NextFunction) => {
+  getPlane = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
     const flightID = request.params.id
 
-    const data = await this.repository.createQueryBuilder('f')
-    .select(['f.PlaneId', 'p.EconomySeats', 'p.BusinessSeats',])
-    .innerJoin('f.Plane','p')
-    .where('f.FlightId = :id', { id: flightID })
-    .getOne();
-    response.send(data);
+    const data = await this.repository
+      .createQueryBuilder('f')
+      .select(['f.PlaneId', 'p.EconomySeats', 'p.BusinessSeats'])
+      .innerJoin('f.Plane', 'p')
+      .where('f.FlightId = :id', { id: flightID })
+      .getOne()
+    response.send(data)
+  }
+
+  getUserFlights = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
+    const userID = request.params.id
+    const data = await this.repository
+      .createQueryBuilder('f')
+      .select([
+        'f.Price',
+        'f.Date',
+        'd.Name',
+        'd.Coordinates',
+        't.TicketId',
+        's.Name',
+        's.Coordinates',
+      ])
+      .innerJoin('f.Destination', 'd')
+      .innerJoin('f.Start', 's')
+      .innerJoin('f.Ticket', 't')
+      .where('t.User = :id', { id: userID })
+      .distinct(true)
+      .getMany()
+    response.send(data)
   }
 }

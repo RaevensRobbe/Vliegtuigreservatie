@@ -47,7 +47,7 @@ export const strenghtValidator = (pw: string) => {
       numberOfElements === 0 ||
       numberOfElements === 1 ||
       numberOfElements === 2 ||
-      numberOfElements === 4
+      numberOfElements === 3
     ) {
       return true
     }

@@ -23,8 +23,8 @@
 
     <article class="lg:px-2 text-sm">
       <h2 class="font-bold text-base pb-2">Contact</h2>
-      <p>+32 455 80 20 40</p>
-      <p>info@mctairlines.be</p>
+      <a href="tel:555-555-5555">+32 555 55 55 55</a><br />
+      <a href="mailto: info@mctairlines.be">info@mctairlines.be</a>
     </article>
   </section>
   <section class="flex items-center">
