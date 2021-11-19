@@ -6,6 +6,7 @@
   import Spinner from './../../components/animations/spinner.svelte'
   import Intertitle from './../../components/Intertitle.svelte'
   import BookingFlight from './../../components/bookingOverviewComponents/bookingFlight.svelte'
+  import { BookingStore } from './../../stores/overviewBookingStore'
 
   let loaded = false
 
@@ -13,6 +14,13 @@
 
   let futureBookings: any = []
   let previousBookings: any = []
+
+  let previousDate = new Date().getFullYear() + 1
+
+  function calculateYear(bookingDate: Date) {
+    previousDate = new Date(bookingDate).getFullYear()
+    console.log(previousDate)
+  }
 
   onMount(async () => {
     bookings = await get(
@@ -27,13 +35,14 @@
         previousBookings.push(booking)
       }
     })
+    $BookingStore.previousYear = new Date().getFullYear() + 1
     loaded = true
   })
 </script>
 
 {#if loaded}
   {#if futureBookings}
-    <section class="m-4">
+    <section class="m-4 px-6">
       <Intertitle titleName="Future bookings" />
       {#each futureBookings as booking}
         <BookingFlight bookingData={booking} />
@@ -42,10 +51,20 @@
   {/if}
 
   {#if previousBookings}
-    <section class="m-4">
+    <section class="m-4 px-6">
       <Intertitle titleName="Previous bookings" />
       {#each previousBookings as booking}
-        <BookingFlight bookingData={booking} />
+        {#if new Date(booking.Date).getFullYear() >= $BookingStore.previousYear}
+          <BookingFlight bookingData={booking} />
+        {:else}
+          <!-- {calculateYear(booking.Date)} -->
+          <p class="text-lg">
+            {($BookingStore.previousYear = new Date(
+              booking.Date,
+            ).getFullYear())}
+          </p>
+          <BookingFlight bookingData={booking} />
+        {/if}
       {/each}
     </section>
   {/if}

@@ -13,30 +13,41 @@
     let datePartTwo = bookingData.Date.split('T')[1]
     let dateHour = datePartTwo.split(':')[0]
     let dateMinute = datePartTwo.split(':')[1]
-    console.log(
-      date.toLocaleString('default', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-      }),
-    )
     return dateHour + ':' + dateMinute
+  }
+
+  function getDay() {
+    let day = date.toLocaleString('default', { day: '2-digit' })
+    let month = date.toLocaleString('default', { month: 'long' })
+    return day
+  }
+
+  function getMonth() {
+    let month = date.toLocaleString('default', { month: 'long' })
+    return month
   }
 </script>
 
-<div class="mt-6 grid grid-cols-6 bg-white shadow-md text-center">
-  <p
-    class=" flex font-bold text-md md:text-2xl text-forest-green justify-center my-auto p-4"
+<div
+  class="my-6 md:my-4 grid grid-rows-5 md:grid-rows-none md:grid-cols-6 bg-white shadow-md text-center transform duration-300 motion-safe:hover:scale-105 hover:shadow-lg md:mx-6"
+>
+  <div class="flex md:flex-col justify-center my-auto md:p-4">
+    <p class="font-bold text-lg lg:text-2xl text-forest-green mr-1 md:mr-0">
+      {getDay()}
+    </p>
+    <p class="font-bold text-lg lg:text-2xl text-forest-green">
+      {getMonth()}
+    </p>
+  </div>
+
+  <div
+    class="row-span-3 py-4 md:py-0 md:col-span-4 grid grid-rows-3 md:grid-rows-none md:grid-cols-3 border-t-1 border-b-1 md:border-b-0 md:border-t-0 md:border-l-1 md:border-r-1 my-auto gap-2 md:gap-0"
   >
-    {date.toLocaleString('default', { day: '2-digit' })} <br />
-    {date.toLocaleString('default', { month: 'long' })}
-  </p>
-  <div class="col-span-4 grid grid-cols-3 border-l-1 border-r-1 my-auto">
-    <div>
-      <p class="font-bold text-md md:text-2xl text-forest-green">
+    <div class="my-auto">
+      <p class="font-bold text-lg text-forest-green">
         {getDepartureTime()}
       </p>
-      <p class="text-md md:text-lg">{bookingData.Start.Name}</p>
+      <p class="text-lg">{bookingData.Start.Name}</p>
     </div>
     <div class="flex justify-center flex-col">
       <svg
@@ -56,25 +67,25 @@
           />
         </g>
       </svg>
-      <p class="text-sm md" text-md>
+      <p class="text-base mt-2" text-md>
         {calculateFlightTimeLong(
           bookingData.Start.Coordinates,
           bookingData.Destination.Coordinates,
         )}
       </p>
     </div>
-    <div>
-      <p class="font-bold text-md md:text-2xl text-forest-green">
+    <div class="my-auto">
+      <p class="font-bold text-lg text-forest-green">
         {getTouchdownTime(
           bookingData.Start.Coordinates,
           bookingData.Destination.Coordinates,
           departureTime,
         )}
       </p>
-      <p class="text-md md:text-lg">{bookingData.Destination.Name}</p>
+      <p class="text-lg">{bookingData.Destination.Name}</p>
     </div>
   </div>
-  <p class=" flex font-bold text-md md:text-2xl justify-center my-auto">
+  <p class=" flex font-bold text-lg lg:text-2xl justify-center my-auto">
     €449.18
   </p>
 </div>

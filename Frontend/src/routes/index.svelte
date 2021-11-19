@@ -1,6 +1,7 @@
 <script lang="ts">
   //@ts-nocheck
   import AppHeader from '../components/AppHeader.svelte'
+  import Spinner from './../components/animations/spinner.svelte'
   import AppFooter from '../components/AppFooter.svelte'
   import Intertitle from '../components/Intertitle.svelte'
   import FlightSearch from '../components/FlightSearch.svelte'
@@ -11,9 +12,10 @@
   import { get } from './../composables/useApi'
 
   let popDestinations: PopularDestination = []
-
+  let popDestinationsLoaded: boolean = false
   onMount(async () => {
     popDestinations = await get('http://localhost:3001/api/v1/country/popular')
+    popDestinationsLoaded = true
   })
 </script>
 
@@ -31,12 +33,14 @@
     class="grid grid-cols-1 md:grid-cols-2  
   lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mb-4 auto-cols-fr"
   >
-    {#if popDestinations}
+    {#if popDestinationsLoaded == true}
       {#each popDestinations as destination}
         <PopularDestinationCard popularDestination={destination} />
       {/each}
     {:else}
-      <p>Loading</p>
+      <div class="w-full h-full flex justify-center my-auto col-span-full">
+        <Spinner />
+      </div>
     {/if}
   </article>
 </section>

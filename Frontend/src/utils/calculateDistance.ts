@@ -111,7 +111,6 @@ export function getTouchdownTime(
     touchdownTimePartOne = '00'
   } else if (touchdownHourNummer > 24) {
     //hour ex:26 should return ex:02
-    console.log(touchdownHourNummer)
     touchdownHourNummer = touchdownHourNummer - 24
     touchdownTimePartOne = touchdownHourNummer.toString()
   }
