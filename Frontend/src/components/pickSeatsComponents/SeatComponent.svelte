@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+import { init } from 'svelte/internal';
   import {adultStore, childrenStore} from '../../stores/travelerStore'
 
   export let row: number
@@ -9,14 +10,15 @@
     fn:string,
     ln:string
   }
+  let initials:string
   let selected:boolean = false
   let index:number = 0
 
   onMount(() => { 
       //console.log(row, column)
   })
-
   const clicked = () => {
+      initials = `${person.fn[0]}${person.ln[0]}`
       selected = !selected
       addSeatToStore()
   }
@@ -71,8 +73,7 @@
           <h1
           class="w-full flex h-full items-center justify-center text-white font-bold text-center text-xl"
           >
-              {row}
-              {column}
+              {initials}
           </h1>
       {/if}
   </div>
