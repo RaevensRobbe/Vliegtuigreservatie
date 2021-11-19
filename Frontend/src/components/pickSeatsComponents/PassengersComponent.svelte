@@ -15,14 +15,16 @@
     }
 
     const selectPassenger = () => {
-        clicked = !clicked
-        if(clicked == true) {
-            selectedPerson.fn = fN
-            selectedPerson.ln = lN
-        }else{
-            selectedPerson.fn = ''
-            selectedPerson.ln = ''
-        }
+        selectedPerson.fn = fN
+        selectedPerson.ln = lN
+        // clicked = !clicked
+        // if(clicked == true) {
+        //     selectedPerson.fn = fN
+        //     selectedPerson.ln = lN
+        // }else{
+        //     selectedPerson.fn = ''
+        //     selectedPerson.ln = ''
+        // }
         console.log(clicked)
         console.log(selectedPerson)
     }

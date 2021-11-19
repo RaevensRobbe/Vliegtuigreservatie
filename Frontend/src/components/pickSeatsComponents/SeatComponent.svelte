@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import {adultStore, adultStore, childrenStore} from '../../stores/travelerStore'
+  import {adultStore, childrenStore} from '../../stores/travelerStore'
 
   export let row: number
   export let column: string
@@ -12,7 +12,7 @@
 
   let style: string
 
-  onMount(() => {
+  onMount(() => { 
     if (status === 'free') {
       style = 'bg-white border border-forest-green'
     } else if (status === 'taken') {
@@ -22,36 +22,36 @@
 
   let clicked = false
 
-  const setStyle = () => {
-    //console.log(`selected [${row},${column}]`)
-    console.log(person)
-    if (status === 'taken') {
-      return
-    }
+const setStyle = () => {
+  //console.log(`selected [${row},${column}]`)
+  console.log(person)
+  if (status === 'taken') {
+    return
+  }
 
     clicked = !clicked
 
-    if (clicked == false) {
-      style = 'bg-white border border-forest-green'
-    } else {
-      style = 'bg-forest-green'
-    }
-
-    seatSelection()
+  if (clicked == false) {
+    style = 'bg-white border border-forest-green'
+  } else {
+    style = 'bg-forest-green'
   }
 
-  const seatSelection = () =>{
-    let index:number = $adultStore.findIndex(x => x.firstName === person.fn)
-    let selectedSeat:string = `${row}${column}`
-    let prevData = $adultStore[index]
-    $adultStore[index] = {
-      title: prevData.title,
-      firstName: prevData.firstName,
-      lastName: prevData.lastName,
-      seatNr: selectedSeat
-    }
-  } 
 
+  seatSelection()  
+}
+
+const seatSelection = () =>{
+  let index:number = $adultStore.findIndex(x => x.firstName === person.fn)
+  let selectedSeat:string = `${row}${column}`
+  let prevData = $adultStore[index]
+  $adultStore[index] = {
+    title: prevData.title,
+    firstName: prevData.firstName,
+    lastName: prevData.lastName,
+    seatNr: selectedSeat
+  }
+} 
   
 </script>
 
