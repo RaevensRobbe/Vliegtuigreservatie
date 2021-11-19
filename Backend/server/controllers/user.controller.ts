@@ -36,11 +36,18 @@ export class UserController extends CrudController<User> implements IUserControl
         Email: req.body.data.email,
         Admin: false
       } 
-      const newDbUser = await this.repository.create(newUser);
-      result = await this.repository.save(newDbUser); 
+      console.log(req.body.data.id)
+      const checkUser = await this.repository.findOne({UserId:req.body.data.id})
+      console.log(checkUser)
+      if(checkUser === undefined) {
+        const newDbUser = await this.repository.create(newUser);
+        result = await this.repository.save(newDbUser); 
+        return res.send(result)
+      }
+      else{
+        console.log('Already exists')
+      }
       
-
-      return res.send(result)
     }
 
     updateUser = async (req: Request, res: Response, next: NextFunction) => {
