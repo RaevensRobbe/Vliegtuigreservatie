@@ -109,7 +109,7 @@
         JSON.stringify(arr).includes(JSON.stringify(coords))
 
     
-    $adultStore = [{'title':'Mr','firstName':'Jelle','lastName':'test', 'seatNr':'A1'},{'title':'Mr','firstName':'Robbe','lastName':'test', 'seatNr':'B1'}]
+    $adultStore = [{'title':'Mr','firstName':'Jelle','lastName':'Demets', 'seatNr':'A1'},{'title':'Mr','firstName':'Robbe','lastName':'Reavens', 'seatNr':'B1'}]
     console.log($adultStore)
     
     let selectedPerson:{
@@ -201,9 +201,9 @@
                                     {:else}
                                         <div>
                                             {#if includesMultiDimension(takenSeatsBus, [tellerBus, colNr])}
-                                                <Seat row={tellerBus} column= {colNr} status = 'taken' person = {selectedPerson}/>
+                                                <Seat row={tellerBus} column= {colNr} status = 'taken' person = {selectedPerson} classType = 'Business'/>
                                             {:else}
-                                                <Seat row={tellerBus} column= {colNr} status = 'free' person = {selectedPerson}/>
+                                                <Seat row={tellerBus} column= {colNr} status = 'free' person = {selectedPerson} classType = 'Business'/>
                                             {/if}
                                         </div>
                                     {/if}   
@@ -233,9 +233,9 @@
                                         {:else}
                                             <div>
                                                 {#if includesMultiDimension(takenSeatsEco,`[${tellerEco},'${colNr}']`)}
-                                                    <Seat row={tellerEco} column={colNr} status = 'taken' person = {selectedPerson}/>
+                                                    <Seat row={tellerEco} column={colNr} status = 'taken' person = {selectedPerson} classType = 'Economy'/>
                                                 {:else}
-                                                    <Seat row={tellerEco} column={colNr} status = 'free' person = {selectedPerson}/>
+                                                    <Seat row={tellerEco} column={colNr} status = 'free' person = {selectedPerson} classType = 'Economy'/>
                                                 {/if}
                                             </div>
                                         {/if}

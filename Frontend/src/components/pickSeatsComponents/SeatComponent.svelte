@@ -10,6 +10,7 @@ import { init } from 'svelte/internal';
     fn:string,
     ln:string
   }
+  export let classType:string
   let initials:string
   let selected:boolean = false
   let index:number = 0
@@ -31,7 +32,8 @@ import { init } from 'svelte/internal';
           title: prevData.title,
           firstName: prevData.firstName,
           lastName: prevData.lastName,
-          seatNr: selectedSeat
+          seatNr: selectedSeat,
+          class: classType
       }
       //console.log($adultStore[index])
   }
