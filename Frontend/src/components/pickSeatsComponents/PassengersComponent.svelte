@@ -1,10 +1,11 @@
 <script lang="ts">
+    import passengerStore from '../../stores/selectPassengerStore'
     export let fN:string
     export let lN:string
     export let seatNr:string
     console.log(`${fN}`)
 
-    let clicked = false
+    let selected = false
 
     export let selectedPerson:{
         fn:string,
@@ -14,24 +15,38 @@
         ln : ''
     }
 
-    const selectPassenger = () => {
+    const clicked = () => {
+        selected = !selected
+
+        setSelectedPassenger()
+    }
+    
+    const setSelectedPassenger = () => {
         selectedPerson.fn = fN
         selectedPerson.ln = lN
-        // clicked = !clicked
-        // if(clicked == true) {
-        //     selectedPerson.fn = fN
-        //     selectedPerson.ln = lN
-        // }else{
-        //     selectedPerson.fn = ''
-        //     selectedPerson.ln = ''
-        // }
-        console.log(clicked)
-        console.log(selectedPerson)
+        $passengerStore = {
+            fn: fN,
+            ln: lN
+        }
     }
+
+    const checkSelected = (currentStore) => {
+        console.log(`currentStore: ${currentStore.fn}`)
+        console.log(`CurrentlySelected: ${fN}`)
+        if(currentStore.fn !== fN){
+            selected = false
+            console.log(selected)
+        }
+    }
+
+    let checkState = passengerStore.subscribe((currentStore) => {
+        checkSelected(currentStore)
+    })
+
 </script>
 
-<div class="flex flex-col" >
-    <h1 class="font-bold text-lg text-forest-green" on:click={selectPassenger}>{fN} {lN}</h1>
+<div class="flex flex-col pl-2 {selected?'border-l-8 border-forest-green':''}">
+    <h1 class="text-forest-green text-2xl{selected?'font-bold text-2xl':''}" on:click={clicked}>{fN} {lN}</h1>
     <p>Select your seat</p>
 </div>
 

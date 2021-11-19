@@ -2,8 +2,8 @@
     import { onMount } from 'svelte';
     import { get } from '../../composables/useApi';
     import Intertitle from '../../components/Intertitle.svelte'
-    //import Seat from '../../components/pickSeatsComponents/SeatComponent.svelte'
-    import Seat from '../../components/pickSeatsComponents/testComp.svelte'
+    import Seat from '../../components/pickSeatsComponents/SeatComponent.svelte'
+    //import PassengerGrid from '../../components/pickSeatsComponents/testComp.svelte'
     import PassengerGrid from '../../components/pickSeatsComponents/PassengersComponent.svelte'
     import {adultStore,  childrenStore} from '../../stores/travelerStore'
     import {FlightStore} from '../../stores/flightStore'
@@ -216,7 +216,7 @@
             
                 <div class="mt-8 mb-8"></div>
         
-                <!-- {#if ecoCols !== 0 && ecoRows !== 0}
+                {#if ecoCols !== 0 && ecoRows !== 0}
                     <h2 class ="h-6 text-white bg-forest-green text-center my-2">Economy Class - prijs</h2>
                     <div>
                         <div>
@@ -233,11 +233,9 @@
                                         {:else}
                                             <div>
                                                 {#if includesMultiDimension(takenSeatsEco,`[${tellerEco},'${colNr}']`)}
-                                                    <Seat
-                                                    bind:selectedSeat = {selectedSeat} 
-                                                    row={tellerEco} column={colNr} status = 'taken'/>
+                                                    <Seat row={tellerEco} column={colNr} status = 'taken' person = {selectedPerson}/>
                                                 {:else}
-                                                    <Seat row={tellerEco} column={colNr} status = 'free'/>
+                                                    <Seat row={tellerEco} column={colNr} status = 'free' person = {selectedPerson}/>
                                                 {/if}
                                             </div>
                                         {/if}
@@ -246,7 +244,7 @@
                             </div>
                         </div>
                     </div>
-                {/if}      -->
+                {/if}     
         </section>
 
         

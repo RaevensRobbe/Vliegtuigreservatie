@@ -9,55 +9,47 @@
     fn:string,
     ln:string
   }
-
-  let style: string
+  let selected:boolean = false
+  let index:number = 0
 
   onMount(() => { 
-    if (status === 'free') {
-      style = 'bg-white border border-forest-green'
-    } else if (status === 'taken') {
-      style = 'bg-gray-300'
-    }
+      //console.log(row, column)
   })
 
-  let clicked = false
-
-const setStyle = () => {
-  //console.log(`selected [${row},${column}]`)
-  console.log(person)
-  if (status === 'taken') {
-    return
+  const clicked = () => {
+      selected = !selected
+      addSeatToStore()
   }
 
-    clicked = !clicked
-
-  if (clicked == false) {
-    style = 'bg-white border border-forest-green'
-  } else {
-    style = 'bg-forest-green'
+  const addSeatToStore = () => {
+      index = $adultStore.findIndex(x => x.firstName === person.fn)
+      let selectedSeat:string = `${row}${column}`
+      let prevData = $adultStore[index]
+      $adultStore[index] = {
+          title: prevData.title,
+          firstName: prevData.firstName,
+          lastName: prevData.lastName,
+          seatNr: selectedSeat
+      }
+      //console.log($adultStore[index])
   }
 
-
-  seatSelection()  
-}
-
-const seatSelection = () =>{
-  let index:number = $adultStore.findIndex(x => x.firstName === person.fn)
-  let selectedSeat:string = `${row}${column}`
-  let prevData = $adultStore[index]
-  $adultStore[index] = {
-    title: prevData.title,
-    firstName: prevData.firstName,
-    lastName: prevData.lastName,
-    seatNr: selectedSeat
+  const checkSelected = (currentStore, index) => {
+      let thisSeatNr = `${row}${column}`
+      if(currentStore[index].seatNr !== thisSeatNr) {
+          selected = false
+      }
   }
-} 
-  
+
+  let checkState = adultStore.subscribe((currentStore) => {
+      checkSelected(currentStore, index)
+  })
+
 </script>
 
-<div class="w-12 h-12 {style}" on:click={setStyle}>
-  {#if status === 'taken'}
-    <svg
+{#if status === 'taken'}
+  <div class="w-12 h-12 bg-gray-300">
+      <svg
       xmlns="http://www.w3.org/2000/svg"
       class="w-12 h-12 "
       viewBox="0 0 24 24"
@@ -72,13 +64,16 @@ const seatSelection = () =>{
         y2="18"
       /></svg
     >
-  {/if}
-  {#if clicked}
-    <h1
-      class="w-full flex h-full items-center justify-center text-white font-bold text-center text-xl"
-    >
-      {row}
-      {column}
-    </h1>
-  {/if}
-</div>
+  </div>
+{:else}
+  <div class="w-12 h-12 bg-white border border-forest-green {selected?'bg-forest-green':'bg-white'}" on:click={clicked} >
+      {#if selected}
+          <h1
+          class="w-full flex h-full items-center justify-center text-white font-bold text-center text-xl"
+          >
+              {row}
+              {column}
+          </h1>
+      {/if}
+  </div>
+{/if}
