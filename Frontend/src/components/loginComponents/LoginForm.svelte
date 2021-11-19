@@ -38,6 +38,7 @@
           email: user.email
         }
         post(data)
+        showLoginForm()
       })
 
     } catch (error) {
@@ -60,6 +61,7 @@
     signInWithEmailAndPassword(auth, email, pw)
       .then(userCredential => {
         const user = userCredential.user
+        showLoginForm()
       })
       .catch(error => {
         const errorCode = error.code
