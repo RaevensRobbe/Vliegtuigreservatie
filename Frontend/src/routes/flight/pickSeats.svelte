@@ -2,7 +2,12 @@
     import { onMount } from 'svelte';
     import { get } from '../../composables/useApi';
     import Intertitle from '../../components/Intertitle.svelte'
-    import Seat from '../../components/SeatComponent.svelte'
+    import Seat from '../../components/pickSeatsComponents/SeatComponent.svelte'
+    //import PassengerGrid from '../../components/pickSeatsComponents/testComp.svelte'
+    import PassengerGrid from '../../components/pickSeatsComponents/PassengersComponent.svelte'
+    import {adultStore,  childrenStore} from '../../stores/travelerStore'
+    import {FlightStore} from '../../stores/flightStore'
+    import PassengersComponent from '../../components/pickSeatsComponents/PassengersComponent.svelte';
 
     let economySeats: number  = 0
     let businessSeats: number = 0
@@ -103,6 +108,15 @@
     const includesMultiDimension = (arr, coords) => 
         JSON.stringify(arr).includes(JSON.stringify(coords))
 
+    
+    $adultStore = [{'title':'Mr','firstName':'Jelle','lastName':'Demets', 'seatNr':'A1'},{'title':'Mr','firstName':'Robbe','lastName':'Reavens', 'seatNr':'B1'}]
+    console.log($adultStore)
+    
+    let selectedPerson:{
+        fn:string,
+        ln:string
+    };
+
 </script>
 
 <body class="mx-12">
@@ -146,44 +160,26 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="22.866" viewBox="0 0 32 22.866">
                         <path id="bxs-plane-take-off" d="M4.633,28.6h29.4v3.267H4.633ZM34.864,13.127a2.63,2.63,0,0,0-3.325-1.664L24.233,13.9,11.166,9,7.9,10.633l9.8,6.533-6.533,3.267L4.633,17.166,3,18.8l6.533,6.533,23.76-8.91A2.632,2.632,0,0,0,34.864,13.127Z" transform="translate(-3 -9)" fill="#008066"/>
                       </svg>
-                    <p>Abbr - Abrr</p> 
+                    <p>{$FlightStore.departureCity} - {$FlightStore.destinationCity}</p> 
                 </div>
                 <div class="flex flex-col justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="22.866" viewBox="0 0 32 22.866">
                         <path id="bxs-plane-take-off" d="M33.367,28.6H3.968v3.267h29.4ZM3.136,13.127a2.63,2.63,0,0,1,3.325-1.664L13.767,13.9,26.834,9,30.1,10.633l-9.8,6.533,6.533,3.267,6.533-3.267L35,18.8l-6.533,6.533-23.76-8.91A2.632,2.632,0,0,1,3.136,13.127Z" transform="translate(-3 -9)" fill="#686868"/>
                     </svg>
-                    <p>Abbr - Abrr</p> 
+                    <p>{$FlightStore.destinationCity} - {$FlightStore.departureCity}</p> 
                 </div>
             </div>
 
             <div class="grid grid-cols-3 grid-rows-1 mt-4">
-                <div class="flex flex-col">
-                    <h1 class="font-bold text-lg text-forest-green">Name</h1>
-                    <p>Select your seat</p>
-                </div>
-
-                <div class="flex justify-center">
-                    <div class="w-12 h-12 bg-forest-green">
-                        <h1
-                        class="w-full flex h-full items-center justify-center text-white font-bold text-center text-xl"
-                      >
-                        4F
-                      </h1>
-                    </div>
-                </div>
-
-               <div class="flex justify-center">
-                <div class="w-12 h-12 bg-white border border-forest-green ">
-                    <h1
-                    class="w-full flex h-full items-center justify-center text-white font-bold text-center text-xl"
-                  >
-                    4F
-                  </h1>
-                </div>
-               </div>
+                {#each $adultStore as adult}
+                    <PassengersComponent 
+                    bind:selectedPerson = {selectedPerson}
+                    fN = {adult.firstName} 
+                    lN={adult.lastName} 
+                    seatNr = {adult.seatNr}/>
+                {/each}
             </div>
 
-            
         </div>
 
         <section >
@@ -205,9 +201,9 @@
                                     {:else}
                                         <div>
                                             {#if includesMultiDimension(takenSeatsBus, [tellerBus, colNr])}
-                                                <Seat row={tellerBus} column= {colNr} status = 'taken'/>
+                                                <Seat row={tellerBus} column= {colNr} status = 'taken' person = {selectedPerson} classType = 'Business'/>
                                             {:else}
-                                                <Seat row={tellerBus} column= {colNr} status = 'free'/>
+                                                <Seat row={tellerBus} column= {colNr} status = 'free' person = {selectedPerson} classType = 'Business'/>
                                             {/if}
                                         </div>
                                     {/if}   
@@ -237,9 +233,9 @@
                                         {:else}
                                             <div>
                                                 {#if includesMultiDimension(takenSeatsEco,`[${tellerEco},'${colNr}']`)}
-                                                    <Seat row={tellerEco} column={colNr} status = 'taken'/>
+                                                    <Seat row={tellerEco} column={colNr} status = 'taken' person = {selectedPerson} classType = 'Economy'/>
                                                 {:else}
-                                                    <Seat row={tellerEco} column={colNr} status = 'free'/>
+                                                    <Seat row={tellerEco} column={colNr} status = 'free' person = {selectedPerson} classType = 'Economy'/>
                                                 {/if}
                                             </div>
                                         {/if}

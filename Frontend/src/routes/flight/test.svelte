@@ -3,7 +3,7 @@
     import { get } from '../../composables/useApi';
     import seatsStore from '../../stores/pickSeatsStore'
     import Intertitle from '../../components/Intertitle.svelte'
-    import Seat from '../../components/SeatComponent.svelte'
+    import Seat from '../../components/pickSeatsComponents/SeatComponent.svelte'
     import { debug, each } from 'svelte/internal';
 
     let loaded = false
