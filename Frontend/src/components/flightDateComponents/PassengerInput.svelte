@@ -24,6 +24,7 @@
             title: value,
             firstName: firstName,
             lastName: lastName,
+            seatNr:''
           }
         } else {
           $adultStore = [
@@ -32,6 +33,7 @@
               title: value,
               firstName: firstName,
               lastName: lastName,
+              seatNr:''
             },
           ]
         }
@@ -44,6 +46,7 @@
           $childrenStore[personnumber] = {
             firstName: firstName,
             lastName: lastName,
+            seatNr:''
           }
         } else {
           $childrenStore = [
@@ -51,6 +54,7 @@
             {
               firstName: firstName,
               lastName: lastName,
+              seatNr:''
             },
           ]
         }

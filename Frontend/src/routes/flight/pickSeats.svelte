@@ -107,7 +107,7 @@
         JSON.stringify(arr).includes(JSON.stringify(coords))
 
     
-    $adultStore = [{'title':'Mr','firstName':'Jelle','lastName':'Demets', 'seatNr':'A1'},{'title':'Mr','firstName':'Robbe','lastName':'Reavens', 'seatNr':'B1'}]
+    $adultStore = [{'title':'Mr','firstName':'Jelle','lastName':'Demets', 'seatNr':''},{'title':'Mr','firstName':'Robbe','lastName':'Reavens', 'seatNr':''}]
     console.log($adultStore)
     
     let selectedPerson:{

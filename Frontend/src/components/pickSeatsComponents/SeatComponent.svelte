@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-import { init } from 'svelte/internal';
+  import { init } from 'svelte/internal';
   import {adultStore, childrenStore} from '../../stores/travelerStore'
 
   export let row: number
@@ -25,16 +25,23 @@ import { init } from 'svelte/internal';
   }
 
   const addSeatToStore = () => {
-      index = $adultStore.findIndex(x => x.firstName === person.fn)
+      index = $adultStore.findIndex(x => x.firstName === person.fn, y => y.lastName === person.ln)
       let selectedSeat:string = `${row}${column}`
       let prevData = $adultStore[index]
+      let seat:string
+      if(prevData.seatNr == selectedSeat){
+        seat = ''
+      }else{
+        seat = selectedSeat
+      }
       $adultStore[index] = {
           title: prevData.title,
           firstName: prevData.firstName,
           lastName: prevData.lastName,
-          seatNr: selectedSeat,
+          seatNr: seat,
           class: classType
       }
+      
       //console.log($adultStore[index])
   }
 
