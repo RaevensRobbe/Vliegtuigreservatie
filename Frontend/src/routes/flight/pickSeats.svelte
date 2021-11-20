@@ -21,20 +21,41 @@
     let busGrid:number[] = [0,0]
     let ecoGrid:number[] = [0,0]
 
-    let takenSeatsEco:any = {}
+    let takenSeatsEco:any[] = []
     let takenSeatsBus:any[] = []
 
     let columnsLetterBus:string[] = ['A','B','','C','D']
     let columnsLetterEco:string[] = [] 
 
-    onMount(async () => {
-        const getData:any = await get(`http://localhost:3001/api/v1/flight/seats/1`)
-        //console.log(getData.Ticket)
+    let selectedPerson:{
+        fn:string,
+        ln:string
+    };
+
+    let retourFlight:boolean = false
+    let clicked:boolean = false
+
+    const miniOnMount = async() => {
+        let getData:any
+        console.log(`FlightId: ${$FlightStore.departureFlight}`)
+        if(retourFlight){
+            getData = await get(`http://localhost:3001/api/v1/flight/seats/${$FlightStore.retourFlight}`)
+            console.log(getData)
+        }else{
+            getData = await get(`http://localhost:3001/api/v1/flight/seats/${$FlightStore.departureFlight}`)
+            console.log(getData)
+        }
+        
         economySeats = getData.Plane.EconomySeats;
         businessSeats = getData.Plane.BusinessSeats;
 
         let i:any
         let j:any
+
+        if(retourFlight){
+            takenSeatsBus = []
+            takenSeatsEco = []
+        }
 
         for(i of getData.Ticket){
             //console.log(i)
@@ -48,16 +69,18 @@
             }
         }
 
-        console.log(takenSeatsBus)
+        console.log(takenSeatsEco)
 
         if( economySeats !== 0){
             gridLayout(economySeats, businessSeats)
         }
-        
+    }
+
+    onMount(async () => {
+        miniOnMount()
     })
 
     const gridLayout = (eco, bus) => {
-        //console.log('test')
         if(eco >=  120){
             ecoParts = 2
             ecoRows = eco / (ecoParts * ecoRowLenght)
@@ -77,6 +100,8 @@
         busGrid = [busRows, busCols]
         ecoGrid = [ecoRows, ecoCols]
 
+        console.log(busGrid, ecoGrid)
+
         test()
         test2()
     }  
@@ -84,23 +109,20 @@
     let arrayBus:number[] = []
     let arrayEco:number[] = []
     const test = () => {
-
 		let i = 0
-        // console.log(`busRows ${busRows}`)
+        if(retourFlight) arrayBus = []
 		while (i < busRows){
 			i = i+1
 			arrayBus.push(i)
 		}
-		// console.log(`arrayBuss ${arrayBus}`)
+        
 	}
 
     const test2 = () => {
-
-        // console.log(`ecoRows ${ecoRows}`)
+        if(retourFlight) arrayEco = []
         for(let i = 1; i <= ecoRows; i++){
             arrayEco.push(i)
         }
-        // console.log(`arrayEco ${arrayEco}`)
     }
 
     const includesMultiDimension = (arr, coords) => 
@@ -109,11 +131,13 @@
     
     $adultStore = [{'title':'Mr','firstName':'Jelle','lastName':'Demets', 'seatNr':''},{'title':'Mr','firstName':'Robbe','lastName':'Reavens', 'seatNr':''}]
     console.log($adultStore)
-    
-    let selectedPerson:{
-        fn:string,
-        ln:string
-    };
+
+    const nextFlight = () =>{
+        console.log('clicked')
+        clicked = !clicked
+        retourFlight = !retourFlight
+        miniOnMount()
+    }
 
 </script>
 
@@ -177,75 +201,149 @@
                     seatNr = {adult.seatNr}/>
                 {/each}
             </div>
+            <button
+                on:click={nextFlight}
+                type="submit"
+                class="flex p-4 mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            >
+                <!--submit button -->
+                Next flight
+            </button>
 
         </div>
 
-        <section >
+        {#if retourFlight}
             <section >
-                {#if busCols !== 0 && busRows !== 0}
-                    <h2 class ="h-6 text-white bg-forest-green text-center my-2">Business Class - prijs</h2>
-                    <div>
-                        <div class="grid grid-cols-{busCols} grid-rows-1 place-items-center gap-2 mb-2">
-                            {#each columnsLetterBus as colNrBus}
-                                <p>{colNrBus}</p>
-                            {/each}
-                        </div>
-    
-                        <div class="grid grid-cols-{busCols} grid-rows-{busRows} place-items-center gap-2">
-                            {#each arrayBus as tellerBus}
-                                {#each columnsLetterBus as colNr}
-                                    {#if colNr == ''}
-                                        <div>{tellerBus}</div>
-                                    {:else}
-                                        <div>
-                                            {#if includesMultiDimension(takenSeatsBus, [tellerBus, colNr])}
-                                                <Seat row={tellerBus} column= {colNr} status = 'taken' person = {selectedPerson} classType = 'Business'/>
-                                            {:else}
-                                                <Seat row={tellerBus} column= {colNr} status = 'free' person = {selectedPerson} classType = 'Business'/>
-                                            {/if}
-                                        </div>
-                                    {/if}   
-                                {/each}
-                            {/each}
-                        </div>
-                    </div>
-    
-                {/if}
-            
-                <div class="mt-8 mb-8"></div>
-        
-                {#if ecoCols !== 0 && ecoRows !== 0}
-                    <h2 class ="h-6 text-white bg-forest-green text-center my-2">Economy Class - prijs</h2>
-                    <div>
+                <section >
+                    {#if busCols !== 0 && busRows !== 0}
+                        <h2 class ="h-6 text-white bg-forest-green text-center my-2">Business Class - prijs</h2>
                         <div>
-                            <div class="grid grid-cols-{ecoCols} grid-rows-1 place-items-center gap-2 mb-2">
-                                {#each columnsLetterEco as colNrEco}
-                                    <p>{colNrEco}</p>
+                            <div class="grid grid-cols-{busCols} grid-rows-1 place-items-center gap-2 mb-2">
+                                {#each columnsLetterBus as colNrBus}
+                                    <p>{colNrBus}</p>
                                 {/each}
                             </div>
-                            <div class="grid grid-cols-{ecoCols} grid-rows-{ecoRows} place-items-center gap-2">
-                                {#each arrayEco as tellerEco}
-                                    {#each columnsLetterEco as colNr }
-                                        {#if  colNr == ''}
-                                            <div>{tellerEco}</div>
+        
+                            <div class="grid grid-cols-{busCols} grid-rows-{busRows} place-items-center gap-2">
+                                {#each arrayBus as tellerBus}
+                                    {#each columnsLetterBus as colNr}
+                                        {#if colNr == ''}
+                                            <div>{tellerBus}</div>
                                         {:else}
                                             <div>
-                                                {#if includesMultiDimension(takenSeatsEco,`[${tellerEco},'${colNr}']`)}
-                                                    <Seat row={tellerEco} column={colNr} status = 'taken' person = {selectedPerson} classType = 'Economy'/>
+                                                {#if includesMultiDimension(takenSeatsBus, [tellerBus, colNr])}
+                                                    <Seat row={tellerBus} column= {colNr} status = 'taken' person = {selectedPerson} classType = 'Business'/>
                                                 {:else}
-                                                    <Seat row={tellerEco} column={colNr} status = 'free' person = {selectedPerson} classType = 'Economy'/>
+                                                    <Seat row={tellerBus} column= {colNr} status = 'free' person = {selectedPerson} classType = 'Business'/>
                                                 {/if}
                                             </div>
-                                        {/if}
+                                        {/if}   
                                     {/each}
                                 {/each}
                             </div>
                         </div>
-                    </div>
-                {/if}     
-        </section>
-
         
-
-    </section>
+                    {/if}
+                
+                    <div class="mt-8 mb-8"></div>
+            
+                    {#if ecoCols !== 0 && ecoRows !== 0}
+                        <h2 class ="h-6 text-white bg-forest-green text-center my-2">Economy Class - prijs</h2>
+                        <div>
+                            <div>
+                                <div class="grid grid-cols-{ecoCols} grid-rows-1 place-items-center gap-2 mb-2">
+                                    {#each columnsLetterEco as colNrEco}
+                                        <p>{colNrEco}</p>
+                                    {/each}
+                                </div>
+                                <div class="grid grid-cols-{ecoCols} grid-rows-{ecoRows} place-items-center gap-2">
+                                    {#each arrayEco as tellerEco}
+                                        {#each columnsLetterEco as colNr }
+                                            {#if  colNr == ''}
+                                                <div>{tellerEco}</div>
+                                            {:else}
+                                                <div>
+                                                    {#if includesMultiDimension(takenSeatsEco,`[${tellerEco},'${colNr}']`)}
+                                                        <Seat row={tellerEco} column={colNr} status = 'taken' person = {selectedPerson} classType = 'Economy'/>
+                                                    {:else}
+                                                        <Seat row={tellerEco} column={colNr} status = 'free' person = {selectedPerson} classType = 'Economy'/>
+                                                    {/if}
+                                                </div>
+                                            {/if}
+                                        {/each}
+                                    {/each}
+                                </div>
+                            </div>
+                        </div>
+                    {/if}     
+            </section>
+        </section>
+        {:else}
+            <section >
+                <section >
+                    {#if busCols !== 0 && busRows !== 0}
+                        <h2 class ="h-6 text-white bg-forest-green text-center my-2">Business Class - prijs</h2>
+                        <div>
+                            <div class="grid grid-cols-{busCols} grid-rows-1 place-items-center gap-2 mb-2">
+                                {#each columnsLetterBus as colNrBus}
+                                    <p>{colNrBus}</p>
+                                {/each}
+                            </div>
+        
+                            <div class="grid grid-cols-{busCols} grid-rows-{busRows} place-items-center gap-2">
+                                {#each arrayBus as tellerBus}
+                                    {#each columnsLetterBus as colNr}
+                                        {#if colNr == ''}
+                                            <div>{tellerBus}</div>
+                                        {:else}
+                                            <div>
+                                                {#if includesMultiDimension(takenSeatsBus, [tellerBus, colNr])}
+                                                    <Seat row={tellerBus} column= {colNr} status = 'taken' person = {selectedPerson} classType = 'Business'/>
+                                                {:else}
+                                                    <Seat row={tellerBus} column= {colNr} status = 'free' person = {selectedPerson} classType = 'Business'/>
+                                                {/if}
+                                            </div>
+                                        {/if}   
+                                    {/each}
+                                {/each}
+                            </div>
+                        </div>
+        
+                    {/if}
+                
+                    <div class="mt-8 mb-8"></div>
+            
+                    {#if ecoCols !== 0 && ecoRows !== 0}
+                        <h2 class ="h-6 text-white bg-forest-green text-center my-2">Economy Class - prijs</h2>
+                        <div>
+                            <div>
+                                <div class="grid grid-cols-{ecoCols} grid-rows-1 place-items-center gap-2 mb-2">
+                                    {#each columnsLetterEco as colNrEco}
+                                        <p>{colNrEco}</p>
+                                    {/each}
+                                </div>
+                                <div class="grid grid-cols-{ecoCols} grid-rows-{ecoRows} place-items-center gap-2">
+                                    {#each arrayEco as tellerEco}
+                                        {#each columnsLetterEco as colNr }
+                                            {#if  colNr == ''}
+                                                <div>{tellerEco}</div>
+                                            {:else}
+                                                <div>
+                                                    {#if includesMultiDimension(takenSeatsEco,`[${tellerEco},'${colNr}']`)}
+                                                        <Seat row={tellerEco} column={colNr} status = 'taken' person = {selectedPerson} classType = 'Economy'/>
+                                                    {:else}
+                                                        <Seat row={tellerEco} column={colNr} status = 'free' person = {selectedPerson} classType = 'Economy'/>
+                                                    {/if}
+                                                </div>
+                                            {/if}
+                                        {/each}
+                                    {/each}
+                                </div>
+                            </div>
+                        </div>
+                    {/if}     
+            </section>
+        </section>
+        {/if}
+    
 </body>

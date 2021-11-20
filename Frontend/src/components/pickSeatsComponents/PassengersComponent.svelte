@@ -4,7 +4,7 @@
     export let fN:string
     export let lN:string
     export let seatNr:string
-    console.log(`${fN}`)
+    //console.log(`${fN}`)
 
     let selected:boolean = false
     let selectedSeat:string = ''
@@ -44,14 +44,14 @@
 
     const checkSelectedSeat = (currentStore) => {
         index = currentStore.findIndex(x => x.firstName === fN)
-        console.log(index)
+        //console.log(index)
         if(currentStore[index] === undefined){
             return
         }else{
-            console.log(fN)
+            //console.log(fN)
             selectedSeat = currentStore[index].seatNr
             test = true
-            console.log(selectedSeat, currentStore[index].firstName)
+            //console.log(selectedSeat, currentStore[index].firstName)
         }
     }
 
