@@ -6,6 +6,7 @@
     import {adultStore,  childrenStore} from '../../stores/travelerStore'
     import {FlightStore} from '../../stores/flightStore'
     import PassengersComponent from '../../components/pickSeatsComponents/PassengersComponent.svelte';
+    import { goto } from '$app/navigation';
 
     let economySeats: number  = 0
     let businessSeats: number = 0
@@ -129,7 +130,7 @@
         JSON.stringify(arr).includes(JSON.stringify(coords))
 
     
-    $adultStore = [{'title':'Mr','firstName':'Jelle','lastName':'Demets', 'seatNr':''},{'title':'Mr','firstName':'Robbe','lastName':'Reavens', 'seatNr':''}]
+    $adultStore = [{'title':'Mr','firstName':'Jelle','lastName':'Demets', 'seatNrDep':'','seatNrRet':''},{'title':'Mr','firstName':'Robbe','lastName':'Reavens', 'seatNrDep':'','seatNrRet':''}]
     console.log($adultStore)
 
     const nextFlight = () =>{
@@ -194,22 +195,45 @@
 
             <div class="grid grid-cols-3 grid-rows-1 mt-4">
                 {#each $adultStore as adult}
-                    <PassengersComponent 
-                    bind:selectedPerson = {selectedPerson}
-                    fN = {adult.firstName} 
-                    lN={adult.lastName} 
-                    seatNr = {adult.seatNr}/>
+                    {#if retourFlight}
+                        <PassengersComponent 
+                            bind:selectedPerson = {selectedPerson}
+                            fN = {adult.firstName} 
+                            lN={adult.lastName} 
+                            seatNrDep = {adult.seatNrDep}
+                            seatNrRet = {adult.seatNrRet}
+                            retour = {true}
+                        />
+                    {:else}
+                        <PassengersComponent 
+                            bind:selectedPerson = {selectedPerson}
+                            fN = {adult.firstName} 
+                            lN={adult.lastName} 
+                            seatNrDep = {adult.seatNrDep}
+                            seatNrRet = {adult.seatNrRet}
+                            retour = {false}
+                        />
+                    {/if}
                 {/each}
             </div>
-            <button
-                on:click={nextFlight}
-                type="submit"
-                class="flex p-4 mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-            >
+            {#if retourFlight}
+                <button
+                    type="submit"
+                    class="flex p-4 mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+                >
                 <!--submit button -->
-                Next flight
-            </button>
-
+                    Continue
+                </button>
+            {:else}
+                <button
+                    on:click={nextFlight}
+                    type="submit"
+                    class="flex p-4 mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+                >
+                    <!--submit button -->
+                    Next flight
+                </button>
+            {/if}
         </div>
 
         {#if retourFlight}
@@ -232,9 +256,9 @@
                                         {:else}
                                             <div>
                                                 {#if includesMultiDimension(takenSeatsBus, [tellerBus, colNr])}
-                                                    <Seat row={tellerBus} column= {colNr} status = 'taken' person = {selectedPerson} classType = 'Business'/>
+                                                    <Seat row={tellerBus} column= {colNr} status = 'taken' person = {selectedPerson} classType = 'Business' retour={true}/>
                                                 {:else}
-                                                    <Seat row={tellerBus} column= {colNr} status = 'free' person = {selectedPerson} classType = 'Business'/>
+                                                    <Seat row={tellerBus} column= {colNr} status = 'free' person = {selectedPerson} classType = 'Business' retour={true}/>
                                                 {/if}
                                             </div>
                                         {/if}   
@@ -264,9 +288,9 @@
                                             {:else}
                                                 <div>
                                                     {#if includesMultiDimension(takenSeatsEco,`[${tellerEco},'${colNr}']`)}
-                                                        <Seat row={tellerEco} column={colNr} status = 'taken' person = {selectedPerson} classType = 'Economy'/>
+                                                        <Seat row={tellerEco} column={colNr} status = 'taken' person = {selectedPerson} classType = 'Economy' retour={true}/>
                                                     {:else}
-                                                        <Seat row={tellerEco} column={colNr} status = 'free' person = {selectedPerson} classType = 'Economy'/>
+                                                        <Seat row={tellerEco} column={colNr} status = 'free' person = {selectedPerson} classType = 'Economy' retour={true}/>
                                                     {/if}
                                                 </div>
                                             {/if}
@@ -298,9 +322,9 @@
                                         {:else}
                                             <div>
                                                 {#if includesMultiDimension(takenSeatsBus, [tellerBus, colNr])}
-                                                    <Seat row={tellerBus} column= {colNr} status = 'taken' person = {selectedPerson} classType = 'Business'/>
+                                                    <Seat row={tellerBus} column= {colNr} status = 'taken' person = {selectedPerson} classType = 'Business' retour={false}/>
                                                 {:else}
-                                                    <Seat row={tellerBus} column= {colNr} status = 'free' person = {selectedPerson} classType = 'Business'/>
+                                                    <Seat row={tellerBus} column= {colNr} status = 'free' person = {selectedPerson} classType = 'Business' retour={false}/>
                                                 {/if}
                                             </div>
                                         {/if}   
@@ -330,9 +354,9 @@
                                             {:else}
                                                 <div>
                                                     {#if includesMultiDimension(takenSeatsEco,`[${tellerEco},'${colNr}']`)}
-                                                        <Seat row={tellerEco} column={colNr} status = 'taken' person = {selectedPerson} classType = 'Economy'/>
+                                                        <Seat row={tellerEco} column={colNr} status = 'taken' person = {selectedPerson} classType = 'Economy' retour={false}/>
                                                     {:else}
-                                                        <Seat row={tellerEco} column={colNr} status = 'free' person = {selectedPerson} classType = 'Economy'/>
+                                                        <Seat row={tellerEco} column={colNr} status = 'free' person = {selectedPerson} classType = 'Economy' retour={false}/>
                                                     {/if}
                                                 </div>
                                             {/if}

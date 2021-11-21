@@ -11,6 +11,8 @@
     ln:string
   }
   export let classType:string
+  export let retour:boolean
+
   let initials:string
   let selected:boolean = false
   let index:number = 0
@@ -28,27 +30,57 @@
       index = $adultStore.findIndex(x => x.firstName === person.fn, y => y.lastName === person.ln)
       let selectedSeat:string = `${row}${column}`
       let prevData = $adultStore[index]
-      let seat:string
-      if(prevData.seatNr == selectedSeat){
-        seat = ''
-      }else{
-        seat = selectedSeat
-      }
-      $adultStore[index] = {
+
+      let seatDep:string
+      let seatRet:string
+
+      if(retour){
+        if(prevData.seatNrRet == selectedSeat){
+          seatRet = ''
+        }
+        else seatRet = selectedSeat
+
+        $adultStore[index] = {
           title: prevData.title,
           firstName: prevData.firstName,
           lastName: prevData.lastName,
-          seatNr: seat,
+          seatNrDep: prevData.seatNrDep,
+          seatNrRet: seatRet,
           class: classType
       }
+
+      }else{
+        seatDep = selectedSeat
+        if(prevData.seatNrDep == selectedSeat){
+          seatDep = ''
+        }
+        else seatDep = selectedSeat
+
+        $adultStore[index] = {
+          title: prevData.title,
+          firstName: prevData.firstName,
+          lastName: prevData.lastName,
+          seatNrDep: seatDep,
+          seatNrRet: prevData.seatNrRet,
+          class: classType
+        }
+      }
       
-      //console.log($adultStore[index])
+      
+      
+      console.log($adultStore[index])
   }
 
   const checkSelected = (currentStore, index) => {
       let thisSeatNr = `${row}${column}`
-      if(currentStore[index].seatNr !== thisSeatNr) {
+      if(retour){
+        if(currentStore[index].seatNrRet !== thisSeatNr) {
           selected = false
+        }
+      }else{
+        if(currentStore[index].seatNrDep !== thisSeatNr) {
+          selected = false
+        }
       }
   }
 

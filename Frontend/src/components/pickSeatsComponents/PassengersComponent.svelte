@@ -3,13 +3,15 @@
     import {adultStore, childrenStore} from '../../stores/travelerStore'
     export let fN:string
     export let lN:string
-    export let seatNr:string
+    export let seatNrDep:string
+    export let seatNrRet:string
+    export let retour:boolean
     //console.log(`${fN}`)
 
     let selected:boolean = false
     let selectedSeat:string = ''
     let index:number = 0
-    let test:boolean = false
+    let seatSelected:boolean = false
     export let selectedPerson:{
         fn:string,
         ln:string
@@ -43,15 +45,24 @@
     }
 
     const checkSelectedSeat = (currentStore) => {
-        index = currentStore.findIndex(x => x.firstName === fN)
+        index = currentStore.findIndex(x => x.firstName === fN, y => y.lastName === lN)
+        console.log(retour)
+
+        if(retour){
+            seatSelected = false
+        }
+
         //console.log(index)
         if(currentStore[index] === undefined){
             return
         }else{
-            //console.log(fN)
-            selectedSeat = currentStore[index].seatNr
-            test = true
-            //console.log(selectedSeat, currentStore[index].firstName)
+            if(retour){
+                selectedSeat = currentStore[index].seatNrRet
+                seatSelected = true
+            }else{
+                selectedSeat = currentStore[index].seatNrDep
+                seatSelected = true
+            }
         }
     }
 
@@ -69,7 +80,7 @@
     <h1 class="text-forest-green text-2xl{selected?'font-bold text-2xl':''}" on:click={clicked}>{fN} {lN}</h1>
     {#if selectedSeat[index] === undefined}
         <p class="text-tomato-red">Select your seat</p>
-    {:else if test}
+    {:else if seatSelected}
         <p class="text-cyprus-green">Seat selected</p>
     {:else}
         <p class="text-tomato-red">Select your seat</p>
@@ -77,21 +88,21 @@
 </div>
 
 <div class="flex justify-center">
-    <div class="w-12 h-12 bg-forest-green">
+    <div class="w-12 h-12 {retour?'bg-white':'bg-forest-green'}">
         <h1
-        class="w-full flex h-full items-center justify-center text-white font-bold text-center text-xl"
-    >
-        {seatNr}
-    </h1>
+            class="w-full flex h-full items-center justify-center {retour?'text-forest-green':'text-white'} font-bold text-center text-xl"
+        >
+            {seatNrDep}
+        </h1>
     </div>
 </div>
 
 <div class="flex justify-center">
-    <div class="w-12 h-12 bg-white border border-forest-green ">
+    <div class="w-12 h-12 {retour?'bg-forest-green':'bg-white'}">
         <h1
-        class="w-full flex h-full items-center justify-center text-white font-bold text-center text-xl"
+            class="w-full flex h-full items-center justify-center {retour?'text-white':'text-forest-green'} font-bold text-center text-xl"
         >
-            {seatNr}
+            {seatNrRet}
         </h1>
     </div>
 </div>
