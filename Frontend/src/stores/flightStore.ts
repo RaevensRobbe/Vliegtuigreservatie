@@ -42,6 +42,6 @@ export const FlightStore = writable<{
   children: 0,
   adults: 0,
 
-  departureFlight: null,
-  retourFlight: null,
+  departureFlight: 1,
+  retourFlight: 3,
 })

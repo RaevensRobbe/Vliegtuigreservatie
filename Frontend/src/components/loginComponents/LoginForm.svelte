@@ -27,16 +27,41 @@
   async function loginWithGoogle() {
     try {
       const provider = new GoogleAuthProvider()
-      await signInWithPopup(auth, provider)
+      signInWithPopup(auth, provider)
+      .then(userCrendtial => {
+        const user = userCrendtial.user
+        const name = user.displayName.split(' ')
+        const data = {
+          id: user.uid,
+          firstname: name[0],
+          lastname: name[1],
+          email: user.email
+        }
+        post(data)
+        showLoginForm()
+      })
+
     } catch (error) {
       console.error(error)
     }
+  }
+
+  async function post(data) {
+    //  console.log(`post functie ${data}`)
+    const res = await fetch('http://localhost:3001/api/v1/user/createUser', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        data,
+      }),
+    })
   }
 
   const loginWithEmail = () => {
     signInWithEmailAndPassword(auth, email, pw)
       .then(userCredential => {
         const user = userCredential.user
+        showLoginForm()
       })
       .catch(error => {
         const errorCode = error.code
