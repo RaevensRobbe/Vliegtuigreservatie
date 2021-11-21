@@ -16,7 +16,7 @@
 
   function handleSubmit() {
     submitClicked = true
-    console.log('submit')
+    goto('/flight/pickSeats')
   }
 </script>
 
@@ -94,6 +94,7 @@
       <button
         type="submit"
         class="flex p-4 mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+        onClick={handleSubmit}
       >
         <!--submit button -->
         Continue
