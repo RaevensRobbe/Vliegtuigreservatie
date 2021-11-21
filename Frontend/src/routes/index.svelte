@@ -1,8 +1,6 @@
 <script lang="ts">
   //@ts-nocheck
-  import AppHeader from '../components/AppHeader.svelte'
   import Spinner from './../components/animations/spinner.svelte'
-  import AppFooter from '../components/AppFooter.svelte'
   import Intertitle from '../components/Intertitle.svelte'
   import FlightSearch from '../components/FlightSearch.svelte'
   import PopularDestinationCard from '../components/PopularDestinationCard.svelte'
