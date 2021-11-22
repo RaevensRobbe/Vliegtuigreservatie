@@ -1,106 +1,115 @@
 <script lang="ts">
+  //@ts-ignore
+  // import Barcode from 'svelte-barcode'
 </script>
 
-<div class="flex flex-col">
-  <div class="bg-forest-green p-4 flex text-white">
-    <h1 class="font-bold text-4xl">MCT Airlines</h1>
-    <div>
-      <p>Boarding pass</p>
-      <p>Economy</p>
+<div class="flex flex-col bg-white rounded-xl">
+  <div class="bg-forest-green grid grid-cols-7 text-white rounded-t-xl">
+    <h1 class="font-bold text-4xl col-span-3 p-4">MCT Airlines</h1>
+    <div class="col-span-2 my-auto">
+      <div class="p-4 grid grid-rows-2 justify-items-end">
+        <p>Boarding pass</p>
+        <p>Economy</p>
+      </div>
     </div>
-    <div>
-      <p>Boarding pass</p>
-      <p>Economy</p>
+    <div class="col-span-2 border-l-2 border-dashed">
+      <div class="p-4 grid grid-rows-2">
+        <p>Boarding pass</p>
+        <p>Economy</p>
+      </div>
     </div>
   </div>
-  <div class="flex">
-    <div class="p-4">
-      <div>qr code</div>
-    </div>
-    <div class="p-4">
-      <div>
-        <p>Passenger name</p>
-        <p>JOHN DOE</p>
-      </div>
-      <div>
-        <p>From</p>
-        <p>BRUSSEL-ZAVENTEM</p>
-      </div>
-      <div>
-        <p>To</p>
-        <p>MILAN-MALPENSA</p>
-      </div>
-    </div>
-    <div class="p-4">
-      <div>
-        <p>Date</p>
-        <p>09OCT</p>
-      </div>
-      <div>
-        <p>Flight</p>
-        <p>A 0137</p>
-      </div>
-      <div>
-        <p>Gate</p>
-        <p>12</p>
-      </div>
-    </div>
-    <div class="p-4">
-      <div>
-        <p>Time</p>
-        <p>08:20</p>
-      </div>
-      <div>
-        <p>Seat</p>
-        <p>4F</p>
-      </div>
-      <div>
-        <p>Board till</p>
-        <p>07:50</p>
-      </div>
-    </div>
-    <div class="grid grid-rows-4">
-      <div>
-        <p>Passenger name</p>
-        <p>JOHN DOE</p>
-      </div>
-      <div>
-        <p>From</p>
-        <p>BRUSSEL-ZAVENTEM</p>
-      </div>
-      <div>
-        <p>To</p>
-        <p>Milan Malpensa</p>
-      </div>
-      <div class="grid grid-cols-3">
+  <div class="grid grid-cols-7">
+    <div class="col-span-3 p-4">
+      <div class="grid grid-rows-3 gap-4">
         <div>
-          <div>
-            <p>Time</p>
-            <p>08:20</p>
-          </div>
-          <div>
-            <p>Gate</p>
-            <p>12</p>
-          </div>
+          <p class="text-sm">Passenger name</p>
+          <p class="text-black uppercase text-xl">John Doe</p>
         </div>
         <div>
-          <div>
-            <p>Seat</p>
-            <p>4F</p>
-          </div>
-          <div>
-            <p>Date</p>
-            <p>09OCT</p>
-          </div>
+          <p class="text-sm">From</p>
+          <p class="text-black uppercase text-xl">BRUSSEL-ZAVENTEM</p>
         </div>
         <div>
+          <p class="text-sm">To</p>
+          <p class="text-black uppercase text-xl">MILAN-MALPENSA</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-span-2 p-4">
+      <div class="grid grid-rows-3 gap-4">
+        <div class="grid grid-cols-2">
           <div>
-            <p>Board till</p>
-            <p>07:50</p>
+            <p class="text-sm">Date</p>
+            <p class="text-black uppercase text-xl">09OCT</p>
           </div>
           <div>
-            <p>Flight</p>
-            <p>A 0137</p>
+            <p class="text-sm">Time</p>
+            <p class="text-black uppercase text-xl">08:20</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-2">
+          <div>
+            <p class="text-sm">Flight</p>
+            <p class="text-black uppercase text-xl">A 0137</p>
+          </div>
+          <div>
+            <p class="text-sm">Seat</p>
+            <p class="text-black uppercase text-xl">4F</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-2">
+          <div>
+            <p class="text-sm">Gate</p>
+            <p class="text-black uppercase text-xl">12</p>
+          </div>
+          <div>
+            <p class="text-sm">Board till</p>
+            <p class="text-black uppercase text-xl">07:50</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-span-2 p-4 border-l-2 border-dashed">
+      <div class="grid grid-rows-5">
+        <div>
+          <p class="text-sm">Passenger name</p>
+          <p class="text-black uppercase">JOHN DOE</p>
+        </div>
+        <div>
+          <p class="text-sm">From</p>
+          <p class="text-black uppercase">BRUSSEL-ZAVENTEM</p>
+        </div>
+        <div>
+          <p class="text-sm">To</p>
+          <p class="text-black uppercase">Milan Malpensa</p>
+        </div>
+        <div class="grid grid-cols-3">
+          <div>
+            <p class="text-sm">Time</p>
+            <p class="text-black uppercase">08:20</p>
+          </div>
+          <div>
+            <p class="text-sm">Seat</p>
+            <p class="text-black uppercase">4F</p>
+          </div>
+          <div>
+            <p class="text-sm">Board till</p>
+            <p class="text-black uppercase">07:50</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-3">
+          <div>
+            <p class="text-sm">Gate</p>
+            <p class="text-black uppercase">12</p>
+          </div>
+          <div>
+            <p class="text-sm">Date</p>
+            <p class="text-black uppercase">09OCT</p>
+          </div>
+          <div>
+            <p class="text-sm">Flight</p>
+            <p class="text-black uppercase">A 0137</p>
           </div>
         </div>
       </div>

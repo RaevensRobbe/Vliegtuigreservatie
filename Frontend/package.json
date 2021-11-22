@@ -31,6 +31,8 @@
   },
   "type": "module",
   "dependencies": {
+    "svelte-barcode": "^1.1.0",
+    "svelte-qrcode": "^1.0.0",
     "vite": "^2.6.13"
   }
 }
