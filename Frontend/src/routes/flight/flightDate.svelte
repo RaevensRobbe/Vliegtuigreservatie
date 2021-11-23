@@ -1,18 +1,23 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
-
+  import { FlightStore } from './../../stores/FlightStore'
   import SelectFlightDate from './../../components/flightDateComponents/SelectFlightDate.svelte'
   import PassengerInput from './../../components/flightDateComponents/PassengerInput.svelte'
   import Intertitle from './../../components/Intertitle.svelte'
-  import { FlightStore } from './../../stores/flightStore'
+  import { onMount } from 'svelte'
 
   let flight = $FlightStore
+
+  onMount(async () => {
+    console.log($FlightStore)
+  })
 
   function goBack() {
     goto('/')
   }
 
   function handleSubmit() {
+    console.log(flight)
     goto('/flight/pickSeats')
   }
 </script>

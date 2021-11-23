@@ -2,9 +2,58 @@
   import { goto } from '$app/navigation'
   import FlightOverviewItem from './../../components/flightOverviewComponents/FlightOverviewItem.svelte'
   import Intertitle from './../../components/Intertitle.svelte'
+  import { FlightStore } from './../../stores/FlightStore'
+  import { travelerStore } from './../../stores/travelerStore'
 
   //@ts-nocheck
-  const retour = true
+  const retour: boolean = true
+
+  let travelers: any = $travelerStore
+
+  function calculatePrice() {
+    console.log($FlightStore)
+    // children pay 0.75 of the full price
+    let retourPrice: number
+    let totalRetourPrice: number = 0
+    if (retour) {
+      retourPrice = $FlightStore.retourPrice
+      travelers.forEach(traveler => {
+        let passengerPrice = 0
+        if (traveler.title === null) {
+          passengerPrice += retourPrice * 0.75
+        } else {
+          passengerPrice = retourPrice
+        }
+        if (traveler.classRet === 'Business') {
+          passengerPrice = passengerPrice * 4
+        }
+        console.log(totalRetourPrice)
+        totalRetourPrice += passengerPrice
+      })
+    }
+
+    let departurePrice: number = $FlightStore.departurePrice
+    let totalDeparturePrice: number = 0
+    travelers.forEach(traveler => {
+      let passengerPrice = 0
+      if (traveler.title === null) {
+        passengerPrice += departurePrice * 0.75
+      } else {
+        passengerPrice = departurePrice
+      }
+      if (traveler.classDep === 'Business') {
+        passengerPrice = passengerPrice * 4
+      }
+      totalDeparturePrice += passengerPrice
+    })
+
+    console.log(totalRetourPrice + ' + ' + totalDeparturePrice)
+
+    let totalprice: number =
+      Math.round((totalRetourPrice + totalDeparturePrice) * 100) / 100
+
+    return totalprice
+  }
 
   function goBack() {
     goto('/')
@@ -49,7 +98,9 @@
       {/if}
     </div>
     <div class="border-t-1">
-      <p class="m-4 text-2xl text-cyprus-green font-bold">Total: €898.36</p>
+      <p class="m-4 text-2xl text-cyprus-green font-bold">
+        Total: €{calculatePrice()}
+      </p>
     </div>
   </div>
 </section>

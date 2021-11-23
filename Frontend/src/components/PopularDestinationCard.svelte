@@ -1,6 +1,6 @@
 <script lang="ts">
   import type PopularDestination from './../models/PopularDestinationModel.type'
-  import { FlightStore } from './../stores/flightStore'
+  import { FlightStore } from './../stores/FlightStore'
   export let popularDestination: PopularDestination
 </script>
 

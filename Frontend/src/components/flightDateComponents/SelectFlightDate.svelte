@@ -1,7 +1,7 @@
 <script lang="ts">
   //@ts-nocheck
   import { get } from './../../composables/useApi'
-  import { FlightStore } from './../../stores/flightStore'
+  import { FlightStore } from './../../stores/FlightStore'
   import { onMount } from 'svelte'
   import {
     calculateFlightTimeLong,
@@ -136,8 +136,10 @@
         // set flightId in store
         if (retour === false) {
           $FlightStore.departureFlight = chosenflight.FlightId
+          $FlightStore.departurePrice = chosenflight.Price
         } else {
           $FlightStore.retourFlight = chosenflight.FlightId
+          $FlightStore.retourPrice = chosenflight.Price
         }
       }
     })

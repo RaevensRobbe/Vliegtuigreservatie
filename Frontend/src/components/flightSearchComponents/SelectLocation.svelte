@@ -1,7 +1,8 @@
 <script lang="ts">
   // @ts-nocheck
   import type Dest from './../../models/DestinationModel.type'
-  import { FlightStore } from './../../stores/flightStore'
+  import { FlightStore } from '../../stores/FlightStore'
+
   // export so parent receives the changes
   export let departureCity
   export let departureCountry

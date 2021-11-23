@@ -2,7 +2,7 @@
   //@ts-nocheck
   import { onMount } from 'svelte'
   import { get } from './../composables/useApi'
-  import { FlightStore } from './../stores/flightStore'
+  import { FlightStore } from '../stores/FlightStore'
   import SelectLocation from './flightSearchComponents/SelectLocation.svelte'
   import SelectTravelers from './flightSearchComponents/SelectTravelers.svelte'
   import { goto } from '$app/navigation'
@@ -103,6 +103,7 @@
     //if no errors then you can go to the next page
     if (Object.keys(errors).length === 0) {
       // console.log(flight)
+      console.log($FlightStore)
       goto('/flight/flightDate')
     }
   }

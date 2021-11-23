@@ -1,5 +1,5 @@
 <script>
-  import { FlightStore } from './../../stores/flightStore'
+  import { FlightStore } from './../../stores/FlightStore'
 
   export let toggleTravelers
   export let children
