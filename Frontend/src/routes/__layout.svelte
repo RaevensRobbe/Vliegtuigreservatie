@@ -1,10 +1,10 @@
 <script lang="ts">
-  import AppHeader from '../components/AppHeader.svelte'
+  import AppHeader from '../components/pageComponents/AppHeader.svelte'
   import { initializeApp } from 'firebase/app'
   import { onMount } from 'svelte'
   import authStore from '../stores/authStore'
   import { getAuth, User } from 'firebase/auth'
-  import AppFooter from '../components/AppFooter.svelte'
+  import AppFooter from '../components/pageComponents/AppFooter.svelte'
 
   onMount(() => {
     const firebaseConfig = {

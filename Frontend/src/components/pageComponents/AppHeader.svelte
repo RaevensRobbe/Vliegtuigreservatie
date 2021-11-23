@@ -3,10 +3,10 @@
   import { debug } from 'svelte/internal'
   import { goto } from '$app/navigation'
 
-  import LoginForm from '../components/loginComponents/LoginForm.svelte'
-  import authStore from '../stores/authStore'
-  import loginCompStore from '../stores/loginCompStore'
-  import RegisterForm from '../components/loginComponents/RegisterForm.svelte'
+  import LoginForm from '../loginComponents/LoginForm.svelte'
+  import authStore from '../../stores/authStore'
+  import loginCompStore from '../../stores/loginCompStore'
+  import RegisterForm from '../loginComponents/RegisterForm.svelte'
 
   let menuToggle = false
   let accountdropDown = false
