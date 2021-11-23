@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { childrenStore, adultStore } from './../../stores/travelerStore'
+  import { travelerStore } from './../../stores/travelerStore'
 
   export let adult: boolean
   export let personnumber: number
@@ -19,23 +19,23 @@
       // check if everything is filled otherwise dont add to storage
       if (value && firstName && lastName) {
         // check if adult exists in storage otherwise add to array
-        if ($adultStore[personnumber]) {
-          $adultStore[personnumber] = {
+        if ($travelerStore[personnumber]) {
+          $travelerStore[personnumber] = {
             title: value,
             firstName: firstName,
             lastName: lastName,
-            seatNrDep:'',
-            seatNrRet:''
+            seatNrDep: '',
+            seatNrRet: '',
           }
         } else {
-          $adultStore = [
-            ...$adultStore,
+          $travelerStore = [
+            ...$travelerStore,
             {
               title: value,
               firstName: firstName,
               lastName: lastName,
-              seatNrDep:'',
-              seatNrRet:''
+              seatNrDep: '',
+              seatNrRet: '',
             },
           ]
         }
@@ -44,28 +44,29 @@
       // check if everything is filled otherwise dont add to storage
       if (firstName && lastName) {
         // check if adult exists in storage otherwise add to array
-        if ($childrenStore[personnumber]) {
-          $childrenStore[personnumber] = {
+        if ($travelerStore[personnumber]) {
+          $travelerStore[personnumber] = {
+            title: null,
             firstName: firstName,
             lastName: lastName,
-            seatNrDep:'',
-            seatNrRet:''
+            seatNrDep: '',
+            seatNrRet: '',
           }
         } else {
-          $childrenStore = [
-            ...$childrenStore,
+          $travelerStore = [
+            ...$travelerStore,
             {
+              title: null,
               firstName: firstName,
               lastName: lastName,
-              seatNrDep:'',
-              seatNrRet:''
+              seatNrDep: '',
+              seatNrRet: '',
             },
           ]
         }
       }
     }
-    console.log($adultStore)
-    console.log($childrenStore)
+    console.log($travelerStore)
   }
 </script>
 
