@@ -4,6 +4,7 @@
   import Intertitle from './../../components/Intertitle.svelte'
   import { FlightStore } from './../../stores/FlightStore'
   import { travelerStore } from './../../stores/travelerStore'
+  import authStore from '../../stores/authStore'
 
   //@ts-nocheck
   const retour: boolean = true
@@ -56,7 +57,17 @@
   }
 
   function goBack() {
-    goto('/')
+    goto('/flight/pickSeats')
+  }
+
+  function handleSubmit() {
+    console.log('clicked')
+    if ($authStore.user !== null) {
+      goto('/flight/flightTicket')
+    } else {
+      //SHOW LOGIN FORM
+      console.log('LOGIN')
+    }
   }
 </script>
 
@@ -109,6 +120,7 @@
   <button
     type="submit"
     class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+    on:click={handleSubmit}
   >
     Go to payment
   </button>

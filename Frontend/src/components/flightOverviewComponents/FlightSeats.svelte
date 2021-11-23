@@ -10,10 +10,10 @@
     // children pay 0.75 of the full price
     let calculatedPrice = price
     if (title === null) {
-      console.log('check')
       calculatedPrice = price * 0.75
     }
     if (travelerclass === 'Business') {
+      console.log('Business')
       calculatedPrice = calculatedPrice * 4
     }
 

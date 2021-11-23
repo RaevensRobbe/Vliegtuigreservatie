@@ -50,10 +50,8 @@
       givenflights.forEach(flight => {
         let dateTime = flight.Date.split('T')[0]
         if (retour === true) {
-          //DYAMISCH MAKEN!!!!!!!!
           controldate = $FlightStore.retourDate
         } else {
-          //DYAMISCH MAKEN!!!!!!!!
           controldate = $FlightStore.departureDate
         }
         if (dateTime == controldate) {
@@ -137,9 +135,13 @@
         if (retour === false) {
           $FlightStore.departureFlight = chosenflight.FlightId
           $FlightStore.departurePrice = chosenflight.Price
+          $FlightStore.departureCoordinates = chosenflight.Start.Coordinates
+          $FlightStore.departureDate = chosenflight.Date
         } else {
           $FlightStore.retourFlight = chosenflight.FlightId
           $FlightStore.retourPrice = chosenflight.Price
+          $FlightStore.destinationCoordinates = chosenflight.Start.Coordinates
+          $FlightStore.retourDate = chosenflight.Date
         }
       }
     })

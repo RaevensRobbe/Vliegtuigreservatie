@@ -120,6 +120,7 @@ export function getTouchdownTime(
   } else {
     touchdownTimePartOne = touchdownHourNummer.toString()
   }
+  console.log(flightTime)
 
   return touchdownTimePartOne + ':' + touchdownTimePartTwo
 }

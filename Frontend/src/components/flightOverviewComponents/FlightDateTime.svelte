@@ -1,22 +1,45 @@
 <script lang="ts">
+  import { getTouchdownTime } from '../../utils/calculateDistance'
+
+  import { FlightStore } from './../../stores/FlightStore'
   export let retour: boolean
 
   let startLocation: string
   let endLocation: string
+  let flightDate: Date
+  let departureTime
 
   if (retour) {
-    startLocation = 'Milan Malpensa'
-    endLocation = 'Brussel-Zaventem'
+    startLocation = $FlightStore.destinationCity
+    endLocation = $FlightStore.departureCity
+    flightDate = $FlightStore.departureDate
   } else {
-    startLocation = 'Brussel-Zaventem'
-    endLocation = 'Milan Malpensa'
+    startLocation = $FlightStore.departureCity
+    endLocation = $FlightStore.destinationCity
+    flightDate = $FlightStore.retourDate
+  }
+
+  function dateFormat(date: Date) {
+    let datum = new Date(date)
+    return datum.toLocaleString('default', { day: '2-digit', month: 'long' })
+  }
+
+  function getDepartureTime(date: Date) {
+    let dateString = date.toString()
+    let datePartTwo = dateString.split('T')[1]
+    let dateHour = datePartTwo.split(':')[0]
+    let dateMinute = datePartTwo.split(':')[1]
+    departureTime = dateHour + ':' + dateMinute
+    return dateHour + ':' + dateMinute
   }
 </script>
 
 <section class="flex flex-col my-4 text-center">
-  <h1 class="font-bold text-forest-green text-lg">09 October</h1>
+  <h1 class="font-bold text-forest-green text-lg">
+    {dateFormat(flightDate)}
+  </h1>
   <div class="my-2">
-    <p class="font-bold text-cyprus-green">08:20</p>
+    <p class="font-bold text-cyprus-green">{getDepartureTime(flightDate)}</p>
     <p>{startLocation}</p>
   </div>
   <div class="self-center">
@@ -41,7 +64,13 @@
     </svg>
   </div>
   <div class="my-2">
-    <p class="font-bold text-cyprus-green">09:50</p>
+    <p class="font-bold text-cyprus-green">
+      {getTouchdownTime(
+        $FlightStore.departureCoordinates,
+        $FlightStore.destinationCoordinates,
+        departureTime,
+      )}
+    </p>
     <p>{endLocation}</p>
   </div>
 </section>
