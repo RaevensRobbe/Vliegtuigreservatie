@@ -8,7 +8,7 @@ export class Ticket {
     TicketId?: number
 
     @Column('simple-json')
-    Seat?: [{column:string,row:string}]
+    Seat?: [{class:string,column:string,row:number}]
 
     @Column('bool')
     Return?: boolean
