@@ -28,10 +28,14 @@ export class CountryController extends CrudController<Country> implements ICount
     }
 
     all = async (request: Request, response: Response, next: NextFunction) => {
-        const data = await this.repository.createQueryBuilder("country")
-        .select(["country.Name","country.CountryId"])
-        .getMany();
-        response.send(data); 
+        try{
+            const data = await this.repository.createQueryBuilder("country")
+            .select(["country.Name","country.CountryId"])
+            .getMany();
+            response.send(data); 
+        }catch(error){
+            response.status(500).send(error)
+        }
     }
 
     // popularDestinations = async (request:Request, response:Response, next:NextFunction) => {
@@ -56,16 +60,20 @@ export class CountryController extends CrudController<Country> implements ICount
     destination = async (request: Request, response: Response, next: NextFunction) => {
         try{
             const countryID = request.params.id
-            const data = await this.repository.createQueryBuilder("country")
-            .select(["country.Name","dest.Name","dest.DestinationId"])
-            .leftJoin("country.Dest", "dest")
-            .where("country.CountryId = :id", {id: 1})
-            .getMany();
-            console.log(data);
-            response.send(data);
+            let numberCID:number = +countryID 
+            if(countryID === null || numberCID === NaN) {
+                response.status(500).send('Parameter error')
+            }else{
+                const data = await this.repository.createQueryBuilder("country")
+                .select(["country.Name","dest.Name","dest.DestinationId"])
+                .leftJoin("country.Dest", "dest")
+                .where("country.CountryId = :id", {id: numberCID})
+                .getMany();
+                console.log(data);
+                response.send(data);
+            }
         }catch(error){
             response.status(500).send(error)
-            console.log('test')
         }
     }
 
