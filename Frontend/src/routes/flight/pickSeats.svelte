@@ -4,7 +4,7 @@
   import Intertitle from '../../components/Intertitle.svelte'
   import Seat from '../../components/pickSeatsComponents/SeatComponent.svelte'
   import { travelerStore } from '../../stores/travelerStore'
-  import { FlightStore } from '../../stores/flightStore'
+  import { FlightStore } from '../../stores/FlightStore'
   import PassengersComponent from '../../components/pickSeatsComponents/PassengersComponent.svelte'
   import { goto } from '$app/navigation'
 

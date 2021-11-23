@@ -4,18 +4,17 @@
   import { travelerStore } from './../../stores/travelerStore'
   export let retour
 
-  console.log($FlightStore)
-
   let travelers: any = $travelerStore
 
   function calculatePrice(travelerclass: string, price: number, title: string) {
     // children pay 0.75 of the full price
     let calculatedPrice = price
     if (title === null) {
+      console.log('check')
       calculatedPrice = price * 0.75
     }
     if (travelerclass === 'Business') {
-      calculatedPrice = price * 4
+      calculatedPrice = calculatedPrice * 4
     }
 
     calculatedPrice = Math.round(calculatedPrice * 100) / 100
