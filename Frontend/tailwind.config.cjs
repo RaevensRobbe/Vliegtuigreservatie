@@ -1,15 +1,15 @@
 module.exports = {
   mode: 'jit',
-  purge: {content:[
-    './src/**/*.svelte'],
-    safelist: ['grid-cols-5','grid-cols-7','grid-cols-11']
+  purge: {
+    content: ['./src/**/*.svelte'],
+    safelist: ['grid-cols-5', 'grid-cols-7', 'grid-cols-11'],
   },
-  
-  theme:{
-    extend:{
-      fontFamily:{
-        'Montserrat': ['Montserrat'],
-        },
+
+  theme: {
+    extend: {
+      fontFamily: {
+        Montserrat: ['Montserrat'],
+      },
       borderWidth: {
         1: '1px',
       },
@@ -26,6 +26,7 @@ module.exports = {
       },
       screens: {
         '3xl': '1921px',
+        xs: '490px',
       },
       backgroundImage: {
         'image-mainpage': "url('/HomePageImage.jpg')",

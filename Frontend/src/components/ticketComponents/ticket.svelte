@@ -1,18 +1,20 @@
 <script lang="ts">
   //@ts-ignore
-  // import Barcode from 'svelte-barcode'
+  import Barcode from 'svelte-barcode'
 </script>
 
 <div class="flex flex-col bg-white rounded-xl">
   <div class="bg-forest-green grid grid-cols-7 text-white rounded-t-xl">
-    <h1 class="font-bold text-4xl col-span-3 p-4">MCT Airlines</h1>
-    <div class="col-span-2 my-auto">
-      <div class="p-4 grid grid-rows-2 justify-items-end">
+    <h1 class="font-bold text-2xl md:text-4xl col-span-3 md:col-span-3 p-4">
+      MCT Airlines
+    </h1>
+    <div class="col-span-4 md:col-span-2 my-auto">
+      <div class="p-4 grid grid-rows-2 justify-items-end text-right">
         <p>Boarding pass</p>
         <p>Economy</p>
       </div>
     </div>
-    <div class="col-span-2 border-l-2 border-dashed">
+    <div class="col-span-2 border-l-2 border-dashed hidden md:grid">
       <div class="p-4 grid grid-rows-2">
         <p>Boarding pass</p>
         <p>Economy</p>
@@ -20,7 +22,7 @@
     </div>
   </div>
   <div class="grid grid-cols-7">
-    <div class="col-span-3 p-4">
+    <div class="col-span-7 md:col-span-3 p-4">
       <div class="grid grid-rows-3 gap-4">
         <div>
           <p class="text-sm">Passenger name</p>
@@ -34,9 +36,35 @@
           <p class="text-sm">To</p>
           <p class="text-black uppercase text-xl">MILAN-MALPENSA</p>
         </div>
+        <div
+          class="overflow-x-hidden hidden xs:block sm:block md:hidden lg:block"
+        >
+          <Barcode
+            value={'ticket barcode'}
+            elementTag={'canvas'}
+            width="2"
+            height="70"
+            displayValue="false"
+            background=""
+            marginLeft="0"
+            marginRight="0"
+          />
+        </div>
+        <div class="overflow-x-hidden xs:hidden sm:hidden md:block lg:hidden">
+          <Barcode
+            value={'svelte-barcode'}
+            elementTag={'canvas'}
+            width="1"
+            height="70"
+            displayValue="false"
+            background=""
+            marginLeft="0"
+            marginRight="0"
+          />
+        </div>
       </div>
     </div>
-    <div class="col-span-2 p-4">
+    <div class="col-span-7 md:col-span-2 p-4">
       <div class="grid grid-rows-3 gap-4">
         <div class="grid grid-cols-2">
           <div>
@@ -70,8 +98,10 @@
         </div>
       </div>
     </div>
-    <div class="col-span-2 p-4 border-l-2 border-dashed">
-      <div class="grid grid-rows-5">
+    <div
+      class="col-span-7 md:col-span-2 p-4 border-t-2 md:border-t-0 md:border-l-2 border-dashed"
+    >
+      <div class="grid grid-rows-3 gap-4">
         <div>
           <p class="text-sm">Passenger name</p>
           <p class="text-black uppercase">JOHN DOE</p>
