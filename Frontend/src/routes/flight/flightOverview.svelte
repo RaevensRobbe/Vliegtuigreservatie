@@ -3,8 +3,11 @@
   import FlightOverviewItem from './../../components/flightOverviewComponents/FlightOverviewItem.svelte'
   import Intertitle from './../../components/Intertitle.svelte'
   import { FlightStore } from './../../stores/FlightStore'
+  import loginCompStore from '../../stores/loginCompStore'
+  import paywallCompStore from '../../stores/paywallCompStore'
   import { travelerStore } from './../../stores/travelerStore'
   import authStore from '../../stores/authStore'
+  import Paywall from '../..//components/flightOverviewComponents/Paywall.svelte'
 
   //@ts-nocheck
   const retour: boolean = true
@@ -61,12 +64,21 @@
   }
 
   function handleSubmit() {
-    console.log('clicked')
     if ($authStore.user !== null) {
-      goto('/flight/flightTicket')
+      let paywallToggle = $paywallCompStore.showPaywall
+      paywallToggle = !paywallToggle
+      paywallCompStore.set({
+        showPaywall: paywallToggle,
+      })
+      // goto('/flight/flightTicket')
     } else {
       //SHOW LOGIN FORM
-      console.log('LOGIN')
+      let loginToggle = $loginCompStore.showLogin
+      loginToggle = !loginToggle
+      loginCompStore.set({
+        showRegister: false,
+        showLogin: loginToggle,
+      })
     }
   }
 </script>
@@ -101,7 +113,7 @@
 
 <section class="p-4 px-6 align-start">
   <Intertitle titleName="Overview" />
-  <div class="flex flex-col bg-white shadow-md">
+  <div class="flex flex-col bg-white shadow-md mx-6">
     <div class="grid {retour ? 'lg:grid-cols-2' : 'lg:grid-cols-1'} ">
       <FlightOverviewItem retour={false} />
       {#if retour}
@@ -116,7 +128,7 @@
   </div>
 </section>
 
-<section class="flex justify-center mb-4">
+<section class="flex justify-center my-4">
   <button
     type="submit"
     class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
@@ -125,3 +137,7 @@
     Go to payment
   </button>
 </section>
+
+{#if $paywallCompStore.showPaywall}
+  <Paywall />
+{/if}
