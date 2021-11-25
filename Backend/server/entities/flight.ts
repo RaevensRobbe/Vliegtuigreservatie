@@ -8,6 +8,9 @@ export class Flight {
     @PrimaryGeneratedColumn('uuid')
     FlightId?: string
 
+    @Column({unique: true})
+    Name?: string
+
     @Column('datetime')
     Date?: string
 
