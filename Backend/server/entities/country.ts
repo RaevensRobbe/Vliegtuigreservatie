@@ -4,7 +4,7 @@ import { Destination } from "./destination"
 @Entity('country')
 export class Country{
     @PrimaryGeneratedColumn('uuid')
-    CountryId?: number
+    CountryId?: string
 
     @Column({unique: true})
     Name?: string

@@ -6,7 +6,7 @@ import { Ticket } from "./ticket"
 @Entity('flight') // The table name
 export class Flight {
     @PrimaryGeneratedColumn('uuid')
-    FlightId?: number
+    FlightId?: string
 
     @Column('datetime')
     Date?: string
@@ -21,21 +21,21 @@ export class Flight {
     Ticket!: Ticket[]
 
     @Column({ name: 'destinationId' })
-    DestinationId?: number;
+    DestinationId?: string;
 
     @ManyToOne(() => Destination)
     @JoinColumn({ name: "destinationId"})
     Destination?: Destination
 
     @Column({ name: 'startId' })
-    StartId?: number;
+    StartId?: string;
 
     @ManyToOne(() => Destination)
     @JoinColumn({ name: "startId"})
     Start?: Destination
 
     @Column({ name: 'planeId' })
-    PlaneId?: number;
+    PlaneId?: string;
     
     @ManyToOne(() => Plane)
     @JoinColumn({ name: "planeId" })

@@ -5,8 +5,8 @@ import { User } from "./user"
 @Entity('ticket') // The table name
 export class Ticket {
     @PrimaryGeneratedColumn('uuid')
-    TicketId?: number
-
+    TicketId?: string
+    
     @Column('simple-json')
     Seat?: [{class:string,column:string,row:number}]
 

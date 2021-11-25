@@ -7,7 +7,7 @@ import { Flight } from "./flight"
 export class Destination {
 
     @PrimaryGeneratedColumn('uuid')
-    DestinationId?: number
+    DestinationId?: string
 
     @Column({unique: true})
     Name?: string
