@@ -1,9 +1,9 @@
-import { BaseEntity, Column, Entity, Index, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 import { Destination } from "./destination"
 
 @Entity('country')
 export class Country{
-    @PrimaryColumn({unique: true})
+    @PrimaryGeneratedColumn('uuid')
     CountryId?: number
 
     @Column({unique: true})

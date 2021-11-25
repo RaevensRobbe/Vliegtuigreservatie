@@ -59,15 +59,14 @@ export class CountryController extends CrudController<Country> implements ICount
     }
     destination = async (request: Request, response: Response, next: NextFunction) => {
         try{
-            const countryID = request.params.id
-            let numberCID:number = +countryID 
-            if(countryID === null || numberCID === NaN) {
+            const countryID = request.params.id 
+            if(countryID === null) {
                 response.status(500).send('Parameter error')
             }else{
                 const data = await this.repository.createQueryBuilder("country")
                 .select(["country.Name","dest.Name","dest.DestinationId"])
                 .leftJoin("country.Dest", "dest")
-                .where("country.CountryId = :id", {id: numberCID})
+                .where("country.CountryId = :id", {id: countryID})
                 .getMany();
                 console.log(data);
                 response.send(data);
