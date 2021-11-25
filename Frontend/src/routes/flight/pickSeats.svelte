@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { get } from '../../composables/useApi'
+  import { get } from '../../utils/useApi'
   import Intertitle from '../../components/Intertitle.svelte'
   import Seat from '../../components/pickSeatsComponents/SeatComponent.svelte'
   import { travelerStore } from '../../stores/travelerStore'

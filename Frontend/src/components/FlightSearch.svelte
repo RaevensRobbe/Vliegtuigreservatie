@@ -1,7 +1,7 @@
 <script lang="ts">
   //@ts-nocheck
   import { onMount } from 'svelte'
-  import { get } from './../composables/useApi'
+  import { get } from '../utils/useApi'
   import { FlightStore } from '../stores/FlightStore'
   import SelectLocation from './flightSearchComponents/SelectLocation.svelte'
   import SelectTravelers from './flightSearchComponents/SelectTravelers.svelte'

@@ -70,7 +70,6 @@
       paywallCompStore.set({
         showPaywall: paywallToggle,
       })
-      // goto('/flight/flightTicket')
     } else {
       //SHOW LOGIN FORM
       let loginToggle = $loginCompStore.showLogin

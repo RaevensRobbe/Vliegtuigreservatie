@@ -7,7 +7,7 @@
   import { onMount } from 'svelte'
   import type PopularDestination from '../models/PopularDestinationModel.type'
 
-  import { get } from './../composables/useApi'
+  import { get } from '../utils/useApi'
 
   let popDestinations: PopularDestination = []
   let popDestinationsLoaded: boolean = false

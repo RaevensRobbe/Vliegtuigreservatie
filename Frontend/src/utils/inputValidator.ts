@@ -61,5 +61,25 @@ export const strenghtValidator = (pw: string) => {
     return 3
   }
 }
+// Paywall validator
 
-// Flight search validator
+export const cardLength = (card: string) => {
+  if (card.length !== 19) {
+    return false
+  }
+  for (let i = 0; i < card.length; i++) {
+    if (card[i].toUpperCase() != card[i].toLowerCase()) {
+      return false
+    }
+  }
+  return true
+}
+
+export const cvcLength = (cvc: string) => {
+  console.log(cvc.length)
+  if (cvc.length === 3) {
+    return true
+  } else {
+    return false
+  }
+}

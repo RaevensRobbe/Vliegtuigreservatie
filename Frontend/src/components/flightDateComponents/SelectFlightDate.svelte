@@ -1,6 +1,6 @@
 <script lang="ts">
   //@ts-nocheck
-  import { get } from './../../composables/useApi'
+  import { get } from '../../utils/useApi'
   import { FlightStore } from './../../stores/FlightStore'
   import { onMount } from 'svelte'
   import {
