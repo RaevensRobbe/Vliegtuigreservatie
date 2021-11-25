@@ -25,7 +25,7 @@ export class TicketController extends CrudController<Ticket> implements ITicketC
         try{
             console.log(`data van frontend ${req.body}`);
             let result
-            if(req.body  === null) {
+            if(req.body === null) {
                 response.status(406).send('No data has been provided')
             }else{
                 let testSeats:{class:string, column:string, row: number} = 

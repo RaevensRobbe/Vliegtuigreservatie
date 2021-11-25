@@ -104,7 +104,9 @@ export class FlightController
         .innerJoin('f.Ticket', 't')
         .where('f.FlightId = :id', { id: nFlightID })
         .getOne()
+        console.log(data)
         response.send(data)
+        
     }catch (error) {
       response.status(500).send(error)
     }
