@@ -44,12 +44,7 @@ admin.initializeApp({
     // MIDDLEWARE
     app.use(express.json()); // for parsing application/json
     //app.use(authMiddleware);
-    app.use(cors()) //-> nu kan je hier de middleware activeren
-    //-> je maakte hier een typo het is accesS
-    // app.use(function (req,res,next){
-    //   res.setHeader("Acces-Control-Allow-Origin","http://localhost:5000");
-    //   next();
-    // })
+    app.use(cors()) 
     // ROUTES
     app.get('/', (request: Request, response: Response) => {
       response.send('Welcome, just know: you matter!');

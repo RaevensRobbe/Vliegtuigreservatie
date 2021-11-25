@@ -49,7 +49,6 @@ export class TicketController extends CrudController<Ticket> implements ITicketC
                     console.log('I have enterd')
 
                     const newTicket:Ticket ={
-                        TicketId: 500,
                         Seat: req.body.seatData,
                         Return: req.body.return,
                         ReturnDate: req.body.returnDate,
