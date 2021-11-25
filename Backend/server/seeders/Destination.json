@@ -1,6 +1,6 @@
 [
   {
-    "DestinationId": "1",
+    "DestinationId": "a604f5d6-78bb-4321-95f0-f2e29a20f316",
     "Name": "Colorado Springs",
     "Popularity": "17",
     "Abbreviation": "COS",
@@ -9,7 +9,7 @@
     "Country": "ca21c510-3459-4be3-9d02-b928b5b876dc"
   },
   {
-    "DestinationId": "2",
+    "DestinationId": "c3b56260-f9f9-447d-b5e2-e9b5f262fe90",
     "Name": "Jacksonville",
     "Popularity": "29",
     "Abbreviation": "JAX",
@@ -18,7 +18,7 @@
     "Country": "dd0e13ae-73a9-4df5-ad74-3e096756da41"
   },
   {
-    "DestinationId": "3",
+    "DestinationId": "39a0465c-efbc-4260-b7df-1272b3bc560b",
     "Name": "Amarillo",
     "Popularity": "47",
     "Abbreviation": "AMA",
@@ -27,7 +27,7 @@
     "Country": "bc96884e-69a1-4a40-9e4b-8a13c1accc1b"
   },
   {
-    "DestinationId": "4",
+    "DestinationId": "79a2a7c5-79d3-40e2-8d0e-d4d4633f1e2a",
     "Name": "San Bernardino",
     "Popularity": "18",
     "Abbreviation": "SBD",
@@ -36,7 +36,7 @@
     "Country": "8c35e121-51e6-4476-b2ce-683c747534ec"
   },
   {
-    "DestinationId": "5",
+    "DestinationId": "de6a5eb0-90e2-42d7-8261-e42bada22e2d",
     "Name": "Springfield",
     "Popularity": "45",
     "Abbreviation": "SPFD",
@@ -45,7 +45,7 @@
     "Country": "f6f62734-149c-4aee-af6a-37f2684d968a"
   },
   {
-    "DestinationId": "6",
+    "DestinationId": "7cf56384-5558-4201-8ec5-ecc1426c13bc",
     "Name": "Charlotte",
     "Popularity": "35",
     "Abbreviation": "CTL",
@@ -54,7 +54,7 @@
     "Country": "bb2f6a75-f25a-4fbb-8ddd-d026b5248d9f"
   },
   {
-    "DestinationId": "7",
+    "DestinationId": "2053ca72-15c7-42b3-bb32-ab1331a056a7",
     "Name": "Honolulu",
     "Popularity": "30",
     "Abbreviation": "HONO",
@@ -63,7 +63,7 @@
     "Country": "e3cb856b-dd08-40bf-aa10-be7b7a8ad44f"
   },
   {
-    "DestinationId": "8",
+    "DestinationId": "0ebccde9-6439-4e6b-9fee-bdfb1576a174",
     "Name": "Scottsdale",
     "Popularity": "46",
     "Abbreviation": "SCOT",
@@ -72,7 +72,7 @@
     "Country": "57ef0742-8c77-49b0-8dbe-2a701555d26b"
   },
   {
-    "DestinationId": "9",
+    "DestinationId": "182abffb-e2df-4871-a3d4-03b09bd05b3b",
     "Name": "Milwaukee",
     "Popularity": "25",
     "Abbreviation": "MKE",
@@ -81,7 +81,7 @@
     "Country": "4037d99c-be1f-4e68-a4e9-f02b377ecfab"
   },
   {
-    "DestinationId": "10",
+    "DestinationId": "42f61ae0-c5ef-4d51-b05e-c7896e90603d",
     "Name": "Richmond",
     "Popularity": "22",
     "Abbreviation": "RVA",
@@ -90,7 +90,7 @@
     "Country": "09757e95-b33b-4397-9a8c-fd79a7fdb9e5"
   },
   {
-    "DestinationId": "11",
+    "DestinationId": "ea0d5936-2682-4f6e-8ca8-26b5d40d9b7b",
     "Name": "Santa Ana",
     "Popularity": "22",
     "Abbreviation": "SA",
@@ -99,7 +99,7 @@
     "Country": "09757e95-b33b-4397-9a8c-fd79a7fdb9e5"
   },
   {
-    "DestinationId": "12",
+    "DestinationId": "5de7245a-f4a6-45d7-bbe6-bae78a5598c2",
     "Name": "San Jose",
     "Popularity": "15",
     "Abbreviation": "SJ",
@@ -108,7 +108,7 @@
     "Country": "dd0e13ae-73a9-4df5-ad74-3e096756da41"
   },
   {
-    "DestinationId": "13",
+    "DestinationId": "168739ce-a2d6-441b-ac63-76e3302456ae",
     "Name": "Albuquerque",
     "Popularity": "15",
     "Abbreviation": "ALBQ",
@@ -117,7 +117,7 @@
     "Country": "bc96884e-69a1-4a40-9e4b-8a13c1accc1b"
   },
   {
-    "DestinationId": "14",
+    "DestinationId": "8d4dd81c-5da3-45bf-a428-a9ebe241e798",
     "Name": "Norfolk",
     "Popularity": "42",
     "Abbreviation": "NK",
@@ -126,7 +126,7 @@
     "Country": "8c35e121-51e6-4476-b2ce-683c747534ec"
   },
   {
-    "DestinationId": "15",
+    "DestinationId": "454eedac-4430-4281-a73f-63da40a02729",
     "Name": "Kansas City",
     "Popularity": "20",
     "Abbreviation": "KS",
@@ -135,7 +135,7 @@
     "Country": "f6f62734-149c-4aee-af6a-37f2684d968a"
   },
   {
-    "DestinationId": "16",
+    "DestinationId": "1a35d1a4-80e6-4ad9-9ffd-3184f5bd91c2",
     "Name": "Oklahoma city",
     "Popularity": "34",
     "Abbreviation": "OK",
@@ -144,7 +144,7 @@
     "Country": "bb2f6a75-f25a-4fbb-8ddd-d026b5248d9f"
   },
   {
-    "DestinationId": "17",
+    "DestinationId": "f9b07a16-e7c1-45cd-9291-c05ff9293f1e",
     "Name": "Bakersfield",
     "Popularity": "47",
     "Abbreviation": "BFD",
@@ -153,7 +153,7 @@
     "Country": "e3cb856b-dd08-40bf-aa10-be7b7a8ad44f"
   },
   {
-    "DestinationId": "18",
+    "DestinationId": "8eb07ff5-67a7-4f32-b3ea-66b18d8b7c63",
     "Name": "Paris",
     "Popularity": "29",
     "Abbreviation": "PAR",
@@ -162,7 +162,7 @@
     "Country": "57ef0742-8c77-49b0-8dbe-2a701555d26b"
   },
   {
-    "DestinationId": "19",
+    "DestinationId": "c4cea5c4-bf7a-44c0-b26c-1d04b2ed4423",
     "Name": "Chicago",
     "Popularity": "42",
     "Abbreviation": "CHI",
@@ -171,7 +171,7 @@
     "Country": "4037d99c-be1f-4e68-a4e9-f02b377ecfab"
   },
   {
-    "DestinationId": "20",
+    "DestinationId": "d8dbec12-c6a3-49a5-bc34-c707488b0ab6",
     "Name": "Berlin",
     "Popularity": "10",
     "Abbreviation": "BE",
