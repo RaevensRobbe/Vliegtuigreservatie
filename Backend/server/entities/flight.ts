@@ -1,11 +1,11 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn} from "typeorm"
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm"
 import { Destination } from "./destination"
 import { Plane } from "./plane"
 import { Ticket } from "./ticket"
 
 @Entity('flight') // The table name
 export class Flight {
-    @PrimaryColumn({unique: true})
+    @PrimaryGeneratedColumn('uuid')
     FlightId?: number
 
     @Column('datetime')

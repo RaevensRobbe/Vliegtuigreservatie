@@ -36,8 +36,6 @@ export class FlightController
     try{
       const startID = request.params.Sid
       const destinationID = request.params.Did
-      const nStartID:number = +startID
-      const nDestID:number = +destinationID
 
       const data = await this.repository
         .createQueryBuilder('f')
@@ -51,8 +49,8 @@ export class FlightController
         ])
         .innerJoin('f.Destination', 'd')
         .innerJoin('f.Start', 's')
-        .where('f.StartId = :id', { id: nStartID })
-        .andWhere('f.DestinationId = :id2', { id2: nDestID })
+        .where('f.StartId = :id', { id: startID })
+        .andWhere('f.DestinationId = :id2', { id2: destinationID })
         .getMany()
       response.send(data)
     }catch(error){
@@ -62,8 +60,7 @@ export class FlightController
 
   one = async (request: Request, response: Response, next: NextFunction) => {
     try{
-      const flightId = request.params.id
-      const nFlightID:number = +flightId 
+      const flightID = request.params.id
 
       const data = await this.repository
         .createQueryBuilder('f')
@@ -84,7 +81,7 @@ export class FlightController
         ])
         .innerJoin('f.Destination', 'd')
         .innerJoin('f.Start', 's')
-        .where('f.FlightId = :id', { id: nFlightID })
+        .where('f.FlightId = :id', { id: flightID })
         .getOne()
         response.send(data)
     }catch(error){
@@ -94,15 +91,14 @@ export class FlightController
 
   seats = async (request: Request, response: Response, next: NextFunction) => {
     try {
-      const flightId = request.params.id
-      const nFlightID:number = +flightId 
+      const flightID = request.params.id
 
       const data = await this.repository
         .createQueryBuilder('f')
         .select(['f.FlightId', 'p.EconomySeats', 'p.BusinessSeats', 't.Seat'])
         .innerJoin('f.Plane', 'p')
         .innerJoin('f.Ticket', 't')
-        .where('f.FlightId = :id', { id: nFlightID })
+        .where('f.FlightId = :id', { id: flightID })
         .getOne()
         console.log(data)
         response.send(data)
@@ -118,14 +114,13 @@ export class FlightController
     next: NextFunction,
   ) => {
     try{
-      const flightId = request.params.id
-      const nFlightID:number = +flightId 
+      const flightID = request.params.id
 
       const data = await this.repository
         .createQueryBuilder('f')
         .select(['f.PlaneId', 'p.EconomySeats', 'p.BusinessSeats'])
         .innerJoin('f.Plane', 'p')
-        .where('f.FlightId = :id', { id: nFlightID })
+        .where('f.FlightId = :id', { id: flightID })
         .getOne()
       response.send(data)
     }catch(error){
