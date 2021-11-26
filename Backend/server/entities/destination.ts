@@ -1,4 +1,4 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 import { Point } from "geojson"
 import { Country } from "./country"
 import { Flight } from "./flight"
@@ -6,8 +6,8 @@ import { Flight } from "./flight"
 @Entity('destination') // The table name
 export class Destination {
 
-    @PrimaryColumn({unique: true})
-    DestinationId?: number
+    @PrimaryGeneratedColumn('uuid')
+    DestinationId?: string
 
     @Column({unique: true})
     Name?: string

@@ -39,15 +39,17 @@
       .then(userCredential => {
         const user = userCredential.user
 
-        $authStore.user.displayName = firstName
-        updateProfile(user, { displayName: firstName })
+        $authStore.user.displayName = `${firstName} ${lastName}`
+        updateProfile(user, { displayName: `${firstName} ${lastName}` })
           .then(() => {
             const data = {
               id: user.uid,
-              name: firstName,
+              firstname: firstName,
+              lastname: lastName,
               email: email,
             }
             post(data)
+            showRegisterForm()
           })
           .catch(error => {
             console.error(error)

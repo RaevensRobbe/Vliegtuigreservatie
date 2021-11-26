@@ -28,10 +28,14 @@ export class CountryController extends CrudController<Country> implements ICount
     }
 
     all = async (request: Request, response: Response, next: NextFunction) => {
-        const data = await this.repository.createQueryBuilder("country")
-        .select(["country.Name","country.CountryId"])
-        .getMany();
-        response.send(data); 
+        try{
+            const data = await this.repository.createQueryBuilder("country")
+            .select(["country.Name","country.CountryId"])
+            .getMany();
+            response.send(data); 
+        }catch(error){
+            response.status(500).send(error)
+        }
     }
 
     // popularDestinations = async (request:Request, response:Response, next:NextFunction) => {
@@ -40,31 +44,47 @@ export class CountryController extends CrudController<Country> implements ICount
     // }
 
     popularDestinations = async (request: Request, response: Response, next: NextFunction) => {
-        const data = await this.repository.createQueryBuilder("country")
-        .select(["country.Name","dest.Name","dest.Picture","dest.DestinationId","dest.Popularity","dest.Coordinates"])
-        .leftJoin("country.Dest", "dest")
-        .orderBy("dest.Popularity")
-        .limit(6)
-        .getMany();
-        response.send(data);
+        let data;
+            try{
+                data = await this.repository.createQueryBuilder("country")
+                .select(["country.Name","dest.Name","dest.Picture","dest.DestinationId","dest.Popularity","dest.Coordinates"])
+                .leftJoin("country.Dest", "dest")
+                .orderBy("dest.Popularity")
+                .limit(6)
+                .getMany();
+                response.send(data);
+            }catch(error){
+                response.status(500).send(error)
+            }
     }
-
     destination = async (request: Request, response: Response, next: NextFunction) => {
-        const countryID = request.params.id
-        console.log(countryID)
-        const data = await this.repository.createQueryBuilder("country")
-        .select(["country.Name","dest.Name","dest.DestinationId"])
-        .leftJoin("country.Dest", "dest")
-        .where("country.CountryId = :id", {id: 1})
-        .getMany();
-        response.send(data);
+        try{
+            const countryID = request.params.id 
+            if(countryID === null) {
+                response.status(500).send('Parameter error')
+            }else{
+                const data = await this.repository.createQueryBuilder("country")
+                .select(["country.Name","dest.Name","dest.DestinationId"])
+                .leftJoin("country.Dest", "dest")
+                .where("country.CountryId = :id", {id: countryID})
+                .getMany();
+                console.log(data);
+                response.send(data);
+            }
+        }catch(error){
+            response.status(500).send(error)
+        }
     }
 
     countiesDestinations = async (request: Request, response: Response, next: NextFunction) => {
-        const data = await this.repository.createQueryBuilder("c")
-        .select(["c.CountryId","c.Name","d.DestinationId","d.Name"])
-        .leftJoin("c.Dest","d")
-        .getMany();
-        response.send(data);
+        try{
+            const data = await this.repository.createQueryBuilder("c")
+            .select(["c.CountryId","c.Name","d.DestinationId","d.Name"])
+            .leftJoin("c.Dest","d")
+            .getMany();
+            response.send(data);
+        }catch(error){
+            response.status(500).send(error)
+        }
     }
 }

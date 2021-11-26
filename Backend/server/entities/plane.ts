@@ -1,10 +1,10 @@
-import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm"
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 import { Flight } from "./flight"
 
 @Entity('plane') // The table name
 export class Plane {
-    @PrimaryColumn({unique: true})
-    PlaneId?: number
+    @PrimaryGeneratedColumn('uuid')
+    PlaneId?: string
 
     @Column({unique: true})
     Name?: string

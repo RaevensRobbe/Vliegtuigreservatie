@@ -26,25 +26,47 @@ export class UserController extends CrudController<User> implements IUserControl
     }
 
     createUser = async (req: Request, res: Response, next: NextFunction) => {
+     try{
       console.log(`data van frontend ${req.body}`);
       let result:any
-      
-      const newUser:User ={
-        UserId : req.body.data.id,
-        Firstname: req.body.data.firstname,
-        Lastname: req.body.data.lastname,
-        Email: req.body.data.email,
-        Admin: false
-      } 
-      const newDbUser = await this.repository.create(newUser);
-      result = await this.repository.save(newDbUser); 
-      
 
-      return res.send(result)
+      if(req.body === null){
+        response.status(406).send('No data has been provided')
+      }else{
+        const newUser:User ={
+          UserId : req.body.data.id,
+          Firstname: req.body.data.firstname,
+          Lastname: req.body.data.lastname,
+          Email: req.body.data.email,
+          Admin: false
+        } 
+        console.log(req.body.data.id)
+        const checkUser = await this.repository.findOne({UserId:req.body.data.id})
+        console.log(checkUser)
+        if(checkUser === undefined) {
+          const newDbUser = await this.repository.create(newUser);
+          result = await this.repository.save(newDbUser); 
+          return res.send(result)
+        }
+        else{
+          console.log('Already exists')
+        }
+      }
+     }catch(error) {
+      response.status(500).send(error)
+     }
     }
 
     updateUser = async (req: Request, res: Response, next: NextFunction) => {
-      const update = await this.repository.update({UserId: req.params.id},{Firstname: req.body.data.firstname, Lastname: req.body.data.lastname, Email: req.body.data.email})
-      return res.send(update);
+      try{
+        if(req.body.data === null){
+          response.status(406).send('No data has been provided')
+        }else{
+          const update = await this.repository.update({UserId: req.params.id},{Firstname: req.body.data.firstname, Lastname: req.body.data.lastname, Email: req.body.data.email})
+          return res.send(update);
+        }
+      }catch(error){
+        response.status(500).send(error)
+      }
     }
 }

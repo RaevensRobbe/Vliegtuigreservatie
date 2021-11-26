@@ -24,19 +24,27 @@ export class DestinationController extends CrudController<Destination> implement
     }
 
     all = async (request: Request, response: Response, next: NextFunction) => {
-        const data = await this.repository.createQueryBuilder("dest")
-        .select(["dest.Name","dest.DestinationId"])
-        .getMany();
-        response.send(data); 
+        try{
+            const data = await this.repository.createQueryBuilder("dest")
+            .select(["dest.Name","dest.DestinationId"])
+            .getMany();
+            response.send(data); 
+        }catch(error){
+            response.status(500).send(error)
+        }
     }
 
     testing = async (request: Request, response: Response, next: NextFunction) => {
-        const data = await this.repository.createQueryBuilder("dest")
-        .select(["dest.Name"])
-        .innerJoinAndSelect("dest.Destination","flight")
-        .innerJoinAndSelect("dest.Start","flightS")
-        .getMany();
-        response.send(data);
+        try{
+            const data = await this.repository.createQueryBuilder("dest")
+            .select(["dest.Name"])
+            .innerJoinAndSelect("dest.Destination","flight")
+            .innerJoinAndSelect("dest.Start","flightS")
+            .getMany();
+            response.send(data);
+        }catch(error){
+            response.status(500).send(error)
+        }
     }
 
 }

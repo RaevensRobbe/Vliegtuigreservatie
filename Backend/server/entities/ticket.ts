@@ -1,14 +1,14 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryColumn } from "typeorm"
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 import { Flight } from "./flight"
 import { User } from "./user"
 
 @Entity('ticket') // The table name
 export class Ticket {
-    @PrimaryColumn({unique: true})
-    TicketId?: number
-
+    @PrimaryGeneratedColumn('uuid')
+    TicketId?: string
+    
     @Column('simple-json')
-    Seat?: [{column:string,row:string}]
+    Seat?: [{class:string,column:string,row:number}]
 
     @Column('bool')
     Return?: boolean

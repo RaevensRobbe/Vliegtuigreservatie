@@ -1,34 +1,34 @@
 [ 
   { 
-    "PlaneId":"1",
+    "PlaneId":"e1ebd896-c6cb-41c2-a795-69635f5c9873",
     "Name": "o2qCSr",
     "Type": "A220",
     "EconomySeats":"120",
     "BusinessSeats":"32"
   },
   {
-    "PlaneId": "2",
+    "PlaneId": "dedf4bf4-baf1-4641-8f7d-3835a7095cdb",
     "Name": "CeAgog",
     "Type": "A320",
     "EconomySeats": "150",
     "BusinessSeats": "32"
   },
   {
-    "PlaneId": "3",
+    "PlaneId": "04587609-8c1b-4369-bec7-5aa4bf5abde4",
     "Name": "QyYQfD",
     "Type": "A332",
     "EconomySeats": "150",
     "BusinessSeats": "32"
   },
   {
-    "PlaneId": "4",
+    "PlaneId": "95afb721-26c3-4fb6-9257-4b059582b582",
     "Name": "4PBrC8",
     "Type": "A350",
     "EconomySeats": "120",
     "BusinessSeats": "32"
   },
   {
-    "PlaneId": "5",
+    "PlaneId": "d6a3cf84-5f70-4233-b2a6-72d74e78a327",
     "Name": "bsU0Ey",
     "Type": "A380",
     "EconomySeats": "150",
