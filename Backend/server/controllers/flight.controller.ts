@@ -54,9 +54,13 @@ export class FlightController
         .where('f.StartId = :id', { id: startID })
         .andWhere('f.DestinationId = :id2', { id2: destinationID })
         .getMany()
-      response.send(data)
+      if(data.length === 0){
+        response.status(400).json({error:'Data is undefined'})
+      }else{
+        response.send(data)
+      }
     } catch (error) {
-      response.status(500).send(error)
+      response.status(500).json({error:{error}})
     }
   }
 
@@ -85,9 +89,14 @@ export class FlightController
         .innerJoin('f.Start', 's')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-      response.send(data)
+        console.log(data)
+        if(data === undefined){
+          response.status(400).json({error:'Data is undefined'})
+        }else{
+          response.send(data)
+        }
     } catch (error) {
-      response.status(500).send(error)
+      response.status(500).json({error:{error}})
     }
   }
 
@@ -102,14 +111,14 @@ export class FlightController
         .innerJoin('f.Ticket', 't')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-      console.log(data)
       if(data === undefined){
-        response.status(400).json({error: 'data is undefined'})
+        response.status(400).json({error: 'Data is undefined'})
       }
-      response.send(data)
-      
+      else{
+        response.send(data)
+      }
     } catch (error) {
-      response.status(500).send(error)
+      response.status(500).json({error:{error}})
     }
   }
 
@@ -123,10 +132,13 @@ export class FlightController
         .innerJoin('f.Plane', 'p')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-      console.log(data)
-      response.send(data)
+        if(data === undefined){
+          response.status(400).json({error: 'Data is undefined'})
+        }else{
+          response.send(data)
+        }
     } catch (error) {
-      response.status(500).send(error)
+      response.status(500).json({error:{error}})
     }
   }
 
@@ -144,9 +156,13 @@ export class FlightController
         .innerJoin('f.Plane', 'p')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-      response.send(data)
+        if(data === undefined){
+          response.status(400).json({error: 'Data is undefined'})
+        }else{
+          response.send(data)
+        }
     } catch (error) {
-      response.status(500).send(error)
+      response.status(500).json({error:{error}})
     }
   }
 
@@ -174,9 +190,13 @@ export class FlightController
         .where('t.User = :id', { id: userID })
         .distinct(true)
         .getMany()
-      response.send(data)
+        if(data.length === 0){
+          response.status(400).json({error:'Data is undefined'})
+        }else{
+          response.send(data)
+        }
     } catch (error) {
-      response.status(500).send(error)
+      response.status(500).json({error:{error}})
     }
   }
 }

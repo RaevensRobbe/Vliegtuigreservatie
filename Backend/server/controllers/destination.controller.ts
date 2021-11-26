@@ -28,9 +28,13 @@ export class DestinationController extends CrudController<Destination> implement
             const data = await this.repository.createQueryBuilder("dest")
             .select(["dest.Name","dest.DestinationId"])
             .getMany();
-            response.send(data); 
+            if(data.length === 0){
+                response.status(400).json({error:'Data is undefined'})
+              }else{
+                response.send(data)
+              }
         }catch(error){
-            response.status(500).send(error)
+            response.status(500).json({error:{error}})
         }
     }
 
@@ -41,9 +45,13 @@ export class DestinationController extends CrudController<Destination> implement
             .innerJoinAndSelect("dest.Destination","flight")
             .innerJoinAndSelect("dest.Start","flightS")
             .getMany();
-            response.send(data);
+            if(data.length === 0){
+                response.status(400).json({error:'Data is undefined'})
+              }else{
+                response.send(data)
+              }
         }catch(error){
-            response.status(500).send(error)
+            response.status(500).json({error:{error}})
         }
     }
 

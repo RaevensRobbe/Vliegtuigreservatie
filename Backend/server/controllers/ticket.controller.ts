@@ -26,23 +26,19 @@ export class TicketController extends CrudController<Ticket> implements ITicketC
             console.log(`data van frontend ${req.body}`);
             let result
             if(req.body === null) {
-                response.status(406).send('No data has been provided')
+                response.status(400).json({error:'No data has been provided'})
             }else{
 
                 if(req.body.seatData.length === 0){
-                    response.status(406).send('Seat data is missing')
+                    response.status(400).json({error:'Seat data is missing'})
                 }else if(req.body.persons.length === 0){
-                    response.status(406).send('Ticket needs to have a least 1 passenger')
-                }
-                else if(req.body.userId === undefined){
-                    //console.log(req.body.persons.length)
-                    response.status(406).send('UserId is missing')
+                    response.status(400).json({error:'Ticket needs to have a least 1 passenger'})
+                }else if(req.body.userId === undefined){
+                    response.status(400).json({error:'UserId is missing'})
                 }else if(req.body.flightId === undefined){
-                    response.status(406).send('FlightId is missing')
+                    response.status(400).json({error:'FlightId is missing'})
                 }
                 else{
-                    console.log('I have enterd')
-
                     const newTicket:Ticket ={
                         Seat: req.body.seatData,
                         Return: req.body.return,
@@ -55,20 +51,19 @@ export class TicketController extends CrudController<Ticket> implements ITicketC
                           },
                         Flight: req.body.flightId
                     } 
-                    console.log('I have made new Ticket')
+
                     const newDbTicket = await this.repository.create(newTicket);
                     result = await this.repository.save(newDbTicket); 
-                    console.log('result:')
-                    console.log(result)
+
                     if(result === {}){
-                        response.status(500).send("Something went wrong")
+                        response.status(500).json({error:"Something went wrong"})
                     }
                     return response.send(result)
                 }
             }
         }
         catch(error) {
-            response.status(500).send(error)
+            response.status(500).json({error:{error}})
         }
     }
 }
