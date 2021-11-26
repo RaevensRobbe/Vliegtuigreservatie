@@ -1,6 +1,6 @@
 <script lang="ts">
   //@ts-nocheck
-  import { get } from './../../composables/useApi'
+  import { get } from '../../utils/useApi'
 
   import { onMount } from 'svelte'
   import Spinner from './../../components/animations/spinner.svelte'

@@ -12,7 +12,7 @@
     emailValidator,
     strenghtValidator,
     confirmValidator,
-  } from '../../composables/inputValidator'
+  } from '../../utils/inputValidator'
 
   let email: string
   let firstName: string

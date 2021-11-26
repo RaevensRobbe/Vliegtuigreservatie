@@ -1,7 +1,7 @@
 <script lang="ts">
   //@ts-nocheck
-  import { get } from './../../composables/useApi'
-  import { FlightStore } from './../../stores/flightStore'
+  import { get } from '../../utils/useApi'
+  import { FlightStore } from './../../stores/FlightStore'
   import { onMount } from 'svelte'
   import {
     calculateFlightTimeLong,
@@ -50,10 +50,8 @@
       givenflights.forEach(flight => {
         let dateTime = flight.Date.split('T')[0]
         if (retour === true) {
-          //DYAMISCH MAKEN!!!!!!!!
           controldate = $FlightStore.retourDate
         } else {
-          //DYAMISCH MAKEN!!!!!!!!
           controldate = $FlightStore.departureDate
         }
         if (dateTime == controldate) {
@@ -136,8 +134,14 @@
         // set flightId in store
         if (retour === false) {
           $FlightStore.departureFlight = chosenflight.FlightId
+          $FlightStore.departurePrice = chosenflight.Price
+          $FlightStore.departureCoordinates = chosenflight.Start.Coordinates
+          $FlightStore.departureDate = chosenflight.Date
         } else {
           $FlightStore.retourFlight = chosenflight.FlightId
+          $FlightStore.retourPrice = chosenflight.Price
+          $FlightStore.destinationCoordinates = chosenflight.Start.Coordinates
+          $FlightStore.retourDate = chosenflight.Date
         }
       }
     })

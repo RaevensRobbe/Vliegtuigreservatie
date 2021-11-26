@@ -30,6 +30,7 @@ module.exports = {
       },
       backgroundImage: {
         'image-mainpage': "url('/HomePageImage.jpg')",
+        'debit-credit-card': "url('FreePlasticCreditDebitCardMockup.png')",
       },
       spacing: {
         18: '4.5rem',

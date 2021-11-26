@@ -10,10 +10,7 @@
   import { form } from 'svelte-forms'
   import { fade } from 'svelte/transition'
 
-  import {
-    requiredValidator,
-    emailValidator,
-  } from '../../composables/inputValidator'
+  import { requiredValidator, emailValidator } from '../../utils/inputValidator'
   import loginCompStore from '../../stores/loginCompStore'
 
   let validationError: boolean = true
@@ -27,20 +24,18 @@
   async function loginWithGoogle() {
     try {
       const provider = new GoogleAuthProvider()
-      signInWithPopup(auth, provider)
-      .then(userCrendtial => {
+      signInWithPopup(auth, provider).then(userCrendtial => {
         const user = userCrendtial.user
         const name = user.displayName.split(' ')
         const data = {
           id: user.uid,
           firstname: name[0],
           lastname: name[1],
-          email: user.email
+          email: user.email,
         }
         post(data)
         showLoginForm()
       })
-
     } catch (error) {
       console.error(error)
     }

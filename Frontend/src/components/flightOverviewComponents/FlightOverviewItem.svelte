@@ -1,6 +1,7 @@
 <script lang="ts">
   import FlightDateTime from './FlightDateTime.svelte'
   import FlightSeats from './FlightSeats.svelte'
+  import { FlightStore } from './../../stores/FlightStore'
   export let retour: boolean
 </script>
 
@@ -44,9 +45,9 @@
 
     <p class="font-bold text-2xl text-forest-green">
       {#if retour}
-        Milan - Brussel
+        {$FlightStore.destinationCity} - {$FlightStore.departureCity}
       {:else}
-        Brussel - Milan
+        {$FlightStore.departureCity} - {$FlightStore.destinationCity}
       {/if}
     </p>
   </div>

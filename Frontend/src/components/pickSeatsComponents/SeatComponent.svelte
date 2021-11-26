@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { init } from 'svelte/internal'
-  import { adultStore, childrenStore } from '../../stores/travelerStore'
+  import { travelerStore } from '../../stores/travelerStore'
 
   export let row: number
   export let column: string
@@ -27,12 +27,12 @@
   }
 
   const addSeatToStore = () => {
-    index = $adultStore.findIndex(
+    index = $travelerStore.findIndex(
       x => x.firstName === person.fn,
       y => y.lastName === person.ln,
     )
     let selectedSeat: string = `${row}${column}`
-    let prevData = $adultStore[index]
+    let prevData = $travelerStore[index]
 
     let seatDep: string
     let seatRet: string
@@ -42,7 +42,7 @@
         seatRet = ''
       } else seatRet = selectedSeat
 
-      $adultStore[index] = {
+      $travelerStore[index] = {
         title: prevData.title,
         firstName: prevData.firstName,
         lastName: prevData.lastName,
@@ -57,7 +57,7 @@
         seatDep = ''
       } else seatDep = selectedSeat
 
-      $adultStore[index] = {
+      $travelerStore[index] = {
         title: prevData.title,
         firstName: prevData.firstName,
         lastName: prevData.lastName,
@@ -68,7 +68,7 @@
       }
     }
 
-    console.log($adultStore[index])
+    // console.log($travelerStore[index])
   }
 
   const checkSelected = (currentStore, index) => {
@@ -84,7 +84,7 @@
     }
   }
 
-  let checkState = adultStore.subscribe(currentStore => {
+  let checkState = travelerStore.subscribe(currentStore => {
     checkSelected(currentStore, index)
   })
 </script>

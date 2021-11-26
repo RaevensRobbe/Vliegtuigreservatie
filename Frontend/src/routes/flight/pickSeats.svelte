@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { get } from '../../composables/useApi'
+  import { get } from '../../utils/useApi'
   import Intertitle from '../../components/Intertitle.svelte'
   import Seat from '../../components/pickSeatsComponents/SeatComponent.svelte'
-  import { adultStore, childrenStore } from '../../stores/travelerStore'
-  import { FlightStore } from '../../stores/flightStore'
+  import { travelerStore } from '../../stores/travelerStore'
+  import { FlightStore } from '../../stores/FlightStore'
   import PassengersComponent from '../../components/pickSeatsComponents/PassengersComponent.svelte'
   import { goto } from '$app/navigation'
 
@@ -38,20 +38,20 @@
 
   const miniOnMount = async () => {
     let getData: any
-    console.log(`FlightId: ${$FlightStore.departureFlight}`)
-    console.log($FlightStore)
+    // console.log(`FlightId: ${$FlightStore.departureFlight}`)
+    // console.log($FlightStore)
     if (retourFlight) {
       getData = await get(
         // `http://localhost:3001/api/v1/flight/seats/${$FlightStore.retourFlight}`,
         `http://localhost:3001/api/v1/flight/seats/1`,
       )
-      console.log(getData)
+      // console.log(getData)
     } else {
       getData = await get(
         // `http://localhost:3001/api/v1/flight/seats/${$FlightStore.departureFlight}`,
         `http://localhost:3001/api/v1/flight/seats/3`,
       )
-      console.log(getData)
+      // console.log(getData)
     }
 
     economySeats = getData.Plane.EconomySeats
@@ -76,7 +76,7 @@
       }
     }
 
-    console.log(takenSeatsEco)
+    // console.log(takenSeatsEco)
 
     if (economySeats !== 0) {
       gridLayout(economySeats, businessSeats)
@@ -106,7 +106,7 @@
     busGrid = [busRows, busCols]
     ecoGrid = [ecoRows, ecoCols]
 
-    console.log(busGrid, ecoGrid)
+    // console.log(busGrid, ecoGrid)
 
     test()
     test2()
@@ -133,26 +133,8 @@
   const includesMultiDimension = (arr, coords) =>
     JSON.stringify(arr).includes(JSON.stringify(coords))
 
-  $adultStore = [
-    {
-      title: 'Mr',
-      firstName: 'Jelle',
-      lastName: 'Demets',
-      seatNrDep: '',
-      seatNrRet: '',
-    },
-    {
-      title: 'Mr',
-      firstName: 'Robbe',
-      lastName: 'Reavens',
-      seatNrDep: '',
-      seatNrRet: '',
-    },
-  ]
-  console.log($adultStore)
-
   const nextFlight = () => {
-    console.log('clicked')
+    // console.log('clicked')
     clicked = !clicked
     retourFlight = !retourFlight
     miniOnMount()
@@ -259,23 +241,23 @@
       </div>
 
       <div class="grid grid-cols-3 grid-rows-1 mt-4">
-        {#each $adultStore as adult}
+        {#each $travelerStore as traveler}
           {#if retourFlight}
             <PassengersComponent
               bind:selectedPerson
-              fN={adult.firstName}
-              lN={adult.lastName}
-              seatNrDep={adult.seatNrDep}
-              seatNrRet={adult.seatNrRet}
+              fN={traveler.firstName}
+              lN={traveler.lastName}
+              seatNrDep={traveler.seatNrDep}
+              seatNrRet={traveler.seatNrRet}
               retour={true}
             />
           {:else}
             <PassengersComponent
               bind:selectedPerson
-              fN={adult.firstName}
-              lN={adult.lastName}
-              seatNrDep={adult.seatNrDep}
-              seatNrRet={adult.seatNrRet}
+              fN={traveler.firstName}
+              lN={traveler.lastName}
+              seatNrDep={traveler.seatNrDep}
+              seatNrRet={traveler.seatNrRet}
               retour={false}
             />
           {/if}

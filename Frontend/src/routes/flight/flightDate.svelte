@@ -1,21 +1,23 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
-
+  import { FlightStore } from './../../stores/FlightStore'
   import SelectFlightDate from './../../components/flightDateComponents/SelectFlightDate.svelte'
   import PassengerInput from './../../components/flightDateComponents/PassengerInput.svelte'
   import Intertitle from './../../components/Intertitle.svelte'
-  import { FlightStore } from './../../stores/flightStore'
+  import { onMount } from 'svelte'
 
   let flight = $FlightStore
 
-  let submitClicked: boolean = false
+  onMount(async () => {
+    console.log($FlightStore)
+  })
 
   function goBack() {
     goto('/')
   }
 
   function handleSubmit() {
-    submitClicked = true
+    console.log(flight)
     goto('/flight/pickSeats')
   }
 </script>
@@ -87,16 +89,16 @@
     {#if $FlightStore.children}
       <h1 class="text-forest-green font-bold text-xl mt-4">Children</h1>
       {#each { length: $FlightStore.children } as _, i}
-        <PassengerInput adult={false} personnumber={i} />
+        <PassengerInput adult={false} personnumber={$FlightStore.adults + i} />
       {/each}
     {/if}
     <div class="flex justify-center">
+      <!--submit button -->
       <button
         type="submit"
         class="flex p-4 mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
         onClick={handleSubmit}
       >
-        <!--submit button -->
         Continue
       </button>
     </div>
