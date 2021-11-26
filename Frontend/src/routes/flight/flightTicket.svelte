@@ -11,7 +11,6 @@
   let departureFlightData: any
   let retourFlightData: any
   let loaded: boolean = false
-  console.log($FlightStore)
 
   onMount(async () => {
     departureFlightData = await get(

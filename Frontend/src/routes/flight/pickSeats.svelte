@@ -39,7 +39,7 @@
   const miniOnMount = async () => {
     let getData: any
     // console.log(`FlightId: ${$FlightStore.departureFlight}`)
-    // console.log($FlightStore)
+    console.log($FlightStore)
     if (retourFlight) {
       getData = await get(
         // `http://localhost:3001/api/v1/flight/seats/${$FlightStore.retourFlight}`,
