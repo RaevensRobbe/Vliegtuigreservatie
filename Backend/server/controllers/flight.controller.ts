@@ -33,7 +33,7 @@ export class FlightController
     response: Response,
     next: NextFunction,
   ) => {
-    try{
+    try {
       const startID = request.params.Sid
       const destinationID = request.params.Did
 
@@ -44,7 +44,7 @@ export class FlightController
           'f.Date',
           'f.StartId',
           'f.DestinationId',
-          'f.Price'
+          'f.Price',
           'd.Name',
           's.Name',
         ])
@@ -54,13 +54,13 @@ export class FlightController
         .andWhere('f.DestinationId = :id2', { id2: destinationID })
         .getMany()
       response.send(data)
-    }catch(error){
+    } catch (error) {
       response.status(500).send(error)
     }
   }
 
   one = async (request: Request, response: Response, next: NextFunction) => {
-    try{
+    try {
       const flightID = request.params.id
 
       const data = await this.repository
@@ -84,8 +84,8 @@ export class FlightController
         .innerJoin('f.Start', 's')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-        response.send(data)
-    }catch(error){
+      response.send(data)
+    } catch (error) {
       response.status(500).send(error)
     }
   }
@@ -101,10 +101,9 @@ export class FlightController
         .innerJoin('f.Ticket', 't')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-        console.log(data)
-        response.send(data)
-        
-    }catch (error) {
+      console.log(data)
+      response.send(data)
+    } catch (error) {
       response.status(500).send(error)
     }
   }
@@ -114,7 +113,7 @@ export class FlightController
     response: Response,
     next: NextFunction,
   ) => {
-    try{
+    try {
       const flightID = request.params.id
 
       const data = await this.repository
@@ -124,7 +123,7 @@ export class FlightController
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
       response.send(data)
-    }catch(error){
+    } catch (error) {
       response.status(500).send(error)
     }
   }
@@ -134,7 +133,7 @@ export class FlightController
     response: Response,
     next: NextFunction,
   ) => {
-    try{
+    try {
       const userID = request.params.id
       const data = await this.repository
         .createQueryBuilder('f')
@@ -154,7 +153,7 @@ export class FlightController
         .distinct(true)
         .getMany()
       response.send(data)
-    }catch(error){
+    } catch (error) {
       response.status(500).send(error)
     }
   }
