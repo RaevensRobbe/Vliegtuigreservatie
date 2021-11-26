@@ -6,6 +6,7 @@
   import Spinner from './../../components/animations/spinner.svelte'
   import Intertitle from './../../components/Intertitle.svelte'
   import BookingFlight from './../../components/bookingOverviewComponents/bookingFlight.svelte'
+  import NoBooking from './../..//components/bookingOverviewComponents/noBooking.svelte'
   import { BookingStore } from './../../stores/overviewBookingStore'
 
   let loaded = false
@@ -24,9 +25,8 @@
 
   onMount(async () => {
     bookings = await get(
-      'http://localhost:3001/api/v1/flight/userFlights/tT6Rcds5rlMFLpRcaSGOtH0ttYW2',
+      'http://localhost:3001/api/v1/flight/userFlights/tT6Rcds5rlMFLpRcaSGOtH0ttYW2', // tT6Rcds5rlMFLpRcaSGOtH0ttYW2 => user with most data
     )
-
     bookings.forEach(booking => {
       let bookingDate = new Date(booking.Date)
       if (bookingDate > Date.now()) {
@@ -41,18 +41,20 @@
 </script>
 
 {#if loaded}
-  {#if futureBookings}
-    <section class="m-4 px-6">
-      <Intertitle titleName="Future bookings" />
+  <section class="m-4 px-6">
+    <Intertitle titleName="Future bookings" />
+    {#if futureBookings.length > 0}
       {#each futureBookings as booking}
         <BookingFlight bookingData={booking} />
       {/each}
-    </section>
-  {/if}
+    {:else}
+      <NoBooking booking={'future'} />
+    {/if}
+  </section>
 
-  {#if previousBookings}
-    <section class="m-4 px-6">
-      <Intertitle titleName="Previous bookings" />
+  <section class="m-4 px-6">
+    <Intertitle titleName="Previous bookings" />
+    {#if previousBookings.length > 0}
       {#each previousBookings as booking}
         {#if new Date(booking.Date).getFullYear() >= $BookingStore.previousYear}
           <BookingFlight bookingData={booking} />
@@ -66,8 +68,10 @@
           <BookingFlight bookingData={booking} />
         {/if}
       {/each}
-    </section>
-  {/if}
+    {:else}
+      <NoBooking booking={'previous'} />
+    {/if}
+  </section>
 {:else}
   <Spinner />
 {/if}
