@@ -44,6 +44,7 @@ export class FlightController
           'f.Date',
           'f.StartId',
           'f.DestinationId',
+          'f.Price'
           'd.Name',
           's.Name',
         ])
