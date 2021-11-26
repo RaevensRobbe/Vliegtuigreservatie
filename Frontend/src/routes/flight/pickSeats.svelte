@@ -36,22 +36,38 @@
   let retourFlight: boolean = false
   let clicked: boolean = false
 
+  // $travelerStore = [{
+  //   title: 'Mr',
+  //   firstName:'Jelle',
+  //   lastName: 'Demets',
+  //   seatNrDep:'',
+  //   classDep: '',
+  //   seatNrRet:'',
+  //   classRet:''
+  // }]
+
   const miniOnMount = async () => {
     let getData: any
     // console.log(`FlightId: ${$FlightStore.departureFlight}`)
     // console.log($FlightStore)
     if (retourFlight) {
       getData = await get(
-        // `http://localhost:3001/api/v1/flight/seats/${$FlightStore.retourFlight}`,
-        `http://localhost:3001/api/v1/flight/seats/65ccb031-dd5c-4ce8-af07-dadc5c01274d`,
+        `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.retourFlight}`,
       )
-      // console.log(getData)
+      console.log(getData)
+      if(getData.error === "data is undefined"){
+        getData = await get(`http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.retourFlight}`)
+      }
+      console.log(getData)
     } else {
       getData = await get(
-        // `http://localhost:3001/api/v1/flight/seats/${$FlightStore.departureFlight}`,
-        `http://localhost:3001/api/v1/flight/seats/6c7b3102-01bf-4ae6-83b7-dd49c9a61c3c`,
+        `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.departureFlight}`,
       )
-      // console.log(getData)
+      console.log(getData)
+      if(getData.error === "data is undefined"){
+        getData = await get(`http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.departureFlight}`)
+      }
+      console.log(getData)
     }
 
     economySeats = getData.Plane.EconomySeats
@@ -65,7 +81,8 @@
       takenSeatsEco = []
     }
 
-    for (i of getData.Ticket) {
+    if(getData.Ticket !== undefined) {
+      for (i of getData.Ticket) {
       //console.log(i)
       for (j of i.Seat) {
         if (j.class == 'Business') {
@@ -74,6 +91,7 @@
           takenSeatsEco.push([j.row, j.column])
         }
       }
+    }
     }
 
     // console.log(takenSeatsEco)

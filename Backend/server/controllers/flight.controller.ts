@@ -23,7 +23,8 @@ export class FlightController
     this.router.get('/:id', this.one)
     this.router.post('', this.save)
     this.router.get('/flightInfo/:Sid/:Did', this.flightInfo)
-    this.router.get('/seats/:id', this.seats)
+    this.router.get('/seatsInfo/:id', this.seatsInfo)
+    this.router.get('/takenSeats/:id', this.takenSeats)
     this.router.get('/plane/:id', this.getPlane)
     this.router.get('/userFlights/:id', this.getUserFlights)
   }
@@ -90,7 +91,7 @@ export class FlightController
     }
   }
 
-  seats = async (request: Request, response: Response, next: NextFunction) => {
+  takenSeats = async (request: Request, response: Response, next: NextFunction) => {
     try {
       const flightID = request.params.id
 
@@ -99,6 +100,27 @@ export class FlightController
         .select(['f.FlightId', 'p.EconomySeats', 'p.BusinessSeats', 't.Seat'])
         .innerJoin('f.Plane', 'p')
         .innerJoin('f.Ticket', 't')
+        .where('f.FlightId = :id', { id: flightID })
+        .getOne()
+      console.log(data)
+      if(data === undefined){
+        response.status(400).json({error: 'data is undefined'})
+      }
+      response.send(data)
+      
+    } catch (error) {
+      response.status(500).send(error)
+    }
+  }
+
+  seatsInfo = async (request: Request, response: Response, next: NextFunction) => {
+    try {
+      const flightID = request.params.id
+
+      const data = await this.repository
+        .createQueryBuilder('f')
+        .select(['f.FlightId', 'p.EconomySeats', 'p.BusinessSeats'])
+        .innerJoin('f.Plane', 'p')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
       console.log(data)
