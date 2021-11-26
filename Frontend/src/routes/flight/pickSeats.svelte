@@ -43,13 +43,13 @@
     if (retourFlight) {
       getData = await get(
         // `http://localhost:3001/api/v1/flight/seats/${$FlightStore.retourFlight}`,
-        `http://localhost:3001/api/v1/flight/seats/1`,
+        `http://localhost:3001/api/v1/flight/seats/65ccb031-dd5c-4ce8-af07-dadc5c01274d`,
       )
       // console.log(getData)
     } else {
       getData = await get(
         // `http://localhost:3001/api/v1/flight/seats/${$FlightStore.departureFlight}`,
-        `http://localhost:3001/api/v1/flight/seats/3`,
+        `http://localhost:3001/api/v1/flight/seats/6c7b3102-01bf-4ae6-83b7-dd49c9a61c3c`,
       )
       // console.log(getData)
     }
