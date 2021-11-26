@@ -28,13 +28,8 @@ export class TicketController extends CrudController<Ticket> implements ITicketC
             if(req.body === null) {
                 response.status(406).send('No data has been provided')
             }else{
-                let testSeats:{class:string, column:string, row: number} = 
-                {
-                    class:req.body.seatData.class,
-                    column:req.body.seatData.column,
-                    row: req.body.seatData.row
-                };
-                if(testSeats.class === undefined|| testSeats.column === undefined || testSeats.row === undefined){
+
+                if(req.body.seatData.length === 0){
                     response.status(406).send('Seat data is missing')
                 }else if(req.body.persons.length === 0){
                     response.status(406).send('Ticket needs to have a least 1 passenger')
@@ -56,7 +51,7 @@ export class TicketController extends CrudController<Ticket> implements ITicketC
                         Rating: 0, 
                         Review:'',
                         User:    {
-                            UserId: "R8ba4Fy2gWY04gq4z3NSuQegaYQ2",
+                            UserId: req.body.userId,
                           },
                         Flight: req.body.flightId
                     } 
