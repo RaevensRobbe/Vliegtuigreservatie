@@ -1,11 +1,13 @@
 <script lang="ts">
+  import { goto } from '$app/navigation'
+
+  import { bookingTicket } from '../../stores/flightStore'
   import {
     calculateFlightTimeLong,
     getTouchdownTime,
   } from './../../utils/calculateDistance'
 
   export let bookingData: any
-
   let date = new Date(bookingData.Date)
   let departureTime = getDepartureTime()
 
@@ -26,10 +28,16 @@
     let month = date.toLocaleString('default', { month: 'long' })
     return month
   }
+
+  function navigate() {
+    $bookingTicket.ticketId = bookingData.Ticket[0].TicketId
+    goto('/bookings/flightTicket')
+  }
 </script>
 
 <div
-  class="my-6 md:my-4 grid grid-rows-5 md:grid-rows-none md:grid-cols-6 bg-white shadow-md text-center transform duration-300 motion-safe:hover:scale-105 hover:shadow-lg md:mx-6"
+  class="my-6 md:my-4 grid grid-rows-5 md:grid-rows-none md:grid-cols-6 bg-white shadow-md text-center transform duration-300 motion-safe:hover:scale-105 hover:shadow-lg md:mx-6 cursor-pointer"
+  on:click={navigate}
 >
   <div class="flex md:flex-col justify-center my-auto md:p-4">
     <p class="font-bold text-lg lg:text-2xl text-forest-green mr-1 md:mr-0">
@@ -86,6 +94,6 @@
     </div>
   </div>
   <p class=" flex font-bold text-lg lg:text-2xl justify-center my-auto">
-    €449.18
+    See tickets
   </p>
 </div>

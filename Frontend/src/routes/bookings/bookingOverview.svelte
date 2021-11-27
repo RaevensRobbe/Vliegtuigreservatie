@@ -4,13 +4,13 @@
 
   import { onMount } from 'svelte'
   import Spinner from './../../components/animations/spinner.svelte'
-  import Intertitle from './../../components/Intertitle.svelte'
+  import authStore from '../../stores/authStore'
+  import Intertitle from '../../components/Intertitle.svelte'
   import BookingFlight from './../../components/bookingOverviewComponents/bookingFlight.svelte'
-  import NoBooking from './../..//components/bookingOverviewComponents/noBooking.svelte'
+  import NoBooking from './../../components/bookingOverviewComponents/noBooking.svelte'
   import { BookingStore } from './../../stores/overviewBookingStore'
 
   let loaded = false
-
   let bookings: any = []
 
   let futureBookings: any = []
@@ -18,14 +18,9 @@
 
   let previousDate = new Date().getFullYear() + 1
 
-  function calculateYear(bookingDate: Date) {
-    previousDate = new Date(bookingDate).getFullYear()
-    console.log(previousDate)
-  }
-
   onMount(async () => {
     bookings = await get(
-      'http://localhost:3001/api/v1/flight/userFlights/tT6Rcds5rlMFLpRcaSGOtH0ttYW2', // tT6Rcds5rlMFLpRcaSGOtH0ttYW2 => user with most data
+      `http://localhost:3001/api/v1/flight/userFlights/${$authStore.user.uid}`, // tT6Rcds5rlMFLpRcaSGOtH0ttYW2 => user with most data
     )
     bookings.forEach(booking => {
       let bookingDate = new Date(booking.Date)
