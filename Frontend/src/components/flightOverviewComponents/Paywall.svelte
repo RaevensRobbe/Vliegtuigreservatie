@@ -5,13 +5,18 @@
     requiredValidator,
   } from '../../utils/inputValidator'
   import paywallCompStore from '../../stores/paywallCompStore'
+  import authStore from '../../stores/authStore'
+  import { travelerStore } from '../../stores/travelerStore'
+  import { FlightStore } from '../../stores/FlightStore'
   import { goto } from '$app/navigation'
+  import { post } from '../../utils/useApi'
   let number
   let name = ''
   let cvc = ''
   let expiry = ''
   let prevLength = 0
-
+  let retourCheck: boolean = false
+  let departureCheck: boolean = false
   let errors: any = {}
 
   function onSubmit() {
@@ -65,6 +70,99 @@
         return
       }
     }
+
+    //departure seats
+    let seatDataArrayDeparture = []
+    $travelerStore.forEach(traveler => {
+      seatDataArrayDeparture.push({
+        class: traveler.classDep,
+        column: traveler.seatNrDep.charAt(0),
+        row: traveler.seatNrDep.charAt(1),
+      })
+    })
+
+    //retour seats
+    let seatDataArrayRetour = []
+    if ($FlightStore.retourFlight) {
+      $travelerStore.forEach(traveler => {
+        seatDataArrayRetour.push({
+          class: traveler.classRet,
+          column: traveler.seatNrRet.charAt(0),
+          row: traveler.seatNrRet.charAt(1),
+        })
+      })
+    }
+
+    //passengers
+    let travelerArray = []
+    $travelerStore.forEach(traveler => {
+      travelerArray.push(`${traveler.firstName} ${traveler.lastName}`)
+    })
+
+    //Submit post data to database
+    let dataDeparture = {
+      seatData: seatDataArrayDeparture,
+      return: false,
+      persons: travelerArray,
+      userId: $authStore.user.uid,
+      flightId: $FlightStore.departureFlight,
+    }
+
+    let dataRetour
+    if ($FlightStore.retourFlight) {
+      dataRetour = {
+        seatData: seatDataArrayRetour,
+        return: true,
+        persons: travelerArray,
+        userId: $authStore.user.uid,
+        flightId: $FlightStore.retourFlight,
+      }
+    }
+
+    addToDB(dataDeparture, false)
+    addToDB(dataRetour, true)
+
+    async function addToDB(data: any, retour: boolean) {
+      let call: any = await post(
+        'http://localhost:3001/api/v1/ticket/createTicket',
+        data,
+      )
+      // console.log(call.success)
+      // if (retour) {
+      //   if (call.succes) {
+      //     retourCheck = true
+      //     console.log('go to next page')
+      //     goToNextPage()
+      //   }
+      // } else {
+      //   if (call.succes) {
+      //     departureCheck = true
+      //     console.log('go to next page')
+      //     goToNextPage()
+      //   }
+      // }
+    }
+
+    // async function goToNextPage() {
+    //   console.log(`retour ${$FlightStore.retourFlight}`)
+    //   console.log(`departure check ${departureCheck}`)
+    //   console.log(`retour check ${retourCheck}`)
+
+    //   if ($FlightStore.retourFlight) {
+    //     console.log(`retour ${$FlightStore.retourFlight}`)
+    //     if (departureCheck && retourCheck) {
+    //       //Go to ticket page
+    //       goto('/flight/flightTicket')
+    //     }
+    //   }
+    //   if (!$FlightStore.retourFlight) {
+    //     if (departureCheck) {
+    //       //Go to ticket page
+    //       goto('/flight/flightTicket')
+    //     }
+    //   }
+    // }
+    goto('/flight/flightTicket')
   }
 
   function showPaywall() {
@@ -107,11 +205,6 @@
     }
     prevLength = lengthExpiry
   }
-
-  //Submit post data to database
-
-  //Go to ticket page
-  goto('/flight/flightTicket')
 </script>
 
 <div class="absolute top-0 left-0 h-full z-10 w-full">
@@ -216,6 +309,9 @@
       >
         Confirm payment
       </button>
+      {#if errors.transaction}
+        <p class="text-red-600 -mt-2 mb-2">{errors.transaction}</p>
+      {/if}
     </form>
   </div>
 </div>

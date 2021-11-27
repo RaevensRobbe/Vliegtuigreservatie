@@ -7,6 +7,9 @@
   let departureTime: string
   let boardingTime: string
 
+  console.log(travelerData)
+  console.log(flightData)
+
   let date: Date = new Date(flightData.Date)
   let day: string = date.toLocaleString('default', {
     day: '2-digit',
@@ -129,7 +132,7 @@
         <div class="grid grid-cols-2">
           <div>
             <p class="text-sm">Flight</p>
-            <p class="text-black uppercase text-xl">A 0137</p>
+            <p class="text-black uppercase text-xl">{flightData.Name}</p>
           </div>
           <div>
             <p class="text-sm">Seat</p>
@@ -192,7 +195,7 @@
           </div>
           <div>
             <p class="text-sm">Flight</p>
-            <p class="text-black uppercase">A 0137</p>
+            <p class="text-black uppercase">{flightData.Name}</p>
           </div>
         </div>
       </div>

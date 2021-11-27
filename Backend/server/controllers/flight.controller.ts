@@ -72,6 +72,7 @@ export class FlightController
           'f.Price',
           'f.StartId',
           'f.PlaneId',
+          'f.Name',
           'f.DestinationId',
           'd.Name',
           'd.Coordinates',
