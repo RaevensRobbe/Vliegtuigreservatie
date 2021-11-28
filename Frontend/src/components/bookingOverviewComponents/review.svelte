@@ -27,6 +27,7 @@
       `http://localhost:3001/api/v1/ticket/review/${flight}`,
       data,
     )
+    givenReview = reviewText
   }
 </script>
 
