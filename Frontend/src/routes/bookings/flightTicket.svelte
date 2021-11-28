@@ -6,6 +6,7 @@
   import { onMount } from 'svelte'
   import { get } from '../../utils/useApi'
   import Spinner from '../../components/animations/spinner.svelte'
+  import Review from '../../components/bookingOverviewComponents/review.svelte'
 
   let ticketData: any
   let travelerData: any = []
@@ -47,4 +48,9 @@
       <Spinner />
     </div>
   {/if}
+</section>
+
+<section class="m-4 px-6">
+  <Intertitle titleName="Review" />
+  <Review />
 </section>
