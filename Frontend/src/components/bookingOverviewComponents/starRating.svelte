@@ -1,5 +1,7 @@
 <script>
+  export let givenRating
   export let ratingScore
+
   let hoverRating = 0
 
   function setRating(rating) {
@@ -57,6 +59,10 @@
     'opacity-50',
     'opacity-50',
   ]
+
+  if (givenRating) {
+    setRating(givenRating)
+  }
 </script>
 
 <div class="flex">
