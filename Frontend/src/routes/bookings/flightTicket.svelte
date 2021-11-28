@@ -52,5 +52,5 @@
 
 <section class="m-4 px-6">
   <Intertitle titleName="Review" />
-  <Review />
+  <Review flight={$bookingTicket.ticketId} />
 </section>

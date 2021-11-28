@@ -1,10 +1,31 @@
 <script lang="ts">
   import StarRating from './starRating.svelte'
+  import { put } from '../../utils/useApi'
+  export let flight
+  console.log(flight)
   let rating: number = 0
   let reviewText: string = ''
   function handleSubmit() {
     console.log(rating)
     console.log(reviewText)
+    if (reviewText) {
+      console.log('ga door')
+      addToDB()
+    } else {
+      console.log('add text')
+    }
+  }
+
+  async function addToDB() {
+    let data = {
+      Rating: rating,
+      Review: reviewText,
+    }
+    let call: any = await put(
+      `http://localhost:3001/api/v1/ticket/review/${flight}`,
+      data,
+    )
+    console.log(call)
   }
 </script>
 
@@ -21,6 +42,7 @@
     <textarea
       bind:value={reviewText}
       class="w-full h-36 p-2 bg-ghost-white border-1 border-current my-4"
+      required
     />
   </div>
   <div class="flex justify-end">
