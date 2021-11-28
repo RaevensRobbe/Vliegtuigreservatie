@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, Router } from 'express'
+import { Request, Response, NextFunction, Router, response } from 'express'
 import { Ticket } from '../entities/ticket'
 import { CrudController, IController, ICrudController } from './crud.controller'
 import { User } from '../entities/user'
@@ -22,6 +22,38 @@ export class TicketController
     this.router.get('/all', this.all)
     this.router.get('/:id', this.one)
     this.router.post('/createTicket', this.createTicket)
+    this.router.put('/review/:id', this.createReview)
+  }
+
+  one = async (request: Request, response: Response, next: NextFunction) => {
+    try {
+      const ticketId = request.params.id
+
+      const data = await this.repository
+        .createQueryBuilder('t')
+        .select([
+          't.TicketId',
+          't.Seat',
+          't.Persons',
+          't.Rating',
+          't.Review',
+          't.Flight',
+          'f.Name',
+          'f.DestinationId',
+          'f.Date',
+          'f.Gate',
+          'd.Name',
+          's.Name',
+        ])
+        .innerJoin('t.Flight', 'f')
+        .innerJoin('f.Destination', 'd')
+        .innerJoin('f.Start', 's')
+        .where('t.TicketId = :id', { id: ticketId })
+        .getOne()
+      response.send(data)
+    } catch (error) {
+      response.status(500).send(error)
+    }
   }
 
   createTicket = async (
@@ -71,6 +103,22 @@ export class TicketController
             success: true,
           })
         }
+      }
+    } catch (error) {
+      response.status(500).send(error)
+    }
+  }
+
+  createReview = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (req.body.data === null) {
+        response.status(406).send('No data has been provided')
+      } else {
+        const update = await this.repository.update(
+          { TicketId: req.params.id },
+          { Rating: req.body.data.Rating, Review: req.body.data.Review },
+        )
+        return res.send(update)
       }
     } catch (error) {
       response.status(500).send(error)
