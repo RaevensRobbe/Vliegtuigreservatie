@@ -142,7 +142,10 @@
             >{$authStore.user.displayName}</button
           >
           {#if accountdropDown}
-            <div class="absolute right-0">
+            <div
+              class="absolute right-0 cursor-pointer"
+              on:click={toggleAccountTab}
+            >
               <div
                 class="relative bg-white top-16 z-10 flex flex-col items-center px-6"
               >
