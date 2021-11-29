@@ -55,7 +55,7 @@
         `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.retourFlight}`,
       )
       console.log(getData)
-      if(getData.error === "data is undefined"){
+      if(getData.error === "Data is undefined"){
         getData = await get(`http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.retourFlight}`)
       }
       console.log(getData)
@@ -64,11 +64,12 @@
         `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.departureFlight}`,
       )
       console.log(getData)
-      if(getData.error === "data is undefined"){
+      if(getData.error === "Data is undefined"){
         getData = await get(`http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.departureFlight}`)
       }
       console.log(getData)
     }
+    console.log($FlightStore.departureFlight)
 
     economySeats = getData.Plane.EconomySeats
     businessSeats = getData.Plane.BusinessSeats
