@@ -127,7 +127,7 @@ app.use(cors())
     synchronize: true,
     logging: true,
     useUnifiedTopology: true,
-    entities: [`${__dirname}/entities/popularDestinatioin{.ts,.js}`],
+    entities: [`${__dirname}/entities/popularDestination{.ts,.js}`],
     ssl: true,
   }
 
