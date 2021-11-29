@@ -137,11 +137,13 @@
           $FlightStore.departurePrice = chosenflight.Price
           $FlightStore.departureCoordinates = chosenflight.Start.Coordinates
           $FlightStore.departureDate = chosenflight.Date
+          $FlightStore.departureAbbreviation = chosenflight.Start.Abbreviation
         } else {
           $FlightStore.retourFlight = chosenflight.FlightId
           $FlightStore.retourPrice = chosenflight.Price
           $FlightStore.destinationCoordinates = chosenflight.Start.Coordinates
           $FlightStore.retourDate = chosenflight.Date
+          $FlightStore.destinationAbbreviation = chosenflight.Start.Abbreviation
         }
       }
     })

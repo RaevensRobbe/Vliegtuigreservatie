@@ -6,6 +6,7 @@
   export let seatNrDep: string
   export let seatNrRet: string
   export let retour: boolean
+  export let lastItem: boolean
   //console.log(`${fN}`)
 
   let selected: boolean = false
@@ -79,44 +80,67 @@
 </script>
 
 <div
-  class="flex flex-col pl-2 {selected ? 'border-l-8 border-forest-green' : ''}"
+  class="flex flex-col col-span-2 {selected
+    ? 'border-l-8 border-forest-green'
+    : ''} cursor-pointer"
+  on:click={clicked}
 >
-  <h1
-    class="text-forest-green text-2xl{selected ? 'font-bold text-2xl' : ''}"
-    on:click={clicked}
-  >
-    {fN}
-    {lN}
-  </h1>
-  {#if selectedSeat[index] === undefined}
-    <p class="text-tomato-red">Select your seat</p>
-  {:else if seatSelected}
-    <p class="text-cyprus-green">Seat selected</p>
-  {:else}
-    <p class="text-tomato-red">Select your seat</p>
-  {/if}
-</div>
-
-<div class="flex justify-center">
-  <div class="w-12 h-12 {retour ? 'bg-white' : 'bg-forest-green'}">
-    <h1
-      class="w-full flex h-full items-center justify-center {retour
-        ? 'text-forest-green'
-        : 'text-white'} font-bold text-center text-xl"
-    >
-      {seatNrDep}
-    </h1>
+  <div class={lastItem ? '' : 'border-b-1'}>
+    <div class="p-4">
+      <h1
+        class="text-forest-green text-2xl {selected
+          ? 'font-bold text-2xl'
+          : ''}"
+      >
+        {fN}
+        {lN}
+      </h1>
+      {#if selectedSeat[index] === undefined}
+        <p class="text-tomato-red">Select your seat</p>
+      {:else if seatSelected}
+        <p class="text-cyprus-green">Seat selected</p>
+      {:else}
+        <p class="text-tomato-red">Select your seat</p>
+      {/if}
+    </div>
   </div>
 </div>
 
-<div class="flex justify-center">
-  <div class="w-12 h-12 {retour ? 'bg-forest-green' : 'bg-white'}">
-    <h1
-      class="w-full flex h-full items-center justify-center {retour
-        ? 'text-white'
-        : 'text-forest-green'} font-bold text-center text-xl"
+<div
+  class="{retour
+    ? 'bg-white'
+    : ' bg-whisper-gray'} flex justify-center {lastItem ? '' : 'border-b-1'}"
+>
+  <div class="flex justify-center my-auto">
+    <div
+      class="w-12 h-12 {seatNrDep ? 'bg-forest-green' : 'bg-white border-2'}"
     >
-      {seatNrRet}
-    </h1>
+      <h1
+        class="w-full flex h-full items-center justify-center {seatNrDep
+          ? 'text-white'
+          : 'text-forest-green'} font-bold text-center text-xl"
+      >
+        {seatNrDep}
+      </h1>
+    </div>
+  </div>
+</div>
+<div
+  class="{retour ? 'bg-whisper-gray' : 'bg-white'} flex justify-center {lastItem
+    ? ''
+    : 'border-b-1'}"
+>
+  <div class="flex justify-center my-auto">
+    <div
+      class="w-12 h-12 {seatNrRet ? 'bg-forest-green' : 'bg-white border-2'} "
+    >
+      <h1
+        class="w-full flex h-full items-center justify-center {seatNrRet
+          ? 'text-white'
+          : 'text-forest-green'} font-bold text-center text-xl"
+      >
+        {seatNrRet}
+      </h1>
+    </div>
   </div>
 </div>

@@ -143,13 +143,36 @@
   function goToOverview() {
     goto('/flight/flightOverview')
   }
+
+  function goBack() {
+    goto('/flight/flightDate')
+  }
 </script>
 
-<body class="mx-12">
-  <div>
-    <button>Go back</button>
-  </div>
-  <section class="grid grid-cols-3 grid-rows-1">
+<body class="">
+  <section
+    class="p-4 flex hover:cursor-pointer hover:font-bold"
+    on:click={goBack}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 my-auto"
+      viewBox="0 0 20.828 37.657"
+    >
+      <path
+        id="chevron-down"
+        d="M6,9,22,25,38,9"
+        transform="translate(27 -3.172) rotate(90)"
+        fill="none"
+        stroke="#686868"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="4"
+      />
+    </svg>
+    <p class="">Go back</p>
+  </section>
+  <section class="grid grid-cols-3 grid-rows-1 p-4 px-6">
     <Intertitle titleName="Select your seat" />
     <div class="flex justify-between">
       <div class="flex items-center">
@@ -184,84 +207,106 @@
     </div>
   </section>
 
-  <section class="grid grid-cols-2 grid-rows-1 mt-8">
-    <div>
+  <section class="grid grid-cols-5 grid-rows-1 mt-8 p-4 px-6">
+    <div class="w-4/5 mx-auto col-span-2">
       <div class="flex flex-row">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="w-10 h-10 mr-2"
+          class="h-10 mr-2"
           viewBox="0 0 44.58 31.855"
         >
           <path
             id="bxs-plane-take-off"
-            d="M45.3,36.3H4.348v4.551H45.3ZM3.189,14.749a3.663,3.663,0,0,1,4.633-2.318L18,15.826,36.2,9l4.551,2.275L27.1,20.377l9.1,4.551,9.1-4.551,2.275,2.275-9.1,9.1L5.378,19.341A3.666,3.666,0,0,1,3.189,14.749Z"
+            d="M4.633,28.6h29.4v3.267H4.633ZM34.864,13.127a2.63,2.63,0,0,0-3.325-1.664L24.233,13.9,11.166,9,7.9,10.633l9.8,6.533-6.533,3.267L4.633,17.166,3,18.8l6.533,6.533,23.76-8.91A2.632,2.632,0,0,0,34.864,13.127Z"
             transform="translate(-3 -9)"
             fill="#008066"
           />
         </svg>
         <h1 class="font-bold text-2xl text-forest-green">
-          Take-off to Destination
+          {#if retourFlight}
+            {$FlightStore.departureCity} to {$FlightStore.destinationCity}
+          {:else}
+            {$FlightStore.destinationCity} to {$FlightStore.departureCity}
+          {/if}
         </h1>
       </div>
-
-      <div class="grid grid-cols-3 grid-rows-1">
-        <h2 class="font-bold text-lg my-auto">Passengers</h2>
-        <div class="flex flex-col justify-center items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="22.866"
-            viewBox="0 0 32 22.866"
+      <div class="bg-white shadow-md">
+        <div class="grid grid-cols-4 grid-rows-1 text-dim-gray border-b-1">
+          <h2 class="font-bold text-lg my-auto px-4 col-span-2">Passengers</h2>
+          <div
+            class="flex flex-col justify-center items-center p-4 {retourFlight
+              ? ''
+              : 'text-forest-green border-b-8 border-current'}"
           >
-            <path
-              id="bxs-plane-take-off"
-              d="M4.633,28.6h29.4v3.267H4.633ZM34.864,13.127a2.63,2.63,0,0,0-3.325-1.664L24.233,13.9,11.166,9,7.9,10.633l9.8,6.533-6.533,3.267L4.633,17.166,3,18.8l6.533,6.533,23.76-8.91A2.632,2.632,0,0,0,34.864,13.127Z"
-              transform="translate(-3 -9)"
-              fill="#008066"
-            />
-          </svg>
-          <p>{$FlightStore.departureCity} - {$FlightStore.destinationCity}</p>
-        </div>
-        <div class="flex flex-col justify-center items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="22.866"
-            viewBox="0 0 32 22.866"
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="22.866"
+              viewBox="0 0 32 22.866"
+              class={retourFlight
+                ? 'text-dim-gray fill-current'
+                : 'text-forest-green fill-current'}
+            >
+              <path
+                id="bxs-plane-take-off"
+                d="M4.633,28.6h29.4v3.267H4.633ZM34.864,13.127a2.63,2.63,0,0,0-3.325-1.664L24.233,13.9,11.166,9,7.9,10.633l9.8,6.533-6.533,3.267L4.633,17.166,3,18.8l6.533,6.533,23.76-8.91A2.632,2.632,0,0,0,34.864,13.127Z"
+                transform="translate(-3 -9)"
+              />
+            </svg>
+            <p class="mt-1">
+              {$FlightStore.departureAbbreviation} - {$FlightStore.destinationAbbreviation}
+            </p>
+          </div>
+          <div
+            class="flex flex-col justify-center items-center {retourFlight
+              ? 'text-forest-green border-b-8 border-current'
+              : ''}"
           >
-            <path
-              id="bxs-plane-take-off"
-              d="M33.367,28.6H3.968v3.267h29.4ZM3.136,13.127a2.63,2.63,0,0,1,3.325-1.664L13.767,13.9,26.834,9,30.1,10.633l-9.8,6.533,6.533,3.267,6.533-3.267L35,18.8l-6.533,6.533-23.76-8.91A2.632,2.632,0,0,1,3.136,13.127Z"
-              transform="translate(-3 -9)"
-              fill="#686868"
-            />
-          </svg>
-          <p>{$FlightStore.destinationCity} - {$FlightStore.departureCity}</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="22.866"
+              viewBox="0 0 32 22.866"
+              class={retourFlight
+                ? 'text-forest-green fill-current'
+                : 'text-dim-gray fill-current'}
+            >
+              <path
+                id="bxs-plane-take-off"
+                d="M33.367,28.6H3.968v3.267h29.4ZM3.136,13.127a2.63,2.63,0,0,1,3.325-1.664L13.767,13.9,26.834,9,30.1,10.633l-9.8,6.533,6.533,3.267,6.533-3.267L35,18.8l-6.533,6.533-23.76-8.91A2.632,2.632,0,0,1,3.136,13.127Z"
+                transform="translate(-3 -9)"
+              />
+            </svg>
+            <p class="mt-1">
+              {$FlightStore.destinationAbbreviation} - {$FlightStore.departureAbbreviation}
+            </p>
+          </div>
         </div>
-      </div>
-
-      <div class="grid grid-cols-3 grid-rows-1 mt-4">
-        {#each $travelerStore as traveler}
-          {#if retourFlight}
-            <PassengersComponent
-              bind:selectedPerson
-              fN={traveler.firstName}
-              lN={traveler.lastName}
-              seatNrDep={traveler.seatNrDep}
-              seatNrRet={traveler.seatNrRet}
-              retour={true}
-            />
-          {:else}
-            <PassengersComponent
-              bind:selectedPerson
-              fN={traveler.firstName}
-              lN={traveler.lastName}
-              seatNrDep={traveler.seatNrDep}
-              seatNrRet={traveler.seatNrRet}
-              retour={false}
-            />
-          {/if}
-        {/each}
+        <div class="grid grid-cols-4 grid-rows-1">
+          {#each $travelerStore as traveler, index (traveler)}
+            {#if retourFlight}
+              <PassengersComponent
+                bind:selectedPerson
+                fN={traveler.firstName}
+                lN={traveler.lastName}
+                seatNrDep={traveler.seatNrDep}
+                seatNrRet={traveler.seatNrRet}
+                retour={true}
+                lastItem={index == $travelerStore.length - 1 ? true : false}
+              />
+            {:else}
+              <PassengersComponent
+                bind:selectedPerson
+                fN={traveler.firstName}
+                lN={traveler.lastName}
+                seatNrDep={traveler.seatNrDep}
+                seatNrRet={traveler.seatNrRet}
+                retour={false}
+                lastItem={index == $travelerStore.length - 1 ? true : false}
+              />
+            {/if}
+          {/each}
+        </div>
       </div>
       {#if retourFlight}
         <button
@@ -285,7 +330,7 @@
     </div>
 
     {#if retourFlight}
-      <section>
+      <section class="col-span-3">
         <section>
           {#if busCols !== 0 && busRows !== 0}
             <h2 class="h-6 text-white bg-forest-green text-center my-2">
@@ -390,7 +435,7 @@
         </section>
       </section>
     {:else}
-      <section>
+      <section class="col-span-3">
         <section>
           {#if busCols !== 0 && busRows !== 0}
             <h2 class="h-6 text-white bg-forest-green text-center my-2">
@@ -495,5 +540,5 @@
         </section>
       </section>
     {/if}
-  </section></body
->
+  </section>
+</body>
