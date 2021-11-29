@@ -325,18 +325,18 @@
               <p>Unavailable</p>
             </div>
             <div class="flex items-center">
-              <div class="w-12 h-12 bg-white border border-forest-green mr-2" />
+              <div class="w-12 h-12 bg-white border border-forest-green" />
               <p>Available</p>
             </div>
 
             <div class="flex items-center">
-              <div class="w-12 h-12 bg-forest-green border mr-2" />
+              <div class="w-12 h-12 bg-forest-green border" />
               <p>Selected</p>
             </div>
           </div>
-          <section>
+          <section class="bg-white p-4 shadow-md">
             {#if busCols !== 0 && busRows !== 0}
-              <h2 class="h-6 text-white bg-forest-green text-center my-2">
+              <h2 class="h-6 text-white bg-forest-green text-center">
                 Business Class - prijs
               </h2>
               <div>
@@ -443,7 +443,7 @@
         <div class="grid-rows-2">
           <div class="flex justify-between p-4">
             <div class="flex items-center flex-col gap-2 lg:flex-row">
-              <div class="w-12 h-12 bg-gray-300 mr-2">
+              <div class="w-12 h-12 bg-gray-300">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-12 h-12 "
@@ -463,12 +463,12 @@
               <p>Unavailable</p>
             </div>
             <div class="flex items-center gap-2 flex-col lg:flex-row">
-              <div class="w-12 h-12 bg-white border border-forest-green mr-2" />
+              <div class="w-12 h-12 bg-white border border-forest-green" />
               <p>Available</p>
             </div>
 
             <div class="flex items-center gap-2 flex-col lg:flex-row">
-              <div class="w-12 h-12 bg-forest-green border mr-2" />
+              <div class="w-12 h-12 bg-forest-green border" />
               <p>Selected</p>
             </div>
           </div>
