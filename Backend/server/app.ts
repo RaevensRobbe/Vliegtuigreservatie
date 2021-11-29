@@ -117,6 +117,7 @@ app.use(cors())
     .catch(error => console.error(error))
 })()
 ;(async () => {
+  const port = process.env.PORT || 8881
   // All our code
   //connection to db
   const conn: MongoConnectionOptions = {

@@ -13,11 +13,22 @@ export class PopularDestinationResolver {
 
   @Query(() => PopularDestination, { nullable: true })
   async getDestinationById(
-    @Arg('id') id: string,
+    @Arg('destinationId') destinationId: string,
   ): Promise<PopularDestination | undefined | null> {
     return await this.manager.findOne<PopularDestination>(
       PopularDestination,
-      id,
+      destinationId,
+    )
+  }
+
+  @Query(() => PopularDestination, { nullable: true })
+  async getDestinationByName(
+    @Arg('name') name: string,
+  ): Promise<PopularDestination | undefined | null> {
+    console.log(name)
+    return await this.manager.findOne<PopularDestination>(
+      PopularDestination,
+      name,
     )
   }
 
