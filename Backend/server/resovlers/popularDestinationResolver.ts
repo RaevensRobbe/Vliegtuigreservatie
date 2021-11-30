@@ -1,3 +1,4 @@
+import { Guid } from 'guid-typescript'
 import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 import { getMongoManager, MongoEntityManager, ObjectID } from 'typeorm'
 import { PopularDestination } from '../entitiesMongo/popularDestination'

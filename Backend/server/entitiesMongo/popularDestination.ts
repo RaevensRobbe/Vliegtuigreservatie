@@ -1,3 +1,4 @@
+import { Guid } from 'guid-typescript'
 import { Field, ID, InputType, Int, ObjectType } from 'type-graphql'
 import { BaseEntity, Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm'
 
@@ -7,7 +8,11 @@ import { BaseEntity, Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm'
 export class PopularDestination extends BaseEntity {
   @Field(() => ID, { nullable: true }) //Field decorator, represent a Graphql field of our graphql object type
   @ObjectIdColumn() //Special decorator, to tell that this collumn represent an unique generated ID
-  destinationId?: ObjectID
+  id?: ObjectID
+
+  @Field()
+  @Column()
+  destinationId: string
 
   @Field()
   @Column()
