@@ -279,27 +279,29 @@
           {/each}
         </div>
       </div>
-      <div class="flex justify-end">
-        {#if retourFlight}
+      {#if retourFlight}
+        <div class="flex justify-center">
           <button
             type="submit"
-            class="flex p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
             on:click={goToOverview}
           >
             <!--submit button -->
             Continue
           </button>
-        {:else}
+        </div>
+      {:else}
+        <div class="flex justify-end">
           <button
             on:click={nextFlight}
             type="submit"
-            class="flex p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
           >
             <!--submit button -->
             Next flight
           </button>
-        {/if}
-      </div>
+        </div>
+      {/if}
     </div>
 
     {#if retourFlight}
@@ -307,10 +309,10 @@
         <div class="grid-rows-2">
           <div class="flex justify-between p-4">
             <div class="flex items-center flex-col gap-2 lg:flex-row">
-              <div class="w-12 h-12 bg-gray-300">
+              <div class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gray-300">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-12 h-12 "
+                  class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16"
                   viewBox="0 0 24 24"
                   stroke="#ffffff"
                   stroke-width="1"
@@ -324,16 +326,20 @@
                   /></svg
                 >
               </div>
-              <p>Unavailable</p>
+              <p class="font-semibold text-sm md:text-base">Unavailable</p>
             </div>
             <div class="flex items-center gap-2 flex-col lg:flex-row">
-              <div class="w-12 h-12 bg-white border border-forest-green" />
-              <p>Available</p>
+              <div
+                class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-white border border-forest-green"
+              />
+              <p class="font-semibold text-sm md:text-base">Available</p>
             </div>
 
             <div class="flex items-center gap-2 flex-col lg:flex-row">
-              <div class="w-12 h-12 bg-forest-green border" />
-              <p>Selected</p>
+              <div
+                class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-forest-green border"
+              />
+              <p class="font-semibold text-sm md:text-base">Selected</p>
             </div>
           </div>
           <section class="bg-white p-4 shadow-md">
@@ -453,10 +459,10 @@
         <div class="grid-rows-2">
           <div class="flex justify-between p-4">
             <div class="flex items-center flex-col gap-2 lg:flex-row">
-              <div class="w-12 h-12 bg-gray-300">
+              <div class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gray-300">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-12 h-12 "
+                  class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 "
                   viewBox="0 0 24 24"
                   stroke="#ffffff"
                   stroke-width="1"
@@ -470,16 +476,20 @@
                   /></svg
                 >
               </div>
-              <p>Unavailable</p>
+              <p class="font-semibold text-sm md:text-base">Unavailable</p>
             </div>
             <div class="flex items-center gap-2 flex-col lg:flex-row">
-              <div class="w-12 h-12 bg-white border border-forest-green" />
-              <p>Available</p>
+              <div
+                class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-white border border-forest-green"
+              />
+              <p class="font-semibold text-sm md:text-base">Available</p>
             </div>
 
             <div class="flex items-center gap-2 flex-col lg:flex-row">
-              <div class="w-12 h-12 bg-forest-green border" />
-              <p>Selected</p>
+              <div
+                class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-forest-green border"
+              />
+              <p class="font-semibold text-sm md:text-base">Selected</p>
             </div>
           </div>
           <section class="bg-white p-4 shadow-md">
@@ -501,7 +511,7 @@
                 </div>
 
                 <div
-                  class="grid grid-cols-{busCols} grid-rows-{busRows} place-items-center gap-y-2 gap-x-1"
+                  class="grid grid-cols-{busCols} grid-rows-{busRows} place-items-center gap-y-2.5 gap-x-1"
                 >
                   {#each arrayBus as tellerBus}
                     {#each columnsLetterBus as colNr}
@@ -558,7 +568,7 @@
                     {/each}
                   </div>
                   <div
-                    class="grid grid-cols-{ecoCols} grid-rows-{ecoRows} place-items-center gap-y-2"
+                    class="grid grid-cols-{ecoCols} grid-rows-{ecoRows} place-items-center gap-y-2.5"
                   >
                     {#each arrayEco as tellerEco}
                       {#each columnsLetterEco as colNr}
