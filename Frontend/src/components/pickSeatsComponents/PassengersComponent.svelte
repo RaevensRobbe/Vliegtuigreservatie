@@ -1,6 +1,7 @@
 <script lang="ts">
   import passengerStore from '../../stores/selectPassengerStore'
   import { travelerStore } from '../../stores/travelerStore'
+  import { fade, scale } from 'svelte/transition'
   export let fN: string
   export let lN: string
   export let seatNrDep: string
@@ -119,6 +120,7 @@
         class="w-full flex h-full items-center justify-center {seatNrDep
           ? 'text-white'
           : 'text-forest-green'} font-bold text-center text-xl"
+        in:scale
       >
         {seatNrDep}
       </h1>
@@ -138,6 +140,7 @@
         class="w-full flex h-full items-center justify-center {seatNrRet
           ? 'text-white'
           : 'text-forest-green'} font-bold text-center text-xl"
+        in:scale
       >
         {seatNrRet}
       </h1>
