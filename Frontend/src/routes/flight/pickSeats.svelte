@@ -159,6 +159,13 @@
     miniOnMount()
   }
 
+  const prevFlight = () => {
+    // console.log('clicked')
+    clicked = !clicked
+    retourFlight = !retourFlight
+    miniOnMount()
+  }
+
   function goToOverview() {
     goto('/flight/flightOverview')
   }
@@ -299,18 +306,28 @@
         </div>
       </div>
       {#if retourFlight}
-        <div class="flex justify-center">
+        <div class="flex justify-between">
           <button
-            type="submit"
-            class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-            on:click={goToOverview}
-          >
+          type="submit"
+          class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+          on:click={prevFlight}
+        >
+          <!--submit button -->
+          Previous
+        </button>
+
+          <button
+              type="submit"
+              class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+              on:click={goToOverview}
+            >
             <!--submit button -->
-            Continue
-          </button>
+              Continue
+            </button>
         </div>
+        
       {:else}
-        <div class="flex justify-end">
+        <div class="flex justify-center md:justify-end">
           <button
             on:click={nextFlight}
             type="submit"
