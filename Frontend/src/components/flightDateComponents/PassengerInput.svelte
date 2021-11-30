@@ -72,7 +72,7 @@
 
 {#if adult}
   <div
-    class="grid grid-rows-3 sm:grid-cols-3 sm:gap-4 sm:grid-rows-1 bg-white shadow-md p-2 mt-2 focus:ring-forest-green"
+    class="grid grid-rows-3 md:mx-6 sm:grid-cols-3 sm:gap-4 sm:grid-rows-1 bg-white shadow-md p-2 mt-2 focus:ring-forest-green"
   >
     <div class="flex flex-col">
       <label for="title{personnumber}" class="font-bold">Title</label>
@@ -127,7 +127,7 @@
   </div>
 {:else}
   <div
-    class="grid grid-rows-2 sm:grid-cols-2 sm:gap-4 sm:grid-rows-1 bg-white shadow-md p-2 mt-2 focus:ring-forest-green"
+    class="grid grid-rows-2 md:mx-6 sm:grid-cols-2 sm:gap-4 sm:grid-rows-1 bg-white shadow-md p-2 mt-2 focus:ring-forest-green"
   >
     <div>
       <div>

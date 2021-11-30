@@ -159,7 +159,7 @@
 </script>
 
 <section
-  class="grid grid-cols-3  md:grid-cols-4 lg:grid-cols-7 border-r-0 items-end gap-y-4"
+  class="grid grid-cols-3 md:mx-6  md:grid-cols-4 lg:grid-cols-7 border-r-0 items-end gap-y-4"
 >
   {#if loaded}
     {#each flights as flight}
@@ -218,7 +218,9 @@
 </section>
 
 {#if chosenflight}
-  <section class="mt-6 grid grid-cols-3 bg-white shadow-md text-center p-4">
+  <section
+    class="mt-6 md:mx-6 grid grid-cols-3 bg-white shadow-md text-center p-4"
+  >
     <div>
       <p class="font-bold text-md md:text-2xl text-forest-green">
         {getDepartureTime(chosenflight.Date)}
