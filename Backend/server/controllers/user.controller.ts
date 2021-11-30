@@ -57,7 +57,7 @@ export class UserController extends CrudController<User> implements IUserControl
             return res.status(200).json({succes: true})
           }
           else{
-            return res.status(400).json({error: "User already exists"})
+            return res.status(200).json({info: "User already exists"})
           }
         }
       }
