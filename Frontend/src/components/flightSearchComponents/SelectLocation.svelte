@@ -2,6 +2,7 @@
   // @ts-nocheck
   import type Dest from './../../models/DestinationModel.type'
   import { FlightStore } from '../../stores/FlightStore'
+  import { fade, scale } from 'svelte/transition'
 
   // export so parent receives the changes
   export let departureCity
@@ -32,6 +33,8 @@
 </script>
 
 <div
+  in:scale
+  out:fade
   class="absolute {isDeparture ? 'top-18' : 'top-38 md:top-18'} z-10 w-full "
 >
   <div class="flex flex-col align-center">
