@@ -2,6 +2,7 @@
   import { onMount } from 'svelte'
   import { init } from 'svelte/internal'
   import { travelerStore } from '../../stores/travelerStore'
+  import { fade, scale } from 'svelte/transition'
 
   export let row: number
   export let column: string
@@ -90,10 +91,10 @@
 </script>
 
 {#if status === 'taken'}
-  <div class="w-12 h-12 bg-gray-300">
+  <div class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gray-300">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="w-12 h-12 "
+      class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 "
       viewBox="0 0 24 24"
       stroke="#ffffff"
       stroke-width="1"
@@ -109,16 +110,24 @@
   </div>
 {:else}
   <div
-    class="w-12 h-12 bg-white border border-forest-green {selected
+    class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-white border-2 border-forest-green {selected
       ? 'bg-forest-green'
-      : 'bg-white'}"
+      : 'bg-white'} hover:bg-cyprus-green hover:border-cyprus-green cursor-pointer"
     on:click={clicked}
   >
     {#if selected}
       <h1
-        class="w-full flex h-full items-center justify-center text-white font-bold text-center text-xl"
+        class="w-full flex h-full items-center justify-center text-white font-bold text-center text-sm sm:text-xl lg:text-2xl"
+        in:scale
       >
         {initials}
+      </h1>
+    {:else}
+      <h1
+        class="w-full h-full items-center justify-center text-white font-bold text-center text-sm sm:text-xl lg:text-2xl flex"
+        in:scale
+      >
+        {column}{row}
       </h1>
     {/if}
   </div>

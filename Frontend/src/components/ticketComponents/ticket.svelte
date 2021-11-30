@@ -7,6 +7,9 @@
   let departureTime: string
   let boardingTime: string
 
+  console.log(travelerData)
+  console.log(flightData)
+
   let date: Date = new Date(flightData.Date)
   let day: string = date.toLocaleString('default', {
     day: '2-digit',
@@ -48,7 +51,7 @@
   import Barcode from 'svelte-barcode'
 </script>
 
-<div class="flex flex-col bg-white rounded-xl mb-4">
+<div class="flex flex-col bg-white rounded-xl my-4 mx-6">
   <div class="bg-forest-green grid grid-cols-7 text-white rounded-t-xl">
     <h1 class="font-bold text-2xl md:text-4xl col-span-3 md:col-span-3 p-4">
       MCT Airlines
@@ -129,7 +132,7 @@
         <div class="grid grid-cols-2">
           <div>
             <p class="text-sm">Flight</p>
-            <p class="text-black uppercase text-xl">A 0137</p>
+            <p class="text-black uppercase text-xl">{flightData.Name}</p>
           </div>
           <div>
             <p class="text-sm">Seat</p>
@@ -192,7 +195,7 @@
           </div>
           <div>
             <p class="text-sm">Flight</p>
-            <p class="text-black uppercase">A 0137</p>
+            <p class="text-black uppercase">{flightData.Name}</p>
           </div>
         </div>
       </div>

@@ -1,25 +1,60 @@
-import { Request, Response, NextFunction, Router } from 'express';
-import { Ticket } from "../entities/ticket"; 
-import { CrudController, IController, ICrudController } from './crud.controller';
-import {User } from '../entities/user';
+import { Request, Response, NextFunction, Router, response } from 'express'
+import { Ticket } from '../entities/ticket'
+import { CrudController, IController, ICrudController } from './crud.controller'
+import { User } from '../entities/user'
 
 /**
  * The interface to use for every Ticket Controller.
  */
- export interface ITicketController extends ICrudController, IController  {
-     test: string;
+export interface ITicketController extends ICrudController, IController {
+  test: string
 }
 
-export class TicketController extends CrudController<Ticket> implements ITicketController {
-    public router = Router();
-    public test = 'OK';
+export class TicketController
+  extends CrudController<Ticket>
+  implements ITicketController
+{
+  public router = Router()
+  public test = 'OK'
 
-    constructor() {
-        super(Ticket); // Initialize the parent constructor
-        this.router.get('/all', this.all);
-        this.router.get('/:id', this.one);
-        this.router.post('/createTicket', this.createTicket);
+  constructor() {
+    super(Ticket) // Initialize the parent constructor
+    this.router.get('/all', this.all)
+    this.router.get('/:id', this.one)
+    this.router.post('/createTicket', this.createTicket)
+    this.router.put('/review/:id', this.createReview)
+  }
+
+  one = async (request: Request, response: Response, next: NextFunction) => {
+    try {
+      const ticketId = request.params.id
+
+      const data = await this.repository
+        .createQueryBuilder('t')
+        .select([
+          't.TicketId',
+          't.Seat',
+          't.Persons',
+          't.Rating',
+          't.Review',
+          't.Flight',
+          'f.Name',
+          'f.DestinationId',
+          'f.Date',
+          'f.Gate',
+          'd.Name',
+          's.Name',
+        ])
+        .innerJoin('t.Flight', 'f')
+        .innerJoin('f.Destination', 'd')
+        .innerJoin('f.Start', 's')
+        .where('t.TicketId = :id', { id: ticketId })
+        .getOne()
+      response.send(data)
+    } catch (error) {
+      response.status(500).send(error)
     }
+  }
 
     createTicket = async (req: Request, response: Response, next: NextFunction) => {
         try{
@@ -58,7 +93,7 @@ export class TicketController extends CrudController<Ticket> implements ITicketC
                     if(result === {}){
                         return response.status(500).json({error:"Something went wrong"})
                     }else{
-                        return response.status(200).json({succes: true})
+                        return response.status(200).json({success: true})
                     }
                 }
             }
@@ -67,4 +102,21 @@ export class TicketController extends CrudController<Ticket> implements ITicketC
             response.status(500).json({error:{error}})
         }
     }
+  }
+
+  createReview = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (req.body.data === null) {
+        response.status(406).send('No data has been provided')
+      } else {
+        const update = await this.repository.update(
+          { TicketId: req.params.id },
+          { Rating: req.body.data.Rating, Review: req.body.data.Review },
+        )
+        return res.send(update)
+      }
+    } catch (error) {
+      response.status(500).send(error)
+    }
+  }
 }
