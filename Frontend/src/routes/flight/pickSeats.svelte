@@ -172,12 +172,12 @@
     </svg>
     <p class="">Go back</p>
   </section>
-  <section class="p-4 px-6">
+  <section class="sm:p-4 px-6">
     <Intertitle titleName="Select your seat" />
   </section>
 
   <section class="grid grid-cols-5 grid-rows-1 p-4 px-6">
-    <div class="w-4/5 mx-auto col-span-5 lg:col-span-2">
+    <div class="w-5/6 md:w-4/5 mx-auto col-span-5 lg:col-span-2">
       <div class="flex flex-row">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -191,7 +191,7 @@
             fill="#008066"
           />
         </svg>
-        <h1 class="font-bold text-2xl text-forest-green mb-4">
+        <h1 class="font-bold text-lg md:text-2xl text-forest-green mb-4">
           {#if retourFlight}
             {$FlightStore.departureCity} to {$FlightStore.destinationCity}
           {:else}
@@ -201,9 +201,11 @@
       </div>
       <div class="bg-white shadow-md">
         <div class="grid grid-cols-4 grid-rows-1 text-dim-gray border-b-1">
-          <h2 class="font-bold text-lg my-auto px-4 col-span-2">Passengers</h2>
+          <h2 class="font-bold text-base md:text-lg  my-auto px-4 col-span-2">
+            Passengers
+          </h2>
           <div
-            class="flex flex-col justify-center items-center p-4 {retourFlight
+            class="flex flex-col justify-center items-center py-4 {retourFlight
               ? ''
               : 'text-forest-green border-b-8 border-current'}"
           >
@@ -222,7 +224,7 @@
                 transform="translate(-3 -9)"
               />
             </svg>
-            <p class="mt-1">
+            <p class="mt-1 text-sm md:text-base">
               {$FlightStore.departureAbbreviation} - {$FlightStore.destinationAbbreviation}
             </p>
           </div>
@@ -246,7 +248,7 @@
                 transform="translate(-3 -9)"
               />
             </svg>
-            <p class="mt-1">
+            <p class="mt-1 text-sm md:text-base">
               {$FlightStore.destinationAbbreviation} - {$FlightStore.departureAbbreviation}
             </p>
           </div>
@@ -281,7 +283,7 @@
         {#if retourFlight}
           <button
             type="submit"
-            class="flex p-4 mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            class="flex p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
             on:click={goToOverview}
           >
             <!--submit button -->
@@ -291,7 +293,7 @@
           <button
             on:click={nextFlight}
             type="submit"
-            class="flex p-4 my-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            class="flex p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
           >
             <!--submit button -->
             Next flight
@@ -301,145 +303,7 @@
     </div>
 
     {#if retourFlight}
-      <section class="col-span-5 lg:col-span-3 w-4/5 mx-auto">
-        <div class="grid-rows-2">
-          <div class="flex justify-between p-4">
-            <div class="flex items-center">
-              <div class="w-12 h-12 bg-gray-300 mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-12 h-12 "
-                  viewBox="0 0 24 24"
-                  stroke="#ffffff"
-                  stroke-width="1"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><line x1="18" y1="6" x2="6" y2="18" /><line
-                    x1="6"
-                    y1="6"
-                    x2="18"
-                    y2="18"
-                  /></svg
-                >
-              </div>
-              <p>Unavailable</p>
-            </div>
-            <div class="flex items-center">
-              <div class="w-12 h-12 bg-white border border-forest-green" />
-              <p>Available</p>
-            </div>
-
-            <div class="flex items-center">
-              <div class="w-12 h-12 bg-forest-green border" />
-              <p>Selected</p>
-            </div>
-          </div>
-          <section class="bg-white p-4 shadow-md">
-            {#if busCols !== 0 && busRows !== 0}
-              <h2 class="h-6 text-white bg-forest-green text-center">
-                Business Class - prijs
-              </h2>
-              <div>
-                <div
-                  class="grid grid-cols-{busCols} grid-rows-1 place-items-center gap-2 mb-2"
-                >
-                  {#each columnsLetterBus as colNrBus}
-                    <p>{colNrBus}</p>
-                  {/each}
-                </div>
-
-                <div
-                  class="grid grid-cols-{busCols} grid-rows-{busRows} place-items-center gap-2"
-                >
-                  {#each arrayBus as tellerBus}
-                    {#each columnsLetterBus as colNr}
-                      {#if colNr == ''}
-                        <div>{tellerBus}</div>
-                      {:else}
-                        <div>
-                          {#if includesMultiDimension( takenSeatsBus, [tellerBus, colNr], )}
-                            <Seat
-                              row={tellerBus}
-                              column={colNr}
-                              status="taken"
-                              person={selectedPerson}
-                              classType="Business"
-                              retour={true}
-                            />
-                          {:else}
-                            <Seat
-                              row={tellerBus}
-                              column={colNr}
-                              status="free"
-                              person={selectedPerson}
-                              classType="Business"
-                              retour={true}
-                            />
-                          {/if}
-                        </div>
-                      {/if}
-                    {/each}
-                  {/each}
-                </div>
-              </div>
-            {/if}
-
-            <div class="mt-8 mb-8" />
-
-            {#if ecoCols !== 0 && ecoRows !== 0}
-              <h2 class="h-6 text-white bg-forest-green text-center my-2">
-                Economy Class - prijs
-              </h2>
-              <div>
-                <div>
-                  <div
-                    class="grid grid-cols-{ecoCols} grid-rows-1 place-items-center gap-2 mb-2"
-                  >
-                    {#each columnsLetterEco as colNrEco}
-                      <p>{colNrEco}</p>
-                    {/each}
-                  </div>
-                  <div
-                    class="grid grid-cols-{ecoCols} grid-rows-{ecoRows} place-items-center gap-2"
-                  >
-                    {#each arrayEco as tellerEco}
-                      {#each columnsLetterEco as colNr}
-                        {#if colNr == ''}
-                          <div>{tellerEco}</div>
-                        {:else}
-                          <div>
-                            {#if includesMultiDimension(takenSeatsEco, `[${tellerEco},'${colNr}']`)}
-                              <Seat
-                                row={tellerEco}
-                                column={colNr}
-                                status="taken"
-                                person={selectedPerson}
-                                classType="Economy"
-                                retour={true}
-                              />
-                            {:else}
-                              <Seat
-                                row={tellerEco}
-                                column={colNr}
-                                status="free"
-                                person={selectedPerson}
-                                classType="Economy"
-                                retour={true}
-                              />
-                            {/if}
-                          </div>
-                        {/if}
-                      {/each}
-                    {/each}
-                  </div>
-                </div>
-              </div>
-            {/if}
-          </section>
-        </div>
-      </section>
-    {:else}
-      <section class="col-span-5 lg:col-span-3 w-4/5 mx-auto ">
+      <section class="col-span-5 lg:col-span-3 w-5/6 md:w-4/5 mx-auto">
         <div class="grid-rows-2">
           <div class="flex justify-between p-4">
             <div class="flex items-center flex-col gap-2 lg:flex-row">
@@ -474,15 +338,17 @@
           </div>
           <section class="bg-white p-4 shadow-md">
             {#if busCols !== 0 && busRows !== 0}
-              <h2 class="h-6 text-white bg-forest-green text-center my-2">
-                Business Class - prijs
+              <h2 class="p-1 text-white bg-forest-green text-center my-2">
+                Business Class: <span class="font-bold"
+                  >€{$FlightStore.retourPrice}</span
+                >
               </h2>
               <div>
                 <div
                   class="grid grid-cols-{busCols} grid-rows-1 place-items-center gap-2 mb-2"
                 >
                   {#each columnsLetterBus as colNrBus}
-                    <p>{colNrBus}</p>
+                    <p class="text-forest-green font-bold">{colNrBus}</p>
                   {/each}
                 </div>
 
@@ -492,7 +358,157 @@
                   {#each arrayBus as tellerBus}
                     {#each columnsLetterBus as colNr}
                       {#if colNr == ''}
-                        <div>{tellerBus}</div>
+                        <div class="text-forest-green font-bold">
+                          {tellerBus}
+                        </div>
+                      {:else}
+                        <div>
+                          {#if includesMultiDimension( takenSeatsBus, [tellerBus, colNr], )}
+                            <Seat
+                              row={tellerBus}
+                              column={colNr}
+                              status="taken"
+                              person={selectedPerson}
+                              classType="Business"
+                              retour={true}
+                            />
+                          {:else}
+                            <Seat
+                              row={tellerBus}
+                              column={colNr}
+                              status="free"
+                              person={selectedPerson}
+                              classType="Business"
+                              retour={true}
+                            />
+                          {/if}
+                        </div>
+                      {/if}
+                    {/each}
+                  {/each}
+                </div>
+              </div>
+            {/if}
+
+            <div class="mt-8 mb-8" />
+
+            {#if ecoCols !== 0 && ecoRows !== 0}
+              <h2 class="p-1 text-white bg-forest-green text-center my-2">
+                Economy Class: <span class="font-bold"
+                  >€{$FlightStore.retourPrice}</span
+                >
+              </h2>
+              <div>
+                <div>
+                  <div
+                    class="grid grid-cols-{ecoCols} grid-rows-1 place-items-center gap-2 mb-2"
+                  >
+                    {#each columnsLetterEco as colNrEco}
+                      <p class="text-forest-green font-bold">{colNrEco}</p>
+                    {/each}
+                  </div>
+                  <div
+                    class="grid grid-cols-{ecoCols} grid-rows-{ecoRows} place-items-center gap-2"
+                  >
+                    {#each arrayEco as tellerEco}
+                      {#each columnsLetterEco as colNr}
+                        {#if colNr == ''}
+                          <div class="text-forest-green font-bold">
+                            {tellerEco}
+                          </div>
+                        {:else}
+                          <div>
+                            {#if includesMultiDimension(takenSeatsEco, `[${tellerEco},'${colNr}']`)}
+                              <Seat
+                                row={tellerEco}
+                                column={colNr}
+                                status="taken"
+                                person={selectedPerson}
+                                classType="Economy"
+                                retour={true}
+                              />
+                            {:else}
+                              <Seat
+                                row={tellerEco}
+                                column={colNr}
+                                status="free"
+                                person={selectedPerson}
+                                classType="Economy"
+                                retour={true}
+                              />
+                            {/if}
+                          </div>
+                        {/if}
+                      {/each}
+                    {/each}
+                  </div>
+                </div>
+              </div>
+            {/if}
+          </section>
+        </div>
+      </section>
+    {:else}
+      <section class="col-span-5 lg:col-span-3 w-11/12 md:w-4/5 mx-auto ">
+        <div class="grid-rows-2">
+          <div class="flex justify-between p-4">
+            <div class="flex items-center flex-col gap-2 lg:flex-row">
+              <div class="w-12 h-12 bg-gray-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-12 h-12 "
+                  viewBox="0 0 24 24"
+                  stroke="#ffffff"
+                  stroke-width="1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><line x1="18" y1="6" x2="6" y2="18" /><line
+                    x1="6"
+                    y1="6"
+                    x2="18"
+                    y2="18"
+                  /></svg
+                >
+              </div>
+              <p>Unavailable</p>
+            </div>
+            <div class="flex items-center gap-2 flex-col lg:flex-row">
+              <div class="w-12 h-12 bg-white border border-forest-green" />
+              <p>Available</p>
+            </div>
+
+            <div class="flex items-center gap-2 flex-col lg:flex-row">
+              <div class="w-12 h-12 bg-forest-green border" />
+              <p>Selected</p>
+            </div>
+          </div>
+          <section class="bg-white p-4 shadow-md">
+            {#if busCols !== 0 && busRows !== 0}
+              <h2 class="p-1 text-white bg-forest-green text-center my-2">
+                Business Class: <span class="font-bold"
+                  >€{$FlightStore.departurePrice * 4}</span
+                >
+              </h2>
+              <div>
+                <div
+                  class="grid grid-cols-{busCols} grid-rows-1 place-items-center gap-2 mb-2"
+                >
+                  {#each columnsLetterBus as colNrBus}
+                    <p class="text-forest-green font-bold text-xl">
+                      {colNrBus}
+                    </p>
+                  {/each}
+                </div>
+
+                <div
+                  class="grid grid-cols-{busCols} grid-rows-{busRows} place-items-center gap-y-2 gap-x-1"
+                >
+                  {#each arrayBus as tellerBus}
+                    {#each columnsLetterBus as colNr}
+                      {#if colNr == ''}
+                        <div class="text-forest-green font-bold text-xl">
+                          {tellerBus}
+                        </div>
                       {:else}
                         <div>
                           {#if includesMultiDimension( takenSeatsBus, [tellerBus, colNr], )}
@@ -525,25 +541,31 @@
             <div class="mt-8 mb-8" />
 
             {#if ecoCols !== 0 && ecoRows !== 0}
-              <h2 class="h-6 text-white bg-forest-green text-center my-2">
-                Economy Class - prijs
+              <h2 class="p-1 text-white bg-forest-green text-center my-2">
+                Economy Class: <span class="font-bold"
+                  >€{$FlightStore.departurePrice}</span
+                >
               </h2>
               <div>
                 <div>
                   <div
-                    class="grid grid-cols-{ecoCols} grid-rows-1 place-items-center gap-2 mb-2"
+                    class="grid grid-cols-{ecoCols} grid-rows-1 place-items-center gap-y-2 gap-x-1"
                   >
                     {#each columnsLetterEco as colNrEco}
-                      <p>{colNrEco}</p>
+                      <p class="text-forest-green font-bold text-xl p-2">
+                        {colNrEco}
+                      </p>
                     {/each}
                   </div>
                   <div
-                    class="grid grid-cols-{ecoCols} grid-rows-{ecoRows} place-items-center gap-2"
+                    class="grid grid-cols-{ecoCols} grid-rows-{ecoRows} place-items-center gap-y-2"
                   >
                     {#each arrayEco as tellerEco}
                       {#each columnsLetterEco as colNr}
                         {#if colNr == ''}
-                          <div>{tellerEco}</div>
+                          <div class="text-forest-green font-bold text-xl">
+                            {tellerEco}
+                          </div>
                         {:else}
                           <div>
                             {#if includesMultiDimension(takenSeatsEco, `[${tellerEco},'${colNr}']`)}

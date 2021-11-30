@@ -88,19 +88,19 @@
   <div class={lastItem ? '' : 'border-b-1'}>
     <div class="p-4">
       <h1
-        class="text-forest-green text-2xl {selected
-          ? 'font-bold text-2xl'
+        class="text-forest-green text-lg md:text-2xl {selected
+          ? 'font-bold'
           : ''}"
       >
         {fN}
         {lN}
       </h1>
       {#if selectedSeat[index] === undefined}
-        <p class="text-tomato-red">Select your seat</p>
+        <p class="text-tomato-red text-sm md:text-base">Select your seat</p>
       {:else if seatSelected}
-        <p class="text-cyprus-green">Seat selected</p>
+        <p class="text-cyprus-green text-sm md:text-base">Seat selected</p>
       {:else}
-        <p class="text-tomato-red">Select your seat</p>
+        <p class="text-tomato-red text-sm md:text-base">Select your seat</p>
       {/if}
     </div>
   </div>
