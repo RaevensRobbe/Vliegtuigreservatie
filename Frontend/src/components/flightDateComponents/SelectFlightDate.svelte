@@ -175,7 +175,7 @@
             on:click={() => setChosenFlight(flight.FlightId)}
           />
           <div
-            class="bg-white border-forest-green peer-checked:border-t-8 align-bottom"
+            class="bg-white border-forest-green peer-checked:border-t-8 align-bottom cursor-pointer"
           >
             <div
               class="bg-white border-r-1 border-l-1 flex flex-col justify-items-end  text-center shadow-md justify-end hover:bg-gray-200"
