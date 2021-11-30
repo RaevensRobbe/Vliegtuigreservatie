@@ -1,6 +1,6 @@
 import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 import { getMongoManager, MongoEntityManager, ObjectID } from 'typeorm'
-import { PopularDestination } from '../entities/popularDestination'
+import { PopularDestination } from '../entitiesMongo/popularDestination'
 
 @Resolver()
 export class PopularDestinationResolver {
