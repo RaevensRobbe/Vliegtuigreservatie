@@ -75,8 +75,9 @@
     class="grid grid-rows-3 sm:grid-cols-3 sm:gap-4 sm:grid-rows-1 bg-white shadow-md p-2 mt-2 focus:ring-forest-green"
   >
     <div class="flex flex-col">
-      <p class="font-bold">Title</p>
+      <label for="title{personnumber}" class="font-bold">Title</label>
       <select
+        id="title{personnumber}"
         bind:value
         on:change={() => setStorage('Title')}
         class="border-2 w-full text-sm md:text-md"
@@ -94,13 +95,14 @@
     </div>
     <div>
       <div>
-        <p class="font-bold">First name</p>
+        <label for="FirstName{personnumber}" class="font-bold">First name</label
+        >
       </div>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={firstName}
           on:change={() => setStorage('FirstName')}
-          id="FirstName"
+          id="FirstName{personnumber}"
           type="text"
           placeholder="insert your first name"
           class="w-full  focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
@@ -109,12 +111,12 @@
       </div>
     </div>
     <div>
-      <p class="font-bold ">Last name</p>
+      <label class="font-bold " for="LastName{personnumber}">Last name</label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={lastName}
           on:change={() => setStorage('LastName')}
-          id="LastName"
+          id="LastName{personnumber}"
           type="text"
           placeholder="insert your last name"
           class="w-full  focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
@@ -129,13 +131,14 @@
   >
     <div>
       <div>
-        <p class="font-bold">First name</p>
+        <label class="font-bold" for="FirstName{personnumber}">First name</label
+        >
       </div>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={firstName}
           on:change={() => setStorage('FirstName')}
-          id="FirstName"
+          id="FirstName{personnumber}"
           type="text"
           placeholder="insert your first name"
           class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
@@ -143,12 +146,12 @@
       </div>
     </div>
     <div>
-      <p class="font-bold ">Last name</p>
+      <label class="font-bold " for="LastName{personnumber}">Last name</label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={lastName}
           on:change={() => setStorage('LastName')}
-          id="LastName"
+          id="LastName{personnumber}"
           type="text"
           placeholder="insert your last name"
           class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
