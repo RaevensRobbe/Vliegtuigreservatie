@@ -193,15 +193,13 @@
           </div>
         </label>
       {:else}
-        <div
-          class="bg-white border-forest-green align-bottom flex flex-col h-full"
-        >
+        <div class="bg-white border-forest-green align-bottom flex flex-col">
           <div
-            class="bg-white border-r-1 border-l-1 flex flex-col text-center shadow-md hover:bg-gray-200  h-full justify-center"
+            class="bg-white border-r-1 border-l-1 flex flex-col text-center shadow-md justify-center"
           >
-            <p class="text-forest-green font-bold m-2 text-xl" />
-            <p class="">No flight</p>
-            <p class="text-cyprus-green font-bold m-2 text-xl" />
+            <p class="text-white font-bold m-2 text-sm md:text-xl">.</p>
+            <p class="text-sm md:text-md">No flight</p>
+            <p class="text-white font-bold m-2 text-sm md:text-xl">.</p>
           </div>
         </div>
       {/if}
