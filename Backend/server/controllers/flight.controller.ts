@@ -23,7 +23,8 @@ export class FlightController
     this.router.get('/:id', this.one)
     this.router.post('', this.save)
     this.router.get('/flightInfo/:Sid/:Did', this.flightInfo)
-    this.router.get('/seats/:id', this.seats)
+    this.router.get('/seatsInfo/:id', this.seatsInfo)
+    this.router.get('/takenSeats/:id', this.takenSeats)
     this.router.get('/plane/:id', this.getPlane)
     this.router.get('/userFlights/:id', this.getUserFlights)
   }
@@ -53,9 +54,13 @@ export class FlightController
         .where('f.StartId = :id', { id: startID })
         .andWhere('f.DestinationId = :id2', { id2: destinationID })
         .getMany()
-      response.send(data)
+      if(data.length === 0){
+        response.status(400).json({error:'Data is undefined'})
+      }else{
+        response.send(data)
+      }
     } catch (error) {
-      response.status(500).send(error)
+      response.status(500).json({error:{error}})
     }
   }
 
@@ -84,13 +89,18 @@ export class FlightController
         .innerJoin('f.Start', 's')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-      response.send(data)
+        console.log(data)
+        if(data === undefined){
+          response.status(400).json({error:'Data is undefined'})
+        }else{
+          response.send(data)
+        }
     } catch (error) {
-      response.status(500).send(error)
+      response.status(500).json({error:{error}})
     }
   }
 
-  seats = async (request: Request, response: Response, next: NextFunction) => {
+  takenSeats = async (request: Request, response: Response, next: NextFunction) => {
     try {
       const flightID = request.params.id
 
@@ -101,10 +111,34 @@ export class FlightController
         .innerJoin('f.Ticket', 't')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-      console.log(data)
-      response.send(data)
+      if(data === undefined){
+        response.status(400).json({error: 'Data is undefined'})
+      }
+      else{
+        response.send(data)
+      }
     } catch (error) {
-      response.status(500).send(error)
+      response.status(500).json({error:{error}})
+    }
+  }
+
+  seatsInfo = async (request: Request, response: Response, next: NextFunction) => {
+    try {
+      const flightID = request.params.id
+
+      const data = await this.repository
+        .createQueryBuilder('f')
+        .select(['f.FlightId', 'p.EconomySeats', 'p.BusinessSeats'])
+        .innerJoin('f.Plane', 'p')
+        .where('f.FlightId = :id', { id: flightID })
+        .getOne()
+        if(data === undefined){
+          response.status(400).json({error: 'Data is undefined'})
+        }else{
+          response.send(data)
+        }
+    } catch (error) {
+      response.status(500).json({error:{error}})
     }
   }
 
@@ -122,9 +156,13 @@ export class FlightController
         .innerJoin('f.Plane', 'p')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-      response.send(data)
+        if(data === undefined){
+          response.status(400).json({error: 'Data is undefined'})
+        }else{
+          response.send(data)
+        }
     } catch (error) {
-      response.status(500).send(error)
+      response.status(500).json({error:{error}})
     }
   }
 
@@ -152,9 +190,13 @@ export class FlightController
         .where('t.User = :id', { id: userID })
         .distinct(true)
         .getMany()
-      response.send(data)
+        if(data.length === 0){
+          response.status(400).json({error:'Data is undefined'})
+        }else{
+          response.send(data)
+        }
     } catch (error) {
-      response.status(500).send(error)
+      response.status(500).json({error:{error}})
     }
   }
 }
