@@ -30,43 +30,52 @@ export class UserController extends CrudController<User> implements IUserControl
       console.log(`data van frontend ${req.body}`);
       let result:any
 
-      if(req.body === null){
-        response.status(406).send('No data has been provided')
+      if(req.body.data === null){
+        response.status(400).json({error:"No data has been provided"})
       }else{
-        const newUser:User ={
-          UserId : req.body.data.id,
-          Firstname: req.body.data.firstname,
-          Lastname: req.body.data.lastname,
-          Email: req.body.data.email,
-          Admin: false
-        } 
-        console.log(req.body.data.id)
-        const checkUser = await this.repository.findOne({UserId:req.body.data.id})
-        console.log(checkUser)
-        if(checkUser === undefined) {
-          const newDbUser = await this.repository.create(newUser);
-          result = await this.repository.save(newDbUser); 
-          return res.send(result)
-        }
-        else{
-          console.log('Already exists')
+        if(req.body.data.id === undefined){
+          response.status(400).json({error:"UserID is missing"})
+        }else if(req.body.data.firstname === undefined){
+          response.status(400).json({error:"FirstName is missing"})
+        }else if(req.body.data.lastname === undefined){
+          response.status(400).json({error:"LastName is missing"})
+        }else if(req.body.data.email === undefined){
+          response.status(400).json({error:"Email is missing"})
+        }else{
+          const newUser:User ={
+            UserId : req.body.data.id,
+            Firstname: req.body.data.firstname,
+            Lastname: req.body.data.lastname,
+            Email: req.body.data.email,
+            Admin: false
+          } 
+          //Check if user exists
+          const checkUser = await this.repository.findOne({UserId:req.body.data.id})
+          if(checkUser === undefined) {
+            const newDbUser = await this.repository.create(newUser);
+            result = await this.repository.save(newDbUser); 
+            return res.status(200).json({succes: true})
+          }
+          else{
+            return res.status(400).json({error: "User already exists"})
+          }
         }
       }
      }catch(error) {
-      response.status(500).send(error)
+      response.status(500).json({error:error})
      }
     }
 
     updateUser = async (req: Request, res: Response, next: NextFunction) => {
       try{
         if(req.body.data === null){
-          response.status(406).send('No data has been provided')
+          response.status(400).json({error:"No data has been provided"})
         }else{
           const update = await this.repository.update({UserId: req.params.id},{Firstname: req.body.data.firstname, Lastname: req.body.data.lastname, Email: req.body.data.email})
-          return res.send(update);
+          return res.status(200).json({succes: true})
         }
       }catch(error){
-        response.status(500).send(error)
+        response.status(500).json({error:error})
       }
     }
 }
