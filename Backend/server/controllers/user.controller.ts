@@ -20,9 +20,31 @@ export class UserController extends CrudController<User> implements IUserControl
         super(User); // Initialize the parent constructor
 
         this.router.get('/all', this.all);
-        this.router.get('/:id', this.one);
+        this.router.get('/:id', this.getOne);
         this.router.post('/createUser', this.createUser);
         this.router.put('/updateUser/:id', this.updateUser);
+    }
+
+    getOne = async (request: Request, response: Response, next: NextFunction) =>{
+      try{
+        const userId = request.params.id;
+        if(request.params.id === undefined){
+          response.status(500).send('Parameter error')
+        }else {
+          const data = await this.repository.createQueryBuilder("u")
+          .select(["u.Admin"])
+          .where("u.UserId = :id",{id:userId})
+          .getOne();
+
+          if(data === null){
+            response.status(400).json({error:'Data is undefined'})
+          }else{
+            response.send(data)
+          }
+        }
+      }catch(error){
+        response.status(500).json({error:{error}})
+      }
     }
 
     createUser = async (req: Request, res: Response, next: NextFunction) => {
