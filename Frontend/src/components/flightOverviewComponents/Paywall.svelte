@@ -248,7 +248,7 @@
           type="tel"
           maxlength="19"
           placeholder="xxxx xxxx xxxx xxxx"
-          class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          class="w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>
       {#if errors.number}
@@ -261,7 +261,7 @@
           bind:value={name}
           id="name"
           placeholder="ex: John Smith"
-          class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          class="w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>
       {#if errors.name}
@@ -278,7 +278,7 @@
               id="expiry"
               placeholder="MM/YY"
               maxlength="5"
-              class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+              class="w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
           {#if errors.expiry}
@@ -294,7 +294,7 @@
               type="password"
               id="securityCode"
               placeholder="CVC"
-              class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+              class="w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
           {#if errors.cvc}

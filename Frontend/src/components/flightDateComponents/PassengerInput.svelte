@@ -105,7 +105,7 @@
           id="FirstName{personnumber}"
           type="text"
           placeholder="insert your first name"
-          class="w-full  focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          class="w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
           required
         />
       </div>
@@ -119,7 +119,7 @@
           id="LastName{personnumber}"
           type="text"
           placeholder="insert your last name"
-          class="w-full  focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          class="w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
           required
         />
       </div>
@@ -141,7 +141,7 @@
           id="FirstName{personnumber}"
           type="text"
           placeholder="insert your first name"
-          class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          class="w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>
     </div>
@@ -154,7 +154,7 @@
           id="LastName{personnumber}"
           type="text"
           placeholder="insert your last name"
-          class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          class="w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>
     </div>

@@ -184,7 +184,7 @@
           id="email"
           type="email"
           placeholder="name@acme.com"
-          class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>
       {#if errors.email}
@@ -198,7 +198,7 @@
           type="text"
           id="firstName"
           placeholder="enter first name"
-          class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>
       {#if errors.firstname}
@@ -212,7 +212,7 @@
           type="text"
           id="lastName"
           placeholder="enter last name"
-          class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>
       {#if errors.lastname}
@@ -226,7 +226,7 @@
           type="password"
           id="pw"
           placeholder="enter password"
-          class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>
       {#if errors.pw}
@@ -240,7 +240,7 @@
           type="password"
           id="cpw"
           placeholder="enter password"
-          class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>
       {#if errors.cpw}
