@@ -61,7 +61,7 @@
           {#each destinationsArray as destination}
             <!-- Set departure city = null => otherwise city in wrong country -->
             <div
-              class="hover:bg-gray-300"
+              class="hover:bg-gray-300 "
               on:click={() => (
                 (departureCountry = destination.Name), (departureCity = null)
               )}
@@ -76,7 +76,9 @@
                   class="peer hidden"
                   bind:group={departureCountry}
                 />
-                <p class="peer-checked:font-bold">{destination.Name}</p>
+                <p class="peer-checked:font-bold cursor-pointer">
+                  {destination.Name}
+                </p>
               </label>
             </div>
           {/each}
@@ -108,7 +110,9 @@
                       class="peer hidden"
                       bind:group={departureCity}
                     />
-                    <p class="peer-checked:font-bold">{city.Name}</p>
+                    <p class="peer-checked:font-bold cursor-pointer">
+                      {city.Name}
+                    </p>
                   </label>
                 </div>
               {/each}

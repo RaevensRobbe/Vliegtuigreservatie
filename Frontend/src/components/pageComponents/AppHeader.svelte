@@ -127,38 +127,37 @@
   {:else if $loginCompStore.showRegister}
     <RegisterForm />
   {/if}
-  <div class="flex-col justify-between px-6 py-8 gap-8 bg-white hidden md:flex">
+  <div class="flex-col justify-between py-8 gap-8 bg-white hidden md:flex">
     <div class="flex flex-row justify-between">
       <button
-        class="font-bold text-2xl text-forest-green"
+        class="font-bold text-2xl text-forest-green pl-6"
         on:click={goToHomepage}>MCT airlines</button
       >
       {#if $authStore.isLoggedIn}
         <div class="flex text-dim-gray gap-8">
           <button on:click={goToBookings}>My bookings</button>
-          <button
-            on:click={toggleAccountTab}
-            class="font-bold text-xl text-forest-green"
-            >{$authStore.user.displayName}</button
-          >
-          {#if accountdropDown}
-            <div
-              class="absolute right-0 cursor-pointer"
+          <div class="relative inline-block">
+            <button
               on:click={toggleAccountTab}
+              class="font-bold text-xl text-forest-green pl-4 pr-6"
+              >{$authStore.user.displayName}</button
             >
+            {#if accountdropDown}
               <div
-                class="relative bg-white top-16 z-10 flex flex-col items-center px-6"
+                id="myDropdown"
+                class="absolute shadow-md bg-white  overflow-auto z-10 w-full top-16"
               >
                 <button
-                  class="text-lg text-forest-green py-4"
+                  class="text-lg text-forest-green py-4  hover:bg-gray-200 w-full px-6"
                   on:click={goToAccountInfo}>Edit Account</button
                 >
-                <button class="text-lg text-forest-green py-4" on:click={logout}
-                  >Sign out</button
+                <button
+                  class="text-lg text-forest-green py-4 hover:bg-gray-200 w-full px-6"
+                  on:click={logout}>Sign out</button
                 >
               </div>
-            </div>
-          {/if}
+            {/if}
+          </div>
         </div>
       {:else}
         <div>

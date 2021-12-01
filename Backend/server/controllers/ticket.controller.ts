@@ -56,51 +56,53 @@ export class TicketController
     }
   }
 
-    createTicket = async (req: Request, response: Response, next: NextFunction) => {
-        try{
-            console.log(`data van frontend ${req.body}`);
-            let result
-            if(req.body === null) {
-                response.status(400).json({error:'No data has been provided'})
-            }else{
+  createTicket = async (
+    req: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      console.log(`data van frontend ${req.body}`)
+      let result
+      if (req.body === null) {
+        response.status(400).json({ error: 'No data has been provided' })
+      } else {
+        if (req.body.data.seatData.length === 0) {
+          response.status(400).json({ error: 'Seat data is missing' })
+        } else if (req.body.data.persons.length === 0) {
+          response
+            .status(400)
+            .json({ error: 'Ticket needs to have a least 1 passenger' })
+        } else if (req.body.data.userId === undefined) {
+          response.status(400).json({ error: 'UserId is missing' })
+        } else if (req.body.data.flightId === undefined) {
+          response.status(400).json({ error: 'FlightId is missing' })
+        } else {
+          const newTicket: Ticket = {
+            Seat: req.body.data.seatData,
+            Return: req.body.data.return,
+            ReturnDate: req.body.data.returnDate,
+            Persons: req.body.data.persons,
+            Rating: 0,
+            Review: '',
+            User: {
+              UserId: req.body.data.userId,
+            },
+            Flight: req.body.data.flightId,
+          }
 
-                if(req.body.data.seatData.length === 0){
-                    response.status(400).json({error:'Seat data is missing'})
-                }else if(req.body.data.persons.length === 0){
-                    response.status(400).json({error:'Ticket needs to have a least 1 passenger'})
-                }else if(req.body.data.userId === undefined){
-                    response.status(400).json({error:'UserId is missing'})
-                }else if(req.body.data.flightId === undefined){
-                    response.status(400).json({error:'FlightId is missing'})
-                }
-                else{
-                    const newTicket:Ticket ={
-                        Seat: req.body.data.seatData,
-                        Return: req.body.data.return,
-                        ReturnDate: req.body.data.returnDate,
-                        Persons: req.body.data.persons,
-                        Rating: 0, 
-                        Review:'',
-                        User:    {
-                            UserId: req.body.data.userId,
-                          },
-                        Flight: req.body.data.flightId
-                    } 
+          const newDbTicket = await this.repository.create(newTicket)
+          result = await this.repository.save(newDbTicket)
 
-                    const newDbTicket = await this.repository.create(newTicket);
-                    result = await this.repository.save(newDbTicket); 
-
-                    if(result === {}){
-                        return response.status(500).json({error:"Something went wrong"})
-                    }else{
-                        return response.status(200).json({success: true})
-                    }
-                }
-            }
+          if (result === {}) {
+            return response.status(500).json({ error: 'Something went wrong' })
+          } else {
+            return response.status(200).json({ success: true })
+          }
         }
-        catch(error) {
-            response.status(500).json({error:{error}})
-        }
+      }
+    } catch (error) {
+      response.status(500).json({ error: { error } })
     }
   
   createReview = async (req: Request, res: Response, next: NextFunction) => {

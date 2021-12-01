@@ -159,7 +159,7 @@
 </script>
 
 <section
-  class="grid grid-cols-3  md:grid-cols-4 lg:grid-cols-7 border-r-0 items-end gap-y-4"
+  class="grid grid-cols-3 md:mx-6  md:grid-cols-4 lg:grid-cols-7 border-r-0 items-end gap-y-4"
 >
   {#if loaded}
     {#each flights as flight}
@@ -175,7 +175,7 @@
             on:click={() => setChosenFlight(flight.FlightId)}
           />
           <div
-            class="bg-white border-forest-green peer-checked:border-t-8 align-bottom"
+            class="bg-white border-forest-green peer-checked:border-t-8 align-bottom cursor-pointer"
           >
             <div
               class="bg-white border-r-1 border-l-1 flex flex-col justify-items-end  text-center shadow-md justify-end hover:bg-gray-200"
@@ -193,15 +193,13 @@
           </div>
         </label>
       {:else}
-        <div
-          class="bg-white border-forest-green align-bottom flex flex-col h-full"
-        >
+        <div class="bg-white border-forest-green align-bottom flex flex-col">
           <div
-            class="bg-white border-r-1 border-l-1 flex flex-col text-center shadow-md hover:bg-gray-200  h-full justify-center"
+            class="bg-white border-r-1 border-l-1 flex flex-col text-center shadow-md justify-center"
           >
-            <p class="text-forest-green font-bold m-2 text-xl" />
-            <p class="">No flight</p>
-            <p class="text-cyprus-green font-bold m-2 text-xl" />
+            <p class="text-white font-bold m-2 text-sm md:text-xl">.</p>
+            <p class="text-sm md:text-md">No flight</p>
+            <p class="text-white font-bold m-2 text-sm md:text-xl">.</p>
           </div>
         </div>
       {/if}
@@ -218,7 +216,9 @@
 </section>
 
 {#if chosenflight}
-  <section class="mt-6 grid grid-cols-3 bg-white shadow-md text-center p-4">
+  <section
+    class="mt-6 md:mx-6 grid grid-cols-3 bg-white shadow-md text-center p-4"
+  >
     <div>
       <p class="font-bold text-md md:text-2xl text-forest-green">
         {getDepartureTime(chosenflight.Date)}
