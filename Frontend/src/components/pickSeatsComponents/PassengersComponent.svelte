@@ -8,7 +8,6 @@
   export let seatNrRet: string
   export let retour: boolean
   export let lastItem: boolean
-  //console.log(`${fN}`)
 
   let selected: boolean = false
   let selectedSeat: string = ''
@@ -24,10 +23,11 @@
 
   const clicked = () => {
     selected = !selected
-
+    //console.log(selected)
     setSelectedPassenger()
   }
 
+  //De geselecteerde persoon opslaan in een store
   const setSelectedPassenger = () => {
     selectedPerson.fn = fN
     selectedPerson.ln = lN
@@ -37,21 +37,23 @@
     }
   }
 
+  //Checken of de geselecteerde persoon dezelfde is al in de store
   const checkSelected = currentStore => {
-    //console.log(`currentStore: ${currentStore.fn}`)
-    //console.log(`CurrentlySelected: ${fN}`)
-    if (currentStore.fn !== fN) {
+    console.log(`currentstore ${currentStore.fn}`)
+    console.log(`Nieuw ${fN}`)
+    if (currentStore.fn !== fN && currentStore.ln !== lN) {
       selected = false
-      //console.log(selected)
+    }else{
+      selected = true
     }
   }
 
+  //Kijken welke seat bij de geselecteerde persoon staat
   const checkSelectedSeat = currentStore => {
     index = currentStore.findIndex(
       x => x.firstName === fN,
       y => y.lastName === lN,
     )
-    // console.log(retour)
 
     if (retour) {
       seatSelected = false
@@ -71,10 +73,12 @@
     }
   }
 
+  //Deze functie wordt uitgevoerd als er iets in de passengerStore verandert
   let checkStatePassenger = passengerStore.subscribe(currentStore => {
     checkSelected(currentStore)
   })
 
+  //Deze functie wordt uitgevoerd als er iets in de travellerStore verandert
   let checkStateAdult = travelerStore.subscribe(currentStore => {
     checkSelectedSeat(currentStore)
   })
@@ -86,7 +90,7 @@
     : ''} cursor-pointer"
   on:click={clicked}
 >
-  <div class={lastItem ? '' : 'border-b-1'}>
+  <div class={lastItem? '' : 'border-b-1'}>
     <div class="p-4">
       <h1
         class="text-forest-green text-lg md:text-2xl {selected
