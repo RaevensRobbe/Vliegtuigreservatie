@@ -158,25 +158,6 @@
               </div>
             {/if}
           </div>
-
-          <!-- {#if accountdropDown}
-            <div class="absolute right-0">
-              <div class="cursor-pointer" on:click={toggleAccountTab}>
-                <div
-                  class="relative bg-white shadow-lg top-16 z-10 flex flex-col items-center"
-                >
-                  <button
-                    class="text-lg text-forest-green py-4 hover:bg-gray-200 w-full px-6"
-                    on:click={goToAccountInfo}>Edit Account</button
-                  >
-                  <button
-                    class="text-lg text-forest-green py-4 hover:bg-gray-200 w-full px-6"
-                    on:click={logout}>Sign out</button
-                  >
-                </div>
-              </div>
-            </div>
-          {/if} -->
         </div>
       {:else}
         <div>
