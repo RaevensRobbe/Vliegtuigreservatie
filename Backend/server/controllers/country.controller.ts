@@ -32,9 +32,13 @@ export class CountryController extends CrudController<Country> implements ICount
             const data = await this.repository.createQueryBuilder("country")
             .select(["country.Name","country.CountryId"])
             .getMany();
-            response.send(data); 
+            if(data.length === 0){
+                response.status(400).json({error:'Data is undefined'})
+              }else{
+                response.send(data)
+              }
         }catch(error){
-            response.status(500).send(error)
+            response.status(500).json({error:{error}})
         }
     }
 
@@ -52,9 +56,13 @@ export class CountryController extends CrudController<Country> implements ICount
                 .orderBy("dest.Popularity")
                 .limit(6)
                 .getMany();
-                response.send(data);
+                if(data.length === 0){
+                    response.status(400).json({error:'Data is undefined'})
+                  }else{
+                    response.send(data)
+                  }
             }catch(error){
-                response.status(500).send(error)
+                response.status(500).json({error:{error}})
             }
     }
     destination = async (request: Request, response: Response, next: NextFunction) => {
@@ -68,11 +76,14 @@ export class CountryController extends CrudController<Country> implements ICount
                 .leftJoin("country.Dest", "dest")
                 .where("country.CountryId = :id", {id: countryID})
                 .getMany();
-                console.log(data);
-                response.send(data);
+                if(data.length === 0){
+                    response.status(400).json({error:'Data is undefined'})
+                  }else{
+                    response.send(data)
+                  }
             }
         }catch(error){
-            response.status(500).send(error)
+            response.status(500).json({error:{error}})
         }
     }
 
@@ -82,9 +93,13 @@ export class CountryController extends CrudController<Country> implements ICount
             .select(["c.CountryId","c.Name","d.DestinationId","d.Name"])
             .leftJoin("c.Dest","d")
             .getMany();
-            response.send(data);
+            if(data.length === 0){
+                response.status(400).json({error:'Data is undefined'})
+              }else{
+                response.send(data)
+              }
         }catch(error){
-            response.status(500).send(error)
+            response.status(500).json({error:{error}})
         }
     }
 }
