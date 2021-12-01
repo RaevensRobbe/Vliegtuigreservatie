@@ -9,9 +9,11 @@
   import { afterUpdate, onMount } from 'svelte'
   import { form } from 'svelte-forms'
   import { fade } from 'svelte/transition'
+  import { post } from '../../utils/useApi'
 
   import { requiredValidator, emailValidator } from '../../utils/inputValidator'
   import loginCompStore from '../../stores/loginCompStore'
+  import authStore from '../../stores/authStore'
 
   let validationError: boolean = true
   let email: string = ''
@@ -33,30 +35,28 @@
           lastname: name[1],
           email: user.email,
         }
-        post(data)
-        showLoginForm()
+        CreateUser(data)
       })
     } catch (error) {
       console.error(error)
     }
   }
 
-  async function post(data) {
-    //  console.log(`post functie ${data}`)
-    const res = await fetch('http://localhost:3001/api/v1/user/createUser', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data,
-      }),
-    })
+  async function CreateUser(data) {
+    const res:any = await post('http://localhost:3001/api/v1/user/createUser', data)
+    console.log(res)
+    if(res.info === "User already exists" || res.succes === true) {
+      showLoginForm()
+    }
   }
 
   const loginWithEmail = () => {
     signInWithEmailAndPassword(auth, email, pw)
       .then(userCredential => {
         const user = userCredential.user
-        showLoginForm()
+        if(user.email !== undefined) {
+          showLoginForm()
+        }
       })
       .catch(error => {
         const errorCode = error.code

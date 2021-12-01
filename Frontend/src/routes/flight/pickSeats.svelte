@@ -19,9 +19,6 @@
 
   let ecoParts: number = 0
 
-  let busGrid: number[] = [0, 0]
-  let ecoGrid: number[] = [0, 0]
-
   let takenSeatsEco: any[] = []
   let takenSeatsBus: any[] = []
 
@@ -36,40 +33,23 @@
   let retourFlight: boolean = false
   let clicked: boolean = false
 
-  // $travelerStore = [{
-  //   title: 'Mr',
-  //   firstName:'Jelle',
-  //   lastName: 'Demets',
-  //   seatNrDep:'',
-  //   classDep: '',
-  //   seatNrRet:'',
-  //   classRet:''
-  // }]
-
-  const miniOnMount = async () => {
+  const GetData = async () => {
     let getData: any
-    // console.log(`FlightId: ${$FlightStore.departureFlight}`)
-    console.log($FlightStore)
     if (retourFlight) {
       getData = await get(
         `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.retourFlight}`,
       )
-      console.log(getData)
       if(getData.error === "Data is undefined"){
         getData = await get(`http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.retourFlight}`)
       }
-      console.log(getData)
     } else {
       getData = await get(
         `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.departureFlight}`,
       )
-      console.log(getData)
       if(getData.error === "Data is undefined"){
         getData = await get(`http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.departureFlight}`)
       }
-      console.log(getData)
     }
-    console.log($FlightStore.departureFlight)
 
     economySeats = getData.Plane.EconomySeats
     businessSeats = getData.Plane.BusinessSeats
@@ -77,35 +57,37 @@
     let i: any
     let j: any
 
+    //Empty the data to refill the grid
     if (retourFlight) {
       takenSeatsBus = []
       takenSeatsEco = []
     }
 
+    //Check for taken seats
     if(getData.Ticket !== undefined) {
+      //Save taken seats in array's
       for (i of getData.Ticket) {
-      //console.log(i)
-      for (j of i.Seat) {
-        if (j.class == 'Business') {
-          takenSeatsBus.push([j.row, j.column])
-        } else if (j.class == 'Economy') {
-          takenSeatsEco.push([j.row, j.column])
+        for (j of i.Seat) {
+          if (j.class == 'Business') {
+            takenSeatsBus.push([j.row, j.column])
+          } else if (j.class == 'Economy') {
+            takenSeatsEco.push([j.row, j.column])
+          }
         }
       }
     }
-    }
 
-    // console.log(takenSeatsEco)
-
-    if (economySeats !== 0) {
+    //Check is there is data to make grid
+    if (economySeats !== 0 && businessSeats !== 0) {
       gridLayout(economySeats, businessSeats)
     }
   }
 
   onMount(async () => {
-    miniOnMount()
+    GetData()
   })
 
+  //De layout van het vliegtuig maken
   const gridLayout = (eco, bus) => {
     if (eco >= 120) {
       ecoParts = 2
@@ -122,18 +104,15 @@
 
     busRows = bus / 4
 
-    busGrid = [busRows, busCols]
-    ecoGrid = [ecoRows, ecoCols]
-
-    // console.log(busGrid, ecoGrid)
-
-    test()
-    test2()
+    RowTellerBus()
+    RowTellerEco()
   }
 
   let arrayBus: number[] = []
   let arrayEco: number[] = []
-  const test = () => {
+
+  //Zorgen dat rijen bij 1 beginnen impv 0 voor Business plaatsen
+  const RowTellerBus = () => {
     let i = 0
     if (retourFlight) arrayBus = []
     while (i < busRows) {
@@ -142,21 +121,22 @@
     }
   }
 
-  const test2 = () => {
+  //Zorgen dat rijen bij 1 beginnen impv 0 voor Economy plaatsen
+  const RowTellerEco = () => {
     if (retourFlight) arrayEco = []
     for (let i = 1; i <= ecoRows; i++) {
       arrayEco.push(i)
     }
   }
 
+  //Check if the coords from a seat are in an array (these are 2 demensional)
   const includesMultiDimension = (arr, coords) =>
     JSON.stringify(arr).includes(JSON.stringify(coords))
 
   const nextFlight = () => {
-    // console.log('clicked')
     clicked = !clicked
     retourFlight = !retourFlight
-    miniOnMount()
+    GetData()
   }
 
   function goToOverview() {
@@ -299,24 +279,23 @@
         </div>
       </div>
       {#if retourFlight}
-        <div class="flex justify-center">
+        <div class="flex justify-center md:justify-end">
           <button
             type="submit"
             class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
             on:click={goToOverview}
           >
-            <!--submit button -->
+          <!--submit button -->
             Continue
           </button>
         </div>
       {:else}
-        <div class="flex justify-end">
+        <div class="flex justify-center md:justify-end">
           <button
             on:click={nextFlight}
             type="submit"
             class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
           >
-            <!--submit button -->
             Next flight
           </button>
         </div>

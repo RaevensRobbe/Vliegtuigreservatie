@@ -13,6 +13,7 @@
     strenghtValidator,
     confirmValidator,
   } from '../../utils/inputValidator'
+  import {post} from '../../utils/useApi'
 
   let email: string
   let firstName: string
@@ -48,8 +49,7 @@
               lastname: lastName,
               email: email,
             }
-            post(data)
-            showRegisterForm()
+            CreateUser(data)
           })
           .catch(error => {
             console.error(error)
@@ -65,15 +65,12 @@
       })
   }
 
-  async function post(data) {
-    //  console.log(`post functie ${data}`)
-    const res = await fetch('http://localhost:3001/api/v1/user/createUser', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data,
-      }),
-    })
+  async function CreateUser(data) {
+    const res:any = await post('http://localhost:3001/api/v1/user/createUser', data)
+    console.log(res)
+    if(res.info === "User already exists" || res.succes === true) {
+      showRegisterForm()
+    }
   }
 
   const showRegisterForm = () => {
