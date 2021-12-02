@@ -162,7 +162,7 @@
       {:else}
         <div>
           <button
-            class="font-bold text-xl text-forest-green"
+            class="font-bold text-xl text-forest-green pr-6"
             on:click={showLoginForm}>Login</button
           >
         </div>

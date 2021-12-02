@@ -20,6 +20,8 @@ export class FlightController
     super(Flight) // Initialize the parent constructor
 
     this.router.get('/all', this.all)
+    this.router.get('/allupcoming', this.allUpcoming)
+    this.router.get('/flightnr/:id', this.specific)
     this.router.get('/:id', this.one)
     this.router.post('', this.save)
     this.router.get('/flightInfo/:Sid/:Did', this.flightInfo)
@@ -54,13 +56,13 @@ export class FlightController
         .where('f.StartId = :id', { id: startID })
         .andWhere('f.DestinationId = :id2', { id2: destinationID })
         .getMany()
-      if(data.length === 0){
-        response.status(400).json({error:'Data is undefined'})
-      }else{
+      if (data.length === 0) {
+        response.status(400).json({ error: 'Data is undefined' })
+      } else {
         response.send(data)
       }
     } catch (error) {
-      response.status(500).json({error:{error}})
+      response.status(500).json({ error: { error } })
     }
   }
 
@@ -90,18 +92,95 @@ export class FlightController
         .innerJoin('f.Start', 's')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-        console.log(data)
-        if(data === undefined){
-          response.status(400).json({error:'Data is undefined'})
-        }else{
-          response.send(data)
-        }
+      console.log(data)
+      if (data === undefined) {
+        response.status(400).json({ error: 'Data is undefined' })
+      } else {
+        response.send(data)
+      }
     } catch (error) {
-      response.status(500).json({error:{error}})
+      response.status(500).json({ error: { error } })
     }
   }
 
-  takenSeats = async (request: Request, response: Response, next: NextFunction) => {
+  allUpcoming = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const data = await this.repository
+        .createQueryBuilder('f')
+        .select([
+          'f.FlightId',
+          'f.Date',
+          'f.Gate',
+          'f.Price',
+          'f.StartId',
+          'f.PlaneId',
+          'f.Name',
+          'f.DestinationId',
+          'd.Name',
+          'd.Coordinates',
+          's.Name',
+          's.Coordinates',
+        ])
+        .innerJoin('f.Destination', 'd')
+        .innerJoin('f.Start', 's')
+        .where('Date(f.Date) >= Date(now())')
+        .orderBy('f.Date', 'ASC')
+        .getMany()
+      if (data === undefined) {
+        response.status(400).json({ error: 'Data is undefined' })
+      } else {
+        response.send(data)
+      }
+    } catch (error) {
+      response.status(500).json({ error: { error } })
+    }
+  }
+  specific = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const specificFlight = request.params.id
+      const data = await this.repository
+        .createQueryBuilder('f')
+        .select([
+          'f.FlightId',
+          'f.Date',
+          'f.Gate',
+          'f.Price',
+          'f.StartId',
+          'f.PlaneId',
+          'f.Name',
+          'f.DestinationId',
+          'd.Name',
+          'd.Coordinates',
+          's.Name',
+          's.Coordinates',
+        ])
+        .innerJoin('f.Destination', 'd')
+        .innerJoin('f.Start', 's')
+        .where('f.Name = :id', { id: specificFlight })
+        .getOne()
+      if (data === undefined) {
+        response.status(400).json({ error: 'Data is undefined' })
+      } else {
+        response.send(data)
+      }
+    } catch (error) {
+      response.status(500).json({ error: { error } })
+    }
+  }
+
+  takenSeats = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
     try {
       const flightID = request.params.id
 
@@ -112,18 +191,21 @@ export class FlightController
         .innerJoin('f.Ticket', 't')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-      if(data === undefined){
-        response.status(400).json({error: 'Data is undefined'})
-      }
-      else{
+      if (data === undefined) {
+        response.status(400).json({ error: 'Data is undefined' })
+      } else {
         response.send(data)
       }
     } catch (error) {
-      response.status(500).json({error:{error}})
+      response.status(500).json({ error: { error } })
     }
   }
 
-  seatsInfo = async (request: Request, response: Response, next: NextFunction) => {
+  seatsInfo = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
     try {
       const flightID = request.params.id
 
@@ -133,13 +215,13 @@ export class FlightController
         .innerJoin('f.Plane', 'p')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-        if(data === undefined){
-          response.status(400).json({error: 'Data is undefined'})
-        }else{
-          response.send(data)
-        }
+      if (data === undefined) {
+        response.status(400).json({ error: 'Data is undefined' })
+      } else {
+        response.send(data)
+      }
     } catch (error) {
-      response.status(500).json({error:{error}})
+      response.status(500).json({ error: { error } })
     }
   }
 
@@ -157,13 +239,13 @@ export class FlightController
         .innerJoin('f.Plane', 'p')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-        if(data === undefined){
-          response.status(400).json({error: 'Data is undefined'})
-        }else{
-          response.send(data)
-        }
+      if (data === undefined) {
+        response.status(400).json({ error: 'Data is undefined' })
+      } else {
+        response.send(data)
+      }
     } catch (error) {
-      response.status(500).json({error:{error}})
+      response.status(500).json({ error: { error } })
     }
   }
 
@@ -191,13 +273,13 @@ export class FlightController
         .where('t.User = :id', { id: userID })
         .distinct(true)
         .getMany()
-        if(data.length === 0){
-          response.status(400).json({error:'Data is undefined'})
-        }else{
-          response.send(data)
-        }
+      if (data.length === 0) {
+        response.status(400).json({ error: 'Data is undefined' })
+      } else {
+        response.send(data)
+      }
     } catch (error) {
-      response.status(500).json({error:{error}})
+      response.status(500).json({ error: { error } })
     }
   }
 }
