@@ -1,10 +1,17 @@
 <script lang="ts">
-  export let flightNumber: string
-  let tempFlightNumber: string
+  import { get } from '../../utils/useApi'
+
+  export let specificFlight: string
+  let flightNumber: string = null
 
   function handleSubmit() {
-    flightNumber = flightNumber
-    console.log(flightNumber)
+    getSpecific()
+  }
+  async function getSpecific() {
+    console.log('start call')
+    specificFlight = await get(
+      `http://localhost:3001/api/v1/flight/flightnr/${flightNumber}`,
+    )
   }
 </script>
 
@@ -15,6 +22,7 @@
   <div class="bg-white rounded-l-xl col-span-2 flex">
     <input
       type="text"
+      bind:value={flightNumber}
       placeholder="Search flight number"
       class="p-4 rounded-l-xl"
     />
