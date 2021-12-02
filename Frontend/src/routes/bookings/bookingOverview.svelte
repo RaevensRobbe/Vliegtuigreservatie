@@ -40,7 +40,7 @@
     <Intertitle titleName="Future bookings" />
     {#if futureBookings.length > 0}
       {#each futureBookings as booking}
-        <BookingFlight bookingData={booking} />
+        <BookingFlight flightData={booking} booking={true} />
       {/each}
     {:else}
       <NoBooking booking={'future'} />
@@ -52,7 +52,7 @@
     {#if previousBookings.length > 0}
       {#each previousBookings as booking}
         {#if new Date(booking.Date).getFullYear() >= $BookingStore.previousYear}
-          <BookingFlight bookingData={booking} />
+          <BookingFlight flightData={booking} booking={true} />
         {:else}
           <!-- {calculateYear(booking.Date)} -->
           <p class="text-lg">
@@ -60,7 +60,7 @@
               booking.Date,
             ).getFullYear())}
           </p>
-          <BookingFlight bookingData={booking} />
+          <BookingFlight flightData={booking} booking={true} />
         {/if}
       {/each}
     {:else}

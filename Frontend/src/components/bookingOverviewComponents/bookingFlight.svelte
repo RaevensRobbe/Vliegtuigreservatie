@@ -7,12 +7,13 @@
     getTouchdownTime,
   } from './../../utils/calculateDistance'
 
-  export let bookingData: any
-  let date = new Date(bookingData.Date)
+  export let flightData: any
+  export let booking: boolean
+  let date = new Date(flightData.Date)
   let departureTime = getDepartureTime()
 
   function getDepartureTime() {
-    let datePartTwo = bookingData.Date.split('T')[1]
+    let datePartTwo = flightData.Date.split('T')[1]
     let dateHour = datePartTwo.split(':')[0]
     let dateMinute = datePartTwo.split(':')[1]
     return dateHour + ':' + dateMinute
@@ -30,8 +31,13 @@
   }
 
   function navigate() {
-    $bookingTicket.ticketId = bookingData.Ticket[0].TicketId
-    goto('/bookings/flightTicket')
+    if (booking) {
+      // go to flightTicket
+      $bookingTicket.ticketId = flightData.Ticket[0].TicketId
+      goto('/bookings/flightTicket')
+    } else {
+      // go to admin edit page
+    }
   }
 </script>
 
@@ -55,7 +61,7 @@
       <p class="font-bold text-lg text-forest-green">
         {getDepartureTime()}
       </p>
-      <p class="text-lg">{bookingData.Start.Name}</p>
+      <p class="text-lg">{flightData.Start.Name}</p>
     </div>
     <div class="flex justify-center flex-col">
       <svg
@@ -77,23 +83,28 @@
       </svg>
       <p class="text-base mt-2" text-md>
         {calculateFlightTimeLong(
-          bookingData.Start.Coordinates,
-          bookingData.Destination.Coordinates,
+          flightData.Start.Coordinates,
+          flightData.Destination.Coordinates,
         )}
       </p>
     </div>
     <div class="my-auto">
       <p class="font-bold text-lg text-forest-green">
         {getTouchdownTime(
-          bookingData.Start.Coordinates,
-          bookingData.Destination.Coordinates,
+          flightData.Start.Coordinates,
+          flightData.Destination.Coordinates,
           departureTime,
         )}
       </p>
-      <p class="text-lg">{bookingData.Destination.Name}</p>
+      <p class="text-lg">{flightData.Destination.Name}</p>
     </div>
   </div>
+
   <p class=" flex font-bold text-lg lg:text-2xl justify-center my-auto">
-    See tickets
+    {#if booking}
+      See tickets
+    {:else}
+      Edit flight
+    {/if}
   </p>
 </div>
