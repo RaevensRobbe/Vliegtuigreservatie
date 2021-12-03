@@ -8,9 +8,12 @@ services:
     ports:
       - 3307:3306
     volumes:
-      - ./db:/var/lib/mysql
+      - database:/var/lib/mysql
       
   adminer:
     image: adminer:4.8.1
     ports:
       - 9999:8080
+
+volumes:
+  database:
