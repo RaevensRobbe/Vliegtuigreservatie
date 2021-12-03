@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction, Router, request, response } from 'express';
 import { User } from "../entities/user"; 
 import { CrudController, IController, ICrudController } from './crud.controller';
-import admin from 'firebase-admin';
+import admin, { auth } from 'firebase-admin';
 import { Guid } from "guid-typescript";
 
 
@@ -22,7 +22,8 @@ export class UserController extends CrudController<User> implements IUserControl
         this.router.get('/all', this.all);
         this.router.get('/:id', this.getOne);
         this.router.post('/createUser', this.createUser);
-        this.router.put('/updateUser/:id', this.updateUser);
+        this.router.put('/updateUser/:id',this.updateUser);
+        this.router.post('/createAdmin', this.createAdminUser)
     }
 
     getOne = async (request: Request, response: Response, next: NextFunction) =>{
@@ -76,10 +77,12 @@ export class UserController extends CrudController<User> implements IUserControl
           if(checkUser === undefined) {
             const newDbUser = await this.repository.create(newUser);
             result = await this.repository.save(newDbUser); 
-            return res.status(200).json({succes: true})
+
+            if(result.UserId) return response.status(200).json({succes: true})
+            else return response.status(500).json({error: "Something went wrong"})
           }
           else{
-            return res.status(200).json({info: "User already exists"})
+            return response.status(200).json({info: "User already exists"})
           }
         }
       }
@@ -96,6 +99,35 @@ export class UserController extends CrudController<User> implements IUserControl
           const update = await this.repository.update({UserId: req.params.id},{Firstname: req.body.data.firstname, Lastname: req.body.data.lastname, Email: req.body.data.email})
           return res.status(200).json({succes: true})
         }
+      }catch(error){
+        response.status(500).json({error:error})
+      }
+    }
+
+    createAdminUser = async (req: Request, response: Response, next: NextFunction) => {
+      try{
+        let result:any
+        const { displayName, password, email, role } = req.body
+        const uid = "ZeZy583ThHOyjFVfYU4MpaUYFUy2"
+ 
+       if (!displayName || !password || !email || !role) {
+           return response.status(400).send({ message: 'Missing fields' })
+       }
+      await admin.auth().setCustomUserClaims(uid, { role })
+      
+      const newUser:User ={
+        UserId : uid,
+        Firstname: displayName.split(' ')[0],
+        Lastname: displayName.split(' ')[1],
+        Email: email,
+        Admin: true 
+      }
+      const newDbUser = await this.repository.create(newUser);
+      result = await this.repository.save(newDbUser); 
+
+      if(result.UserId) return response.status(200).json({succes: true})
+      else return response.status(500).json({error: "Something went wrong"})
+
       }catch(error){
         response.status(500).json({error:error})
       }
