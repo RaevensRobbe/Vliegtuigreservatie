@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, Router } from 'express'
+import { Request, Response, NextFunction, Router, response } from 'express'
 import { Flight } from '../entities/flight'
 import { CrudController, IController, ICrudController } from './crud.controller'
 
@@ -23,7 +23,7 @@ export class FlightController
     this.router.get('/allupcoming', this.allUpcoming)
     this.router.get('/flightnr/:id', this.specific)
     this.router.get('/:id', this.one)
-    this.router.post('', this.save)
+    this.router.post('', this.createFlight)
     this.router.get('/flightInfo/:Sid/:Did', this.flightInfo)
     this.router.get('/seatsInfo/:id', this.seatsInfo)
     this.router.get('/takenSeats/:id', this.takenSeats)
@@ -139,6 +139,7 @@ export class FlightController
       response.status(500).json({ error: { error } })
     }
   }
+
   specific = async (
     request: Request,
     response: Response,
@@ -280,6 +281,40 @@ export class FlightController
       }
     } catch (error) {
       response.status(500).json({ error: { error } })
+    }
+  }
+
+  createFlight = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (req.body.data === null) {
+        response.status(406).send('No data has been provided')
+      } else {
+        const newFlight: Flight = {
+          Ticket: null,
+          Name: req.body.data.Name,
+          PlaneId: req.body.data.PlaneId,
+          StartId: req.body.data.StartId,
+          DestinationId: req.body.data.DestinationId,
+          Start: {
+            DestinationId: req.body.data.StartId,
+          },
+          Destination: {
+            DestinationId: req.body.data.DestinationId,
+          },
+
+          Date: req.body.data.Date,
+          Price: req.body.data.Price,
+          Gate: req.body.data.Gate,
+        }
+        const create = await this.repository.create(newFlight)
+        let result = await this.repository.save(create)
+
+        console.log('created')
+        console.log(result)
+        return res.json(result)
+      }
+    } catch (error) {
+      response.status(500).json(error)
     }
   }
 }
