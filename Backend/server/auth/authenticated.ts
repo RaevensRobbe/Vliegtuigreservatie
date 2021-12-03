@@ -3,9 +3,10 @@ import * as admin from 'firebase-admin'
 
 export async function isAuthenticated(req: Request, res: Response, next: Function) {
     const { authorization } = req.headers
+    console.log(req.headers)
   
     if (!authorization)
-        return res.status(401).send({ message: 'Unauthorized' });
+        return res.status(401).send({ message: 'Missing auth header' });
   
     if (!authorization.startsWith('Bearer'))
         return res.status(401).send({ message: 'Unauthorized' });

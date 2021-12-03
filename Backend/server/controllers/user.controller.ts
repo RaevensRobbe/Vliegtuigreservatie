@@ -3,7 +3,8 @@ import { User } from "../entities/user";
 import { CrudController, IController, ICrudController } from './crud.controller';
 import admin, { auth } from 'firebase-admin';
 import { Guid } from "guid-typescript";
-
+import { isAuthenticated } from "../auth/authenticated";
+import { isAuthorized } from "../auth/authorized";
 
 /**
  * The interface to use for every User Controller.
@@ -23,7 +24,7 @@ export class UserController extends CrudController<User> implements IUserControl
         this.router.get('/:id', this.getOne);
         this.router.post('/createUser', this.createUser);
         this.router.put('/updateUser/:id',this.updateUser);
-        this.router.post('/createAdmin', this.createAdminUser)
+        this.router.post('/createAdmin', isAuthenticated , isAuthorized({hasRole: ['admin']}) ,this.createAdminUser)
     }
 
     getOne = async (request: Request, response: Response, next: NextFunction) =>{
@@ -107,14 +108,14 @@ export class UserController extends CrudController<User> implements IUserControl
     createAdminUser = async (req: Request, response: Response, next: NextFunction) => {
       try{
         let result:any
-        const { displayName, password, email, role } = req.body
-        const uid = "ZeZy583ThHOyjFVfYU4MpaUYFUy2"
+        const { displayName, password, email, role } = req.body.data
+        const uid = "w8YZuYZB7ePqF5cW7cG662eyZjw1"
  
        if (!displayName || !password || !email || !role) {
            return response.status(400).send({ message: 'Missing fields' })
        }
       await admin.auth().setCustomUserClaims(uid, { role })
-      
+
       const newUser:User ={
         UserId : uid,
         Firstname: displayName.split(' ')[0],

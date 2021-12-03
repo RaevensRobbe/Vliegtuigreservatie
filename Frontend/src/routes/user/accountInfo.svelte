@@ -2,7 +2,7 @@
   import { emailValidator, requiredValidator } from '../../utils/inputValidator'
   import Intertitle from '../../components/Intertitle.svelte'
   import { onMount } from 'svelte'
-  import { get } from '../../utils/useApi'
+  import { get, post } from '../../utils/useApi'
   import authStore from '../../stores/authStore'
   import { updateCurrentUser, updateEmail, updateProfile } from '@firebase/auth'
   import { getAuth } from 'firebase/auth'
@@ -106,6 +106,23 @@
   function goBack() {
     goto('/')
   }
+  async function CreateUser(data) {
+    const res:any = await post('http://localhost:3001/api/v1/user/createAdmin', data)
+    console.log(res)
+  }
+
+  function testAdminUSer(){
+    console.log('clicked')
+    const data:any = {
+      "displayName" : "Test security",
+      "password": "-TestPw2001-",
+      "email": "jelle.test@gmail.com",
+      "role": "admin"
+    }
+    CreateUser(data)
+  }
+
+
 </script>
 
 <section class="p-4 px-6 align-start">
@@ -201,6 +218,15 @@
         >
           Change
         </button>
+
+        <div class="flex justify-center mt-8">
+          <button
+            on:click={testAdminUSer}
+            type="button"
+            class="bg-forest-green rounded-full py-2 px-4 mt-4 font-bold text-2xl text-white"
+          >
+            Test
+          </button>
       </div>
       <div class="flex justify-center">
         {#if errors.update}
