@@ -106,23 +106,41 @@
   function goBack() {
     goto('/')
   }
-  async function CreateUser(data) {
-    const res:any = await post('http://localhost:3001/api/v1/user/createAdmin', data)
-    console.log(res)
-  }
+  
+  // async function CreateUser(data, token) {
+  //   //console.log(token)
+  //   //const res:any = await post('http://localhost:3001/api/v1/user/createAdmin', data)
+  //   const res = await fetch('http://localhost:3001/api/v1/user/createAdmin', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'Authorization':  `Bearer ${token}`
+  //   },
+  //   body: JSON.stringify({
+  //     data,
+  //   }),
+  // })
+  //   console.log(res)
+  // }
 
-  function testAdminUSer(){
-    console.log('clicked')
-    const data:any = {
-      "displayName" : "Test security",
-      "password": "-TestPw2001-",
-      "email": "jelle.test@gmail.com",
-      "role": "admin"
-    }
-    CreateUser(data)
-  }
+  // function testAdminUSer(){
+  //   console.log('clicked')
+  //   let token:any = ''
 
-
+  //   auth.currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+  //     //console.log(idToken)
+  //     token = idToken
+  //     const data:any = {
+  //     "displayName" : "Admin Howest",
+  //     "password": "P@ssw0rd",
+  //     "email": "docent@howest.be",
+  //     "role": "admin"
+  //   }
+  //   CreateUser(data, token)
+  //   }).catch(function(error) {
+  //     // Handle error
+  //   });
+  // }
 </script>
 
 <section class="p-4 px-6 align-start">
@@ -219,14 +237,14 @@
           Change
         </button>
 
-        <div class="flex justify-center mt-8">
-          <button
+        <!-- <div class="flex justify-center mt-8"> -->
+          <!-- <button
             on:click={testAdminUSer}
             type="button"
             class="bg-forest-green rounded-full py-2 px-4 mt-4 font-bold text-2xl text-white"
           >
             Test
-          </button>
+          </button> -->
       </div>
       <div class="flex justify-center">
         {#if errors.update}

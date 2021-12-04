@@ -107,13 +107,22 @@ export class UserController extends CrudController<User> implements IUserControl
 
     createAdminUser = async (req: Request, response: Response, next: NextFunction) => {
       try{
+        console.log('i get in')
         let result:any
+        console.log(req.body.data)
         const { displayName, password, email, role } = req.body.data
-        const uid = "w8YZuYZB7ePqF5cW7cG662eyZjw1"
+        //const uid = "DGtOvw750lZaKIuJP3C7KFZQsWB3"
  
        if (!displayName || !password || !email || !role) {
            return response.status(400).send({ message: 'Missing fields' })
        }
+       console.log('hier')
+
+      const { uid } = await admin.auth().createUser({
+        displayName,
+        password,
+        email
+      })
       await admin.auth().setCustomUserClaims(uid, { role })
 
       const newUser:User ={
@@ -123,6 +132,7 @@ export class UserController extends CrudController<User> implements IUserControl
         Email: email,
         Admin: true 
       }
+      console.log(newUser)
       const newDbUser = await this.repository.create(newUser);
       result = await this.repository.save(newDbUser); 
 
