@@ -1,41 +1,141 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
-  import { get } from '../../utils/useApi'
+  import { get, post } from '../../utils/useApi'
   import { onMount } from 'svelte'
 
   import Intertitle from '../../components/Intertitle.svelte'
   import Spinner from '../../components/animations/spinner.svelte'
+
+  import {
+    requiredValidator,
+    emailValidator,
+    strenghtValidator,
+    confirmValidator,
+    checkNumber,
+    dateValidator,
+    requiredNumber,
+  } from '../../utils/inputValidator'
+
   let flightName: string
   let plane: string
-  let gate: number
+  let gate: number = null
   let departureAirport: string
   let destinationAirport: string
   let departureTime
-  let price: number
-  let highSeason: boolean
+  let price: number = null
+  let highSeason: boolean = false
 
   let planes: any
   let locations: any
 
   let loaded: boolean = false
 
+  let errors: any = {}
+
   onMount(async () => {
     locations = await get('http://localhost:3001/api/v1/destination/all')
     planes = await get('http://localhost:3001/api/v1/plane/all')
-    console.log(planes)
-    console.log(locations)
+
     loaded = true
   })
 
   function handleSubmit() {
-    console.log(`Flightname: ${flightName}`)
-    console.log(`plane: ${plane}`)
-    console.log(`gate: ${gate}`)
-    console.log(`departureAirport: ${departureAirport}`)
-    console.log(`destinationAirport: ${destinationAirport}`)
-    console.log(`destinationAirport: ${destinationAirport}`)
-    console.log(`price: ${price}`)
-    console.log(`highSeason: ${highSeason}`)
+    if (
+      requiredValidator(flightName) &&
+      requiredValidator(plane) &&
+      requiredNumber(gate) &&
+      requiredValidator(departureAirport) &&
+      requiredValidator(destinationAirport) &&
+      requiredValidator(departureTime) &&
+      requiredNumber(price)
+    ) {
+      errors.flightName = 'Flight name is required'
+      errors.plane = 'Plane is required'
+      errors.gate = 'Gate is required'
+      errors.departureAirport = 'Departure airport is required'
+      errors.destinationAirport = 'Destination airport is required'
+      errors.departureTime = 'Departure time is required'
+      errors.price = 'Price is required'
+      return
+    }
+
+    if (requiredValidator(flightName)) {
+      errors.flightName = 'Flight name is required'
+      return
+    } else {
+      errors.flightName = ''
+    }
+
+    if (requiredValidator(plane)) {
+      errors.plane = 'Plane is required'
+      return
+    } else {
+      errors.plane = ''
+    }
+
+    if (requiredNumber(gate)) {
+      errors.gate = 'Gate is required'
+      return
+    } else if (!checkNumber(gate)) {
+      errors.gate = 'Gate has to be a number'
+    } else {
+      errors.gate = ''
+    }
+
+    if (requiredValidator(departureAirport)) {
+      errors.departureAirport = 'Departure airport is required'
+      return
+    } else {
+      errors.departureAirport = ''
+    }
+
+    if (requiredValidator(destinationAirport)) {
+      errors.destinationAirport = 'Destination airport is required'
+      return
+    } else if (
+      confirmValidator(departureAirport, destinationAirport) === true
+    ) {
+      errors.destinationAirport =
+        "Destination and departure airport can't be the same"
+    } else {
+      errors.destinationAirport = ''
+    }
+
+    if (requiredValidator(departureTime)) {
+      errors.departureTime = 'Departure time is required'
+      return
+    } else if (dateValidator(departureTime) === false) {
+      errors.departureTime = "Departure time can't be in the past"
+    } else {
+      errors.departureTime = ''
+    }
+
+    if (requiredNumber(price)) {
+      errors.price = 'Price is required'
+      return
+    } else if (!checkNumber(price)) {
+      errors.price = 'Price has to be a number with a . as seperator'
+      return
+    } else {
+      errors.price = ''
+    }
+    addToDB()
+  }
+
+  async function addToDB() {
+    let data = {
+      Name: flightName,
+      PlaneId: plane,
+      DestinationId: destinationAirport,
+      StartId: departureAirport,
+      Date: departureTime,
+      Price: price,
+      Gate: gate,
+    }
+    console.log(data)
+
+    let call: any = await post('http://localhost:3001/api/v1/flight', data)
+    console.log(call)
   }
 
   function goBack() {
@@ -85,25 +185,30 @@
               class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
+          {#if errors.flightName}
+            <p class="text-red-600 -mt-2 mb-2">{errors.flightName}</p>
+          {/if}
         </div>
         <!-- Plane -->
-        <div class="flex flex-col justify-between">
+        <div class="flex flex-col">
           <label for="plane" class="font-bold"> Plane </label>
           <select
             id="plane"
             bind:value={plane}
-            class="border-2 w-full text-sm md:text-md mb-2"
-            required
+            class="border-2 w-full text-sm md:text-md mb-2 py-1"
           >
-            <option value="null" selected disabled class="bg-gray-100"
+            <option value="" selected disabled class="bg-gray-100"
               >Select the plane</option
             >
             {#each planes as specificPlane}
-              <option value={specificPlane.Type}>
+              <option value={specificPlane.PlaneId}>
                 {specificPlane.Type}
               </option>
             {/each}
           </select>
+          {#if errors.plane}
+            <p class="text-red-600 -mt-2 mb-2">{errors.plane}</p>
+          {/if}
         </div>
         <!-- Gate -->
         <div class="flex flex-col">
@@ -117,19 +222,21 @@
               class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
+          {#if errors.gate}
+            <p class="text-red-600 -mt-2 mb-2">{errors.gate}</p>
+          {/if}
         </div>
         <!-- Departure airport -->
-        <div class="flex flex-col justify-between">
+        <div class="flex flex-col">
           <label for="departureAirport" class="font-bold">
             Departure airport
           </label>
           <select
             id="departureAirport"
             bind:value={departureAirport}
-            class="border-2 w-full text-sm md:text-md mb-2"
-            required
+            class="border-2 w-full text-sm md:text-md mb-2 py-1"
           >
-            <option value="null" selected disabled class="bg-gray-100"
+            <option value="" selected disabled class="bg-gray-100"
               >Select the airport</option
             >
             {#each locations as location}
@@ -138,19 +245,21 @@
               </option>
             {/each}
           </select>
+          {#if errors.departureAirport}
+            <p class="text-red-600 -mt-2 mb-2">{errors.departureAirport}</p>
+          {/if}
         </div>
         <!-- Destination airport -->
-        <div class="flex flex-col justify-between">
+        <div class="flex flex-col">
           <label for="departureAirport" class="font-bold">
             Destination airport
           </label>
           <select
             id="departureAirport"
             bind:value={destinationAirport}
-            class="border-2 w-full text-sm md:text-md mb-2"
-            required
+            class="border-2 w-full text-sm md:text-md mb-2 py-1"
           >
-            <option value="null" selected disabled class="bg-gray-100"
+            <option value="" selected disabled class="bg-gray-100"
               >Select the airport</option
             >
             {#each locations as location}
@@ -159,7 +268,11 @@
               </option>
             {/each}
           </select>
+          {#if errors.destinationAirport}
+            <p class="text-red-600 -mt-2 mb-2">{errors.destinationAirport}</p>
+          {/if}
         </div>
+        <!-- Departure time -->
         <div class="flex flex-col">
           <label for="departureTime" class="font-bold"> Departure time </label>
           <div class="border-b text-dim-gray mb-2 border-current">
@@ -170,7 +283,11 @@
               class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
+          {#if errors.departureTime}
+            <p class="text-red-600 -mt-2 mb-2">{errors.departureTime}</p>
+          {/if}
         </div>
+        <!-- Price -->
         <div class="flex flex-col">
           <label for="price" class="font-bold"> Price </label>
           <div class="border-b text-dim-gray mb-2 border-current">
@@ -189,6 +306,9 @@
             <input type="checkbox" id="HighSeason" bind:checked={highSeason} /> HighSeason
             (price * 1.75)
           </label>
+          {#if errors.price}
+            <p class="text-red-600 mb-2">{errors.price}</p>
+          {/if}
         </div>
       </section>
       <button
