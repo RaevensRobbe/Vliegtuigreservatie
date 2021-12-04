@@ -284,8 +284,13 @@ export class FlightController
     }
   }
 
-  createFlight = async (req: Request, res: Response, next: NextFunction) => {
+  createFlight = async (
+    req: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
     try {
+      let result
       if (req.body.data === null) {
         response.status(406).send('No data has been provided')
       } else {
@@ -307,11 +312,15 @@ export class FlightController
           Gate: req.body.data.Gate,
         }
         const create = await this.repository.create(newFlight)
-        let result = await this.repository.save(create)
+        result = await this.repository.save(create)
 
         console.log('created')
         console.log(result)
-        return res.json(result)
+        if (result === {}) {
+          return response.status(500).json({ error: 'Something went wrong' })
+        } else {
+          return response.status(200).json({ success: true })
+        }
       }
     } catch (error) {
       response.status(500).json(error)
