@@ -2,6 +2,8 @@
   import { goto } from '$app/navigation'
   import { get, post } from '../../utils/useApi'
   import { onMount } from 'svelte'
+  import { fade, scale, draw } from 'svelte/transition'
+  import { quintOut } from 'svelte/easing'
 
   import Intertitle from '../../components/Intertitle.svelte'
   import Spinner from '../../components/animations/spinner.svelte'
@@ -25,6 +27,8 @@
   let price: number = null
   let highSeason: boolean = false
 
+  let succes: boolean = false
+
   let planes: any
   let locations: any
 
@@ -38,6 +42,18 @@
 
     loaded = true
   })
+
+  function addAnotherFlight() {
+    succes = false
+    flightName = null
+    plane = null
+    gate = null
+    departureAirport = null
+    destinationAirport = null
+    departureTime = null
+    price = null
+    highSeason = null
+  }
 
   function handleSubmit() {
     if (
@@ -123,6 +139,9 @@
   }
 
   async function addToDB() {
+    if (highSeason) {
+      price = price * 1.75
+    }
     let data = {
       Name: flightName,
       PlaneId: plane,
@@ -136,6 +155,10 @@
 
     let call: any = await post('http://localhost:3001/api/v1/flight', data)
     console.log(call)
+
+    if (call.success === true) {
+      succes = true
+    }
   }
 
   function goBack() {
@@ -168,159 +191,194 @@
     <p class="">Go back</p>
   </section>
   <Intertitle titleName="Add a new flight" />
-  {#if loaded}
-    <form on:submit|preventDefault={handleSubmit}>
-      <section
-        class="grid grid-cols-3 gap-4 bg-white shadow-md w-3/4 mx-auto p-4"
-      >
-        <!-- Flight name -->
-        <div class="flex flex-col">
-          <label for="flightName" class="font-bold"> Flight name </label>
-          <div class="border-b text-dim-gray mb-2 border-current">
-            <input
-              bind:value={flightName}
-              id="flightName"
-              type="text"
-              placeholder="Enter flightname here"
-              class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
-            />
-          </div>
-          {#if errors.flightName}
-            <p class="text-red-600 -mt-2 mb-2">{errors.flightName}</p>
-          {/if}
-        </div>
-        <!-- Plane -->
-        <div class="flex flex-col">
-          <label for="plane" class="font-bold"> Plane </label>
-          <select
-            id="plane"
-            bind:value={plane}
-            class="border-2 w-full text-sm md:text-md mb-2 py-1"
-          >
-            <option value="" selected disabled class="bg-gray-100"
-              >Select the plane</option
-            >
-            {#each planes as specificPlane}
-              <option value={specificPlane.PlaneId}>
-                {specificPlane.Type}
-              </option>
-            {/each}
-          </select>
-          {#if errors.plane}
-            <p class="text-red-600 -mt-2 mb-2">{errors.plane}</p>
-          {/if}
-        </div>
-        <!-- Gate -->
-        <div class="flex flex-col">
-          <label for="gate" class="font-bold"> Gate </label>
-          <div class="border-b text-dim-gray mb-2 border-current">
-            <input
-              bind:value={gate}
-              id="gate"
-              type="number"
-              placeholder="Enter Gate number here"
-              class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
-            />
-          </div>
-          {#if errors.gate}
-            <p class="text-red-600 -mt-2 mb-2">{errors.gate}</p>
-          {/if}
-        </div>
-        <!-- Departure airport -->
-        <div class="flex flex-col">
-          <label for="departureAirport" class="font-bold">
-            Departure airport
-          </label>
-          <select
-            id="departureAirport"
-            bind:value={departureAirport}
-            class="border-2 w-full text-sm md:text-md mb-2 py-1"
-          >
-            <option value="" selected disabled class="bg-gray-100"
-              >Select the airport</option
-            >
-            {#each locations as location}
-              <option value={location.DestinationId}>
-                {location.Name}
-              </option>
-            {/each}
-          </select>
-          {#if errors.departureAirport}
-            <p class="text-red-600 -mt-2 mb-2">{errors.departureAirport}</p>
-          {/if}
-        </div>
-        <!-- Destination airport -->
-        <div class="flex flex-col">
-          <label for="departureAirport" class="font-bold">
-            Destination airport
-          </label>
-          <select
-            id="departureAirport"
-            bind:value={destinationAirport}
-            class="border-2 w-full text-sm md:text-md mb-2 py-1"
-          >
-            <option value="" selected disabled class="bg-gray-100"
-              >Select the airport</option
-            >
-            {#each locations as location}
-              <option value={location.DestinationId}>
-                {location.Name}
-              </option>
-            {/each}
-          </select>
-          {#if errors.destinationAirport}
-            <p class="text-red-600 -mt-2 mb-2">{errors.destinationAirport}</p>
-          {/if}
-        </div>
-        <!-- Departure time -->
-        <div class="flex flex-col">
-          <label for="departureTime" class="font-bold"> Departure time </label>
-          <div class="border-b text-dim-gray mb-2 border-current">
-            <input
-              bind:value={departureTime}
-              id="departureTime"
-              type="datetime-local"
-              class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
-            />
-          </div>
-          {#if errors.departureTime}
-            <p class="text-red-600 -mt-2 mb-2">{errors.departureTime}</p>
-          {/if}
-        </div>
-        <!-- Price -->
-        <div class="flex flex-col">
-          <label for="price" class="font-bold"> Price </label>
-          <div class="border-b text-dim-gray mb-2 border-current">
-            <div class="flex">
-              <span class="text-sm md:text-md mr-2 py-1">€ </span>
+  {#if succes === false}
+    {#if loaded}
+      <form on:submit|preventDefault={handleSubmit} in:fade>
+        <section
+          class="grid grid-cols-3 gap-4 bg-white shadow-md w-3/4 mx-auto p-4"
+        >
+          <!-- Flight name -->
+          <div class="flex flex-col">
+            <label for="flightName" class="font-bold"> Flight name </label>
+            <div class="border-b text-dim-gray mb-2 border-current">
               <input
-                bind:value={price}
-                id="price"
-                type="numeric"
-                placeholder="Enter the price here"
+                bind:value={flightName}
+                id="flightName"
+                type="text"
+                placeholder="Enter flightname here"
                 class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
               />
             </div>
+            {#if errors.flightName}
+              <p class="text-red-600 -mt-2 mb-2">{errors.flightName}</p>
+            {/if}
           </div>
-          <label for="HighSeason" class="text-xs">
-            <input type="checkbox" id="HighSeason" bind:checked={highSeason} /> HighSeason
-            (price * 1.75)
-          </label>
-          {#if errors.price}
-            <p class="text-red-600 mb-2">{errors.price}</p>
-          {/if}
-        </div>
-      </section>
-      <button
-        type="submit"
-        class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-      >
-        Add flight
-      </button>
-    </form>
+          <!-- Plane -->
+          <div class="flex flex-col">
+            <label for="plane" class="font-bold"> Plane </label>
+            <select
+              id="plane"
+              bind:value={plane}
+              class="border-2 w-full text-sm md:text-md mb-2 py-1"
+            >
+              <option value="" selected disabled class="bg-gray-100"
+                >Select the plane</option
+              >
+              {#each planes as specificPlane}
+                <option value={specificPlane.PlaneId}>
+                  {specificPlane.Type}
+                </option>
+              {/each}
+            </select>
+            {#if errors.plane}
+              <p class="text-red-600 -mt-2 mb-2">{errors.plane}</p>
+            {/if}
+          </div>
+          <!-- Gate -->
+          <div class="flex flex-col">
+            <label for="gate" class="font-bold"> Gate </label>
+            <div class="border-b text-dim-gray mb-2 border-current">
+              <input
+                bind:value={gate}
+                id="gate"
+                type="number"
+                placeholder="Enter Gate number here"
+                class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
+              />
+            </div>
+            {#if errors.gate}
+              <p class="text-red-600 -mt-2 mb-2">{errors.gate}</p>
+            {/if}
+          </div>
+          <!-- Departure airport -->
+          <div class="flex flex-col">
+            <label for="departureAirport" class="font-bold">
+              Departure airport
+            </label>
+            <select
+              id="departureAirport"
+              bind:value={departureAirport}
+              class="border-2 w-full text-sm md:text-md mb-2 py-1"
+            >
+              <option value="" selected disabled class="bg-gray-100"
+                >Select the airport</option
+              >
+              {#each locations as location}
+                <option value={location.DestinationId}>
+                  {location.Name}
+                </option>
+              {/each}
+            </select>
+            {#if errors.departureAirport}
+              <p class="text-red-600 -mt-2 mb-2">{errors.departureAirport}</p>
+            {/if}
+          </div>
+          <!-- Destination airport -->
+          <div class="flex flex-col">
+            <label for="departureAirport" class="font-bold">
+              Destination airport
+            </label>
+            <select
+              id="departureAirport"
+              bind:value={destinationAirport}
+              class="border-2 w-full text-sm md:text-md mb-2 py-1"
+            >
+              <option value="" selected disabled class="bg-gray-100"
+                >Select the airport</option
+              >
+              {#each locations as location}
+                <option value={location.DestinationId}>
+                  {location.Name}
+                </option>
+              {/each}
+            </select>
+            {#if errors.destinationAirport}
+              <p class="text-red-600 -mt-2 mb-2">{errors.destinationAirport}</p>
+            {/if}
+          </div>
+          <!-- Departure time -->
+          <div class="flex flex-col">
+            <label for="departureTime" class="font-bold">
+              Departure time
+            </label>
+            <div class="border-b text-dim-gray mb-2 border-current">
+              <input
+                bind:value={departureTime}
+                id="departureTime"
+                type="datetime-local"
+                class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
+              />
+            </div>
+            {#if errors.departureTime}
+              <p class="text-red-600 -mt-2 mb-2">{errors.departureTime}</p>
+            {/if}
+          </div>
+          <!-- Price -->
+          <div class="flex flex-col">
+            <label for="price" class="font-bold"> Price </label>
+            <div class="border-b text-dim-gray mb-2 border-current">
+              <div class="flex">
+                <span class="text-sm md:text-md mr-2 py-1">€ </span>
+                <input
+                  bind:value={price}
+                  id="price"
+                  type="numeric"
+                  placeholder="Enter the price here"
+                  class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
+                />
+              </div>
+            </div>
+            <label for="HighSeason" class="text-xs">
+              <input
+                type="checkbox"
+                id="HighSeason"
+                bind:checked={highSeason}
+              /> HighSeason (price * 1.75)
+            </label>
+            {#if errors.price}
+              <p class="text-red-600 mb-2">{errors.price}</p>
+            {/if}
+          </div>
+        </section>
+        <button
+          type="submit"
+          class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+        >
+          Add flight
+        </button>
+      </form>
+    {:else}
+      <div class="w-full h-full flex justify-center my-auto col-span-full">
+        <Spinner />
+      </div>
+    {/if}
   {:else}
-    <div class="w-full h-full flex justify-center my-auto col-span-full">
-      <Spinner />
-    </div>
+    <section class="bg-white shadow-md w-3/4 mx-auto p-4" in:fade>
+      <div class="flex flex-col justify-center items-center gap-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 31.5 31.5"
+          class="h-32 w-32 fill-current text-forest-green"
+          ><g transform="translate(-2.25 -2.25)">
+            <path
+              d="M15.75,24.091l-5.625-5.626,1.59-1.59,4.035,4.034,8.533-8.534,1.592,1.592Z"
+            /><path
+              d="M18,2.25A15.75,15.75,0,1,0,33.75,18,15.75,15.75,0,0,0,18,2.25ZM18,31.5A13.5,13.5,0,1,1,31.5,18,13.5,13.5,0,0,1,18,31.5Z"
+            />
+          </g></svg
+        >
+        <p class="text-2xl">Flight succesfully added</p>
+        <div class="flex gap-4">
+          <button
+            class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            on:click={addAnotherFlight}>Add another flight</button
+          >
+          <button
+            class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            on:click={goBack}>Go back</button
+          >
+        </div>
+      </div>
+    </section>
   {/if}
 </div>
