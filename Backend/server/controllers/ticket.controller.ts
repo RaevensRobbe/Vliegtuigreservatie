@@ -104,6 +104,7 @@ export class TicketController
     } catch (error) {
       response.status(500).json({ error: { error } })
     }
+  }
   
   createReview = async (req: Request, res: Response, next: NextFunction) => {
     try {

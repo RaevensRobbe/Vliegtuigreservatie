@@ -69,7 +69,7 @@ export class CountryController extends CrudController<Country> implements ICount
         try{
             const countryID = request.params.id 
             if(countryID === null) {
-                response.status(500).send('Parameter error')
+                response.status(500).json({error: "Parameter error"})
             }else{
                 const data = await this.repository.createQueryBuilder("country")
                 .select(["country.Name","dest.Name","dest.DestinationId"])

@@ -23,6 +23,7 @@
         isLoggedIn: user !== null,
         user,
         firebaseControlled: true,
+        admin: false,
       })
     })
 

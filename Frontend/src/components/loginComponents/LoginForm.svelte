@@ -9,7 +9,7 @@
   import { afterUpdate, onMount } from 'svelte'
   import { form } from 'svelte-forms'
   import { fade } from 'svelte/transition'
-  import { post } from '../../utils/useApi'
+  import { post, get } from '../../utils/useApi'
 
   import { requiredValidator, emailValidator } from '../../utils/inputValidator'
   import loginCompStore from '../../stores/loginCompStore'
@@ -35,7 +35,9 @@
           lastname: name[1],
           email: user.email,
         }
-        CreateUser(data)
+        CreateUser(data).then(user => {
+          checkAdmin()
+        })
       })
     } catch (error) {
       console.error(error)
@@ -50,11 +52,24 @@
     }
   }
 
+  async function checkAdmin(){
+    const getData:any = await get(`http://localhost:3001/api/v1/user/${$authStore.user.uid}`)
+    const currentStore = $authStore
+    console.log(getData.Admin)
+    authStore.set({
+        isLoggedIn: currentStore.isLoggedIn,
+        user: currentStore.user,
+        firebaseControlled: currentStore.firebaseControlled,
+        admin: getData.Admin
+      })
+  }
+
   const loginWithEmail = () => {
     signInWithEmailAndPassword(auth, email, pw)
       .then(userCredential => {
         const user = userCredential.user
         if(user.email !== undefined) {
+          checkAdmin()
           showLoginForm()
         }
       })
@@ -140,7 +155,7 @@
           id="email"
           type="text"
           placeholder="name@acme.com"
-          class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>
       {#if errors.email}
@@ -154,7 +169,7 @@
           type="password"
           id="pw"
           placeholder="enter password"
-          class="w-full focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+          class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>
       {#if errors.pw}
