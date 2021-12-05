@@ -5,6 +5,12 @@ export const requiredValidator = (input: string) => {
   }
 }
 
+export const requiredNumber = (input: number) => {
+  if (input === undefined || input === null) {
+    return true
+  }
+}
+
 export const emailValidator = (input: string) => {
   const re =
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -68,6 +74,7 @@ export const cardLength = (card: string) => {
     return false
   }
   for (let i = 0; i < card.length; i++) {
+    //check if number
     if (card[i].toUpperCase() != card[i].toLowerCase()) {
       return false
     }
@@ -76,10 +83,28 @@ export const cardLength = (card: string) => {
 }
 
 export const cvcLength = (cvc: string) => {
-  console.log(cvc.length)
   if (cvc.length === 3) {
     return true
   } else {
     return false
+  }
+}
+
+export const checkNumber = (number: number) => {
+  const regex = /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/
+  if (regex.test(number.toString())) {
+    return true
+  }
+  return false
+}
+
+export const dateValidator = (date: Date) => {
+  const today = new Date()
+  const givenDate = new Date(date)
+
+  if (givenDate <= today) {
+    return false
+  } else {
+    return true
   }
 }
