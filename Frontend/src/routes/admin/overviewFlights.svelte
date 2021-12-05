@@ -5,6 +5,7 @@
   import { get } from '../../utils/useApi'
   import BookingFlight from '../../components/bookingOverviewComponents/bookingFlight.svelte'
   import Spinner from '../../components/animations/spinner.svelte'
+  import { goto } from '$app/navigation'
 
   let flights: any = []
   let flightsLoaded: boolean = false
@@ -15,7 +16,7 @@
     getSpecific()
   }
   async function getSpecific() {
-    console.log('start call')
+    // console.log('start call')
     specificFlightData = await get(
       `http://localhost:3001/api/v1/flight/flightnr/${flightNumber}`,
     )
@@ -23,9 +24,13 @@
 
   onMount(async () => {
     flights = await get('http://localhost:3001/api/v1/flight/allupcoming')
-    console.log(flights)
+    // console.log(flights)
     flightsLoaded = true
   })
+
+  function addFlight() {
+    goto('/admin/createFlight')
+  }
 </script>
 
 <body>
@@ -52,6 +57,7 @@
   <section class="m-4 px-6 flex gap-4">
     <button
       class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+      on:click={addFlight}
     >
       Add a flight
     </button>

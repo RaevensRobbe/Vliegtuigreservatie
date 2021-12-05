@@ -151,10 +151,10 @@
       Price: price,
       Gate: gate,
     }
-    console.log(data)
+    // console.log(data)
 
     let call: any = await post('http://localhost:3001/api/v1/flight', data)
-    console.log(call)
+    // console.log(call)
 
     if (call.success === true) {
       succes = true
