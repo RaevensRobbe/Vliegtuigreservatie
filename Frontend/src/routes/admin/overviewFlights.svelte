@@ -59,7 +59,13 @@
       class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
       on:click={addFlight}
     >
-      Add a flight
+      Add flight
+    </button>
+    <button
+      class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+      on:click={addFlight}
+    >
+      Add admin
     </button>
     {#if specificFlightData}
       <button
