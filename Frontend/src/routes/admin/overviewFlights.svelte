@@ -54,7 +54,7 @@
       </button>
     </form>
   </section>
-  <section class="m-4 px-6 flex gap-4">
+  <section class="m-4 md:px-6 flex gap-4">
     <button
       class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
       on:click={addFlight}
@@ -90,7 +90,7 @@
 
 <style>
   .custom-scroll::-webkit-scrollbar {
-    width: 0.5rem;
+    width: 0.25rem;
     cursor: pointer;
   }
   .custom-scroll::-webkit-scrollbar-track {

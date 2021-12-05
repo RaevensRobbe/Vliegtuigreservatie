@@ -27,7 +27,9 @@
   let price: number = null
   let highSeason: boolean = false
 
-  let succes: boolean = false
+  let succes: boolean = true
+  let submitted: boolean = false
+  let failed: boolean = false
 
   let planes: any
   let locations: any
@@ -53,6 +55,7 @@
     departureTime = null
     price = null
     highSeason = null
+    submitted = false
   }
 
   function handleSubmit() {
@@ -139,6 +142,7 @@
   }
 
   async function addToDB() {
+    submitted = true
     if (highSeason) {
       price = price * 1.75
     }
@@ -158,6 +162,9 @@
 
     if (call.success === true) {
       succes = true
+    } else {
+      submitted = false
+      failed = true
     }
   }
 
@@ -166,7 +173,7 @@
   }
 </script>
 
-<div class="m-4 px-6 ">
+<div class="m-4 md:px-6 ">
   <section
     class="pb-4 flex hover:cursor-pointer hover:font-bold"
     on:click={goBack}
@@ -195,7 +202,7 @@
     {#if loaded}
       <form on:submit|preventDefault={handleSubmit} in:fade>
         <section
-          class="grid grid-cols-3 gap-4 bg-white shadow-md w-3/4 mx-auto p-4"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-white shadow-md w-3/4 mx-auto p-4"
         >
           <!-- Flight name -->
           <div class="flex flex-col">
@@ -340,12 +347,23 @@
             {/if}
           </div>
         </section>
-        <button
-          type="submit"
-          class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-        >
-          Add flight
-        </button>
+        {#if submitted}
+          <div class="flex p-4 mx-auto mt-4 justify-center items-center">
+            <Spinner />
+          </div>
+        {:else}
+          {#if failed}
+            <p class="text-red-600 mt-4 flex justify-center">
+              Flight add failed please try again
+            </p>
+          {/if}
+          <button
+            type="submit"
+            class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+          >
+            Add flight
+          </button>
+        {/if}
       </form>
     {:else}
       <div class="w-full h-full flex justify-center my-auto col-span-full">
@@ -367,14 +385,14 @@
             />
           </g></svg
         >
-        <p class="text-2xl">Flight succesfully added</p>
-        <div class="flex gap-4">
+        <p class="text-lg lg:text-2xl">Flight succesfully added</p>
+        <div class="flex flex-col md:flex-row md:gap-4">
           <button
-            class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-md lg:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
             on:click={addAnotherFlight}>Add another flight</button
           >
           <button
-            class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-md lg:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
             on:click={goBack}>Go back</button
           >
         </div>

@@ -83,7 +83,6 @@ export const cardLength = (card: string) => {
 }
 
 export const cvcLength = (cvc: string) => {
-  console.log(cvc.length)
   if (cvc.length === 3) {
     return true
   } else {
@@ -93,8 +92,6 @@ export const cvcLength = (cvc: string) => {
 
 export const checkNumber = (number: number) => {
   const regex = /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/
-  console.log(regex.test(number.toString()))
-  console.log(number.toString())
   if (regex.test(number.toString())) {
     return true
   }
