@@ -1,9 +1,9 @@
-export async function post(url: string, data: any, token:any = null) {
+export async function post(url: string, data: any, token: any = null) {
   const res = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization':  `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       data,

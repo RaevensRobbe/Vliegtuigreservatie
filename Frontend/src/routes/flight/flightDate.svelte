@@ -56,7 +56,7 @@
   />
   <h1 class="text-sm mb-4 md:text-xl">Choose your departure flight</h1>
   <SelectFlightDate
-    url={`http://localhost:3001/api/v1/flight/flightInfo/${flight.departureLocationId}/${flight.destinationLocationId}`}
+    url={`http://localhost:3001/api/v1/flight/flightInfoBetween/${flight.departureLocationId}/${flight.destinationLocationId}/${flight.departureDate}`}
     retour={false}
   />
 </section>
@@ -68,7 +68,7 @@
     />
     <h1 class="text-sm md:text-xl mb-4">Choose your retour flight</h1>
     <SelectFlightDate
-      url={`http://localhost:3001/api/v1/flight/flightInfo/${flight.destinationLocationId}/${flight.departureLocationId}`}
+      url={`http://localhost:3001/api/v1/flight/flightInfoBetween/${flight.destinationLocationId}/${flight.departureLocationId}/${flight.retourDate}`}
       retour={true}
     />
   </section>

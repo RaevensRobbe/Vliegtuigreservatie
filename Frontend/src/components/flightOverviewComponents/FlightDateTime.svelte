@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getTouchdownTime } from '../../utils/calculateDistance'
 
-  import { FlightStore } from './../../stores/FlightStore'
+  import { FlightStore } from './../../stores/flightStore'
   export let retour: boolean
 
   let startLocation: string
