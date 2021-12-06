@@ -1,9 +1,9 @@
-export async function post(url: string, data: any, token:any = null) {
+export async function post(url: string, data: any, token: any = null) {
   const res = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization':  `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       data,
@@ -32,6 +32,16 @@ export async function put(url: string, data: any) {
     body: JSON.stringify({
       data,
     }),
+  })
+    .then(res => res.json())
+    .catch(error => console.error({ error }))
+
+  return res
+}
+
+export async function del(url: string) {
+  const res = await fetch(url, {
+    method: 'DELETE',
   })
     .then(res => res.json())
     .catch(error => console.error({ error }))
