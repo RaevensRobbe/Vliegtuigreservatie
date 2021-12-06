@@ -39,15 +39,19 @@
       getData = await get(
         `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.retourFlight}`,
       )
-      if(getData.error === "Data is undefined"){
-        getData = await get(`http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.retourFlight}`)
+      if (getData.error === 'Data is undefined') {
+        getData = await get(
+          `http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.retourFlight}`,
+        )
       }
     } else {
       getData = await get(
         `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.departureFlight}`,
       )
-      if(getData.error === "Data is undefined"){
-        getData = await get(`http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.departureFlight}`)
+      if (getData.error === 'Data is undefined') {
+        getData = await get(
+          `http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.departureFlight}`,
+        )
       }
     }
 
@@ -64,7 +68,7 @@
     }
 
     //Check for taken seats
-    if(getData.Ticket !== undefined) {
+    if (getData.Ticket !== undefined) {
       //Save taken seats in array's
       for (i of getData.Ticket) {
         for (j of i.Seat) {
@@ -83,7 +87,19 @@
     }
   }
 
+  let departureAbr: string = $FlightStore.departureAbbreviation
+  let destinationAbr: string = $FlightStore.destinationAbbreviation
+  if (destinationAbr == null) {
+    destinationAbr = $FlightStore.destinationCity.substr(0, 3).toUpperCase()
+  }
+
   onMount(async () => {
+    if ($FlightStore.retourFlight === null) {
+      retourFlight = false
+    } else {
+      retourFlight = true
+    }
+
     GetData()
   })
 
@@ -224,7 +240,7 @@
               />
             </svg>
             <p class="mt-1 text-sm md:text-base">
-              {$FlightStore.departureAbbreviation} - {$FlightStore.destinationAbbreviation}
+              {departureAbr} - {destinationAbr}
             </p>
           </div>
           <div
@@ -248,7 +264,7 @@
               />
             </svg>
             <p class="mt-1 text-sm md:text-base">
-              {$FlightStore.destinationAbbreviation} - {$FlightStore.departureAbbreviation}
+              {destinationAbr} - {departureAbr}
             </p>
           </div>
         </div>
@@ -285,7 +301,7 @@
             class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
             on:click={goToOverview}
           >
-          <!--submit button -->
+            <!--submit button -->
             Continue
           </button>
         </div>
