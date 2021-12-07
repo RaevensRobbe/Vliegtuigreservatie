@@ -47,8 +47,7 @@
       .then(userCredential => {
         const user = userCredential.user
         if(user.email !== undefined) {
-          checkAdmin()
-          showLoginForm()
+          showLoginForm() 
         }
       })
       .catch(error => {
@@ -56,21 +55,6 @@
         const errorMessage = error.message
         console.error(error)
       })
-  }
-
-  async function checkAdmin(){
-    const getData:any = await get(`http://localhost:3001/api/v1/user/${$authStore.user.uid}`)
-    .then((data) => {
-      console.log(data)
-      const currentStore = $authStore
-      authStore.set({
-        isLoggedIn: currentStore.isLoggedIn,
-        user: currentStore.user,
-        firebaseControlled: currentStore.firebaseControlled,
-        admin: data.Admin
-      })
-      console.log($authStore)
-    })
   }
 
   async function CreateUser(data) {

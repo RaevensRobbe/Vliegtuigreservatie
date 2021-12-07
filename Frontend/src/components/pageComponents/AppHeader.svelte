@@ -44,7 +44,6 @@
     })
     await goto('/user/accountInfo')
   }
-
   
   const goToAdminOverview = async () => {
     await goto('/admin/overviewFlights')
@@ -52,7 +51,6 @@
 
   function logout() {
     const auth = getAuth()
-    // console.log("pressed")
     auth.signOut()
   }
 </script>
@@ -146,6 +144,9 @@
       >
       {#if $authStore.isLoggedIn}
         <div class="flex text-dim-gray gap-8">
+          {#if $authStore.admin}
+            <button on:click={goToAdminOverview}>AdminOverview</button>
+          {/if}
           <button on:click={goToBookings}>My bookings</button>
           <div class="relative inline-block">
             <button
