@@ -44,6 +44,9 @@ export async function queryGraphql(
   query: string,
   variables?: Object,
 ) {
+  console.log(url)
+  console.log(query)
+  console.log(variables)
   const res = await fetch(url, {
     method: 'POST',
     headers: {

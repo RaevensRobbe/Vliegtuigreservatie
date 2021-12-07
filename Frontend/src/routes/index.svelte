@@ -3,7 +3,7 @@
   import Spinner from './../components/animations/spinner.svelte'
   import Intertitle from '../components/Intertitle.svelte'
   import FlightSearch from '../components/FlightSearch.svelte'
-  import PopularDestinationCard from '../components/PopularDestinationCard.svelte'
+  import PopularDestinationCard from '../components/popularDestinationComponents/PopularDestinationCard.svelte'
   import { onMount } from 'svelte'
   import type PopularDestination from '../models/PopularDestinationModel.type'
 
