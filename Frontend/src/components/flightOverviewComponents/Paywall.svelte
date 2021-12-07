@@ -10,11 +10,11 @@
   import { FlightStore } from '../../stores/FlightStore'
   import { goto } from '$app/navigation'
   import { post } from '../../utils/useApi'
-  let number
-  let name = ''
-  let cvc = ''
-  let expiry = ''
-  let prevLength = 0
+  let number: string
+  let name: string = ''
+  let cvc: string = ''
+  let expiry: string = ''
+  let prevLength: number = 0
   let retourCheck: boolean = false
   let departureCheck: boolean = false
   let errors: any = {}

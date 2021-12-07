@@ -1,6 +1,6 @@
-<script>
-  export let givenRating
-  export let ratingScore
+<script lang="ts">
+  export let givenRating: number
+  export let ratingScore: number
 
   let hoverRating = 0
 

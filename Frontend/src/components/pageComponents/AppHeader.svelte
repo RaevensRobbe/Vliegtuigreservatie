@@ -8,8 +8,8 @@
   import loginCompStore from '../../stores/loginCompStore'
   import RegisterForm from '../loginComponents/RegisterForm.svelte'
 
-  let menuToggle = false
-  let accountdropDown = false
+  let menuToggle: boolean = false
+  let accountdropDown: boolean = false
 
   function toggler() {
     menuToggle = !menuToggle
@@ -24,7 +24,7 @@
   }
 
   function showLoginForm() {
-    let loginToggle = $loginCompStore.showLogin
+    let loginToggle: boolean = $loginCompStore.showLogin
     loginToggle = !loginToggle
     loginCompStore.set({
       showRegister: false,

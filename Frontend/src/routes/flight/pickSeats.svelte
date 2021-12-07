@@ -7,6 +7,7 @@
   import { FlightStore } from '../../stores/FlightStore'
   import PassengersComponent from '../../components/pickSeatsComponents/PassengersComponent.svelte'
   import { goto } from '$app/navigation'
+  import type Flight from '../../models/FlightModel.type'
 
   let economySeats: number = 0
   let businessSeats: number = 0
@@ -34,24 +35,34 @@
   let clicked: boolean = false
 
   const GetData = async () => {
-    let getData: any
+    let getData: Flight
     if (retourFlight) {
       getData = await get(
         `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.retourFlight}`,
       )
+      console.log('retour')
+      console.log(getData)
+      //@ts-ignore
       if (getData.error === 'Data is undefined') {
         getData = await get(
           `http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.retourFlight}`,
         )
+        console.log('retour no data')
+        console.log(getData)
       }
     } else {
       getData = await get(
         `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.departureFlight}`,
       )
+      console.log('departure')
+      console.log(getData)
+      //@ts-ignore
       if (getData.error === 'Data is undefined') {
         getData = await get(
           `http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.departureFlight}`,
         )
+        console.log('departure no data')
+        console.log(getData)
       }
     }
 
