@@ -9,6 +9,8 @@
     requiredValidator,
     strenghtValidator,
   } from '../../utils/inputValidator'
+  import authstore from '../../stores/authStore'
+  import { post } from '../../utils/useApi'
 
   let email: string
   let firstName: string
@@ -86,11 +88,39 @@
       }
     }
 
-    register()
+    const data:{
+      firstName:string,
+      lastName:string,
+      email:string,
+      password:string,
+      role:string
+    } = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: pw,
+      role: "Admin"
+    }
+
+    register(data)
   }
 
-  function register() {
-    //Here comes code to database
+  function register(data) {
+    $authstore.user.getIdToken(true)
+    .then((token) => {
+      createUser(data, token)
+    })
+  }
+
+  const createUser = async(data, token) =>{
+    const result = await post('http://localhost:3001/api/v1/user/createAdmin',data,token)
+    if(result.succes){
+      //Robbe fix loading dingkie
+      console.log('Succes')
+    }else{
+      //Robbe fixt error
+      console.log('Error')
+    }
   }
 
   function goBack() {

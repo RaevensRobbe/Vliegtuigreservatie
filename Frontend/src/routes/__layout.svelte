@@ -6,7 +6,6 @@
   import { getAuth, User } from 'firebase/auth'
   import AppFooter from '../components/pageComponents/AppFooter.svelte'
   import { get } from '../utils/useApi'
-import authStore from '../stores/authStore';
 
   onMount(() => {
     const firebaseConfig = {
@@ -25,6 +24,7 @@ import authStore from '../stores/authStore';
       if(user){
         user.getIdTokenResult()
         .then((idTokenResult) => {
+          console.log(idTokenResult)
           if (idTokenResult.claims.role == 'admin') {
             admin = true
           } else {

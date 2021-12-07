@@ -1,4 +1,6 @@
 import { Request, Response, NextFunction, Router, response } from 'express'
+import { isAuthenticated } from '../auth/authenticated'
+import { isAuthorized } from '../auth/authorized'
 import { Flight } from '../entities/flight'
 import { CrudController, IController, ICrudController } from './crud.controller'
 
@@ -20,16 +22,18 @@ export class FlightController
     super(Flight) // Initialize the parent constructor
 
     this.router.get('/all', this.all)
-    this.router.get('/allupcoming', this.allUpcoming)
+    this.router.get('/allupcoming', isAuthenticated , isAuthorized({hasRole: ['admin']}) , this.allUpcoming)
     this.router.get('/flightnr/:id', this.specific)
     this.router.get('/:id', this.one)
-    this.router.post('', this.createFlight)
     this.router.get('/flightInfo/:Sid/:Did', this.flightInfo)
     this.router.get('/seatsInfo/:id', this.seatsInfo)
     this.router.get('/takenSeats/:id', this.takenSeats)
     this.router.get('/plane/:id', this.getPlane)
     this.router.get('/userFlights/:id', this.getUserFlights)
-    this.router.put('/updateFlight/:id', this.updateFlight)
+
+    this.router.post('', isAuthenticated , isAuthorized({hasRole: ['admin']}) , this.createFlight)
+
+    this.router.put('/updateFlight/:id', isAuthenticated , isAuthorized({hasRole: ['admin']}) , this.updateFlight)
   }
 
   flightInfo = async (

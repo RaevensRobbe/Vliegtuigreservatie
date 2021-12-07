@@ -107,37 +107,35 @@ export class UserController extends CrudController<User> implements IUserControl
 
     createAdminUser = async (request: Request, response: Response, next: NextFunction) => {
       try{
-        console.log('i get in')
         let result:any
         console.log(request.body.data)
-        const { displayName, password, email, role } = request.body.data
-        //const uid = "DGtOvw750lZaKIuJP3C7KFZQsWB3"
+        const { firstName, lastName, email, password, role } = request.body.data
  
-       if (!displayName || !password || !email || !role) {
-           return response.status(400).send({ message: 'Missing fields' })
-       }
-       console.log('hier')
+        if (!firstName || !lastName || !email || !password || !role) {
+          return response.status(400).json({ message: 'Missing fields' })
+        }
 
-      const { uid } = await admin.auth().createUser({
-        displayName,
-        password,
-        email
-      })
-      await admin.auth().setCustomUserClaims(uid, { role })
+        const displayName = firstName + ' ' + lastName
+        const { uid } = await admin.auth().createUser({
+          displayName,
+          password,
+          email
+        })
+        await admin.auth().setCustomUserClaims(uid, { role })
 
-      const newUser:User ={
-        UserId : uid,
-        Firstname: displayName.split(' ')[0],
-        Lastname: displayName.split(' ')[1],
-        Email: email,
-        Admin: true 
-      }
-      console.log(newUser)
-      const newDbUser = await this.repository.create(newUser);
-      result = await this.repository.save(newDbUser); 
+        const newUser:User ={
+          UserId : uid,
+          Firstname: firstName,
+          Lastname: lastName,
+          Email: email,
+          Admin: true 
+        }
+        console.log(newUser)
+        const newDbUser = await this.repository.create(newUser);
+        result = await this.repository.save(newDbUser); 
 
-      if(result.UserId) return response.status(200).json({succes: true})
-      else return response.status(500).json({error: "Something went wrong"})
+        if(result.UserId) return response.status(200).json({succes: true})
+        else return response.status(500).json({error: "Something went wrong"})
 
       }catch(error){
         response.status(500).json({error:error})
