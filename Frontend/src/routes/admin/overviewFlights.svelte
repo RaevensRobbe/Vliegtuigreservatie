@@ -1,6 +1,7 @@
 <script lang="ts">
   import Intertitle from '../../components/Intertitle.svelte'
   import SearchFlightNumberComponent from '../../components/adminComponents/SearchFlightNumberComponent.svelte'
+  import type Flight from '../../models/FlightModel.type'
   import { onMount } from 'svelte'
   import { get } from '../../utils/useApi'
   import BookingFlight from '../../components/bookingOverviewComponents/bookingFlight.svelte'
@@ -9,16 +10,15 @@
   import { getAuth} from 'firebase/auth'
   import authStore from '../../stores/authStore'
 
-  let flights: any = []
+  let flights: Array<Flight> = []
   let flightsLoaded: boolean = false
-  let specificFlightData: any
+  let specificFlightData: Flight
   let flightNumber: string = null
 
   function handleSubmit() {
     getSpecific()
   }
   async function getSpecific() {
-    // console.log('start call')
     specificFlightData = await get(
       `http://localhost:3001/api/v1/flight/flightnr/${flightNumber}`,
     )

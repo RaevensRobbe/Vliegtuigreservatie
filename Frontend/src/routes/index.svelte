@@ -3,9 +3,11 @@
   import Spinner from './../components/animations/spinner.svelte'
   import Intertitle from '../components/Intertitle.svelte'
   import FlightSearch from '../components/FlightSearch.svelte'
-  import PopularDestinationCard from '../components/PopularDestinationCard.svelte'
+  import PopularDestinationCard from '../components/popularDestinationComponents/PopularDestinationCard.svelte'
+  import popularCompStore from './../stores/popularCompStore'
   import { onMount } from 'svelte'
   import type PopularDestination from '../models/PopularDestinationModel.type'
+  import PopularDestinationModal from '../components/popularDestinationComponents/PopularDestinationModal.svelte'
 
   import { get } from '../utils/useApi'
 
@@ -42,3 +44,7 @@
     {/if}
   </article>
 </section>
+
+{#if $popularCompStore.showPopular}
+  <PopularDestinationModal />
+{/if}

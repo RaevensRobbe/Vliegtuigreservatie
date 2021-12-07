@@ -1,7 +1,8 @@
 <script lang="ts">
   import { get } from '../../utils/useApi'
+  import type Flight from '../../models/FlightModel.type'
 
-  export let specificFlight: string
+  export let specificFlight: Flight
   let flightNumber: string = null
 
   function handleSubmit() {

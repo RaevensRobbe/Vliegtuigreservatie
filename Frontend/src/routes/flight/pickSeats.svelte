@@ -7,6 +7,7 @@
   import { FlightStore } from '../../stores/FlightStore'
   import PassengersComponent from '../../components/pickSeatsComponents/PassengersComponent.svelte'
   import { goto } from '$app/navigation'
+  import type Flight from '../../models/FlightModel.type'
 
   let economySeats: number = 0
   let businessSeats: number = 0
@@ -34,20 +35,34 @@
   let clicked: boolean = false
 
   const GetData = async () => {
-    let getData: any
+    let getData: Flight
     if (retourFlight) {
       getData = await get(
         `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.retourFlight}`,
       )
-      if(getData.error === "Data is undefined"){
-        getData = await get(`http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.retourFlight}`)
+      console.log('retour')
+      console.log(getData)
+      //@ts-ignore
+      if (getData.error === 'Data is undefined') {
+        getData = await get(
+          `http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.retourFlight}`,
+        )
+        console.log('retour no data')
+        console.log(getData)
       }
     } else {
       getData = await get(
         `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.departureFlight}`,
       )
-      if(getData.error === "Data is undefined"){
-        getData = await get(`http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.departureFlight}`)
+      console.log('departure')
+      console.log(getData)
+      //@ts-ignore
+      if (getData.error === 'Data is undefined') {
+        getData = await get(
+          `http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.departureFlight}`,
+        )
+        console.log('departure no data')
+        console.log(getData)
       }
     }
 
@@ -64,7 +79,7 @@
     }
 
     //Check for taken seats
-    if(getData.Ticket !== undefined) {
+    if (getData.Ticket !== undefined) {
       //Save taken seats in array's
       for (i of getData.Ticket) {
         for (j of i.Seat) {
@@ -83,7 +98,19 @@
     }
   }
 
+  let departureAbr: string = $FlightStore.departureAbbreviation
+  let destinationAbr: string = $FlightStore.destinationAbbreviation
+  if (destinationAbr == null) {
+    destinationAbr = $FlightStore.destinationCity.substr(0, 3).toUpperCase()
+  }
+
   onMount(async () => {
+    if ($FlightStore.retourFlight === null) {
+      retourFlight = false
+    } else {
+      retourFlight = true
+    }
+
     GetData()
   })
 
@@ -224,7 +251,7 @@
               />
             </svg>
             <p class="mt-1 text-sm md:text-base">
-              {$FlightStore.departureAbbreviation} - {$FlightStore.destinationAbbreviation}
+              {departureAbr} - {destinationAbr}
             </p>
           </div>
           <div
@@ -248,7 +275,7 @@
               />
             </svg>
             <p class="mt-1 text-sm md:text-base">
-              {$FlightStore.destinationAbbreviation} - {$FlightStore.departureAbbreviation}
+              {destinationAbr} - {departureAbr}
             </p>
           </div>
         </div>
@@ -285,7 +312,7 @@
             class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
             on:click={goToOverview}
           >
-          <!--submit button -->
+            <!--submit button -->
             Continue
           </button>
         </div>

@@ -30,6 +30,10 @@ export class FlightController
     this.router.get('/takenSeats/:id', this.takenSeats)
     this.router.get('/plane/:id', this.getPlane)
     this.router.get('/userFlights/:id', this.getUserFlights)
+    this.router.get(
+      '/flightInfoBetween/:Sid/:Did/:Date',
+      this.flightInfoBetween,
+    )
 
     this.router.post('', isAuthenticated , isAuthorized({hasRole: ['admin']}) , this.createFlight)
 
@@ -60,6 +64,51 @@ export class FlightController
         .innerJoin('f.Start', 's')
         .where('f.StartId = :id', { id: startID })
         .andWhere('f.DestinationId = :id2', { id2: destinationID })
+        .orderBy('f.Date', 'ASC')
+        .getMany()
+      if (data.length === 0) {
+        response.status(400).json({ error: 'Data is undefined' })
+      } else {
+        response.send(data)
+      }
+    } catch (error) {
+      response.status(500).json({ error: { error } })
+    }
+  }
+  flightInfoBetween = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const startID = request.params.Sid
+      const destinationID = request.params.Did
+
+      const datum = new Date(request.params.Date)
+      let firstDate = new Date()
+      let lastDate = new Date()
+
+      firstDate.setDate(datum.getDate() - 3)
+      lastDate.setDate(datum.getDate() + 3)
+
+      const data = await this.repository
+        .createQueryBuilder('f')
+        .select([
+          'f.FlightId',
+          'f.Date',
+          'f.StartId',
+          'f.DestinationId',
+          'f.Price',
+          'd.Name',
+          's.Name',
+        ])
+        .innerJoin('f.Destination', 'd')
+        .innerJoin('f.Start', 's')
+        .where('f.StartId = :id', { id: startID })
+        .andWhere('f.DestinationId = :id2', { id2: destinationID })
+        .andWhere('f.Date >= :startDate', { startDate: firstDate })
+        .andWhere('f.Date <= :endDate', { endDate: lastDate })
+        .orderBy('f.Date', 'ASC')
         .getMany()
       if (data.length === 0) {
         response.status(400).json({ error: 'Data is undefined' })
@@ -332,34 +381,40 @@ export class FlightController
     }
   }
 
-  updateFlight = async (request: Request, response: Response, next: NextFunction,) => {
-    try{
-      const flightId = request.params.id;
-      if(!flightId || !request.body){
-        return response.status(401).json({ error: 'Data is missing'})
-      }else{
-        const oldData:Flight = await this.repository.findOne(flightId);
-        if(!oldData) {
-          return response.status(401).json({ error: 'FlightId is incorrect'})
+  updateFlight = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const flightId = request.params.id
+      if (!flightId || !request.body) {
+        return response.status(401).json({ error: 'Data is missing' })
+      } else {
+        const oldData: Flight = await this.repository.findOne(flightId)
+        if (!oldData) {
+          return response.status(401).json({ error: 'FlightId is incorrect' })
         }
-        let price:number = request.body.data.price
-        let gate:number = request.body.data.gate
-        let date:string = request.body.data.date
+        let price: number = request.body.data.price
+        let gate: number = request.body.data.gate
+        let date: string = request.body.data.date
 
-        if(!price) price = oldData.Price
-        if(!gate) gate = oldData.Gate
-        if(!date) date = oldData.Date 
+        if (!price) price = oldData.Price
+        if (!gate) gate = oldData.Gate
+        if (!date) date = oldData.Date
 
-        const update = await this.repository.createQueryBuilder()
-        .update(Flight)
-        .set({Price: price, Gate: gate, Date: date })
-        .where("FlightId = :id",{id: flightId})
-        .execute();
+        const update = await this.repository
+          .createQueryBuilder()
+          .update(Flight)
+          .set({ Price: price, Gate: gate, Date: date })
+          .where('FlightId = :id', { id: flightId })
+          .execute()
 
-        if(update.affected === 1) return response.status(200).json({ success: true })
+        if (update.affected === 1)
+          return response.status(200).json({ success: true })
         else return response.status(500).json({ error: 'Something went wrong' })
       }
-    }catch (error) {
+    } catch (error) {
       response.status(500).json({ error: { error } })
     }
   }

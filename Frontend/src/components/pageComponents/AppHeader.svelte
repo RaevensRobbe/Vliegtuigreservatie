@@ -8,8 +8,8 @@
   import loginCompStore from '../../stores/loginCompStore'
   import RegisterForm from '../loginComponents/RegisterForm.svelte'
 
-  let menuToggle = false
-  let accountdropDown = false
+  let menuToggle: boolean = false
+  let accountdropDown: boolean = false
 
   function toggler() {
     menuToggle = !menuToggle
@@ -24,7 +24,7 @@
   }
 
   function showLoginForm() {
-    let loginToggle = $loginCompStore.showLogin
+    let loginToggle: boolean = $loginCompStore.showLogin
     loginToggle = !loginToggle
     loginCompStore.set({
       showRegister: false,
@@ -89,13 +89,23 @@
           on:click={goToAdminOverview}>AdminOverview</button
         >
       {/if}
+      <p
+        class="justify-self-start self-end col-span-2 p-2 w-full text-center text-forest-green font-bold"
+      >
+        {$authStore.user.displayName}
+      </p>
       <button
         class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
         on:click={goToBookings}>My bookings</button
       >
+
       <button
         class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
-        >{$authStore.user.email}</button
+        on:click={goToAccountInfo}>Edit Account</button
+      >
+      <button
+        class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
+        on:click={logout}>Sign out</button
       >
     {:else}
       <button
