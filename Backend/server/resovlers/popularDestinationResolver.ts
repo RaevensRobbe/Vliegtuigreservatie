@@ -25,11 +25,9 @@ export class PopularDestinationResolver {
   async getDestinationByName(
     @Arg('name') name: string,
   ): Promise<PopularDestination | undefined | null> {
-    console.log(name)
-    return await this.manager.findOne<PopularDestination>(
-      PopularDestination,
-      name,
-    )
+    return await this.manager.findOne<PopularDestination>(PopularDestination, {
+      name: name,
+    })
   }
 
   @Mutation(() => PopularDestination, { nullable: true })
