@@ -38,3 +38,27 @@ export async function put(url: string, data: any) {
 
   return res
 }
+
+export async function queryGraphql(
+  url: string,
+  query: string,
+  variables?: Object,
+) {
+  console.log(url)
+  console.log(query)
+  console.log(variables)
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query,
+      variables,
+    }),
+  })
+    .then(res => res.json())
+    .catch(error => console.error({ error }))
+
+  return res.data
+}

@@ -1,11 +1,50 @@
 <script lang="ts">
-  import type PopularDestination from './../models/PopularDestinationModel.type'
-  import { FlightStore } from './../stores/FlightStore'
+  import { queryGraphql } from '../../utils/useApi'
+
+  import type PopularDestination from '../../models/PopularDestinationModel.type'
+  import { FlightStore } from '../../stores/flightStore'
+  import type PopularDestinationGraphql from '../../models/PopularDestinationModel.type'
+  import popularCompStore from '../../stores/popularCompStore'
   export let popularDestination: PopularDestination
+
+  function showModal() {
+    console.log('clicked ')
+    console.log(popularDestination.Dest[0].DestinationId)
+    getRoutines()
+  }
+
+  const getRoutines = async () => {
+    const data = await queryGraphql(
+      'http://localhost:8881/v1',
+      `query getDestinationById ($destinationId: String = "") {
+          getDestinationById (destinationId: $destinationId) {
+            destinationId
+            name
+            intro
+            summary
+          }
+        }`,
+      { destinationId: popularDestination.Dest[0].DestinationId },
+    )
+
+    console.log(data.getDestinationById)
+    let popularDestinationData: PopularDestinationGraphql =
+      data.getDestinationById
+    let showPopularToggle = $popularCompStore.showPopular
+    showPopularToggle = !showPopularToggle
+    popularCompStore.set({
+      showPopular: showPopularToggle,
+      img: popularDestination.Dest[0].Picture,
+      name: popularDestinationData.name,
+      intro: popularDestinationData.intro,
+      summary: popularDestinationData.summary,
+    })
+  }
 </script>
 
 <button
   class="flex flex-col bg-white shadow-md transform motion-safe:hover:scale-105 hover:shadow-lg"
+  on:click={showModal}
 >
   <!-- svelte-ignore a11y-img-redundant-alt -->
   {#if popularDestination.Dest[0].Picture}
