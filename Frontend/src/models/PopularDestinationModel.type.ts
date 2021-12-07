@@ -9,6 +9,8 @@ export default interface Dest {
 export default interface PopularDestination {
   Name: string
   Dest: Dest
+  Abbreviation: string
+  Coordinates: [number, number]
 }
 
 export default interface PopularDestinationGraphql {

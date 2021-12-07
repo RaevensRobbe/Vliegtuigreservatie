@@ -10,26 +10,26 @@
   let flight = $FlightStore
 
   // set today date => check if departure date
-  let today = new Date().toISOString().split('T')[0]
+  let today: string = new Date().toISOString().split('T')[0]
 
   //toggle states => show item when true
-  let toggleTravelers = false
-  let toggleDestination = false
-  let toggleDeparture = false
+  let toggleTravelers: boolean = false
+  let toggleDestination: boolean = false
+  let toggleDeparture: boolean = false
 
   //default set what's in storage
-  let children = flight.children
-  let adults = flight.adults
+  let children: number = flight.children
+  let adults: number = flight.adults
 
   //dates of flights
-  let departureDate = flight.departureDate
-  let retourDate = flight.retourDate
+  let departureDate: Date = flight.departureDate
+  let retourDate: Date = flight.retourDate
 
   //departure and destination city and country
-  let departureCity = flight.departureCity
-  let departureCountry = flight.departureCountry
-  let destinationCity = flight.destinationCity
-  let destinationCountry = flight.destinationCountry
+  let departureCity: string = flight.departureCity
+  let departureCountry: string = flight.departureCountry
+  let destinationCity: string = flight.destinationCity
+  let destinationCountry: string = flight.destinationCountry
 
   //object errors add errors in here otherwise delete them
   let errors: any = {}
@@ -42,7 +42,7 @@
     )
   })
 
-  function showItem(item) {
+  function showItem(item: string) {
     switch (item) {
       case 'travelers':
         toggleTravelers = !toggleTravelers
@@ -82,7 +82,6 @@
     if (!$FlightStore.departureDate) {
       errors.departureDate = 'No departure date set'
     } else if ($FlightStore.departureDate <= today) {
-      // console.log('error departureDate')
       errors.departureDate = "Departure can't be today or in the past"
     } else delete errors['departureDate']
 
@@ -102,8 +101,6 @@
 
     //if no errors then you can go to the next page
     if (Object.keys(errors).length === 0) {
-      // console.log(flight)
-      console.log($FlightStore)
       goto('/flight/flightDate')
     }
   }
