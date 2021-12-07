@@ -305,7 +305,7 @@
 
       <button
         type="submit"
-        class="bg-forest-green rounded-full p-2 mt-4 font-bold text-xl md:text-2xl text-white"
+        class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
       >
         Confirm payment
       </button>

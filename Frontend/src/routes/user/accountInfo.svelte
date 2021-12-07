@@ -106,7 +106,7 @@
   function goBack() {
     goto('/')
   }
-  
+
   // async function CreateUser(data, token) {
   //   //console.log(token)
   //   //const res:any = await post('http://localhost:3001/api/v1/user/createAdmin', data)
@@ -143,9 +143,9 @@
   // }
 </script>
 
-<section class="p-4 px-6 align-start">
+<section class="p-4 md:px-6 align-start">
   <section
-    class="p-4 flex hover:cursor-pointer hover:font-bold"
+    class="my-4 flex hover:cursor-pointer hover:font-bold"
     on:click={goBack}
   >
     <svg
@@ -170,20 +170,23 @@
 
   <Intertitle titleName="Edit account details" />
 
-  <section class="w-screen flex justify-center self-center">
+  <section class="flex justify-center self-center">
     <form
       on:submit|preventDefault={onSubmit}
-      class="bg-white shadow-lg p-10 w-1/2"
+      class="w-4/5 sm:w-3/5 md:w-4/5 lg:w-3/5 bg-white p-8 flex flex-col shadow-md"
     >
-      <div class="grid grid-cols-3 grid-row-2 gap-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="flex flex-col">
           <label for="firstname" class="mb-2"> First name </label>
-          <input
-            bind:value={userdata.Firstname}
-            id="firstname"
-            type="text"
-            class="border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green shadow-md bg-gray-100"
-          />
+          <div class="border-b text-dim-gray mb-2 border-current">
+            <input
+              bind:value={userdata.Firstname}
+              id="firstname"
+              type="text"
+              class="py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+            />
+          </div>
+
           {#if errors.firstname}
             <p class="text-red-600 -mt-2 mb-2">{errors.firstname}</p>
           {/if}
@@ -191,12 +194,14 @@
 
         <div class="flex flex-col">
           <label for="lastname" class="mb-2"> Last name </label>
-          <input
-            bind:value={userdata.Lastname}
-            id="lastname"
-            type="text"
-            class="border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green shadow-md bg-gray-100"
-          />
+          <div class="border-b text-dim-gray mb-2 border-current">
+            <input
+              bind:value={userdata.Lastname}
+              id="lastname"
+              type="text"
+              class="py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+            />
+          </div>
           {#if errors.lastname}
             <p class="text-red-600 -mt-2 mb-2">{errors.lastname}</p>
           {/if}
@@ -204,12 +209,14 @@
 
         <div class="flex flex-col">
           <label for="email" class="mb-2"> Email </label>
-          <input
-            bind:value={userdata.Email}
-            id="email"
-            type="email"
-            class="border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green shadow-md bg-gray-100"
-          />
+          <div class="border-b text-dim-gray mb-2 border-current">
+            <input
+              bind:value={userdata.Email}
+              id="email"
+              type="email"
+              class="py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+            />
+          </div>
           {#if errors.email}
             <p class="text-red-600 -mt-2 mb-2">{errors.email}</p>
           {/if}
@@ -221,7 +228,7 @@
             bind:value={userdata.Picture}
             id="picture"
             type="file"
-            class="border-b mb-4 h-8 focus:outline-none focus:ring focus:ring-forest-green shadow-md bg-gray-100"
+            class="py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
           />
           {#if errors.pic}
             <p class="text-red-600 -mt-2 mb-2">{errors.pic}</p>
@@ -232,13 +239,13 @@
       <div class="flex justify-center mt-8">
         <button
           type="submit"
-          class="bg-forest-green rounded-full py-2 px-4 mt-4 font-bold text-2xl text-white"
+          class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
         >
           Change
         </button>
 
         <!-- <div class="flex justify-center mt-8"> -->
-          <!-- <button
+        <!-- <button
             on:click={testAdminUSer}
             type="button"
             class="bg-forest-green rounded-full py-2 px-4 mt-4 font-bold text-2xl text-white"
