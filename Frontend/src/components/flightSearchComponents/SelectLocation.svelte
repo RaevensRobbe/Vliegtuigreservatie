@@ -16,14 +16,10 @@
       $FlightStore.departureCountry = departureCountry
       $FlightStore.departureCity = departureCity
       $FlightStore.departureLocationId = locationId
-      console.log('departure: ' + locationId)
-      console.log($FlightStore.departureLocationId)
     } else {
       $FlightStore.destinationCountry = departureCountry
       $FlightStore.destinationCity = departureCity
       $FlightStore.destinationLocationId = locationId
-      console.log('destination: ' + locationId)
-      console.log($FlightStore.destinationLocationId)
     }
 
     toggleDeparture = false
