@@ -7,6 +7,7 @@
 
   import Intertitle from '../../components/Intertitle.svelte'
   import Spinner from '../../components/animations/spinner.svelte'
+  import authStore from '../../stores/authStore'
 
   import {
     requiredValidator,
@@ -44,6 +45,7 @@
     locations = await get('http://localhost:3001/api/v1/destination/all')
     planes = await get('http://localhost:3001/api/v1/plane/all')
     loaded = true
+    console.log(flightData.FlightId)
   })
 
   function handleSubmit() {
@@ -89,26 +91,30 @@
   }
 
   async function addToDB() {
-    console.log('update')
+    console.log('in de add')
+    $authStore.user.getIdToken(true)
+    .then((token) => {
+      UpdateFlight(token)
+    })
+  }
+
+  const UpdateFlight = async (token) => {
     submitted = true
     let data = {
       Date: departureTime,
       Price: price,
       Gate: gate,
     }
-    console.log(data)
-
-    let call: any = await put(
-      `http://localhost:3001/api/v1/flight/updateFlight/${flightData.FlightId}`,
-      data,
-    )
-    console.log(call)
-
-    if (call.success === true) {
+    const result = await put(`http://localhost:3001/api/v1/flight/updateFlight/${flightData.FlightId}`,data,token)
+    if(result.success){
+      //Robbe fix loading dingkie
       succes = true
-    } else {
+      console.log('Yeey')
+    }else{
+      //Robbe fix error
       submitted = false
       failed = true
+      console.log('Neey')
     }
   }
 

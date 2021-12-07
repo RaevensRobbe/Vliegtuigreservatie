@@ -23,11 +23,12 @@ export async function get(url: string) {
   return res
 }
 
-export async function put(url: string, data: any) {
+export async function put(url: string, data: any, token:any) {
   const res = await fetch(url, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       data,

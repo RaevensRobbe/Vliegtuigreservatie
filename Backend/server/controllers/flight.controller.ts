@@ -1,4 +1,6 @@
 import { Request, Response, NextFunction, Router, response } from 'express'
+import { isAuthenticated } from '../auth/authenticated'
+import { isAuthorized } from '../auth/authorized'
 import { Flight } from '../entities/flight'
 import { CrudController, IController, ICrudController } from './crud.controller'
 
@@ -29,7 +31,7 @@ export class FlightController
     this.router.get('/takenSeats/:id', this.takenSeats)
     this.router.get('/plane/:id', this.getPlane)
     this.router.get('/userFlights/:id', this.getUserFlights)
-    this.router.put('/updateFlight/:id', this.updateFlight)
+    this.router.put('/updateFlight/:id', isAuthenticated , isAuthorized({hasRole: ['admin']}), this.updateFlight)
   }
 
   flightInfo = async (
@@ -331,6 +333,7 @@ export class FlightController
   updateFlight = async (request: Request, response: Response, next: NextFunction,) => {
     try{
       const flightId = request.params.id;
+      console.log(request.body)
       if(!flightId || !request.body){
         return response.status(401).json({ error: 'Data is missing'})
       }else{
@@ -352,6 +355,7 @@ export class FlightController
         .where("FlightId = :id",{id: flightId})
         .execute();
 
+        console.log(update)
         if(update.affected === 1) return response.status(200).json({ success: true })
         else return response.status(500).json({ error: 'Something went wrong' })
       }
