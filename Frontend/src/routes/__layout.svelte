@@ -6,6 +6,7 @@
   import { getAuth, User } from 'firebase/auth'
   import AppFooter from '../components/pageComponents/AppFooter.svelte'
   import { get } from '../utils/useApi'
+import authStore from '../stores/authStore';
 
   onMount(() => {
     const firebaseConfig = {
@@ -20,8 +21,9 @@
     initializeApp(firebaseConfig)
 
     getAuth().onAuthStateChanged((user: User) => {
-      let admin
-      user.getIdTokenResult()
+      let admin = false
+      if(user){
+        user.getIdTokenResult()
         .then((idTokenResult) => {
           if (idTokenResult.claims.role == 'admin') {
             admin = true
@@ -37,9 +39,15 @@
         })
         console.log($authStore)
       })
+      }else{
+        authStore.set({
+          isLoggedIn: user !== null,
+          user,
+          firebaseControlled: true,
+          admin: admin,
+        })
+      }
     })
-
-    // console.log("onMount")
   })
 </script>
 

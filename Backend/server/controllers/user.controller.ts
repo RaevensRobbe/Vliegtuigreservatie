@@ -49,32 +49,32 @@ export class UserController extends CrudController<User> implements IUserControl
       }
     }
 
-    createUser = async (req: Request, res: Response, next: NextFunction) => {
+    createUser = async (request: Request, response: Response, next: NextFunction) => {
      try{
-      console.log(`data van frontend ${req.body}`);
+      console.log(`data van frontend ${request.body}`);
       let result:any
 
-      if(req.body.data === null){
+      if(request.body.data === null){
         response.status(400).json({error:"No data has been provided"})
       }else{
-        if(req.body.data.id === undefined){
+        if(request.body.data.id === undefined){
           response.status(400).json({error:"UserID is missing"})
-        }else if(req.body.data.firstname === undefined){
+        }else if(request.body.data.firstname === undefined){
           response.status(400).json({error:"FirstName is missing"})
-        }else if(req.body.data.lastname === undefined){
+        }else if(request.body.data.lastname === undefined){
           response.status(400).json({error:"LastName is missing"})
-        }else if(req.body.data.email === undefined){
+        }else if(request.body.data.email === undefined){
           response.status(400).json({error:"Email is missing"})
         }else{
           const newUser:User ={
-            UserId : req.body.data.id,
-            Firstname: req.body.data.firstname,
-            Lastname: req.body.data.lastname,
-            Email: req.body.data.email,
+            UserId : request.body.data.id,
+            Firstname: request.body.data.firstname,
+            Lastname: request.body.data.lastname,
+            Email: request.body.data.email,
             Admin: false
           } 
           //Check if user exists
-          const checkUser = await this.repository.findOne({UserId:req.body.data.id})
+          const checkUser = await this.repository.findOne({UserId:request.body.data.id})
           if(checkUser === undefined) {
             const newDbUser = await this.repository.create(newUser);
             result = await this.repository.save(newDbUser); 
@@ -92,25 +92,25 @@ export class UserController extends CrudController<User> implements IUserControl
      }
     }
 
-    updateUser = async (req: Request, res: Response, next: NextFunction) => {
+    updateUser = async (request: Request, response: Response, next: NextFunction) => {
       try{
-        if(req.body.data === null){
+        if(request.body.data === null){
           response.status(400).json({error:"No data has been provided"})
         }else{
-          const update = await this.repository.update({UserId: req.params.id},{Firstname: req.body.data.firstname, Lastname: req.body.data.lastname, Email: req.body.data.email})
-          return res.status(200).json({succes: true})
+          const update = await this.repository.update({UserId: request.params.id},{Firstname: request.body.data.firstname, Lastname: request.body.data.lastname, Email: request.body.data.email})
+          return response.status(200).json({succes: true})
         }
       }catch(error){
         response.status(500).json({error:error})
       }
     }
 
-    createAdminUser = async (req: Request, response: Response, next: NextFunction) => {
+    createAdminUser = async (request: Request, response: Response, next: NextFunction) => {
       try{
         console.log('i get in')
         let result:any
-        console.log(req.body.data)
-        const { displayName, password, email, role } = req.body.data
+        console.log(request.body.data)
+        const { displayName, password, email, role } = request.body.data
         //const uid = "DGtOvw750lZaKIuJP3C7KFZQsWB3"
  
        if (!displayName || !password || !email || !role) {
