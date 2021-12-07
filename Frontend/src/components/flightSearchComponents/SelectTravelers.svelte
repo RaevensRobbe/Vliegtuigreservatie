@@ -1,9 +1,10 @@
-<script>
+<script type="ts">
   import { FlightStore } from './../../stores/FlightStore'
+  import { fade, scale } from 'svelte/transition'
 
-  export let toggleTravelers
-  export let children
-  export let adults
+  export let toggleTravelers: boolean
+  export let children: number
+  export let adults: number
 
   function showTravelers() {
     // console.log(toggleTravelers)
@@ -34,7 +35,7 @@
   }
 </script>
 
-<div class="absolute top-20 justify-center">
+<div class="absolute top-20 justify-center" in:scale out:fade>
   <div class="flex flex-col align-center">
     <div class="w-6 overflow-hidden inline-block self-center">
       <div class=" h-4 w-4 bg-white rotate-45 transform origin-bottom-left" />
