@@ -7,7 +7,7 @@
   let startLocation: string
   let endLocation: string
   let flightDate: Date
-  let departureTime
+  let departureTime: string
 
   if (retour) {
     startLocation = $FlightStore.destinationCity

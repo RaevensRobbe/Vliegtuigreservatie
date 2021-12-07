@@ -9,8 +9,8 @@
 
   export let flightData: any
   export let booking: boolean
-  let date = new Date(flightData.Date)
-  let departureTime = getDepartureTime()
+  let date: Date = new Date(flightData.Date)
+  let departureTime: string = getDepartureTime()
 
   function getDepartureTime() {
     let datePartTwo = flightData.Date.split('T')[1]

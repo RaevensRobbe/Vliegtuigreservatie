@@ -5,10 +5,10 @@
   import { fade, scale } from 'svelte/transition'
 
   // export so parent receives the changes
-  export let departureCity
-  export let departureCountry
-  export let toggleDeparture = true
-  export let isDeparture
+  export let departureCity: string
+  export let departureCountry: string
+  export let toggleDeparture: boolean = true
+  export let isDeparture: boolean
 
   function showDestination(cityName: string, locationId: number) {
     departureCity = cityName
@@ -16,14 +16,10 @@
       $FlightStore.departureCountry = departureCountry
       $FlightStore.departureCity = departureCity
       $FlightStore.departureLocationId = locationId
-      console.log('departure: ' + locationId)
-      console.log($FlightStore.departureLocationId)
     } else {
       $FlightStore.destinationCountry = departureCountry
       $FlightStore.destinationCity = departureCity
       $FlightStore.destinationLocationId = locationId
-      console.log('destination: ' + locationId)
-      console.log($FlightStore.destinationLocationId)
     }
 
     toggleDeparture = false

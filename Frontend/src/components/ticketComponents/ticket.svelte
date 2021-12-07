@@ -7,9 +7,6 @@
   let departureTime: string
   let boardingTime: string
 
-  console.log(travelerData)
-  console.log(flightData)
-
   let date: Date = new Date(flightData.Date)
   let day: string = date.toLocaleString('default', {
     day: '2-digit',

@@ -8,19 +8,19 @@
     getTouchdownTime,
   } from './../../utils/calculateDistance'
 
-  let givenflights: any
+  let givenflights: Array<Flight>
   let controldate: Date
-  let chosenflight: any
+  let chosenflight: string
   let position: number
-  let flights = new Array()
+  let flights: Array<Flight> = new Array()
   let loaded: boolean = false
   let noData: boolean = false
-  let departureTime
+  let departureTime: string
 
   export let url: string
   export let retour: boolean
 
-  let radiobuttonName
+  let radiobuttonName: string
   if (retour === true) {
     radiobuttonName = 'retour'
   } else {
@@ -41,38 +41,33 @@
   firstDate.setDate(datum.getDate() - 3)
   lastDate.setDate(datum.getDate() + 3)
 
-  console.log(firstDate + ' ' + lastDate)
-
   onMount(async () => {
     givenflights = await get(url)
 
-    console.log(url)
-    console.log(givenflights)
-
-    let i = 0
-    let exactdate = false
-    let closestAmountOfDays = 360
+    let i: number = 0
+    let exactdate: boolean = false
+    let closestAmountOfDays: number = 360
 
     // check if there are flights
     if (givenflights.length > 0) {
       noData = false
 
       givenflights.forEach(flight => {
-        let dateTime = flight.Date.split('T')[0]
+        let dateTime: string = flight.Date.split('T')[0]
 
         if (dateTime == controldate) {
           position = i
           exactdate = true
         } else if (exactdate == false) {
           // To set two dates to two variables
-          let date1 = new Date(dateTime)
-          let date2 = new Date(controldate)
+          let date1: Date = new Date(dateTime)
+          let date2: Date = new Date(controldate)
 
           // To calculate the time difference of two dates
-          let Difference_In_Time = date2.getTime() - date1.getTime()
+          let Difference_In_Time: number = date2.getTime() - date1.getTime()
 
           // To calculate the number of days between two dates
-          let Difference_In_Days = Math.abs(
+          let Difference_In_Days: number = Math.abs(
             Difference_In_Time / (1000 * 3600 * 24),
           )
 
@@ -86,20 +81,18 @@
       if (position === undefined && givenflights.length > 0) {
       }
 
-      console.log(position)
-
       if (position !== undefined) {
         for (let j = -3; j < 4; j++) {
           // if j == 0 => middlepoint selected date / closest to selected date
           if (j === 0) {
-            let flightInfo = await get(
+            let flightInfo: Flight = await get(
               `http://localhost:3001/api/v1/flight/${givenflights[position].FlightId}`,
             )
             flights.push(flightInfo)
             setChosenFlight(flightInfo.FlightId)
           } else {
             if (givenflights[position + j]?.FlightId !== undefined) {
-              let flightInfo = await get(
+              let flightInfo: Flight = await get(
                 `http://localhost:3001/api/v1/flight/${
                   givenflights[position + j].FlightId
                 }`,
@@ -123,31 +116,30 @@
   })
 
   function calculateDayName(date: Date) {
-    let d = new Date(date)
+    let d: Date = new Date(date)
     return d.toLocaleString('default', { weekday: 'long' })
   }
 
   function dateFormat(date: Date) {
-    let datum = new Date(date)
+    let datum: Date = new Date(date)
     return datum.toLocaleString('default', { day: '2-digit', month: 'long' })
   }
 
   function calculatePrice(price: number) {
     // children pay 0.75 of the full price
-    let childrenPrice = price * 0.75 * $FlightStore.children
-    let adultPrice = price * $FlightStore.adults
+    let childrenPrice: number = price * 0.75 * $FlightStore.children
+    let adultPrice: number = price * $FlightStore.adults
     // calculate total price
-    let totalprice = Math.round((childrenPrice + adultPrice) * 100) / 100
+    let totalprice: number =
+      Math.round((childrenPrice + adultPrice) * 100) / 100
     return totalprice
   }
 
   function setChosenFlight(flightId: number) {
     //set chosenflight to flight to show the time of flight
     flights.forEach(flight => {
-      // console.log(flight.FlightId + ' = ' + flightId)
       if (flight.FlightId == flightId) {
         chosenflight = flight
-        // console.log('chosenflight set')
         // set flightId in store
         if (retour === false) {
           $FlightStore.departureFlight = chosenflight.FlightId
@@ -167,9 +159,9 @@
   }
 
   function getDepartureTime(date: Date) {
-    let datePartTwo = date.split('T')[1]
-    let dateHour = datePartTwo.split(':')[0]
-    let dateMinute = datePartTwo.split(':')[1]
+    let datePartTwo: string = date.split('T')[1]
+    let dateHour: string = datePartTwo.split(':')[0]
+    let dateMinute: string = datePartTwo.split(':')[1]
     departureTime = dateHour + ':' + dateMinute
     return dateHour + ':' + dateMinute
   }

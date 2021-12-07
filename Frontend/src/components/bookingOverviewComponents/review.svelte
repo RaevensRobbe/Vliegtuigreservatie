@@ -2,8 +2,8 @@
   import StarRating from './starRating.svelte'
   import { put } from '../../utils/useApi'
   export let flight
-  export let givenRating
-  export let givenReview
+  export let givenRating: number
+  export let givenReview: string
 
   let rating: number = 0
   let reviewText: string = ''
