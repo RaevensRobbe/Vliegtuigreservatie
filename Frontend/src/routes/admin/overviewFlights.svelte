@@ -6,6 +6,8 @@
   import BookingFlight from '../../components/bookingOverviewComponents/bookingFlight.svelte'
   import Spinner from '../../components/animations/spinner.svelte'
   import { goto } from '$app/navigation'
+  import { getAuth} from 'firebase/auth'
+  import authStore from '../../stores/authStore'
 
   let flights: any = []
   let flightsLoaded: boolean = false
@@ -23,13 +25,23 @@
   }
 
   onMount(async () => {
-    flights = await get('http://localhost:3001/api/v1/flight/allupcoming')
-    // console.log(flights)
-    flightsLoaded = true
+    $authStore.user.getIdToken(true)
+    .then((token) => {
+      console.log(token)
+      get('http://localhost:3001/api/v1/flight/allupcoming', token)
+      .then((data) => {
+        flights = data
+        flightsLoaded = true
+      })
+    })
   })
 
   function addFlight() {
     goto('/admin/createFlight')
+  }
+
+  function addAdmin() {
+    goto('/admin/createAdmin')
   }
 </script>
 
@@ -59,7 +71,13 @@
       class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
       on:click={addFlight}
     >
-      Add a flight
+      Add flight
+    </button>
+    <button
+      class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+      on:click={addAdmin}
+    >
+      Add admin
     </button>
     {#if specificFlightData}
       <button

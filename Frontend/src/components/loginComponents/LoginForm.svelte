@@ -35,13 +35,26 @@
           lastname: name[1],
           email: user.email,
         }
-        CreateUser(data).then(user => {
-          checkAdmin()
-        })
+        CreateUser(data)
       })
     } catch (error) {
       console.error(error)
     }
+  }
+
+  const loginWithEmail = () => {
+    signInWithEmailAndPassword(auth, email, pw)
+      .then(userCredential => {
+        const user = userCredential.user
+        if(user.email !== undefined) {
+          showLoginForm() 
+        }
+      })
+      .catch(error => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.error(error)
+      })
   }
 
   async function CreateUser(data) {
@@ -50,34 +63,6 @@
     if(res.info === "User already exists" || res.succes === true) {
       showLoginForm()
     }
-  }
-
-  async function checkAdmin(){
-    const getData:any = await get(`http://localhost:3001/api/v1/user/${$authStore.user.uid}`)
-    const currentStore = $authStore
-    console.log(getData.Admin)
-    authStore.set({
-        isLoggedIn: currentStore.isLoggedIn,
-        user: currentStore.user,
-        firebaseControlled: currentStore.firebaseControlled,
-        admin: getData.Admin
-      })
-  }
-
-  const loginWithEmail = () => {
-    signInWithEmailAndPassword(auth, email, pw)
-      .then(userCredential => {
-        const user = userCredential.user
-        if(user.email !== undefined) {
-          checkAdmin()
-          showLoginForm()
-        }
-      })
-      .catch(error => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.error(error)
-      })
   }
 
   function showLoginForm() {

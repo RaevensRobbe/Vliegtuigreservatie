@@ -15,8 +15,13 @@ export async function post(url: string, data: any, token:any = null) {
   return res
 }
 
-export async function get(url: string) {
-  const res = await fetch(url)
+export async function get(url: string, token:any = null) {
+  const res = await fetch(url,{
+    method: 'GET',
+    headers: {
+      'Authorization':  `Bearer ${token}`
+    }
+  })
     .then(res => res.json())
     .catch(error => console.error({ error }))
 
