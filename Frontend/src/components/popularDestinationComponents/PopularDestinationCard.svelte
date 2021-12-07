@@ -3,6 +3,8 @@
 
   import type PopularDestination from '../../models/PopularDestinationModel.type'
   import { FlightStore } from '../../stores/flightStore'
+  import type PopularDestinationGraphql from '../../models/PopularDestinationModel.type'
+  import popularCompStore from '../../stores/popularCompStore'
   export let popularDestination: PopularDestination
 
   function showModal() {
@@ -25,7 +27,18 @@
       { destinationId: popularDestination.Dest[0].DestinationId },
     )
 
-    console.log(data)
+    console.log(data.getDestinationById)
+    let popularDestinationData: PopularDestinationGraphql =
+      data.getDestinationById
+    let showPopularToggle = $popularCompStore.showPopular
+    showPopularToggle = !showPopularToggle
+    popularCompStore.set({
+      showPopular: showPopularToggle,
+      img: popularDestination.Dest[0].Picture,
+      name: popularDestinationData.name,
+      intro: popularDestinationData.intro,
+      summary: popularDestinationData.summary,
+    })
   }
 </script>
 
