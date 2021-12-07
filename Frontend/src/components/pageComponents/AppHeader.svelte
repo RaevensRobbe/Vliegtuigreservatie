@@ -80,13 +80,23 @@
       </div>
     </button>
     {#if $authStore.isLoggedIn}
+      <p
+        class="justify-self-start self-end col-span-2 p-2 w-full text-center text-forest-green font-bold"
+      >
+        {$authStore.user.displayName}
+      </p>
       <button
         class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
         on:click={goToBookings}>My bookings</button
       >
+
       <button
         class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
-        >{$authStore.user.email}</button
+        on:click={goToAccountInfo}>Edit Account</button
+      >
+      <button
+        class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
+        on:click={logout}>Sign out</button
       >
     {:else}
       <button
