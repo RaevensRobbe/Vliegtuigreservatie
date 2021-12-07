@@ -35,33 +35,11 @@
           lastname: name[1],
           email: user.email,
         }
-        CreateUser(data).then(user => {
-          checkAdmin()
-        })
+        CreateUser(data)
       })
     } catch (error) {
       console.error(error)
     }
-  }
-
-  async function CreateUser(data) {
-    const res:any = await post('http://localhost:3001/api/v1/user/createUser', data)
-    console.log(res)
-    if(res.info === "User already exists" || res.succes === true) {
-      showLoginForm()
-    }
-  }
-
-  async function checkAdmin(){
-    const getData:any = await get(`http://localhost:3001/api/v1/user/${$authStore.user.uid}`)
-    const currentStore = $authStore
-    console.log(getData.Admin)
-    authStore.set({
-        isLoggedIn: currentStore.isLoggedIn,
-        user: currentStore.user,
-        firebaseControlled: currentStore.firebaseControlled,
-        admin: getData.Admin
-      })
   }
 
   const loginWithEmail = () => {
@@ -78,6 +56,29 @@
         const errorMessage = error.message
         console.error(error)
       })
+  }
+
+  async function checkAdmin(){
+    const getData:any = await get(`http://localhost:3001/api/v1/user/${$authStore.user.uid}`)
+    .then((data) => {
+      console.log(data)
+      const currentStore = $authStore
+      authStore.set({
+        isLoggedIn: currentStore.isLoggedIn,
+        user: currentStore.user,
+        firebaseControlled: currentStore.firebaseControlled,
+        admin: data.Admin
+      })
+      console.log($authStore)
+    })
+  }
+
+  async function CreateUser(data) {
+    const res:any = await post('http://localhost:3001/api/v1/user/createUser', data)
+    console.log(res)
+    if(res.info === "User already exists" || res.succes === true) {
+      showLoginForm()
+    }
   }
 
   function showLoginForm() {
