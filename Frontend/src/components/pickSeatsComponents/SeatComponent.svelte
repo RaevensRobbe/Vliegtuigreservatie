@@ -14,6 +14,7 @@
   export let classType: string
   export let retour: boolean
 
+  let selectUser:boolean
   let initials: string
   let selected: boolean = false
   let index: number = 0
@@ -23,9 +24,11 @@
   })
   const clicked = () => {
     if(person.fn === "" && person.ln === ""){
+      selectUser = true
       console.log('yeet')
       return
     }else{
+      selectUser = false
       initials = `${person.fn[0]}${person.ln[0]}`
       selected = !selected
       addSeatToStore()
