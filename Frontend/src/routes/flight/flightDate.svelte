@@ -13,6 +13,8 @@
   })
 
   function goBack() {
+    $FlightStore.retourDate = null
+    $FlightStore.departureDate = null
     goto('/')
   }
 
