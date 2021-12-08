@@ -305,7 +305,7 @@
 
       <button
         type="submit"
-        class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+        class="flex mx-auto mt-2 p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
       >
         Confirm payment
       </button>
