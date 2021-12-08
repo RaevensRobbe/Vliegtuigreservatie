@@ -99,7 +99,7 @@
       lastName: lastName,
       email: email,
       password: pw,
-      role: "Admin"
+      role: "admin"
     }
 
     register(data)
