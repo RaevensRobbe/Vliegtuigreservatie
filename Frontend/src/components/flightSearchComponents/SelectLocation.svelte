@@ -10,22 +10,33 @@
   export let toggleDeparture: boolean = true
   export let isDeparture: boolean
 
-  function showDestination(cityName: string, locationId: number) {
+  function showDestination(
+    cityName: string,
+    locationId: number,
+    abr: string,
+    Coordinates: Array,
+  ) {
     departureCity = cityName
     if (isDeparture) {
       $FlightStore.departureCountry = departureCountry
       $FlightStore.departureCity = departureCity
       $FlightStore.departureLocationId = locationId
+      $FlightStore.departureCoordinates = Coordinates
+      $FlightStore.departureAbbreviation = abr
     } else {
       $FlightStore.destinationCountry = departureCountry
       $FlightStore.destinationCity = departureCity
       $FlightStore.destinationLocationId = locationId
+      $FlightStore.destinationCoordinates = Coordinates
+      $FlightStore.destinationAbbreviation = abr
     }
 
     toggleDeparture = false
   }
 
   export let destinationsArray: Dest
+
+  console.log(destinationsArray)
 </script>
 
 <div
@@ -94,7 +105,12 @@
                 <div
                   class="hover:bg-gray-300"
                   on:click={() =>
-                    showDestination(city.Name, city.DestinationId)}
+                    showDestination(
+                      city.Name,
+                      city.DestinationId,
+                      city.Abbreviation,
+                      city.Coordinates,
+                    )}
                 >
                   <label key={city.DestinationId}>
                     <!-- bind:group makes chosen city bold -->
