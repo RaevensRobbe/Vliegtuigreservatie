@@ -173,7 +173,7 @@
   {#if loaded}
     {#each flights as flight}
       {#if flight.FlightId != null}
-        <label key={flight.FlightId} class="mb-2 lg:mb-0">
+        <label key={flight.FlightId} class="lg:mb-0">
           <input
             type="radio"
             name={radiobuttonName}

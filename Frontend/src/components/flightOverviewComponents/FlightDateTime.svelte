@@ -21,6 +21,8 @@
     flightDate = $FlightStore.departureDate
   }
 
+  console.log(flightDate)
+
   function dateFormat(date: Date) {
     console.log(date)
     let datum = new Date(date)
