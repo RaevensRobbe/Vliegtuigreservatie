@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getTouchdownTime } from '../../utils/calculateDistance'
 
-  import { FlightStore } from './../../stores/flightStore'
+  import { FlightStore } from './../../stores/FlightStore'
   export let retour: boolean
 
   let startLocation: string
@@ -9,22 +9,27 @@
   let flightDate: Date
   let departureTime: string
 
+  console.log($FlightStore)
+
   if (retour) {
     startLocation = $FlightStore.destinationCity
     endLocation = $FlightStore.departureCity
-    flightDate = $FlightStore.departureDate
+    flightDate = $FlightStore.retourDate
   } else {
     startLocation = $FlightStore.departureCity
     endLocation = $FlightStore.destinationCity
-    flightDate = $FlightStore.retourDate
+    flightDate = $FlightStore.departureDate
   }
 
   function dateFormat(date: Date) {
+    console.log(date)
     let datum = new Date(date)
+    console.log(datum)
     return datum.toLocaleString('default', { day: '2-digit', month: 'long' })
   }
 
   function getDepartureTime(date: Date) {
+    console.log(date)
     let dateString = date.toString()
     let datePartTwo = dateString.split('T')[1]
     let dateHour = datePartTwo.split(':')[0]
