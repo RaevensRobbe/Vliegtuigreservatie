@@ -44,7 +44,7 @@
     })
     await goto('/user/accountInfo')
   }
-  
+
   const goToAdminOverview = async () => {
     await goto('/admin/overviewFlights')
   }
@@ -83,34 +83,30 @@
       </div>
     </button>
     {#if $authStore.isLoggedIn}
+      <p class="col-span-2 p-2 text-lg w-full text-forest-green">
+        {$authStore.user.displayName}
+      </p>
       {#if $authStore.admin}
         <button
-          class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
+          class="col-span-2 p-2 w-full text-left hover:bg-gray-200 border-b-1"
           on:click={goToAdminOverview}>AdminOverview</button
         >
       {/if}
-      <p
-        class="justify-self-start self-end col-span-2 p-2 w-full text-center text-forest-green font-bold"
-      >
-        {$authStore.user.displayName}
-      </p>
       <button
-        class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
+        class="col-span-2 p-2 w-full text-left hover:bg-gray-200 border-b-1"
         on:click={goToBookings}>My bookings</button
       >
 
       <button
-        class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
+        class="col-span-2 p-2 w-full text-left hover:bg-gray-200 border-b-1"
         on:click={goToAccountInfo}>Edit Account</button
       >
       <button
-        class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
+        class="col-span-2 p-2 w-full text-left hover:bg-gray-200 font-bold"
         on:click={logout}>Sign out</button
       >
     {:else}
-      <button
-        class="justify-self-start self-end col-span-2 p-2 w-full hover:bg-gray-200"
-      >
+      <button class="col-span-2 p-2 w-full text-left hover:bg-gray-200">
         <div on:click={showLoginForm}>
           <p>Login</p>
         </div>
