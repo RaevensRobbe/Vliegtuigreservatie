@@ -8,6 +8,7 @@
   export let seatNrRet: string
   export let retour: boolean
   export let lastItem: boolean
+  export let hasRetour: boolean
 
   let selected: boolean = false
   let selectedSeat: string = ''
@@ -131,23 +132,25 @@
     </div>
   </div>
 </div>
-<div
-  class="{retour ? 'bg-whisper-gray' : 'bg-white'} flex justify-center {lastItem
-    ? ''
-    : 'border-b-1'}"
->
-  <div class="flex justify-center my-auto">
-    <div
-      class="w-12 h-12 {seatNrRet ? 'bg-forest-green' : 'bg-white border-2'} "
-    >
-      <h1
-        class="w-full flex h-full items-center justify-center {seatNrRet
-          ? 'text-white'
-          : 'text-forest-green'} font-bold text-center text-xl"
-        in:scale
+{#if hasRetour}
+  <div
+    class="{retour ? 'bg-whisper-gray' : 'bg-white'} flex justify-center {lastItem
+      ? ''
+      : 'border-b-1'}"
+  >
+    <div class="flex justify-center my-auto">
+      <div
+        class="w-12 h-12 {seatNrRet ? 'bg-forest-green' : 'bg-white border-2'} "
       >
-        {seatNrRet}
-      </h1>
+        <h1
+          class="w-full flex h-full items-center justify-center {seatNrRet
+            ? 'text-white'
+            : 'text-forest-green'} font-bold text-center text-xl"
+          in:scale
+        >
+          {seatNrRet}
+        </h1>
+      </div>
     </div>
   </div>
-</div>
+{/if}

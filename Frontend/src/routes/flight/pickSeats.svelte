@@ -5,6 +5,7 @@
   import Seat from '../../components/pickSeatsComponents/SeatComponent.svelte'
   import { travelerStore } from '../../stores/travelerStore'
   import { FlightStore } from '../../stores/FlightStore'
+  import passengerStore from '../../stores/selectPassengerStore'
   import PassengersComponent from '../../components/pickSeatsComponents/PassengersComponent.svelte'
   import { goto } from '$app/navigation'
   import type Flight from '../../models/FlightModel.type'
@@ -29,8 +30,9 @@
   let selectedPerson: {
     fn: string
     ln: string
-  }
+  } 
 
+  let hasRetourFlight:boolean;
   let retourFlight: boolean = false
   let clicked: boolean = false
 
@@ -105,10 +107,13 @@
   }
 
   onMount(async () => {
+    console.log($FlightStore)
     if ($FlightStore.retourFlight === null) {
-      retourFlight = false
+      hasRetourFlight = false
+      //retourFlight = false
     } else {
-      retourFlight = true
+      hasRetourFlight = true
+      //retourFlight = true
     }
 
     GetData()
@@ -162,7 +167,7 @@
 
   const nextFlight = () => {
     clicked = !clicked
-    retourFlight = !retourFlight
+    retourFlight = true
     GetData()
   }
 
@@ -198,12 +203,14 @@
     </svg>
     <p class="">Go back</p>
   </section>
+
   <section class="sm:p-4 px-6">
     <Intertitle titleName="Select your seat" />
   </section>
 
   <section class="grid grid-cols-5 grid-rows-1 p-4 px-6">
     <div class="w-5/6 md:w-4/5 mx-auto col-span-5 lg:col-span-2">
+      <!-- HEADERPASSENGERGRID -->
       <div class="flex flex-row">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -219,17 +226,20 @@
         </svg>
         <h1 class="font-bold text-lg md:text-2xl text-forest-green mb-4">
           {#if retourFlight}
-            {$FlightStore.departureCity} to {$FlightStore.destinationCity}
-          {:else}
             {$FlightStore.destinationCity} to {$FlightStore.departureCity}
+          {:else}
+            {$FlightStore.departureCity} to {$FlightStore.destinationCity}
           {/if}
         </h1>
       </div>
+
+      <!-- PASSENGERGRID -->
       <div class="bg-white shadow-md">
-        <div class="grid grid-cols-4 grid-rows-1 text-dim-gray border-b-1">
+        <div class="grid {hasRetourFlight ? 'grid-cols-4': 'grid-cols-3'} grid-rows-1 text-dim-gray border-b-1">
           <h2 class="font-bold text-base md:text-lg  my-auto px-4 col-span-2">
             Passengers
           </h2>
+          
           <div
             class="flex flex-col justify-center items-center py-4 {retourFlight
               ? ''
@@ -254,32 +264,34 @@
               {departureAbr} - {destinationAbr}
             </p>
           </div>
-          <div
+          {#if hasRetourFlight}
+            <div
             class="flex flex-col justify-center items-center {retourFlight
               ? 'text-forest-green border-b-8 border-current'
               : ''}"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="22.866"
-              viewBox="0 0 32 22.866"
-              class={retourFlight
-                ? 'text-forest-green fill-current'
-                : 'text-dim-gray fill-current'}
             >
-              <path
-                id="bxs-plane-take-off"
-                d="M33.367,28.6H3.968v3.267h29.4ZM3.136,13.127a2.63,2.63,0,0,1,3.325-1.664L13.767,13.9,26.834,9,30.1,10.633l-9.8,6.533,6.533,3.267,6.533-3.267L35,18.8l-6.533,6.533-23.76-8.91A2.632,2.632,0,0,1,3.136,13.127Z"
-                transform="translate(-3 -9)"
-              />
-            </svg>
-            <p class="mt-1 text-sm md:text-base">
-              {destinationAbr} - {departureAbr}
-            </p>
-          </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="22.866"
+                viewBox="0 0 32 22.866"
+                class={retourFlight
+                  ? 'text-forest-green fill-current'
+                  : 'text-dim-gray fill-current'}
+              >
+                <path
+                  id="bxs-plane-take-off"
+                  d="M33.367,28.6H3.968v3.267h29.4ZM3.136,13.127a2.63,2.63,0,0,1,3.325-1.664L13.767,13.9,26.834,9,30.1,10.633l-9.8,6.533,6.533,3.267,6.533-3.267L35,18.8l-6.533,6.533-23.76-8.91A2.632,2.632,0,0,1,3.136,13.127Z"
+                  transform="translate(-3 -9)"
+                />
+              </svg>
+              <p class="mt-1 text-sm md:text-base">
+                {destinationAbr} - {departureAbr}
+              </p>
+            </div>
+          {/if}
         </div>
-        <div class="grid grid-cols-4 grid-rows-1">
+        <div class="grid {hasRetourFlight ? 'grid-cols-4': 'grid-cols-3'} grid-rows-1">
           {#each $travelerStore as traveler, index (traveler)}
             {#if retourFlight}
               <PassengersComponent
@@ -288,6 +300,7 @@
                 lN={traveler.lastName}
                 seatNrDep={traveler.seatNrDep}
                 seatNrRet={traveler.seatNrRet}
+                hasRetour= {hasRetourFlight}
                 retour={true}
                 lastItem={index == $travelerStore.length - 1 ? true : false}
               />
@@ -298,6 +311,7 @@
                 lN={traveler.lastName}
                 seatNrDep={traveler.seatNrDep}
                 seatNrRet={traveler.seatNrRet}
+                hasRetour= {hasRetourFlight}
                 retour={false}
                 lastItem={index == $travelerStore.length - 1 ? true : false}
               />
@@ -305,30 +319,43 @@
           {/each}
         </div>
       </div>
-      {#if retourFlight}
-        <div class="flex justify-center md:justify-end">
-          <button
-            type="submit"
-            class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-            on:click={goToOverview}
-          >
-            <!--submit button -->
-            Continue
-          </button>
-        </div>
-      {:else}
-        <div class="flex justify-center md:justify-end">
-          <button
-            on:click={nextFlight}
-            type="submit"
-            class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-          >
-            Next flight
-          </button>
-        </div>
-      {/if}
-    </div>
 
+      <!-- BUTTONS -->
+      {#if hasRetourFlight && retourFlight}
+          <div class="flex justify-center md:justify-end">
+            <button
+              type="submit"
+              class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+              on:click={goToOverview}
+            >
+              Continue
+            </button>
+          </div>
+        {:else if hasRetourFlight && !retourFlight}
+          <div class="flex justify-center md:justify-end">
+            <button
+              on:click={nextFlight}
+              type="submit"
+              class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            >
+              Next flight
+            </button>
+          </div>
+        {:else if !hasRetourFlight}
+          <div class="flex justify-center md:justify-end">
+            <button
+              type="submit"
+              class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+              on:click={goToOverview}
+            >
+              <!--submit button -->
+              Continue
+            </button>
+          </div>
+        {/if}
+
+      <!-- PLANELAYOUT -->
+    </div>
     {#if retourFlight}
       <section class="col-span-5 lg:col-span-3 w-5/6 md:w-4/5 mx-auto">
         <div class="grid-rows-2">

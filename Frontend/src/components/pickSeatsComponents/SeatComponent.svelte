@@ -22,9 +22,14 @@
     //console.log(row, column)
   })
   const clicked = () => {
-    initials = `${person.fn[0]}${person.ln[0]}`
-    selected = !selected
-    addSeatToStore()
+    if(person.fn === "" && person.ln === ""){
+      console.log('yeet')
+      return
+    }else{
+      initials = `${person.fn[0]}${person.ln[0]}`
+      selected = !selected
+      addSeatToStore()
+    }
   }
 
   const addSeatToStore = () => {
@@ -37,6 +42,7 @@
 
     let seatDep: string
     let seatRet: string
+    console.log(person)
 
     if (retour) {
       if (prevData.seatNrRet == selectedSeat) {
