@@ -341,21 +341,20 @@ export class FlightController
         if(!oldData) {
           return response.status(401).json({ error: 'FlightId is incorrect'})
         }
-        let price:number = request.body.data.price
-        let gate:number = request.body.data.gate
-        let date:string = request.body.data.date
+        let price:number = request.body.data.Price
+        let gate:number = request.body.data.Gate
+        let date:string = request.body.data.Date
 
         if(!price) price = oldData.Price
         if(!gate) gate = oldData.Gate
         if(!date) date = oldData.Date 
 
         const update = await this.repository.createQueryBuilder()
-        .update(Flight)
+        .update()
         .set({Price: price, Gate: gate, Date: date })
         .where("FlightId = :id",{id: flightId})
         .execute();
 
-        console.log(update)
         if(update.affected === 1) return response.status(200).json({ success: true })
         else return response.status(500).json({ error: 'Something went wrong' })
       }
