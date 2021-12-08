@@ -20,6 +20,7 @@
   } from '../../utils/inputValidator'
 
   let flightData: any = $editStore[0]
+  console.log($editStore)
 
   let flightName: string = flightData.Name
   let plane: string = flightData.PlaneId
@@ -28,6 +29,14 @@
   let destinationAirport: string = flightData.DestinationId
   let departureTime = flightData.Date.substr(0, flightData.Date.length - 8)
   let price: number = flightData.Price
+
+  // let flightName: string = "Test"
+  // let plane: string = "Test"
+  // let gate: number = 2
+  // let departureAirport: string = "Test"
+  // let destinationAirport: string = "Test"
+  // let departureTime = "Test"
+  // let price: number = 1000
 
   let succes: boolean = false
   let submitted: boolean = false
@@ -94,6 +103,7 @@
     console.log('in de add')
     $authStore.user.getIdToken(true)
     .then((token) => {
+      console.log(token)
       UpdateFlight(token)
     })
   }
@@ -329,7 +339,7 @@
           <div class="flex gap-4 justify-center">
             <button
               on:click={handleSubmit}
-              type="submit"
+              type="button"
               class="flex p-4 mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
             >
               Edit flight
