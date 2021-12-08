@@ -21,34 +21,38 @@
     class="flex justify-center items-center w-screen h-screen bg-black bg-opacity-70 fixed"
   >
     <div
-      class="flex relative flex-col w-3/4 h-4/5 bg-white rounded-2xl shadow-md overflow-y-scroll scrollbar"
+      class="flex relative flex-col w-3/4 h-4/5 bg-white shadow-md overflow-y-scroll scrollbar"
       in:scale
       out:scale
     >
       <!-- svelte-ignore a11y-img-redundant-alt -->
-      <div
-        class="absolute ml-4 mt-4 p-2 bg-gray-900 opacity-50 cursor-pointer rounded-full hover:opacity-90"
-        on:click={closeModal}
-      >
-        <svg
-          class="h-6 w-6 text-white stroke-current"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          ><line x1="18" y1="6" x2="6" y2="18" /><line
-            x1="6"
-            y1="6"
-            x2="18"
-            y2="18"
-          /></svg
-        >
+      <div class="absolute w-full">
+        <div class="flex justify-end ">
+          <div
+            class="ml-auto mr-4 mt-4 p-2 bg-gray-900 opacity-50 cursor-pointer rounded-full hover:opacity-90"
+            on:click={closeModal}
+          >
+            <svg
+              class="h-6 w-6 text-white stroke-current"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><line x1="18" y1="6" x2="6" y2="18" /><line
+                x1="6"
+                y1="6"
+                x2="18"
+                y2="18"
+              /></svg
+            >
+          </div>
+        </div>
       </div>
       {#if $popularCompStore.img}
         <img
-          class="rounded-t-2xl max-h-1/2"
+          class="max-h-1/2"
           src={$popularCompStore.img}
           alt="Picture of {$popularCompStore.name}"
         />
