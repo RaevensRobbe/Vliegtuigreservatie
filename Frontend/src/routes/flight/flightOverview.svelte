@@ -10,7 +10,10 @@
   import Paywall from '../..//components/flightOverviewComponents/Paywall.svelte'
 
   //@ts-nocheck
-  const retour: boolean = true
+  let retour: boolean = false
+  if ($FlightStore.retourFlight != null) {
+    retour = true
+  }
 
   let travelers: any = $travelerStore
 

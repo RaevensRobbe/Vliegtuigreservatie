@@ -15,13 +15,15 @@
     startLocation = $FlightStore.destinationCity
     endLocation = $FlightStore.departureCity
     flightDate = $FlightStore.retourDate
+    console.log('retour' + $FlightStore.retourDate)
   } else {
     startLocation = $FlightStore.departureCity
     endLocation = $FlightStore.destinationCity
     flightDate = $FlightStore.departureDate
+    console.log('departurte' + $FlightStore.departureDate)
   }
 
-  console.log(flightDate)
+  console.log('Flightdate: ' + flightDate)
 
   function dateFormat(date: Date) {
     console.log(date)

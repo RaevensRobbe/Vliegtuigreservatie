@@ -5,6 +5,7 @@
   export let retour
 
   let travelers: any = $travelerStore
+  console.log(travelers)
 
   function calculatePrice(travelerclass: string, price: number, title: string) {
     // children pay 0.75 of the full price
@@ -37,12 +38,12 @@
           {traveler.lastName}
         </h2>
         <p class="text-sm self-start">
-          {retour ? traveler.classDep : traveler.classRet} class
+          {retour ? traveler.classRet : traveler.classDep} class
         </p>
       </div>
       <div class="flex justify-center">
         <p class="text-lg font-bold text-white bg-forest-green p-2 self-center">
-          {retour ? traveler.seatNrDep : traveler.seatNrRet}
+          {retour ? traveler.seatNrRet : traveler.seatNrDep}
         </p>
       </div>
       <p class="flex text-xl text-cyprus-green self-center">
