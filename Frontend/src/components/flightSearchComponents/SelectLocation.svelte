@@ -60,7 +60,9 @@
       class="grid grid-rows-1 md:grid-cols-5 rounded-xl bg-white-500 shadow-lg flex-grow"
     >
       <!-- Choose country -->
-      <div class="bg-ghost-white p-4 md:rounded-l-xl  md:col-span-4">
+      <div
+        class="bg-ghost-white p-4 rounded-t-xl md:rounded-t-none md:rounded-l-xl  md:col-span-4"
+      >
         <h1 class="font-bold text-forest-green text-xl mb-2">
           Choose a country
         </h1>
