@@ -68,5 +68,12 @@
       "Lastname": "Lewis",
       "Email": "Erick_Lewis7280@elnee.tech",
       "Admin": "False"
+    },
+    {
+      "UserId": "zwqpY68qpoS14qKj1RTZB2UGzJx2",
+      "Firstname": "docent",
+      "Lastname": "admin",
+      "Email": "docent@howest.be",
+      "Admin": true
     }
   ]
