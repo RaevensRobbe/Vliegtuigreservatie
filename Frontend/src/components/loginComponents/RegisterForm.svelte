@@ -42,7 +42,12 @@
 
         updateProfile(user, { displayName: `${firstName} ${lastName}` })
           .then(() => {
-            const data = {
+            const data:{
+              id:string,
+              firstname:string,
+              lastname:string,
+              email:string,
+            } = {
               id: user.uid,
               firstname: firstName,
               lastname: lastName,
