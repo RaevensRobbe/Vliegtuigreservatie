@@ -52,6 +52,7 @@
   function logout() {
     const auth = getAuth()
     auth.signOut()
+    goto('/')
   }
 </script>
 
