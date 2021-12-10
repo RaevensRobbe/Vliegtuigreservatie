@@ -29,7 +29,12 @@
       signInWithPopup(auth, provider).then(userCrendtial => {
         const user = userCrendtial.user
         const name = user.displayName.split(' ')
-        const data = {
+        const data:{
+              id:string,
+              firstname:string,
+              lastname:string,
+              email:string,
+            } = {
           id: user.uid,
           firstname: name[0],
           lastname: name[1],
