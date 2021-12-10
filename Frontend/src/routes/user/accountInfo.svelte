@@ -39,7 +39,7 @@
   const changeUserData = () => {
     succes.update = ''
     const displayName = `${userdata.Firstname} ${userdata.Lastname}`
-    //console.log(user)
+    console.log(userdata.Picture)
     updateProfile(user, {
       displayName: displayName,
       photoURL: userdata.Picture,
@@ -48,7 +48,7 @@
         updateEmail(user, userdata.Email)
           .then(() => {
             $authStore.user = user
-            console.log($authStore.user)
+            console.log(user.photoURL)
             const data:{firstname:string, lastname:string, email:string} = {
               firstname: userdata.Firstname,
               lastname: userdata.Lastname,
@@ -147,7 +147,7 @@
               bind:value={userdata.Firstname}
               id="firstname"
               type="text"
-              class="py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+              class=" w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
 
@@ -163,7 +163,7 @@
               bind:value={userdata.Lastname}
               id="lastname"
               type="text"
-              class="py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+              class=" w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
           {#if errors.lastname}
@@ -178,7 +178,7 @@
               bind:value={userdata.Email}
               id="email"
               type="email"
-              class="py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+              class=" w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
           {#if errors.email}
@@ -186,16 +186,18 @@
           {/if}
         </div>
 
-        <div class="flex flex-col w-full">
-          <label for="picture" class="mb-2"> Picture </label>
-          <input
-            bind:value={userdata.Picture}
-            id="picture"
-            type="file"
-            class="py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
-          />
-          {#if errors.pic}
-            <p class="text-red-600 -mt-2 mb-2">{errors.pic}</p>
+        <div class="flex flex-col">
+          <label for="pic" class="mb-2"> Picture </label>
+          <div class="border-b text-dim-gray mb-2 border-current">
+            <input
+              bind:value={userdata.Picture}
+              id="pic"
+              type="url"
+              class=" w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+            />
+          </div>
+          {#if errors.email}
+            <p class="text-red-600 -mt-2 mb-2">{errors.email}</p>
           {/if}
         </div>
       </div>
