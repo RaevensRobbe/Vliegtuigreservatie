@@ -6,8 +6,9 @@
   import authStore from '../../stores/authStore'
   import { updateCurrentUser, updateEmail, updateProfile } from '@firebase/auth'
   import { getAuth } from 'firebase/auth'
+  import { put } from '../../utils/useApi'
   import { goto } from '$app/navigation'
-
+ 
   const auth = getAuth()
   const user = auth.currentUser
 
@@ -16,25 +17,22 @@
   let userdata: any = {}
 
   onMount(async () => {
+    console.log($authStore.user.uid)
     const getData = await get(
-      `http://localhost:3001/api/v1/user/${$authStore.user.uid}`,
+      `http://localhost:3001/api/v1/user/data/${$authStore.user.uid}`,
     )
     userdata = getData
-    console.log(userdata)
+    //console.log(userdata)
   })
 
-  async function put(data) {
-    console.log(`post functie ${data}`)
-    const res = await fetch(
-      `http://localhost:3001/api/v1/user/updateUser/${$authStore.user.uid}`,
-      {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          data,
-        }),
-      },
-    )
+  async function updateUser(data) {
+    const res = await put(`http://localhost:3001/api/v1/user/updateUser/${$authStore.user.uid}`, data)
+    if(res.success) {
+      //ROBBE FIX LOADING DINGKIE
+      console.log('yeey')
+    }else{
+      console.log('NEEY')
+    }
   }
 
   const changeUserData = () => {
@@ -49,12 +47,12 @@
           .then(() => {
             console.log($authStore.user)
             //Goed gegaan
-            const data = {
+            const data:{firstname:string, lastname:string, email:string} = {
               firstname: userdata.Firstname,
               lastname: userdata.Lastname,
               email: userdata.Email,
             }
-            put(data)
+            updateUser(data)
             succes.update = 'User data updated'
           })
           .catch(error => {

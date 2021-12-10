@@ -24,7 +24,7 @@
       if(user){
         user.getIdTokenResult()
         .then((idTokenResult) => {
-          console.log(idTokenResult)
+          //console.log(idTokenResult)
           if (idTokenResult.claims.role == 'admin') {
             admin = true
           } else {
@@ -37,7 +37,7 @@
           firebaseControlled: true,
           admin: admin,
         })
-        console.log($authStore)
+        //console.log($authStore)
       })
       }else{
         authStore.set({
