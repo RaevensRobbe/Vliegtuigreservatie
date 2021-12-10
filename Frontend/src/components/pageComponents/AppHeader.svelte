@@ -155,11 +155,13 @@
           {/if}
           <button on:click={goToBookings}>My bookings</button>
           <div class="relative inline-block">
-            <button
-              on:click={toggleAccountTab}
-              class="font-bold text-xl text-forest-green pl-4 pr-6"
-              >{$authStore.user.displayName}</button
-            >
+            {#if $authStore.user.displayName}
+              <button
+                on:click={toggleAccountTab}
+                class="font-bold text-xl text-forest-green pl-4 pr-6"
+                >{$authStore.user.displayName}</button
+              >
+            {/if}
             {#if accountdropDown}
               <div
                 id="myDropdown"

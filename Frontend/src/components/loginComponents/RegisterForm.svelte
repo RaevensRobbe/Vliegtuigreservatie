@@ -40,7 +40,6 @@
       .then(userCredential => {
         const user = userCredential.user
 
-        $authStore.user.displayName = `${firstName} ${lastName}`
         updateProfile(user, { displayName: `${firstName} ${lastName}` })
           .then(() => {
             const data = {
@@ -67,7 +66,7 @@
 
   async function CreateUser(data) {
     const res:any = await post('http://localhost:3001/api/v1/user/createUser', data)
-    console.log(res)
+    //console.log(res)
     if(res.info === "User already exists" || res.succes === true) {
       showRegisterForm()
     }
