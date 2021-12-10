@@ -29,6 +29,7 @@
     const res = await put(`http://localhost:3001/api/v1/user/updateUser/${$authStore.user.uid}`, data)
     if(res.success) {
       //ROBBE FIX LOADING DINGKIE
+      succes.update = 'User data updated'
       console.log('yeey')
     }else{
       console.log('NEEY')
@@ -37,23 +38,23 @@
 
   const changeUserData = () => {
     succes.update = ''
-    console.log(user)
+    const displayName = `${userdata.Firstname} ${userdata.Lastname}`
+    //console.log(user)
     updateProfile(user, {
-      displayName: userdata.Firstname,
+      displayName: displayName,
       photoURL: userdata.Picture,
     })
       .then(() => {
         updateEmail(user, userdata.Email)
           .then(() => {
+            $authStore.user = user
             console.log($authStore.user)
-            //Goed gegaan
             const data:{firstname:string, lastname:string, email:string} = {
               firstname: userdata.Firstname,
               lastname: userdata.Lastname,
               email: userdata.Email,
             }
             updateUser(data)
-            succes.update = 'User data updated'
           })
           .catch(error => {
             console.error(error)
