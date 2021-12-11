@@ -478,7 +478,7 @@ export class FlightController
         .innerJoin('f.Destination', 'd')
         .innerJoin('f.Start', 's')
         .where('Date(f.Date) < Date(now())')
-        .orderBy('f.Date', 'ASC')
+        .orderBy('f.Date', 'DESC')
         .getMany()
       response.send(data);
     } catch (error) {
