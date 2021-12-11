@@ -390,5 +390,71 @@
     "Review": "uL2RN7pADzVeZ4iHmxuhxn0eeeKi9LuXuvcINdGAQ70vB2VkLIPR6fJHUXwsxHB1E8toba4JrtQ0wFdlIkW16daPlVx0qXNI58qCJrJvOFjMOTUP3KjMuK5lidCGmDdTfI4yZbcbalm03NBSAi6fyBXvDEeppCIKmPqFYgzcrIvJhErUctGEG7feuIvU7xwYccOoh53esexqPOO8WJN56EDouLVQvef4VXqEzDxg0lVmKyPg4w7xk0bYYk3VkntN",
     "User": "tT6Rcds5rlMFLpRcaSGOtH0ttYW2",
     "Flight": "669fd444-212f-4bdc-8fc7-d72f33434e29"
+  },
+  {
+    "TicketId": "10b9590b-d2a1-4b8f-8592-2f11b9df04f2",
+    "Seat": [
+      {
+        "class": "Business",
+        "column": "A",
+        "row": 1
+      },
+      {
+        "class": "Business",
+        "column": "B",
+        "row": 1
+      }
+    ],
+    "Return": 1,
+    "ReturnDate": "2021-12-12 05:30:34",
+    "Persons": ["Nathan", "Martijn"],
+    "Rating": "4",
+    "Review": "",
+    "User": "zwqpY68qpoS14qKj1RTZB2UGzJx2",
+    "Flight": "bdfd73ad-916f-4124-97f6-c4684090cfaa"
+  },
+  {
+    "TicketId": "a96a574f-4ce1-487a-b03d-3c16feeb5fe7",
+    "Seat": [
+      {
+        "class": "Business",
+        "column": "A",
+        "row": 1
+      },
+      {
+        "class": "Business",
+        "column": "B",
+        "row": 1
+      }
+    ],
+    "Return": 0,
+    "ReturnDate": "",
+    "Persons": ["Nathan", "Martijn"],
+    "Rating": "4",
+    "Review": "",
+    "User": "zwqpY68qpoS14qKj1RTZB2UGzJx2",
+    "Flight": "05fc5c6f-f4c8-4218-9060-fe87a4834c98"
+  },
+  {
+    "TicketId": "fc004244-3836-4da3-b788-71a8136a3865",
+    "Seat": [
+      {
+        "class": "Business",
+        "column": "A",
+        "row": 1
+      },
+      {
+        "class": "Business",
+        "column": "B",
+        "row": 1
+      }
+    ],
+    "Return": 0,
+    "ReturnDate": "",
+    "Persons": ["Nathan", "Martijn"],
+    "Rating": "4",
+    "Review": "",
+    "User": "zwqpY68qpoS14qKj1RTZB2UGzJx2",
+    "Flight": "a57395e5-1ab6-468d-9865-bf2f5d16644e"
   }
 ]

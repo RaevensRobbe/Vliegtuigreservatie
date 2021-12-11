@@ -505,5 +505,44 @@
     "Start": "39a0465c-efbc-4260-b7df-1272b3bc560b",
     "PlaneId": "e1ebd896-c6cb-41c2-a795-69635f5c9873",
     "Plane": "e1ebd896-c6cb-41c2-a795-69635f5c9873"
+  },
+  {
+    "FlightId": "bdfd73ad-916f-4124-97f6-c4684090cfaa",
+    "Name":"A 0169",
+    "Date": "2021-12-10 05:30:34",
+    "Price": "30.78",
+    "Gate": 1,
+    "DestinationId": "a604f5d6-78bb-4321-95f0-f2e29a20f316",
+    "Destination": "a604f5d6-78bb-4321-95f0-f2e29a20f316",
+    "StartId": "39a0465c-efbc-4260-b7df-1272b3bc560b",
+    "Start": "39a0465c-efbc-4260-b7df-1272b3bc560b",
+    "PlaneId": "e1ebd896-c6cb-41c2-a795-69635f5c9873",
+    "Plane": "e1ebd896-c6cb-41c2-a795-69635f5c9873"
+  },
+  {
+    "FlightId": "05fc5c6f-f4c8-4218-9060-fe87a4834c98",
+    "Name":"A 0170",
+    "Date": "2021-12-01 13:38:34",
+    "Price": "30.78",
+    "Gate": 1,
+    "DestinationId": "39a0465c-efbc-4260-b7df-1272b3bc560b",
+    "Destination": "39a0465c-efbc-4260-b7df-1272b3bc560b",
+    "StartId": "a604f5d6-78bb-4321-95f0-f2e29a20f316",
+    "Start": "a604f5d6-78bb-4321-95f0-f2e29a20f316",
+    "PlaneId": "e1ebd896-c6cb-41c2-a795-69635f5c9873",
+    "Plane": "e1ebd896-c6cb-41c2-a795-69635f5c9873"
+  },
+  {
+    "FlightId": "a57395e5-1ab6-468d-9865-bf2f5d16644e",
+    "Name":"A 0171",
+    "Date": "2021-12-05 05:05:28",
+    "Price": "36.47",
+    "Gate": 17,
+    "DestinationId": "c4cea5c4-bf7a-44c0-b26c-1d04b2ed4423",
+    "Destination": "c4cea5c4-bf7a-44c0-b26c-1d04b2ed4423",
+    "StartId": "f9b07a16-e7c1-45cd-9291-c05ff9293f1e",
+    "Start": "f9b07a16-e7c1-45cd-9291-c05ff9293f1e",
+    "PlaneId": "dedf4bf4-baf1-4641-8f7d-3835a7095cdb",
+    "Plane": "dedf4bf4-baf1-4641-8f7d-3835a7095cdb"
   }
 ]
