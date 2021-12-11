@@ -18,7 +18,7 @@
     dateValidator,
     requiredNumber,
   } from '../../utils/inputValidator'
-import authStore from '../../stores/authStore';
+  import authStore from '../../stores/authStore'
 
   let flightName: string
   let plane: string
@@ -29,7 +29,7 @@ import authStore from '../../stores/authStore';
   let price: number = null
   let highSeason: boolean = false
 
-  let succes: boolean = true
+  let succes: boolean = false
   let submitted: boolean = false
   let failed: boolean = false
 
@@ -144,13 +144,12 @@ import authStore from '../../stores/authStore';
   }
 
   async function addToDB() {
-    $authStore.user.getIdToken(true)
-    .then((token) => {
+    $authStore.user.getIdToken(true).then(token => {
       AddFlight(token)
     })
   }
 
-  const AddFlight = async (token) => {
+  const AddFlight = async token => {
     submitted = true
     if (highSeason) {
       price = price * 1.75
@@ -165,7 +164,11 @@ import authStore from '../../stores/authStore';
       Gate: gate,
     }
 
-    let call: any = await post('http://localhost:3001/api/v1/flight', data, token)
+    let call: any = await post(
+      'http://localhost:3001/api/v1/flight',
+      data,
+      token,
+    )
     console.log(call)
 
     if (call.success === true) {
