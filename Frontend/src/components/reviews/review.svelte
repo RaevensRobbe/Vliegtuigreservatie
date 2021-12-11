@@ -8,7 +8,10 @@
 
     export let flightId;
     let reviews: any[] = []
-    let titel:string
+    let flightName:any
+    let flightPath:any
+    let start:string
+    let end:string
 
     onMount(async () => {
       $authStore.user.getIdToken(true)
@@ -18,8 +21,10 @@
         .then((data) => {
             console.log(data)
             reviews = data.Ticket
-            console.log(reviews)
-            titel = `${data.Start.Name} - ${data.Destination.Name}`
+            flightName = `Flight: ${data.Name}`
+            //flightPath = `${data.Start.Name} - ${data.Destination.Name}`
+            start = data.Start.Name
+            end =data.Destination.Name
         })
       })
     })
@@ -54,8 +59,29 @@
         <p class="">Go back</p>
   </section>
   <section class="sm:p-4 px-6">
-    <Intertitle titleName={titel} />
-    <!-- Extra info -->
+    <Intertitle titleName={flightName} />
+  </section>
+
+  <section class ='flex flex-row align-center justify-center'>
+      <h1 class = 'mr-4 text-lg font-bold text-forest-green'>{start}</h1>
+      <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="fill-current dim-gray h-3 md:h-4 align-center"
+          viewBox="0 0 44 22.458"
+        >
+          <g
+            id="Flight_icon"
+            data-name="Flight icon"
+            transform="translate(-829 -1009.771)"
+          >
+            <path
+              id="bxs-plane-take-off"
+              d="M46.813,14.674a3.616,3.616,0,0,0-4.572-2.288L32.195,15.737,14.229,9,9.737,11.246l13.475,8.983L14.229,24.72,5.246,20.229,3,22.475l8.983,8.983,32.67-12.251a3.619,3.619,0,0,0,2.16-4.532Z"
+              transform="translate(826 1000.771)"
+            />
+          </g>
+        </svg>
+        <h1 class="ml-4 text-lg font-bold text-forest-green">{end}</h1>
   </section>
 
   <section>
@@ -66,7 +92,7 @@
                 <StarRating givenRating={review.Rating}/>
             </div>
 
-            <div class='text-left'>
+            <div class='text-left flex'>
                 <p class=''>{review.Review}</p>
             </div>
         </article>

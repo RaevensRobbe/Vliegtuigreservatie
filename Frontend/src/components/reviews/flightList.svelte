@@ -62,7 +62,7 @@
       <div class="flex justify-center flex-col">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="fill-current text-forest-green h-3 md:h-4"
+          class="fill-current dim-gray h-3 md:h-4"
           viewBox="0 0 44 22.458"
         >
           <g
@@ -77,11 +77,8 @@
             />
           </g>
         </svg>
-        <p class="text-base mt-2" text-md>
-          {calculateFlightTimeLong(
-            flightData.Start.Coordinates,
-            flightData.Destination.Coordinates,
-          )}
+        <p class="font-bold text-lg lg:text-2xl text-forest-green mr-1 md:mr-0">
+          {flightData.Name}
         </p>
       </div>
       <div class="my-auto">
