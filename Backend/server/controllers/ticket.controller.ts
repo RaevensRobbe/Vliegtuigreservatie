@@ -83,7 +83,7 @@ export class TicketController
             Return: req.body.data.return,
             ReturnDate: req.body.data.returnDate,
             Persons: req.body.data.persons,
-            Rating: 0,
+            Rating: null,
             Review: '',
             User: {
               UserId: req.body.data.userId,
