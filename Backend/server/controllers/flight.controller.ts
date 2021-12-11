@@ -30,11 +30,9 @@ export class FlightController
     this.router.get('/takenSeats/:id', this.takenSeats)
     this.router.get('/plane/:id', this.getPlane)
     this.router.get('/userFlights/:id', this.getUserFlights)
-    this.router.get(
-      '/flightInfoBetween/:Sid/:Did/:Date',
-      this.flightInfoBetween,
-    )
+    this.router.get('/flightInfoBetween/:Sid/:Did/:Date', this.flightInfoBetween)
     this.router.get('/reviews/:id', this.getReviews)
+    this.router.get('/pastFlights', this.getOldFlights)
 
     this.router.post('', isAuthenticated , isAuthorized({hasRole: ['admin']}) , this.createFlight)
 
@@ -147,7 +145,7 @@ export class FlightController
         .innerJoin('f.Start', 's')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-      console.log(data)
+        //console.log(data)
       if (data === undefined) {
         response.status(400).json({ error: 'Data is undefined' })
       } else {
@@ -369,8 +367,8 @@ export class FlightController
         const create = await this.repository.create(newFlight)
         result = await this.repository.save(create)
 
-        console.log('created')
-        console.log(result)
+        //console.log('created')
+        //console.log(result)
         if (result === {}) {
           return response.status(500).json({ error: 'Something went wrong' })
         } else {
@@ -447,9 +445,46 @@ export class FlightController
       .where('f.flightId = :id',{id:flightId})
       .getOne();
 
-      response.send(data);
+      if (data === null) {
+        response.status(400).json({ error: 'Data is undefined' })
+      } else {
+        response.send(data)
+      }
     }catch (error) {
       response.status(500).json({ error: { error } })
     }
   }
+
+  getOldFlights = async(request: Request, response: Response, next: NextFunction) => {
+    //console.log('get old flights')
+    try {
+      //console.log('wtf?')
+      const data = await this.repository
+        .createQueryBuilder('f')
+        .select([
+          'f.FlightId',
+          'f.Date',
+          'f.Gate',
+          'f.Price',
+          'f.StartId',
+          'f.PlaneId',
+          'f.Name',
+          'f.DestinationId',
+          'd.Name',
+          'd.Coordinates',
+          's.Name',
+          's.Coordinates',
+        ])
+        .innerJoin('f.Destination', 'd')
+        .innerJoin('f.Start', 's')
+        .where('Date(f.Date) >= Date(now())')
+        .orderBy('f.Date', 'ASC')
+        .getMany()
+      response.send(data);
+    } catch (error) {
+      //console.log('wtf?')
+      response.status(500).json({ error: { error } })
+    }
+  }
+
 }

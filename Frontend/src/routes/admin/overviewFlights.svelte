@@ -43,6 +43,9 @@
   function addAdmin() {
     goto('/admin/createAdmin')
   }
+  function goToReviews() {
+    goto('/admin/overviewReviews')
+  }
 </script>
 
 <body>
@@ -78,6 +81,12 @@
       on:click={addAdmin}
     >
       Add admin
+    </button>
+    <button
+      class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+      on:click={goToReviews}
+    >
+      Reviews
     </button>
     {#if specificFlightData}
       <button
