@@ -30,6 +30,14 @@
   let departureTime = flightData.Date.substr(0, flightData.Date.length - 8)
   let price: number = flightData.Price
 
+  // let flightName: string = "Test"
+  // let plane: string = "Test"
+  // let gate: number = 2
+  // let departureAirport: string = "Test"
+  // let destinationAirport: string = "Test"
+  // let departureTime = "Test"
+  // let price: number = 1000
+
   let succes: boolean = false
   let submitted: boolean = false
   let failed: boolean = false

@@ -2,6 +2,7 @@
   import { goto } from '$app/navigation'
 
   import { bookingTicket } from '../../stores/flightStore'
+  import { editStore } from '../../stores/editStore'
   import {
     calculateFlightTimeLong,
     getTouchdownTime,
@@ -37,6 +38,8 @@
       goto('/bookings/flightTicket')
     } else {
       // go to admin edit page
+      $editStore = [flightData]
+      goto('/admin/editFlight')
     }
   }
 </script>
