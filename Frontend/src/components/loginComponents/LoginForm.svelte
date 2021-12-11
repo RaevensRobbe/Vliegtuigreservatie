@@ -10,6 +10,7 @@
   import { form } from 'svelte-forms'
   import { fade } from 'svelte/transition'
   import { post, get } from '../../utils/useApi'
+  import Spinner from '../animations/spinner.svelte'
 
   import { requiredValidator, emailValidator } from '../../utils/inputValidator'
   import loginCompStore from '../../stores/loginCompStore'
@@ -18,6 +19,7 @@
   let validationError: boolean = true
   let email: string = ''
   let pw: string = ''
+  let loginClicked: boolean = false
 
   let errors: any = {}
 
@@ -29,17 +31,18 @@
       signInWithPopup(auth, provider).then(userCrendtial => {
         const user = userCrendtial.user
         const name = user.displayName.split(' ')
-        const data:{
-              id:string,
-              firstname:string,
-              lastname:string,
-              email:string,
-            } = {
+        const data: {
+          id: string
+          firstname: string
+          lastname: string
+          email: string
+        } = {
           id: user.uid,
           firstname: name[0],
           lastname: name[1],
           email: user.email,
         }
+
         CreateUser(data)
       })
     } catch (error) {
@@ -48,11 +51,12 @@
   }
 
   const loginWithEmail = () => {
+    loginClicked = true
     signInWithEmailAndPassword(auth, email, pw)
       .then(userCredential => {
         const user = userCredential.user
-        if(user.email !== undefined) {
-          showLoginForm() 
+        if (user.email !== undefined) {
+          showLoginForm()
         }
       })
       .catch(error => {
@@ -63,9 +67,14 @@
   }
 
   async function CreateUser(data) {
-    const res:any = await post('http://localhost:3001/api/v1/user/createUser', data)
+    loginClicked = true
+    const res: any = await post(
+      'http://localhost:3001/api/v1/user/createUser',
+      data,
+    )
     console.log(res)
-    if(res.info === "User already exists" || res.succes === true) {
+    loginClicked = false
+    if (res.info === 'User already exists' || res.succes === true) {
       showLoginForm()
     }
   }
@@ -172,27 +181,30 @@
             >
                 Login
             </button> -->
-
-      <button
-        type="submit"
-        class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white"
-      >
-        Login
-      </button>
-
-      <div class="mt-4">
-        <button type="button" on:click|preventDefault={loginWithGoogle}>
-          Sign In with Google
-        </button>
-      </div>
-
-      <div class="mt-4 flex">
-        <p>No account yet?</p>
+      {#if loginClicked}
+        <Spinner />
+      {:else}
         <button
-          on:click={showRegisterForm}
-          class="ml-1 font-bold text-forest-green">Register</button
+          type="submit"
+          class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white"
         >
-      </div>
+          Login
+        </button>
+
+        <div class="mt-4">
+          <button type="button" on:click|preventDefault={loginWithGoogle}>
+            Sign In with Google
+          </button>
+        </div>
+
+        <div class="mt-4 flex">
+          <p>No account yet?</p>
+          <button
+            on:click={showRegisterForm}
+            class="ml-1 font-bold text-forest-green">Register</button
+          >
+        </div>
+      {/if}
     </form>
   </div>
 </div>
