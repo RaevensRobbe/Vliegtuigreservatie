@@ -1,35 +1,42 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
-import { Flight } from "./flight"
-import { User } from "./user"
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
+import { Flight } from './flight'
+import { User } from './user'
 
 @Entity('ticket') // The table name
 export class Ticket {
-    @PrimaryGeneratedColumn('uuid')
-    TicketId?: string
-    
-    @Column('simple-json')
-    Seat?: [{class:string,column:string,row:number}]
+  @PrimaryGeneratedColumn('uuid')
+  TicketId?: string
 
-    @Column('bool')
-    Return?: boolean
+  @Column('simple-json')
+  Seat?: [{ class: string; column: string; row: number }]
 
-    @Column('datetime',{nullable:true})
-    ReturnDate?: string
+  @Column('bool')
+  Return?: boolean
 
-    @Column('simple-array')
-    Persons?: string[]
+  @Column('datetime', { nullable: true })
+  ReturnDate?: string
 
-    @Column('')
-    Rating?: number
+  @Column('simple-array')
+  Persons?: string[]
 
-    @Column({length:256})
-    Review?: string
+  @Column({ nullable: true })
+  Rating?: number
 
-    @ManyToOne(() => User)
-    @JoinColumn({ name: "userId" })
-    User?: User;
+  @Column({ length: 256 })
+  Review?: string
 
-    @ManyToOne(() => Flight)
-    @JoinColumn({ name: "flightId" })
-    Flight?: Flight
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'userId' })
+  User?: User
+
+  @ManyToOne(() => Flight)
+  @JoinColumn({ name: 'flightId' })
+  Flight?: Flight
 }

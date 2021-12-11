@@ -9,11 +9,13 @@
   import { travelerStore } from '../../stores/travelerStore'
   import { FlightStore } from '../../stores/FlightStore'
   import { goto } from '$app/navigation'
+  import Spinner from '../animations/spinner.svelte'
   import { post } from '../../utils/useApi'
   let number: string
   let name: string = ''
   let cvc: string = ''
   let expiry: string = ''
+  let loading: boolean = false
   let prevLength: number = 0
   let retourCheck: boolean = false
   let departureCheck: boolean = false
@@ -109,7 +111,7 @@
     }
 
     let dataRetour
-    if ($FlightStore.retourFlight) {
+    if ($FlightStore.retourFlight !== null) {
       dataRetour = {
         seatData: seatDataArrayRetour,
         return: true,
@@ -119,14 +121,43 @@
       }
     }
 
-    addToDB(dataDeparture, false)
-    addToDB(dataRetour, true)
+    loading = true
+
+    if ($FlightStore.retourFlight !== null) {
+      addToDB(dataDeparture, false)
+      addToDB(dataRetour, true)
+    } else {
+      addToDB(dataDeparture, false)
+    }
 
     async function addToDB(data: any, retour: boolean) {
       let call: any = await post(
         'http://localhost:3001/api/v1/ticket/createTicket',
         data,
       )
+      console.log(call)
+      console.log($FlightStore.retourFlight)
+
+      if ($FlightStore.retourFlight !== null) {
+        console.log('Has retour flight')
+        if (retour) {
+          console.log('in retour loop')
+          if (call.success == true) {
+            showPaywall
+            goto('/flight/flightTicket')
+          } else {
+            errors.transaction = 'Please try again transaction failed'
+          }
+        }
+      } else {
+        console.log('No retour flight')
+        if (call.success == true) {
+          showPaywall
+          goto('/flight/flightTicket')
+        } else {
+          errors.transaction = 'Please try again transaction failed'
+        }
+      }
       // console.log(call.success)
       // if (retour) {
       //   if (call.succes) {
@@ -162,7 +193,6 @@
     //     }
     //   }
     // }
-    goto('/flight/flightTicket')
   }
 
   function showPaywall() {
@@ -302,15 +332,18 @@
           {/if}
         </div>
       </div>
-
-      <button
-        type="submit"
-        class="flex mx-auto mt-2 p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-      >
-        Confirm payment
-      </button>
-      {#if errors.transaction}
-        <p class="text-red-600 -mt-2 mb-2">{errors.transaction}</p>
+      {#if loading}
+        <Spinner />
+      {:else}
+        <button
+          type="submit"
+          class="flex mx-auto mt-2 p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+        >
+          Confirm payment
+        </button>
+        {#if errors.transaction}
+          <p class="text-red-600 -mt-2 mb-2">{errors.transaction}</p>
+        {/if}
       {/if}
     </form>
   </div>
