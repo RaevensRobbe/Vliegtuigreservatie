@@ -44,7 +44,7 @@
     goto('/admin/createAdmin')
   }
   function goToReviews() {
-    goto('/admin/overviewReviews')
+    goto('/admin/overviewPastFlights')
   }
 </script>
 

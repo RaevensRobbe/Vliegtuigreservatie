@@ -54,3 +54,9 @@ export const bookingTicket = writable<{
 }>({
   ticketId: null,
 })
+
+export const reviewStore = writable<{
+  flightId: string
+}>({
+  flightId: null,
+})

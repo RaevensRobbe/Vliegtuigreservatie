@@ -21,7 +21,8 @@ export class FlightController
   constructor() {
     super(Flight) // Initialize the parent constructor
 
-    this.router.get('/all', this.all)
+    this.router.get('/all', this.getOldFlights)
+    this.router.get('/past', this.getOldFlights)
     this.router.get('/allupcoming', isAuthenticated , isAuthorized({hasRole: ['admin']}) , this.allUpcoming)
     this.router.get('/flightnr/:id', this.specific)
     this.router.get('/:id', this.one)
@@ -32,7 +33,6 @@ export class FlightController
     this.router.get('/userFlights/:id', this.getUserFlights)
     this.router.get('/flightInfoBetween/:Sid/:Did/:Date', this.flightInfoBetween)
     this.router.get('/reviews/:id', this.getReviews)
-    this.router.get('/pastFlights', this.getOldFlights)
 
     this.router.post('', isAuthenticated , isAuthorized({hasRole: ['admin']}) , this.createFlight)
 
@@ -458,7 +458,7 @@ export class FlightController
   getOldFlights = async(request: Request, response: Response, next: NextFunction) => {
     //console.log('get old flights')
     try {
-      //console.log('wtf?')
+      console.log('wtf?')
       const data = await this.repository
         .createQueryBuilder('f')
         .select([
@@ -477,7 +477,7 @@ export class FlightController
         ])
         .innerJoin('f.Destination', 'd')
         .innerJoin('f.Start', 's')
-        .where('Date(f.Date) >= Date(now())')
+        .where('Date(f.Date) < Date(now())')
         .orderBy('f.Date', 'ASC')
         .getMany()
       response.send(data);
@@ -486,5 +486,4 @@ export class FlightController
       response.status(500).json({ error: { error } })
     }
   }
-
 }
