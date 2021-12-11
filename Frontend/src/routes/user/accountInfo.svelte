@@ -6,8 +6,9 @@
   import authStore from '../../stores/authStore'
   import { updateCurrentUser, updateEmail, updateProfile } from '@firebase/auth'
   import { getAuth } from 'firebase/auth'
+  import { put } from '../../utils/useApi'
   import { goto } from '$app/navigation'
-
+ 
   const auth = getAuth()
   const user = auth.currentUser
 
@@ -16,46 +17,44 @@
   let userdata: any = {}
 
   onMount(async () => {
+    console.log($authStore.user.uid)
     const getData = await get(
-      `http://localhost:3001/api/v1/user/${$authStore.user.uid}`,
+      `http://localhost:3001/api/v1/user/data/${$authStore.user.uid}`,
     )
     userdata = getData
-    console.log(userdata)
+    //console.log(userdata)
   })
 
-  async function put(data) {
-    console.log(`post functie ${data}`)
-    const res = await fetch(
-      `http://localhost:3001/api/v1/user/updateUser/${$authStore.user.uid}`,
-      {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          data,
-        }),
-      },
-    )
+  async function updateUser(data) {
+    const res = await put(`http://localhost:3001/api/v1/user/updateUser/${$authStore.user.uid}`, data)
+    if(res.success) {
+      //ROBBE FIX LOADING DINGKIE
+      succes.update = 'User data updated'
+      console.log('yeey')
+    }else{
+      console.log('NEEY')
+    }
   }
 
   const changeUserData = () => {
     succes.update = ''
-    console.log(user)
+    const displayName = `${userdata.Firstname} ${userdata.Lastname}`
+    console.log(userdata.Picture)
     updateProfile(user, {
-      displayName: userdata.Firstname,
+      displayName: displayName,
       photoURL: userdata.Picture,
     })
       .then(() => {
         updateEmail(user, userdata.Email)
           .then(() => {
-            console.log($authStore.user)
-            //Goed gegaan
-            const data = {
+            $authStore.user = user
+            console.log(user.photoURL)
+            const data:{firstname:string, lastname:string, email:string} = {
               firstname: userdata.Firstname,
               lastname: userdata.Lastname,
               email: userdata.Email,
             }
-            put(data)
-            succes.update = 'User data updated'
+            updateUser(data)
           })
           .catch(error => {
             console.error(error)
@@ -148,7 +147,7 @@
               bind:value={userdata.Firstname}
               id="firstname"
               type="text"
-              class="py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+              class=" w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
 
@@ -164,7 +163,7 @@
               bind:value={userdata.Lastname}
               id="lastname"
               type="text"
-              class="py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+              class=" w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
           {#if errors.lastname}
@@ -179,7 +178,7 @@
               bind:value={userdata.Email}
               id="email"
               type="email"
-              class="py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+              class=" w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
           {#if errors.email}
@@ -187,16 +186,18 @@
           {/if}
         </div>
 
-        <div class="flex flex-col w-full">
-          <label for="picture" class="mb-2"> Picture </label>
-          <input
-            bind:value={userdata.Picture}
-            id="picture"
-            type="file"
-            class="py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
-          />
-          {#if errors.pic}
-            <p class="text-red-600 -mt-2 mb-2">{errors.pic}</p>
+        <div class="flex flex-col">
+          <label for="pic" class="mb-2"> Picture </label>
+          <div class="border-b text-dim-gray mb-2 border-current">
+            <input
+              bind:value={userdata.Picture}
+              id="pic"
+              type="url"
+              class=" w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+            />
+          </div>
+          {#if errors.email}
+            <p class="text-red-600 -mt-2 mb-2">{errors.email}</p>
           {/if}
         </div>
       </div>

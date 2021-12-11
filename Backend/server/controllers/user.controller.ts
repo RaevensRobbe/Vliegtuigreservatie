@@ -21,17 +21,18 @@ export class UserController extends CrudController<User> implements IUserControl
         super(User); // Initialize the parent constructor
 
         this.router.get('/all', this.all);
-        this.router.get('/:id', this.getOne);
+        this.router.get('/:id', this.getAdmin);
+        this.router.get('/data/:id', this.getOne);
         this.router.post('/createUser', this.createUser);
         this.router.put('/updateUser/:id',this.updateUser);
         this.router.post('/createAdmin', isAuthenticated , isAuthorized({hasRole: ['admin']}) ,this.createAdminUser)
     }
 
-    getOne = async (request: Request, response: Response, next: NextFunction) =>{
+    getAdmin = async (request: Request, response: Response, next: NextFunction) =>{
       try{
         const userId = request.params.id;
         if(request.params.id === undefined){
-          response.status(500).send('Parameter error')
+          return response.status(500).json({error: 'Parameter error'})
         }else {
           const data = await this.repository.createQueryBuilder("u")
           .select(["u.Admin"])
@@ -39,10 +40,27 @@ export class UserController extends CrudController<User> implements IUserControl
           .getOne();
 
           if(data === null){
-            response.status(400).json({error:'Data is undefined'})
+            return response.status(400).json({error:'Data is undefined'})
           }else{
             response.send(data)
           }
+        }
+      }catch(error){
+        response.status(500).json({error:{error}})
+      }
+    }
+
+    getOne = async(request: Request, response: Response, next: NextFunction) => {
+      try{
+        if(request.params.id === undefined)
+          return response.status(500).json({error: 'Parameter error'})
+
+        else{
+          const data = await this.repository.findOne(request.params.id);
+          if(data === null)
+            return response.status(400).json({error:'Data is undefined'})
+          else
+            response.send(data)
         }
       }catch(error){
         response.status(500).json({error:{error}})
@@ -94,14 +112,38 @@ export class UserController extends CrudController<User> implements IUserControl
 
     updateUser = async (request: Request, response: Response, next: NextFunction) => {
       try{
-        if(request.body.data === null){
-          response.status(400).json({error:"No data has been provided"})
+        const userId = request.params.id
+        if(!userId || !request.body){
+          return response.status(401).json({ error: 'Data is missing' })
+
         }else{
-          const update = await this.repository.update({UserId: request.params.id},{Firstname: request.body.data.firstname, Lastname: request.body.data.lastname, Email: request.body.data.email})
-          return response.status(200).json({succes: true})
+          const oldData: User = await this.repository.findOne(userId)
+
+          if (!oldData) {
+            return response.status(401).json({ error: 'FlightId is incorrect' })
+          }
+
+          let fN: string = request.body.data.firstname
+          let lN: string = request.body.data.lastname
+          let email: string = request.body.data.email
+
+          if (!fN) fN = oldData.Firstname
+          if (!lN) lN = oldData.Lastname
+          if (!email) email = oldData.Email
+
+          const update = await this.repository
+          .createQueryBuilder()
+          .update(User)
+          .set({Firstname: fN, Lastname: lN, Email: email})
+          .where('UserId = :id',{ id : userId })
+          .execute()
+
+          if (update.affected === 1)
+            return response.status(200).json({ success: true })
+          else return response.status(500).json({ error: 'Something went wrong' })
         }
       }catch(error){
-        response.status(500).json({error:error})
+        response.status(500).json({ error: { error } })
       }
     }
 

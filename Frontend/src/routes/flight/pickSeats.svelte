@@ -176,6 +176,10 @@
   }
 
   function goBack() {
+    passengerStore.set({
+      fn:'',
+      ln:''
+    })
     goto('/flight/flightDate')
   }
 </script>
