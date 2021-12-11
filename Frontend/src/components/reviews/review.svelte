@@ -9,7 +9,6 @@
     export let flightId;
     let reviews: any[] = []
     let flightName:any
-    let flightPath:any
     let start:string
     let end:string
 
@@ -22,7 +21,6 @@
             console.log(data)
             reviews = data.Ticket
             flightName = `Flight: ${data.Name}`
-            //flightPath = `${data.Start.Name} - ${data.Destination.Name}`
             start = data.Start.Name
             end =data.Destination.Name
         })
@@ -86,6 +84,7 @@
 
   <section>
     {#each reviews as review}
+      {#if review}
         <article class='my-6 md:my-4 py-2 px-4 bg-white shadow-md text-center hover:shadow-lg md:mx-6'>
             <div class='flex flex-row items-center justify-between mb-6'>
                 <h1 class='font-bold text-lg lg:text-xl text-forest-green text-left'>{review.User.Firstname} {review.User.Lastname}</h1>
@@ -96,6 +95,11 @@
                 <p class=''>{review.Review}</p>
             </div>
         </article>
+      {:else}
+        <div class='flex justify-center m-8'>
+          <h1 class="text-lg font-bold text-forest-green">No Reviews found</h1>
+        </div>
+      {/if}
     {/each}
   </section>
 

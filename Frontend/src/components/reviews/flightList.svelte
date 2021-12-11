@@ -3,7 +3,6 @@
   
     import { reviewStore } from '../../stores/flightStore'
     import {
-      calculateFlightTimeLong,
       getTouchdownTime,
     } from './../../utils/calculateDistance'
   

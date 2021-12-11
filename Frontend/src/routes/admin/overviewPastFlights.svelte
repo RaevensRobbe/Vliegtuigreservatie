@@ -30,7 +30,7 @@
       $authStore.user.getIdToken(true)
       .then((token) => {
         console.log(token)
-        get('http://localhost:3001/api/v1/flight/all', token)
+        get('http://localhost:3001/api/v1/flight/pastFlights', token)
         .then((data) => {
           flights = data
           flightsLoaded = true
