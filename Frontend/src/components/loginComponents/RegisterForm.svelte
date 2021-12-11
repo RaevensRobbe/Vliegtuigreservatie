@@ -7,20 +7,21 @@
   import { getAuth } from 'firebase/auth'
   import loginCompStore from '../../stores/loginCompStore'
   import authStore from '../../stores/authStore'
+  import Spinner from '../animations/spinner.svelte'
   import {
     requiredValidator,
     emailValidator,
     strenghtValidator,
     confirmValidator,
   } from '../../utils/inputValidator'
-  import {post} from '../../utils/useApi'
+  import { post } from '../../utils/useApi'
 
   let email: string
   let firstName: string
   let lastName: string
   let pw: string
   let cpw: string
-
+  let registerClicked: boolean = false
   let errors: any = {}
 
   let result = null
@@ -35,6 +36,7 @@
   }
 
   const register = () => {
+    registerClicked = true
     const auth = getAuth()
     createUserWithEmailAndPassword(auth, email, pw)
       .then(userCredential => {
@@ -42,11 +44,11 @@
 
         updateProfile(user, { displayName: `${firstName} ${lastName}` })
           .then(() => {
-            const data:{
-              id:string,
-              firstname:string,
-              lastname:string,
-              email:string,
+            const data: {
+              id: string
+              firstname: string
+              lastname: string
+              email: string
             } = {
               id: user.uid,
               firstname: firstName,
@@ -70,9 +72,13 @@
   }
 
   async function CreateUser(data) {
-    const res:any = await post('http://localhost:3001/api/v1/user/createUser', data)
+    const res: any = await post(
+      'http://localhost:3001/api/v1/user/createUser',
+      data,
+    )
     //console.log(res)
-    if(res.info === "User already exists" || res.succes === true) {
+    registerClicked = false
+    if (res.info === 'User already exists' || res.succes === true) {
       showRegisterForm()
     }
   }
@@ -250,21 +256,24 @@
       {#if errors.cpw}
         <p class="text-red-600 -mt-2 mb-2">{errors.cpw}</p>
       {/if}
-
-      <button
-        type="submit"
-        class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white"
-      >
-        Register
-      </button>
-
-      <div class="mt-4 flex">
-        <p>Already have an account?</p>
+      {#if registerClicked}
+        <Spinner />
+      {:else}
         <button
-          on:click={showLoginForm}
-          class="ml-1 font-bold text-forest-green">Login</button
+          type="submit"
+          class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white"
         >
-      </div>
+          Register
+        </button>
+
+        <div class="mt-4 flex">
+          <p>Already have an account?</p>
+          <button
+            on:click={showLoginForm}
+            class="ml-1 font-bold text-forest-green">Login</button
+          >
+        </div>
+      {/if}
     </form>
   </div>
 </div>
