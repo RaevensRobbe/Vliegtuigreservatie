@@ -34,6 +34,7 @@ export class FlightController
       '/flightInfoBetween/:Sid/:Did/:Date',
       this.flightInfoBetween,
     )
+    this.router.get('/reviews/:id', this.getReviews)
 
     this.router.post('', isAuthenticated , isAuthorized({hasRole: ['admin']}) , this.createFlight)
 
@@ -415,6 +416,39 @@ export class FlightController
         else return response.status(500).json({ error: 'Something went wrong' })
       }
     } catch (error) {
+      response.status(500).json({ error: { error } })
+    }
+  }
+
+  getReviews = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) =>{
+    try{
+      const flightId = request.params.id;
+
+      const data = await this.repository
+      .createQueryBuilder('f')
+      .select([
+      'f.FlightId',
+      'f.Date',
+      'f.Name',
+      'd.Name',
+      's.Name',
+      'u.Firstname',
+      'u.Lastname',
+      't.Rating',
+      't.Review',])
+      .innerJoin('f.Destination', 'd')
+      .innerJoin('f.Start', 's')
+      .innerJoin('f.Ticket', 't')
+      .innerJoin('t.User','u')
+      .where('f.flightId = :id',{id:flightId})
+      .getOne();
+
+      response.send(data);
+    }catch (error) {
       response.status(500).json({ error: { error } })
     }
   }
