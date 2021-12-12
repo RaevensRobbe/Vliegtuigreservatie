@@ -28,11 +28,12 @@ export async function get(url: string, token: any = null) {
   return res
 }
 
-export async function put(url: string, data: any) {
+export async function put(url: string, data: any, token: any = null) {
   const res = await fetch(url, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       data,
@@ -66,4 +67,14 @@ export async function queryGraphql(
     .catch(error => console.error({ error }))
 
   return res.data
+}
+
+export async function del(url: string) {
+  const res = await fetch(url, {
+    method: 'DELETE',
+  })
+    .then(res => res.json())
+    .catch(error => console.error({ error }))
+
+  return res
 }

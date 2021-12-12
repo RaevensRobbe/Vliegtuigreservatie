@@ -380,34 +380,29 @@ export class FlightController
     }
   }
 
-  updateFlight = async (
-    request: Request,
-    response: Response,
-    next: NextFunction,
-  ) => {
-    try {
-      const flightId = request.params.id
-      if (!flightId || !request.body) {
-        return response.status(401).json({ error: 'Data is missing' })
-      } else {
-        const oldData: Flight = await this.repository.findOne(flightId)
-        if (!oldData) {
-          return response.status(401).json({ error: 'FlightId is incorrect' })
+  updateFlight = async (request: Request, response: Response, next: NextFunction,) => {
+    try{
+      const flightId = request.params.id;
+      if(!flightId || !request.body){
+        return response.status(401).json({ error: 'Data is missing'})
+      }else{
+        const oldData:Flight = await this.repository.findOne(flightId);
+        if(!oldData) {
+          return response.status(401).json({ error: 'FlightId is incorrect'})
         }
-        let price: number = request.body.data.price
-        let gate: number = request.body.data.gate
-        let date: string = request.body.data.date
+        let price:number = request.body.data.price
+        let gate:number = request.body.data.gate
+        let date:string = request.body.data.date
 
         if (!price) price = oldData.Price
         if (!gate) gate = oldData.Gate
         if (!date) date = oldData.Date
 
-        const update = await this.repository
-          .createQueryBuilder()
-          .update(Flight)
-          .set({ Price: price, Gate: gate, Date: date })
-          .where('FlightId = :id', { id: flightId })
-          .execute()
+        const update = await this.repository.createQueryBuilder()
+        .update(Flight)
+        .set({Price: price, Gate: gate, Date: date })
+        .where("FlightId = :id",{id: flightId})
+        .execute();
 
         if (update.affected === 1)
           return response.status(200).json({ success: true })

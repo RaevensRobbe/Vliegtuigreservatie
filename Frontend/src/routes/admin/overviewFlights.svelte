@@ -7,7 +7,7 @@
   import BookingFlight from '../../components/bookingOverviewComponents/bookingFlight.svelte'
   import Spinner from '../../components/animations/spinner.svelte'
   import { goto } from '$app/navigation'
-  import { getAuth} from 'firebase/auth'
+  import { getAuth } from 'firebase/auth'
   import authStore from '../../stores/authStore'
 
   let flights: Array<Flight> = []
@@ -18,21 +18,24 @@
   function handleSubmit() {
     getSpecific()
   }
+
   async function getSpecific() {
+    flightsLoaded = false
     specificFlightData = await get(
       `http://localhost:3001/api/v1/flight/flightnr/${flightNumber}`,
     )
+    flightsLoaded = true
   }
 
   onMount(async () => {
-    $authStore.user.getIdToken(true)
-    .then((token) => {
+    $authStore.user.getIdToken(true).then(token => {
       console.log(token)
-      get('http://localhost:3001/api/v1/flight/allupcoming', token)
-      .then((data) => {
-        flights = data
-        flightsLoaded = true
-      })
+      get('http://localhost:3001/api/v1/flight/allupcoming', token).then(
+        data => {
+          flights = data
+          flightsLoaded = true
+        },
+      )
     })
   })
 

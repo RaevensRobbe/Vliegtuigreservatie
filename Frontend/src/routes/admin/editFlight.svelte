@@ -27,14 +27,21 @@
   let gate: number = flightData.Gate
   let departureAirport: string = flightData.StartId
   let destinationAirport: string = flightData.DestinationId
-  let departureTime = flightData.Date.substr(0, flightData.Date.length - 8)
+  let isoDate: string = flightData.Date
+  console.log(isoDate)
+  let date = isoDate.split('T')[0]
+  console.log(date)
+  let time = isoDate.split('T')[1]
+  time = time.slice(0, time.length - 8)
+  console.log(time)
+
   let price: number = flightData.Price
 
   let succes: boolean = false
   let submitted: boolean = false
   let failed: boolean = false
   let delFlight: boolean = false
-
+  let departureTime
   let planes: any
   let locations: any
 
@@ -50,11 +57,15 @@
   })
 
   function handleSubmit() {
+    departureTime = new Date(date + 'T' + time)
+    console.log(departureTime)
     if (
       requiredNumber(gate) &&
-      requiredValidator(departureTime) &&
+      requiredValidator(departureTime.toString()) &&
       requiredNumber(price)
     ) {
+      submitted = false
+      failed = true
       errors.gate = 'Gate is required'
       errors.departureTime = 'Departure time is required'
       errors.price = 'Price is required'
@@ -62,80 +73,85 @@
     }
 
     if (requiredNumber(gate)) {
+      submitted = false
+      failed = true
       errors.gate = 'Gate is required'
       return
     } else if (!checkNumber(gate)) {
+      submitted = false
+      failed = true
       errors.gate = 'Gate has to be a number'
     } else {
+      submitted = false
+      failed = true
       errors.gate = ''
     }
 
-    if (requiredValidator(departureTime)) {
+    if (requiredValidator(departureTime.toString())) {
+      submitted = false
+      failed = true
       errors.departureTime = 'Departure time is required'
       return
     } else if (dateValidator(departureTime) === false) {
+      submitted = false
+      failed = true
       errors.departureTime = "Departure time can't be in the past"
     } else {
+      submitted = false
+      failed = true
       errors.departureTime = ''
     }
 
     if (requiredNumber(price)) {
+      submitted = false
+      failed = true
       errors.price = 'Price is required'
       return
     } else if (!checkNumber(price)) {
+      submitted = false
+      failed = true
       errors.price = 'Price has to be a number with a . as seperator'
       return
     } else {
+      submitted = false
+      failed = true
       errors.price = ''
     }
     addToDB()
   }
 
   async function addToDB() {
-    console.log('in de add')
-    $authStore.user.getIdToken(true)
-    .then((token) => {
+    $authStore.user.getIdToken(true).then(token => {
       console.log(token)
       UpdateFlight(token)
     })
+    submitted = false
   }
 
-  const UpdateFlight = async (token) => {
+  const UpdateFlight = async token => {
     submitted = true
     let data = {
-      Date: departureTime,
-      Price: price,
-      Gate: gate,
+      date: departureTime,
+      price: price,
+      gate: gate,
     }
-    const result = await put(`http://localhost:3001/api/v1/flight/updateFlight/${flightData.FlightId}`,data,token)
-    if(result.success){
+    console.log(data)
+    const result = await put(
+      `http://localhost:3001/api/v1/flight/updateFlight/${flightData.FlightId}`,
+      data,
+      token,
+    )
+    submitted = false
+    if (result.success) {
       //Robbe fix loading dingkie
       succes = true
       console.log('Yeey')
-    }else{
+    } else {
       //Robbe fix error
-      submitted = false
       failed = true
       console.log('Neey')
     }
   }
-
-  // async function deleteFlight() {
-  //   console.log('delete')
-  //   submitted = true
-
-  //   let call: any = await del(
-  //     `http://localhost:3001/api/v1/flight/delete/${flightData.FlightId}`,
-  //   )
-  //   console.log(call)
-  //   delFlight = true
-  //   if (call.success === true) {
-  //     succes = true
-  //   } else {
-  //     submitted = false
-  //     failed = true
-  //   }
-  // }
 
   function goBack() {
     goto('/admin/overviewFlights')
@@ -284,12 +300,8 @@
               Departure time
             </label>
             <div class="border-b text-dim-gray mb-2 border-current">
-              <input
-                bind:value={departureTime}
-                id="departureTime"
-                type="datetime-local"
-                class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
-              />
+              <input type="date" bind:value={date} />
+              <input type="time" bind:value={time} />
             </div>
             {#if errors.departureTime}
               <p class="text-red-600 -mt-2 mb-2">{errors.departureTime}</p>

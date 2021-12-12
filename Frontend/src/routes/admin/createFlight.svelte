@@ -18,7 +18,6 @@
     dateValidator,
     requiredNumber,
   } from '../../utils/inputValidator'
-import authStore from '../../stores/authStore';
 
   let flightName: string
   let plane: string
@@ -28,8 +27,10 @@ import authStore from '../../stores/authStore';
   let departureTime
   let price: number = null
   let highSeason: boolean = false
+  let date: string = null
+  let time: string = null
 
-  let succes: boolean = true
+  let succes: boolean = false
   let submitted: boolean = false
   let failed: boolean = false
 
@@ -61,13 +62,14 @@ import authStore from '../../stores/authStore';
   }
 
   function handleSubmit() {
+    departureTime = new Date(date + 'T' + time)
     if (
       requiredValidator(flightName) &&
       requiredValidator(plane) &&
       requiredNumber(gate) &&
       requiredValidator(departureAirport) &&
       requiredValidator(destinationAirport) &&
-      requiredValidator(departureTime) &&
+      requiredValidator(departureTime.toString()) &&
       requiredNumber(price)
     ) {
       errors.flightName = 'Flight name is required'
@@ -122,7 +124,7 @@ import authStore from '../../stores/authStore';
       errors.destinationAirport = ''
     }
 
-    if (requiredValidator(departureTime)) {
+    if (requiredValidator(departureTime.toString())) {
       errors.departureTime = 'Departure time is required'
       return
     } else if (dateValidator(departureTime) === false) {
@@ -144,13 +146,12 @@ import authStore from '../../stores/authStore';
   }
 
   async function addToDB() {
-    $authStore.user.getIdToken(true)
-    .then((token) => {
+    $authStore.user.getIdToken(true).then(token => {
       AddFlight(token)
     })
   }
 
-  const AddFlight = async (token) => {
+  const AddFlight = async token => {
     submitted = true
     if (highSeason) {
       price = price * 1.75
@@ -165,7 +166,11 @@ import authStore from '../../stores/authStore';
       Gate: gate,
     }
 
-    let call: any = await post('http://localhost:3001/api/v1/flight', data, token)
+    let call: any = await post(
+      'http://localhost:3001/api/v1/flight',
+      data,
+      token,
+    )
     console.log(call)
 
     if (call.success === true) {
@@ -317,12 +322,8 @@ import authStore from '../../stores/authStore';
               Departure time
             </label>
             <div class="border-b text-dim-gray mb-2 border-current">
-              <input
-                bind:value={departureTime}
-                id="departureTime"
-                type="datetime-local"
-                class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
-              />
+              <input type="date" bind:value={date} />
+              <input type="time" bind:value={time} />
             </div>
             {#if errors.departureTime}
               <p class="text-red-600 -mt-2 mb-2">{errors.departureTime}</p>
