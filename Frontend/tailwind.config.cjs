@@ -28,6 +28,7 @@ module.exports = {
         'dim-gray': '#707070',
         'whisper-gray': '#ECECEC',
         'ghost-white': '#F8F8FF',
+        'orange': '#FFA500',
       },
       screens: {
         '3xl': '1921px',
