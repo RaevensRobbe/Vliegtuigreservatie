@@ -111,6 +111,8 @@
   const changePassword = async () => {
     updatePassword(auth.currentUser, pw).then(() => {
       //ROBBE FIX LOADING DINGKIE
+      pw = ''
+      cpw = ''
       console.log('yeey')
     }).catch((error) => {
       if(error.message === 'Firebase: Password should be at least 6 characters (auth/weak-password).')
