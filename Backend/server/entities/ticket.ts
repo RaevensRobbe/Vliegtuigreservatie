@@ -22,7 +22,7 @@ export class Ticket {
     @Column('')
     Rating?: number
 
-    @Column({length:256})
+    @Column('text')
     Review?: string
 
     @ManyToOne(() => User)

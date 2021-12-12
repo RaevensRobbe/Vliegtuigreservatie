@@ -2,6 +2,7 @@
   import {
     getAuth,
     GoogleAuthProvider,
+    sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signInWithPopup,
     updateProfile,
@@ -14,6 +15,7 @@
   import { requiredValidator, emailValidator } from '../../utils/inputValidator'
   import loginCompStore from '../../stores/loginCompStore'
   import authStore from '../../stores/authStore'
+  import { goto } from '$app/navigation';
 
   let validationError: boolean = true
   let email: string = ''
@@ -52,12 +54,18 @@
       .then(userCredential => {
         const user = userCredential.user
         if(user.email !== undefined) {
+          email = ''
+          pw = ''
           showLoginForm() 
         }
       })
       .catch(error => {
-        const errorCode = error.code
+        //const errorCode = error.code
         const errorMessage = error.message
+        if(error.message === 'Firebase: Error (auth/wrong-password).')
+          errors.login = 'Email or password are incorrect'
+        if(error.message === 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).')
+          errors.login = 'Account temporarily disabled due to many failed attempts'
         console.error(error)
       })
   }
@@ -112,6 +120,13 @@
 
     loginWithEmail()
   }
+
+  const forgotPassword =  () => {
+    showLoginForm()
+    console.log('clicked')
+      goto('/user/forgotPassword')
+    }
+  
 </script>
 
 <div class="absolute top-0 left-0 h-full z-10 w-full">
@@ -165,13 +180,12 @@
       {#if errors.pw}
         <p class="text-red-600 -mt-2 mb-2">{errors.pw}</p>
       {/if}
-      <!-- <button
-                on:click={loginWithEmail}
-                type="button"
-                class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white" 
-            >
-                Login
-            </button> -->
+      <button
+        class="text-left"
+        on:click={forgotPassword}
+      >
+        forgot password?
+      </button>
 
       <button
         type="submit"
@@ -179,6 +193,9 @@
       >
         Login
       </button>
+      {#if errors.login}
+        <p class="text-red-600 text-center my-2">{errors.login}</p>
+      {/if}
 
       <div class="mt-4">
         <button type="button" on:click|preventDefault={loginWithGoogle}>

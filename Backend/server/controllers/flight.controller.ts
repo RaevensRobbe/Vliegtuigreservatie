@@ -22,6 +22,7 @@ export class FlightController
     super(Flight) // Initialize the parent constructor
 
     this.router.get('/all', this.all)
+    this.router.get('/pastFlights', isAuthenticated , isAuthorized({hasRole: ['admin']}), this.getOldFlights)
     this.router.get('/allupcoming', isAuthenticated , isAuthorized({hasRole: ['admin']}) , this.allUpcoming)
     this.router.get('/flightnr/:id', this.specific)
     this.router.get('/:id', this.one)
@@ -30,10 +31,8 @@ export class FlightController
     this.router.get('/takenSeats/:id', this.takenSeats)
     this.router.get('/plane/:id', this.getPlane)
     this.router.get('/userFlights/:id', this.getUserFlights)
-    this.router.get(
-      '/flightInfoBetween/:Sid/:Did/:Date',
-      this.flightInfoBetween,
-    )
+    this.router.get('/flightInfoBetween/:Sid/:Did/:Date', this.flightInfoBetween)
+    this.router.get('/reviews/:id', isAuthenticated , isAuthorized({hasRole: ['admin']}), this.getReviews)
 
     this.router.post('', isAuthenticated , isAuthorized({hasRole: ['admin']}) , this.createFlight)
 
@@ -146,7 +145,7 @@ export class FlightController
         .innerJoin('f.Start', 's')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-      console.log(data)
+        //console.log(data)
       if (data === undefined) {
         response.status(400).json({ error: 'Data is undefined' })
       } else {
@@ -368,8 +367,8 @@ export class FlightController
         const create = await this.repository.create(newFlight)
         result = await this.repository.save(create)
 
-        console.log('created')
-        console.log(result)
+        //console.log('created')
+        //console.log(result)
         if (result === {}) {
           return response.status(500).json({ error: 'Something went wrong' })
         } else {
@@ -415,6 +414,76 @@ export class FlightController
         else return response.status(500).json({ error: 'Something went wrong' })
       }
     } catch (error) {
+      response.status(500).json({ error: { error } })
+    }
+  }
+
+  getReviews = async (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) =>{
+    try{
+      const flightId = request.params.id;
+
+      const data = await this.repository
+      .createQueryBuilder('f')
+      .select([
+      'f.FlightId',
+      'f.Date',
+      'f.Name',
+      'd.Name',
+      's.Name',
+      'u.Firstname',
+      'u.Lastname',
+      't.Rating',
+      't.Review',])
+      .innerJoin('f.Destination', 'd')
+      .innerJoin('f.Start', 's')
+      .innerJoin('f.Ticket', 't')
+      .innerJoin('t.User','u')
+      .where('f.flightId = :id',{id:flightId})
+      .getOne();
+
+      if (data === null) {
+        response.status(400).json({ error: 'Data is undefined' })
+      } else {
+        response.send(data)
+      }
+    }catch (error) {
+      response.status(500).json({ error: { error } })
+    }
+  }
+
+  getOldFlights = async(request: Request, response: Response, next: NextFunction) => {
+    try {
+      const data = await this.repository
+        .createQueryBuilder('f')
+        .select([
+          'f.FlightId',
+          'f.Date',
+          'f.Gate',
+          'f.Price',
+          'f.StartId',
+          'f.PlaneId',
+          'f.Name',
+          'f.DestinationId',
+          'd.Name',
+          'd.Coordinates',
+          's.Name',
+          's.Coordinates',
+        ])
+        .innerJoin('f.Destination', 'd')
+        .innerJoin('f.Start', 's')
+        .where('Date(f.Date) < Date(now())')
+        .orderBy('f.Date', 'DESC')
+        .getMany()
+        if (data === null) {
+          response.status(400).json({ error: 'Data is undefined' })
+        } else {
+          response.send(data)
+        }
+    } catch (error){
       response.status(500).json({ error: { error } })
     }
   }
