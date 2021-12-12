@@ -116,6 +116,7 @@
   }
 
   const forgotPassword =  () => {
+    showLoginForm()
     console.log('clicked')
       goto('/user/forgotPassword')
     }
@@ -174,6 +175,7 @@
         <p class="text-red-600 -mt-2 mb-2">{errors.pw}</p>
       {/if}
       <button
+        class="text-left"
         on:click={forgotPassword}
       >
         forgot password?
