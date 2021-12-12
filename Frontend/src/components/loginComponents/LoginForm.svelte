@@ -64,6 +64,7 @@
         }
       })
       .catch(error => {
+        loginClicked = false
         //const errorCode = error.code
         const errorMessage = error.message
         if(error.message === 'Firebase: Error (auth/wrong-password).')
@@ -189,10 +190,11 @@
       {#if errors.pw}
         <p class="text-red-600 -mt-2 mb-2">{errors.pw}</p>
       {/if}
-      <button
+
       {#if loginClicked}
         <Spinner />
       {:else}
+      
        <button
             class="text-left"
             on:click={forgotPassword}
@@ -205,6 +207,9 @@
         >
           Login
         </button>
+        {#if errors.login}
+          <p class="text-red-600 mt-2 mb-2">{errors.login}</p>
+        {/if}
         <div class="mt-4 flex">
           <p>No account yet?</p>
           <button

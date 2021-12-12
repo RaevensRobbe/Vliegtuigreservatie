@@ -168,7 +168,7 @@
   }
 
   function goBack() {
-    goto('/')
+    goto('/index.svelte')
   }
 </script>
 
@@ -205,6 +205,7 @@
         on:submit|preventDefault={onSubmit}
         class="w-4/5 sm:w-3/5 md:w-4/5 lg:w-3/5 bg-white p-8 flex flex-col shadow-md"
       >
+        <h1 class="text-2xl text-forest-green font-bold text-left mb-4">Change userdata</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="flex flex-col">
             <label for="firstname" class="mb-2 font-bold"> First name </label>
@@ -317,7 +318,7 @@
       on:submit|preventDefault={onSubmitPassword} 
       class="w-4/5 sm:w-3/5 md:w-4/5 lg:w-3/5 bg-white p-8 flex flex-col shadow-md"
     >
-
+      <h1 class="text-2xl text-forest-green font-bold text-left mb-4">Change password</h1>
       <div class="flex flex-col">
         <label for="password" class="mb-2"> New password </label>
         <div class="border-b text-dim-gray mb-2 border-current">
