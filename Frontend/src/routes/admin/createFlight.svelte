@@ -322,12 +322,6 @@
               Departure time
             </label>
             <div class="border-b text-dim-gray mb-2 border-current">
-              <!-- <input
-                bind:value={departureTime}
-                id="departureTime"
-                type="datetime-local"
-                class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
-              /> -->
               <input type="date" bind:value={date} />
               <input type="time" bind:value={time} />
             </div>
