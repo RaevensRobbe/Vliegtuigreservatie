@@ -131,9 +131,9 @@
   const UpdateFlight = async token => {
     submitted = true
     let data = {
-      Date: departureTime,
-      Price: price,
-      Gate: gate,
+      date: departureTime,
+      price: price,
+      gate: gate,
     }
     console.log(data)
     const result = await put(
