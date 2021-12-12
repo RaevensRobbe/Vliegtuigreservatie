@@ -28,7 +28,7 @@ export async function get(url: string, token: any = null) {
   return res
 }
 
-export async function put(url: string, data: any, token:any) {
+export async function put(url: string, data: any, token: any = null) {
   const res = await fetch(url, {
     method: 'PUT',
     headers: {
