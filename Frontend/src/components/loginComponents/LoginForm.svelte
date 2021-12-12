@@ -2,6 +2,7 @@
   import {
     getAuth,
     GoogleAuthProvider,
+    sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signInWithPopup,
     updateProfile,
@@ -14,6 +15,7 @@
   import { requiredValidator, emailValidator } from '../../utils/inputValidator'
   import loginCompStore from '../../stores/loginCompStore'
   import authStore from '../../stores/authStore'
+  import { goto } from '$app/navigation';
 
   let validationError: boolean = true
   let email: string = ''
@@ -112,6 +114,12 @@
 
     loginWithEmail()
   }
+
+  const forgotPassword =  () => {
+    console.log('clicked')
+      goto('/user/forgotPassword')
+    }
+  
 </script>
 
 <div class="absolute top-0 left-0 h-full z-10 w-full">
@@ -165,6 +173,11 @@
       {#if errors.pw}
         <p class="text-red-600 -mt-2 mb-2">{errors.pw}</p>
       {/if}
+      <button
+        on:click={forgotPassword}
+      >
+        forgot password?
+      </button>
       <!-- <button
                 on:click={loginWithEmail}
                 type="button"
