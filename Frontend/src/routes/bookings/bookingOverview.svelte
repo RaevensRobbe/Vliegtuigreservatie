@@ -22,15 +22,19 @@
     bookings = await get(
       `http://localhost:3001/api/v1/flight/userFlights/${$authStore.user.uid}`, // tT6Rcds5rlMFLpRcaSGOtH0ttYW2 => user with most data
     )
-    bookings.forEach(booking => {
-      let bookingDate = new Date(booking.Date)
-      if (bookingDate > Date.now()) {
-        futureBookings.push(booking)
-      } else {
-        previousBookings.push(booking)
-      }
-    })
-    $BookingStore.previousYear = new Date().getFullYear() + 1
+    console.log(bookings)
+    if (bookings.error) {
+    } else {
+      bookings.forEach(booking => {
+        let bookingDate = new Date(booking.Date)
+        if (bookingDate > Date.now()) {
+          futureBookings.push(booking)
+        } else {
+          previousBookings.push(booking)
+        }
+      })
+      $BookingStore.previousYear = new Date().getFullYear() + 1
+    }
     loaded = true
   })
 </script>
