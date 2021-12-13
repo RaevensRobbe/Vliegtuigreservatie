@@ -22,25 +22,37 @@
       }else{
         searchIsActive = true
 
-        specificFlightData = flights.find(flight => flight.Name === flightNumber)
-      }
-    }
+  let flights: Array<Flight> = []
+  let flightsLoaded: boolean = false
+  let specificFlightData: Flight
+  let flightNumber: string = null
+  let searchIsActive: boolean = false
 
-    onMount(async () => {
-      $authStore.user.getIdToken(true)
-      .then((token) => {
-        console.log(token)
-        get('http://localhost:3001/api/v1/flight/pastFlights', token)
-        .then((data) => {
+  function handleSubmit() {
+    if (flightNumber == '') {
+      searchIsActive = false
+    } else {
+      searchIsActive = true
+
+      specificFlightData = flights.find(flight => flight.Name === flightNumber)
+    }
+  }
+
+  onMount(async () => {
+    $authStore.user.getIdToken(true).then(token => {
+      console.log(token)
+      get('http://localhost:3001/api/v1/flight/pastFlights', token).then(
+        data => {
           flights = data
           flightsLoaded = true
-        })
-      })
+        },
+      )
     })
-  
-    function goBack() {
-        goto('/admin/overviewFlights')
-    }
+  })
+
+  function goBack() {
+    goto('/admin/overviewFlights')
+  }
 </script>
 
 <body>
@@ -70,23 +82,41 @@
     on:click={goBack}
   >
     <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class="h-6 w-6 my-auto"
-    viewBox="0 0 20.828 37.657"
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 my-auto"
+      viewBox="0 0 20.828 37.657"
     >
-        <path
-            id="chevron-down"
-            d="M6,9,22,25,38,9"
-            transform="translate(27 -3.172) rotate(90)"
-            fill="none"
-            stroke="#686868"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="4"
-        />
+      <path
+        id="chevron-down"
+        d="M6,9,22,25,38,9"
+        transform="translate(27 -3.172) rotate(90)"
+        fill="none"
+        stroke="#686868"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="4"
+      />
     </svg>
     <p class="">Go back</p>
   </section>
+  <section class="m-4 px-6">
+    <Intertitle titleName="Reviews" />
+    <div class="max-h-1/2 overflow-x-hidden overflow-y-scroll custom-scroll">
+      {#if searchIsActive}
+        {#if specificFlightData}
+          <FlightList flightData={specificFlightData} />
+        {:else}
+          <div class="flex justify-center m-8">
+            <h1 class="text-lg font-bold text-forest-green">
+              No flights found
+            </h1>
+          </div>
+        {/if}
+      {:else}
+        {#each flights as flight}
+          <FlightList flightData={flight} />
+        {/each}
+      {/if}
 
   {#if searchIsActive}
     {#if specificFlightData}
@@ -122,6 +152,19 @@
     {/if}
 </body>
 
-
-
-  
+<style>
+  .custom-scroll::-webkit-scrollbar {
+    width: 0.25rem;
+    cursor: pointer;
+  }
+  .custom-scroll::-webkit-scrollbar-track {
+    background-color: rgb(104, 104, 104, 0.2);
+    cursor: pointer;
+  }
+  .custom-scroll::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background-color: #686868;
+    border: 2px solid #686868;
+    border-radius: 50px;
+  }
+</style>

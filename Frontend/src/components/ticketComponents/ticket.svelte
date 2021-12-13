@@ -17,24 +17,25 @@
   let formatedDate: string = day + month
 
   function getDepartureTime() {
-    let dateString = flightData.Date.toString()
-    let datePartTwo = dateString.split('T')[1]
-    let dateHour = datePartTwo.split(':')[0]
-    let dateMinute = datePartTwo.split(':')[1]
-    departureTime = dateHour + ':' + dateMinute
+    let tempDate = new Date(date)
+    //.slice 2 gives back last 2 characters => you can always add 0 in front if its higher than 10 it wil not show the 0 in front
+    let hours = ('0' + tempDate.getHours()).slice(-2)
+    let minutes = ('0' + tempDate.getMinutes()).slice(-2)
+    departureTime = hours + ':' + minutes
+
     getBoardingTime()
-    return dateHour + ':' + dateMinute
+    return departureTime
   }
 
   function getBoardingTime() {
     var oldDateObj = new Date(flightData.Date)
     var newDateObj = new Date(flightData.Date)
     newDateObj.setMinutes(oldDateObj.getMinutes() - 30)
-    let dateString = newDateObj.toISOString()
-    let datePartTwo = dateString.split('T')[1]
-    let dateHour = datePartTwo.split(':')[0]
-    let dateMinute = datePartTwo.split(':')[1]
-    boardingTime = dateHour + ':' + dateMinute
+    console.log(newDateObj)
+    //.slice 2 gives back last 2 characters => you can always add 0 in front if its higher than 10 it wil not show the 0 in front
+    let hours = ('0' + newDateObj.getHours()).slice(-2)
+    let minutes = ('0' + newDateObj.getMinutes()).slice(-2)
+    boardingTime = hours + ':' + minutes
   }
 
   if (retour) {
