@@ -10,4 +10,8 @@ export default {
     ],
   },
   moduleFileExtensions: ['js', 'ts', 'svelte'],
+  moduleNameMapper: {
+    '^\\$lib(.*)$': '<rootDir>/src/lib$1',
+    '^\\$app(.*)$': '<rootDir>/.svelte-kit/dev/runtime/app$1',
+  },
 }

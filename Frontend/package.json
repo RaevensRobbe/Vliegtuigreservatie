@@ -18,6 +18,7 @@
     "@sveltejs/kit": "next",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/svelte": "^3.0.3",
+    "@tsconfig/svelte": "^2.0.1",
     "@types/jest": "^27.0.3",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
@@ -36,6 +37,7 @@
     "svelte-forms": "^1.1.51",
     "svelte-jester": "^2.1.5",
     "svelte-preprocess": "^4.9.4",
+    "svelte-types": "0.0.7",
     "tailwindcss": "^2.2.17",
     "tslib": "^2.3.1",
     "typescript": "^4.4.3"
