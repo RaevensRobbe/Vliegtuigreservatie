@@ -481,6 +481,7 @@ export class FlightController
         .innerJoin('f.Ticket', 't')
         .innerJoin('f.Plane', 'p')
         .where('Date(f.Date) < Date(now())')
+        .andWhere('t.Review != ""')
         .orderBy('f.Date', 'DESC')
         .getMany()
         if (data === null) {
