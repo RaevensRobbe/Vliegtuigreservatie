@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
-
+  import Spinner from '../../components/animations/spinner.svelte'
   import {
     confirmPasswordReset,
     getAuth,
@@ -14,7 +14,9 @@
   let newPwd
   let errors: any = {}
   let success: any = {}
+  let submitClicked: boolean = false
   const onSubmit = async () => {
+    submitClicked = true
     if (success.email) {
       goto('/')
     } else {
@@ -22,6 +24,7 @@
         success.email = 'Email has been sent'
         confirmPasswordReset(auth, test, newPwd)
       })
+      submitClicked = false
     }
   }
 </script>
@@ -61,13 +64,15 @@
           >
             Back to home
           </button>
-        {:else}
+        {:else if submitClicked === false}
           <button
             type="submit"
             class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white"
           >
             Reset
           </button>
+        {:else}
+          <Spinner />
         {/if}
       </form>
     </div>
