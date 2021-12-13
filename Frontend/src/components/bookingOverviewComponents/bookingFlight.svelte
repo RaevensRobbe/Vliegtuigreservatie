@@ -14,9 +14,7 @@
   let departureTime: string = getDepartureTime()
 
   function getDepartureTime() {
-    console.log(flightData.Date)
     let tempDate = new Date(flightData.Date)
-    console.log(tempDate)
     return tempDate.getHours() + ':' + tempDate.getMinutes()
   }
 

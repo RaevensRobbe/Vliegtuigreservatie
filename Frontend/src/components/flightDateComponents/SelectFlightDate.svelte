@@ -53,7 +53,14 @@
       noData = false
 
       givenflights.forEach(flight => {
-        let dateTime: string = flight.Date.split('T')[0]
+        let tempDate = new Date(flight.Date)
+        let dateTime: string =
+          tempDate.getFullYear() +
+          '-' +
+          tempDate.getMonth() +
+          '-' +
+          tempDate.getDate()
+        console.log(dateTime)
 
         if (dateTime == controldate) {
           position = i
@@ -159,11 +166,12 @@
   }
 
   function getDepartureTime(date: Date) {
-    let datePartTwo: string = date.split('T')[1]
-    let dateHour: string = datePartTwo.split(':')[0]
-    let dateMinute: string = datePartTwo.split(':')[1]
-    departureTime = dateHour + ':' + dateMinute
-    return dateHour + ':' + dateMinute
+    let tempDate = new Date(date)
+    //.slice 2 gives back last 2 characters => you can always add 0 in front if its higher than 10 it wil not show the 0 in front
+    let hours = ('0' + tempDate.getHours()).slice(-2)
+    let minutes = ('0' + tempDate.getMinutes()).slice(-2)
+    departureTime = hours + ':' + minutes
+    return departureTime
   }
 </script>
 
