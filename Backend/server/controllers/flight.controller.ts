@@ -177,9 +177,14 @@ export class FlightController
           'd.Coordinates',
           's.Name',
           's.Coordinates',
+          't.Persons',
+          'p.EconomySeats',
+          'p.BusinessSeats'
         ])
         .innerJoin('f.Destination', 'd')
         .innerJoin('f.Start', 's')
+        .innerJoin('f.Ticket', 't')
+        .innerJoin('f.Plane', 'p')
         .where('Date(f.Date) >= Date(now())')
         .orderBy('f.Date', 'ASC')
         .getMany()
