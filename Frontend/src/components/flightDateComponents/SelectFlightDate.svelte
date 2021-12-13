@@ -2,6 +2,7 @@
   //@ts-nocheck
   import { get } from '../../utils/useApi'
   import { FlightStore } from './../../stores/FlightStore'
+  import { travelerStore } from './../../stores/travelerStore'
   import { onMount } from 'svelte'
   import {
     calculateFlightTimeLong,
@@ -40,6 +41,30 @@
 
   firstDate.setDate(datum.getDate() - 3)
   lastDate.setDate(datum.getDate() + 3)
+
+  function allSeats(data) {
+    let totalSeats: number
+    console.log(data)
+    if (!data.error) {
+      totalSeats = data.Plane.EconomySeats + data.Plane.BusinessSeats
+    } else {
+      totalSeats = 0
+    }
+    return totalSeats
+  }
+
+  function allPassengers(data) {
+    let totalPersons: number = 0
+    if (!data.error) {
+      for (let ticket of data.Ticket) {
+        console.log(ticket)
+        console.log(ticket.Seat.length)
+        totalPersons += ticket.Seat.length
+      }
+    }
+
+    return totalPersons
+  }
 
   onMount(async () => {
     givenflights = await get(url)
@@ -95,8 +120,35 @@
             let flightInfo: Flight = await get(
               `http://localhost:3001/api/v1/flight/${givenflights[position].FlightId}`,
             )
-            flights.push(flightInfo)
-            setChosenFlight(flightInfo.FlightId)
+            let availableSeats = await get(
+              `http://localhost:3001/api/v1/flight/takenSeats/${givenflights[position].FlightId}`,
+            )
+            console.log(
+              `http://localhost:3001/api/v1/flight/takenSeats/${givenflights[position].FlightId}`,
+            )
+            if (availableSeats.error) {
+              //gives error when there are no tix
+              flights.push(flightInfo)
+            } else {
+              let totalSeats: number = allSeats(availableSeats)
+              let seatsTaken: number = allPassengers(availableSeats)
+              console.log(totalSeats + '/' + seatsTaken)
+              if (totalSeats > seatsTaken) {
+                console.log('seats over')
+                if (totalSeats - seatsTaken > $travelerStore.length) {
+                  console.log('places over')
+                  flights.push(flightInfo)
+                } else {
+                  flights.push({
+                    flightId: null,
+                  })
+                }
+              } else {
+                flights.push({
+                  flightId: null,
+                })
+              }
+            }
           } else {
             if (givenflights[position + j]?.FlightId !== undefined) {
               let flightInfo: Flight = await get(
@@ -104,7 +156,37 @@
                   givenflights[position + j].FlightId
                 }`,
               )
-              flights.push(flightInfo)
+              let availableSeats = await get(
+                `http://localhost:3001/api/v1/flight/takenSeats/${
+                  givenflights[position + j].FlightId
+                }`,
+              )
+              if (availableSeats.error) {
+                //gives error when there are no tix
+                flights.push(flightInfo)
+              } else {
+                console.log(
+                  `http://localhost:3001/api/v1/flight/takenSeats/${givenflights[position].FlightId}`,
+                )
+                let totalSeats: number = allSeats(availableSeats)
+                let seatsTaken: number = allPassengers(availableSeats)
+                console.log(totalSeats + '/' + seatsTaken)
+                if (totalSeats > seatsTaken) {
+                  console.log('seats over')
+                  if (totalSeats - seatsTaken > $travelerStore.length) {
+                    console.log('places over')
+                    flights.push(flightInfo)
+                  } else {
+                    flights.push({
+                      flightId: null,
+                    })
+                  }
+                } else {
+                  flights.push({
+                    flightId: null,
+                  })
+                }
+              }
             } else {
               flights.push({
                 flightId: null,
