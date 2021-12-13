@@ -89,34 +89,54 @@
   </section>
   <section class="m-4 px-6">
     <Intertitle titleName="Reviews" />
-
-    {#if searchIsActive}
-      {#if specificFlightData}
-        <FlightList flightData={specificFlightData} />
+    <div class="max-h-1/2 overflow-x-hidden overflow-y-scroll custom-scroll">
+      {#if searchIsActive}
+        {#if specificFlightData}
+          <FlightList flightData={specificFlightData} />
+        {:else}
+          <div class="flex justify-center m-8">
+            <h1 class="text-lg font-bold text-forest-green">
+              No flights found
+            </h1>
+          </div>
+        {/if}
       {:else}
-        <div class="flex justify-center m-8">
-          <h1 class="text-lg font-bold text-forest-green">No flights found</h1>
+        {#each flights as flight}
+          <FlightList flightData={flight} />
+        {/each}
+      {/if}
+
+      {#if searchIsActive}
+        <div class="flex justify-center">
+          <button
+            class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            on:click={() => {
+              flightNumber = ''
+              searchIsActive = false
+              specificFlightData = null
+            }}
+          >
+            Show all flights
+          </button>
         </div>
       {/if}
-    {:else}
-      {#each flights as flight}
-        <FlightList flightData={flight} />
-      {/each}
-    {/if}
-
-    {#if searchIsActive}
-      <div class="flex justify-center">
-        <button
-          class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-          on:click={() => {
-            flightNumber = ''
-            searchIsActive = false
-            specificFlightData = null
-          }}
-        >
-          Show all flights
-        </button>
-      </div>
-    {/if}
+    </div>
   </section>
 </body>
+
+<style>
+  .custom-scroll::-webkit-scrollbar {
+    width: 0.25rem;
+    cursor: pointer;
+  }
+  .custom-scroll::-webkit-scrollbar-track {
+    background-color: rgb(104, 104, 104, 0.2);
+    cursor: pointer;
+  }
+  .custom-scroll::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background-color: #686868;
+    border: 2px solid #686868;
+    border-radius: 50px;
+  }
+</style>
