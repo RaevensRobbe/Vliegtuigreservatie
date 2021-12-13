@@ -8,7 +8,6 @@
     import Spinner from '../../components/animations/spinner.svelte'
     import { goto } from '$app/navigation'
     import authStore from '../../stores/authStore'
-    //import FlightList from '../../components/reviews/flightList.svelte'
     import FlightList from '../../components/adminComponents/flightList.svelte'
   
     let flights: Array<Flight> = []
@@ -98,9 +97,13 @@
       </div>
     {/if}
   {:else}
-    {#each flights as flight }
-        <FlightList flightData = {flight} review={true}/>
+  {#if flightsLoaded}
+    {#each flights as flight}
+      <FlightList flightData = {flight} review={true} />
     {/each}
+    {:else}
+      <Spinner />
+    {/if}
   {/if}
 
   {#if searchIsActive}
