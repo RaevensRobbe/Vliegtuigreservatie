@@ -1,46 +1,46 @@
 <script lang="ts">
-    import Intertitle from '../../components/Intertitle.svelte'
-    import SearchFlightNumberComponent from '../../components/adminComponents/SearchFlightNumberComponent.svelte'
-    import type Flight from '../../models/FlightModel.type'
-    import { onMount } from 'svelte'
-    import { get } from '../../utils/useApi'
-    import BookingFlight from '../../components/bookingOverviewComponents/bookingFlight.svelte'
-    import Spinner from '../../components/animations/spinner.svelte'
-    import { goto } from '$app/navigation'
-    import authStore from '../../stores/authStore'
-    import FlightList from '../../components/reviews/flightList.svelte'
-  
-    let flights: Array<Flight> = []
-    let flightsLoaded: boolean = false
-    let specificFlightData: Flight
-    let flightNumber: string = null
-    let searchIsActive:boolean = false
-  
-    function handleSubmit() {
-      if(flightNumber == ''){
-        searchIsActive =false
-      }else{
-        searchIsActive = true
+  import Intertitle from '../../components/Intertitle.svelte'
+  import SearchFlightNumberComponent from '../../components/adminComponents/SearchFlightNumberComponent.svelte'
+  import type Flight from '../../models/FlightModel.type'
+  import { onMount } from 'svelte'
+  import { get } from '../../utils/useApi'
+  import BookingFlight from '../../components/bookingOverviewComponents/bookingFlight.svelte'
+  import Spinner from '../../components/animations/spinner.svelte'
+  import { goto } from '$app/navigation'
+  import authStore from '../../stores/authStore'
+  import FlightList from '../../components/reviews/flightList.svelte'
 
-        specificFlightData = flights.find(flight => flight.Name === flightNumber)
-      }
+  let flights: Array<Flight> = []
+  let flightsLoaded: boolean = false
+  let specificFlightData: Flight
+  let flightNumber: string = null
+  let searchIsActive: boolean = false
+
+  function handleSubmit() {
+    if (flightNumber == '') {
+      searchIsActive = false
+    } else {
+      searchIsActive = true
+
+      specificFlightData = flights.find(flight => flight.Name === flightNumber)
     }
+  }
 
-    onMount(async () => {
-      $authStore.user.getIdToken(true)
-      .then((token) => {
-        console.log(token)
-        get('http://localhost:3001/api/v1/flight/pastFlights', token)
-        .then((data) => {
+  onMount(async () => {
+    $authStore.user.getIdToken(true).then(token => {
+      console.log(token)
+      get('http://localhost:3001/api/v1/flight/pastFlights', token).then(
+        data => {
           flights = data
           flightsLoaded = true
-        })
-      })
+        },
+      )
     })
-  
-    function goBack() {
-        goto('/admin/overviewFlights')
-    }
+  })
+
+  function goBack() {
+    goto('/admin/overviewFlights')
+  }
 </script>
 
 <body>
@@ -70,54 +70,53 @@
     on:click={goBack}
   >
     <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class="h-6 w-6 my-auto"
-    viewBox="0 0 20.828 37.657"
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 my-auto"
+      viewBox="0 0 20.828 37.657"
     >
-        <path
-            id="chevron-down"
-            d="M6,9,22,25,38,9"
-            transform="translate(27 -3.172) rotate(90)"
-            fill="none"
-            stroke="#686868"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="4"
-        />
+      <path
+        id="chevron-down"
+        d="M6,9,22,25,38,9"
+        transform="translate(27 -3.172) rotate(90)"
+        fill="none"
+        stroke="#686868"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="4"
+      />
     </svg>
     <p class="">Go back</p>
   </section>
+  <section class="m-4 px-6">
+    <Intertitle titleName="Reviews" />
 
-  {#if searchIsActive}
-    {#if specificFlightData}
-      <FlightList flightData = {specificFlightData}/>
+    {#if searchIsActive}
+      {#if specificFlightData}
+        <FlightList flightData={specificFlightData} />
+      {:else}
+        <div class="flex justify-center m-8">
+          <h1 class="text-lg font-bold text-forest-green">No flights found</h1>
+        </div>
+      {/if}
     {:else}
-      <div class='flex justify-center m-8'>
-        <h1 class="text-lg font-bold text-forest-green">No flights found</h1>
-      </div>
+      {#each flights as flight}
+        <FlightList flightData={flight} />
+      {/each}
     {/if}
-  {:else}
-    {#each flights as flight }
-        <FlightList flightData = {flight}/>
-    {/each}
-  {/if}
 
-  {#if searchIsActive}
-      <div class = 'flex justify-center'>
+    {#if searchIsActive}
+      <div class="flex justify-center">
         <button
-        class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-        on:click={() => {
-          flightNumber = ''
-          searchIsActive = false;
-          specificFlightData = null
-        }}
-      >
-        Show all flights
-      </button>
+          class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+          on:click={() => {
+            flightNumber = ''
+            searchIsActive = false
+            specificFlightData = null
+          }}
+        >
+          Show all flights
+        </button>
       </div>
     {/if}
+  </section>
 </body>
-
-
-
-  
