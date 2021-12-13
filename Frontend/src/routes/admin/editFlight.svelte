@@ -27,12 +27,14 @@
   let gate: number = flightData.Gate
   let departureAirport: string = flightData.StartId
   let destinationAirport: string = flightData.DestinationId
-  let isoDate: string = flightData.Date
+  let isoDate = new Date(flightData.Date)
+  console.log(new Date(isoDate))
   console.log(isoDate)
-  let date = isoDate.split('T')[0]
+  let date =
+    isoDate.getFullYear() + '-' + isoDate.getMonth() + '-' + isoDate.getDate()
   console.log(date)
-  let time = isoDate.split('T')[1]
-  time = time.slice(0, time.length - 8)
+  let time = isoDate.getHours() + ':' + isoDate.getMinutes()
+  // time = time.slice(0, time.length - 8)
   console.log(time)
 
   let price: number = flightData.Price
