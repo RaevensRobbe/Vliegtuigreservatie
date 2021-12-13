@@ -14,10 +14,8 @@
   let departureTime: string = getDepartureTime()
 
   function getDepartureTime() {
-    let datePartTwo = flightData.Date.split('T')[1]
-    let dateHour = datePartTwo.split(':')[0]
-    let dateMinute = datePartTwo.split(':')[1]
-    return dateHour + ':' + dateMinute
+    let tempDate = new Date(flightData.Date)
+    return tempDate.getHours() + ":" + tempDate.getMinutes()
   }
 
   function getDay() {
