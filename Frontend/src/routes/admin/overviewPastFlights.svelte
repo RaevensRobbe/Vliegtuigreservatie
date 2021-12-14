@@ -9,19 +9,7 @@
     import { goto } from '$app/navigation'
     import authStore from '../../stores/authStore'
     import FlightList from '../../components/adminComponents/flightList.svelte'
-  
-    let flights: Array<Flight> = []
-    let flightsLoaded: boolean = false
-    let specificFlightData: Flight
-    let flightNumber: string = null
-    let searchIsActive:boolean = false
-  
-    function handleSubmit() {
-      if(flightNumber == ''){
-        searchIsActive =false
-      }else{
-        searchIsActive = true
-
+    
   let flights: Array<Flight> = []
   let flightsLoaded: boolean = false
   let specificFlightData: Flight
@@ -102,21 +90,6 @@
   <section class="m-4 px-6">
     <Intertitle titleName="Reviews" />
     <div class="max-h-1/2 overflow-x-hidden overflow-y-scroll custom-scroll">
-      {#if searchIsActive}
-        {#if specificFlightData}
-          <FlightList flightData={specificFlightData} />
-        {:else}
-          <div class="flex justify-center m-8">
-            <h1 class="text-lg font-bold text-forest-green">
-              No flights found
-            </h1>
-          </div>
-        {/if}
-      {:else}
-        {#each flights as flight}
-          <FlightList flightData={flight} />
-        {/each}
-      {/if}
 
   {#if searchIsActive}
     {#if specificFlightData}
@@ -135,6 +108,7 @@
       <Spinner />
     {/if}
   {/if}
+</div>
 
   {#if searchIsActive}
       <div class = 'flex justify-center'>
