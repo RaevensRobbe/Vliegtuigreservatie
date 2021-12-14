@@ -19,7 +19,17 @@
       "$lib": ["src/lib"],
       "$lib/*": ["src/lib/*"]
     },
-    "types": ["node", "svelte", "jest"]
+    "types": ["node", "jest"]
   },
-  "include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte"]
+  // "include": [
+  //   "src/**/*.d.ts",
+  //   "src/**/*.js",
+  //   "src/**/*.ts",
+  //   "src/**/*.svelte",
+  //   "src/**/*.svelte-kit",
+  //   "./jest-setup.ts"
+  // ],
+  // "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
 }
