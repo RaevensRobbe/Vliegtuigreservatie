@@ -307,6 +307,7 @@
                 hasRetour= {hasRetourFlight}
                 retour={true}
                 lastItem={index == $travelerStore.length - 1 ? true : false}
+                passengerNr = {index}
               />
             {:else}
               <PassengersComponent
@@ -318,6 +319,7 @@
                 hasRetour= {hasRetourFlight}
                 retour={false}
                 lastItem={index == $travelerStore.length - 1 ? true : false}
+                passengerNr = {index}
               />
             {/if}
           {/each}

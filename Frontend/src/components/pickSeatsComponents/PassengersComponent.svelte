@@ -2,6 +2,7 @@
   import passengerStore from '../../stores/selectPassengerStore'
   import { travelerStore } from '../../stores/travelerStore'
   import { fade, scale } from 'svelte/transition'
+  import { onMount } from 'svelte';
   export let fN: string
   export let lN: string
   export let seatNrDep: string
@@ -9,6 +10,7 @@
   export let retour: boolean
   export let lastItem: boolean
   export let hasRetour: boolean
+  export let passengerNr: number
 
   let selected: boolean = false
   let selectedSeat: string = ''
@@ -21,6 +23,17 @@
     fn: '',
     ln: '',
   }
+
+  onMount(async () => {
+    if (passengerNr === 0){
+      selectedPerson.fn = fN
+      selectedPerson.ln = lN
+      $passengerStore = {
+        fn: fN,
+        ln: lN,
+      }
+    }
+  })
 
   const clicked = () => {
     selected = !selected
