@@ -2,7 +2,6 @@
   //@ts-nocheck
   import { get } from '../../utils/useApi'
   import { FlightStore } from './../../stores/FlightStore'
-  import { travelerStore } from './../../stores/travelerStore'
   import { onMount } from 'svelte'
   import {
     calculateFlightTimeLong,
@@ -42,23 +41,10 @@
   firstDate.setDate(datum.getDate() - 3)
   lastDate.setDate(datum.getDate() + 3)
 
-  function allSeats(data) {
-    let totalSeats: number
-    console.log(data)
-    if (!data.error) {
-      totalSeats = data.Plane.EconomySeats + data.Plane.BusinessSeats
-    } else {
-      totalSeats = 0
-    }
-    return totalSeats
-  }
-
   function allPassengers(data) {
     let totalPersons: number = 0
     if (!data.error) {
       for (let ticket of data.Ticket) {
-        console.log(ticket)
-        console.log(ticket.Seat.length)
         totalPersons += ticket.Seat.length
       }
     }
@@ -85,7 +71,6 @@
           tempDate.getMonth() +
           '-' +
           tempDate.getDate()
-        console.log(dateTime)
 
         if (dateTime == controldate) {
           position = i
@@ -120,32 +105,43 @@
             let flightInfo: Flight = await get(
               `http://localhost:3001/api/v1/flight/${givenflights[position].FlightId}`,
             )
+            let planeInfo = await get(
+              `http://localhost:3001/api/v1/plane/${flightInfo.PlaneId}`,
+            )
             let availableSeats = await get(
               `http://localhost:3001/api/v1/flight/takenSeats/${givenflights[position].FlightId}`,
             )
-            console.log(
-              `http://localhost:3001/api/v1/flight/takenSeats/${givenflights[position].FlightId}`,
-            )
+
+            let totalSeats: number =
+              planeInfo.EconomySeats + planeInfo.BusinessSeats
             if (availableSeats.error) {
-              //gives error when there are no tix
-              flights.push(flightInfo)
+              //gives error when there are no seats taken yet
+              if (totalSeats > $FlightStore.adults + $FlightStore.children) {
+                flights.push(flightInfo)
+              } else {
+                flights.push({
+                  flightId: null,
+                  position: j,
+                })
+              }
             } else {
-              let totalSeats: number = allSeats(availableSeats)
               let seatsTaken: number = allPassengers(availableSeats)
-              console.log(totalSeats + '/' + seatsTaken)
               if (totalSeats > seatsTaken) {
-                console.log('seats over')
-                if (totalSeats - seatsTaken > $travelerStore.length) {
-                  console.log('places over')
+                if (
+                  totalSeats - seatsTaken >
+                  $FlightStore.adults + $FlightStore.children
+                ) {
                   flights.push(flightInfo)
                 } else {
                   flights.push({
                     flightId: null,
+                    position: j,
                   })
                 }
               } else {
                 flights.push({
                   flightId: null,
+                  position: j,
                 })
               }
             }
@@ -161,35 +157,47 @@
                   givenflights[position + j].FlightId
                 }`,
               )
+              let planeInfo = await get(
+                `http://localhost:3001/api/v1/plane/${flightInfo.PlaneId}`,
+              )
+              let totalSeats: number =
+                planeInfo.EconomySeats + planeInfo.BusinessSeats
+
               if (availableSeats.error) {
-                //gives error when there are no tix
-                flights.push(flightInfo)
+                //gives error when there are no seats taken yet
+                if (totalSeats > $FlightStore.adults + $FlightStore.children) {
+                  flights.push(flightInfo)
+                } else {
+                  flights.push({
+                    flightId: null,
+                    position: j,
+                  })
+                }
               } else {
-                console.log(
-                  `http://localhost:3001/api/v1/flight/takenSeats/${givenflights[position].FlightId}`,
-                )
-                let totalSeats: number = allSeats(availableSeats)
                 let seatsTaken: number = allPassengers(availableSeats)
-                console.log(totalSeats + '/' + seatsTaken)
                 if (totalSeats > seatsTaken) {
-                  console.log('seats over')
-                  if (totalSeats - seatsTaken > $travelerStore.length) {
-                    console.log('places over')
+                  if (
+                    totalSeats - seatsTaken >
+                    $FlightStore.adults + $FlightStore.children
+                  ) {
                     flights.push(flightInfo)
                   } else {
                     flights.push({
                       flightId: null,
+                      position: j,
                     })
                   }
                 } else {
                   flights.push({
                     flightId: null,
+                    position: j,
                   })
                 }
               }
             } else {
               flights.push({
                 flightId: null,
+                position: j,
               })
             }
           }
