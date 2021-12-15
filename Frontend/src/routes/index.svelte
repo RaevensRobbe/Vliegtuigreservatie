@@ -8,6 +8,7 @@
   import { onMount } from 'svelte'
   import type PopularDestination from '../models/PopularDestinationModel.type'
   import PopularDestinationModal from '../components/popularDestinationComponents/PopularDestinationModal.svelte'
+  import Lazy from 'svelte-lazy'
 
   import { get } from '../utils/useApi'
 
@@ -23,9 +24,11 @@
   <title>MCT Airlines</title>
 </svelte:head>
 
-<section class="bg-image-mainpage bg-cover w-full h-auto bg-bottom py-36">
-  <FlightSearch />
-</section>
+<Lazy height={300}>
+  <section class="bg-image-mainpage bg-cover w-full h-auto bg-bottom py-36">
+    <FlightSearch />
+  </section>
+</Lazy>
 
 <section class="m-4 px-6 align-start">
   <Intertitle titleName="Popular destinations" />

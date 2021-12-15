@@ -28,14 +28,14 @@ module.exports = {
         'dim-gray': '#707070',
         'whisper-gray': '#ECECEC',
         'ghost-white': '#F8F8FF',
-        'orange': '#FFA500',
+        orange: '#FFA500',
       },
       screens: {
         '3xl': '1921px',
         xs: '490px',
       },
       backgroundImage: {
-        'image-mainpage': "url('/HomePageImage.jpg')",
+        'image-mainpage': "url('/HomePageImage.webp')",
         'debit-credit-card': "url('FreePlasticCreditDebitCardMockup.png')",
       },
       spacing: {

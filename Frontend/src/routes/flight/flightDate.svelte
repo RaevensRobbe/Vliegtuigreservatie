@@ -9,7 +9,7 @@
   let flight = $FlightStore
 
   onMount(async () => {
-    console.log($FlightStore)
+    // console.log($FlightStore)
   })
 
   function goBack() {
@@ -19,7 +19,7 @@
   }
 
   function handleSubmit() {
-    console.log(flight)
+    // console.log(flight)
     goto('/flight/pickSeats')
   }
 </script>
