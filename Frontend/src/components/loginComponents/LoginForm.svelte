@@ -144,6 +144,7 @@
     <form
       on:submit|preventDefault={onSubmit}
       class="w-4/5 sm:w-3/5 md:w-3/5 lg:w-2/5 xl:w-2/5 2xl:w-2/5 3xl:w-1/5 z-10 bg-white p-8 flex flex-col"
+      id="loginForm"
       in:fade
       out:fade
     >
@@ -163,11 +164,12 @@
           />
         </svg>
       </div>
-      <label for="email" class="font-bold"> Email </label>
+      <label for="loginEmail" class="font-bold"> Email </label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={email}
-          id="email"
+          id="loginEmail"
+          name="loginEmail"
           type="text"
           placeholder="name@acme.com"
           class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
@@ -177,12 +179,13 @@
         <p class="text-red-600 -mt-2 mb-2">{errors.email}</p>
       {/if}
 
-      <label for="pw" class="font-bold">Password</label>
+      <label for="loginPw" class="font-bold">Password</label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={pw}
           type="password"
-          id="pw"
+          name="loginPw"
+          id="loginPw"
           placeholder="enter password"
           class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
         />
