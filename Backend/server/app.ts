@@ -38,7 +38,10 @@ import seedDatabase from './seeders/seeder'
 import admin from 'firebase-admin'
 import dotenv from 'dotenv'
 import authMiddleware from './auth/firebaseAuthMiddleware'
-import cors from 'cors' // vergeet niet npm install CORS en npm install @types/cors te doen. Volgens mij heb je enkel @types/cors geïnstalleerd
+import cors from 'cors'
+//const swaggerUi = require('swagger-ui-express')
+import swaggerUi from 'swagger-ui-express'
+import { swaggerDocument } from "./swagger"
 
 import { MongoConnectionOptions } from 'typeorm/driver/mongodb/MongoConnectionOptions'
 import { graphqlHTTP } from 'express-graphql'
@@ -58,6 +61,7 @@ const app = express(),
 
 // MIDDLEWARE
 app.use(express.json()) // for parsing application/json
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 //app.use(authMiddleware);
 app.use(cors())
 ;(async () => {

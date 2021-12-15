@@ -109,7 +109,7 @@ export class TicketController
   createReview = async (req: Request, res: Response, next: NextFunction) => {
     try {
       if (req.body.data === null) {
-        response.status(406).send('No data has been provided')
+        response.status(406).json({error: 'No data has been provided'})
       } else {
         const update = await this.repository.update(
           { TicketId: req.params.id },
@@ -118,7 +118,7 @@ export class TicketController
         return res.send(update)
       }
     } catch (error) {
-      response.status(500).send(error)
+      response.status(500).json({error:{error}})
     }
   }
 }
