@@ -34,7 +34,6 @@
 
   function toggleAccountTab() {
     accountdropDown = !accountdropDown
-    // console.log(accountdropDown)
   }
 
   const goToAccountInfo = async () => {

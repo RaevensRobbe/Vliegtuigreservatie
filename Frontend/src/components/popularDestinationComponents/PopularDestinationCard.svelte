@@ -9,8 +9,6 @@
   export let popularDestination: PopularDestination
 
   function showModal() {
-    console.log('clicked ')
-    console.log(popularDestination.Dest[0].DestinationId)
     getRoutines()
   }
 
@@ -28,7 +26,6 @@
       { destinationId: popularDestination.Dest[0].DestinationId },
     )
 
-    console.log(data.getDestinationById)
     let popularDestinationData: PopularDestinationGraphql =
       data.getDestinationById
     let showPopularToggle = $popularCompStore.showPopular
@@ -60,8 +57,8 @@
       <div class="bg-gray-300">
         <img
           class=" object-fill opacity-0"
-          src="https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80"
-          alt=""
+          src="/placeholder.webp"
+          alt="placeholder image"
         />
       </div>
     {/if}
