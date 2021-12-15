@@ -28,6 +28,36 @@ export const getAllDestinations = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Something went wrong",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
@@ -82,14 +112,44 @@ export const getOneDestination = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Something went wrong",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
 
-export const createDestination = {
+export const addDestination = {
     tags: ['Destination'],
-    description: "Create a new destination",
-    operationId: 'createDestination',
+    description: "add a new destination",
+    operationId: 'addDestination',
     parameters: [
         {
             name: "body",

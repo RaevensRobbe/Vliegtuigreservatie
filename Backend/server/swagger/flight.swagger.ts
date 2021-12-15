@@ -43,6 +43,36 @@ export const getAllFlights = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
@@ -102,6 +132,36 @@ export const getPastFlights = {
                             },
                             Plane: {
                                 type: 'list',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
                             },
                         }
                     }
@@ -171,14 +231,44 @@ export const getUpcomingFlights = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
 
 export const getOneFlight = {
     tags: ['Flight'],
-    description: "Returns a sepecified flightfrom the system that the user has access to",
-    operationId: 'getOneFlights',
+    description: "Returns a sepecified flight from the system that the user has access to",
+    operationId: 'getOneFlight',
     security: [
         {
             BearerAuth:[]
@@ -201,7 +291,7 @@ export const getOneFlight = {
             "content": {
                 "application/json": {
                     schema: {
-                        type: "array",
+                        type: "object",
                         items: {
                             FlightId: {
                                 type: 'string',
@@ -233,6 +323,36 @@ export const getOneFlight = {
                             Start: {
                                 type: 'list',
                             }
+                        }
+                    }
+                }
+            }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
                         }
                     }
                 }
@@ -303,6 +423,36 @@ export const getFlightInfo = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
@@ -341,6 +491,36 @@ export const getSeatsInfo = {
                             Plane: {
                                 type: 'list',
                             }
+                        }
+                    }
+                }
+            }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
                         }
                     }
                 }
@@ -390,6 +570,36 @@ export const getTakenSeatsInfo = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
@@ -427,6 +637,36 @@ export const getPlaneInfo = {
                             },
                             Plane: {
                                 type: 'list',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
                             },
                         }
                     }
@@ -483,6 +723,36 @@ export const getUserFlights = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
@@ -531,7 +801,7 @@ export const getFlightInfoBetween = {
             "content": {
                 "application/json": {
                     schema: {
-                        type: "object",
+                        type: "array",
                         items: {
                             FlightId: {
                                 type: 'uuid',
@@ -558,6 +828,36 @@ export const getFlightInfoBetween = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
@@ -569,9 +869,11 @@ export const getReviews = {
     security: [
         {
             BearerAuth:[
-                { 
-                    type: "http",
-                    scheme: "bearer"
+                {
+                    type: 'http',
+                    scheme:"bearer",
+                    in:"header",
+                    bearerFormat:"JWT"
                 }
             ]
         }
@@ -584,6 +886,15 @@ export const getReviews = {
             schema:{
                 type:"string",
                 example:"05fc5c6f-f4c8-4218-9060-fe87a4834c98"   
+            }
+        },
+        {
+            name: "Authorization",
+            in: "header",
+            required: true,
+            schema:{
+                type:"string",
+                example:"Bearer "   
             }
         }
     ],
@@ -617,14 +928,44 @@ export const getReviews = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
 
-export const createFlight = {
+export const addFlight = {
     tags: ['Flight'],
-    description: "Create a new flight",
-    operationId: 'createFlight',
+    description: "Add a new flight",
+    operationId: 'addFlight',
     parameters: [
         {
             name: "body",
@@ -674,6 +1015,21 @@ export const createFlight = {
                     }
                 }
             }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -688,30 +1044,14 @@ export const updateFlight = {
             in: "body",
             required: true,
             example:{
-                FlightId: {
-                    type: 'string',
-                },
-                Name: {
-                    type: 'string',
-                },
-                Date: {
-                    type: 'string',
-                },
-                Price: {
-                    type: 'string',
-                },
-                Gate: {
-                    type: 'int',
-                },
-                DestinationId: {
-                    type: 'uuid',
-                },
-                StartId: {
-                    type: 'uuid',
-                },
-                PlaneId: {
-                    type: 'uuid',
-                },
+                FlightId: "05fc5c6f-f4c8-4218-9060-fe87a4834c98",
+                Name: "A 0173",
+                Date: "2021-12-01 13:38:34",
+                Price: 30.78,
+                Gate: 1,
+                DestinationId: "39a0465c-efbc-4260-b7df-1272b3bc560b	",
+                StartId: "a604f5d6-78bb-4321-95f0-f2e29a20f316	",
+                PlaneId: "e1ebd896-c6cb-41c2-a795-69635f5c9873",
             }
         },
         {
@@ -735,6 +1075,21 @@ export const updateFlight = {
                         items: {
                             success: {
                                 type: 'boolean',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
                             },
                         }
                     }

@@ -25,6 +25,36 @@ export const getAllCountries = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
@@ -52,6 +82,36 @@ export const getPopularCountries = {
                             Dest: {
                                 type: 'list',
                             }
+                        }
+                    }
+                }
+            }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
                         }
                     }
                 }
@@ -98,6 +158,36 @@ export const getDestinationsFromCountry = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
@@ -128,6 +218,36 @@ export const getAllCountriesAndDestinations = {
                             Dest: {
                                 type: 'list',
                             }
+                        }
+                    }
+                }
+            }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
                         }
                     }
                 }
@@ -174,14 +294,44 @@ export const getOneCountry = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Data is undefined",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
 
-export const createCountry = {
+export const addCountry = {
     tags: ['Country'],
-    description: "Create a new country",
-    operationId: 'createCountry',
+    description: "Add a new country",
+    operationId: 'addCountry',
     parameters: [
         {
             name: "body",
@@ -206,12 +356,9 @@ export const createCountry = {
                     schema: {
                         type: "object",
                         items: {
-                            CountryId: {
-                                type: 'string',
+                            success: {
+                                type: 'boolean',
                             },
-                            Name: {
-                                type: 'string',
-                            }
                         }
                     }
                 }

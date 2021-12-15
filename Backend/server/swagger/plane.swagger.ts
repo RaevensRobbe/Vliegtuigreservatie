@@ -37,6 +37,36 @@ export const getAllPlanes = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Something went wrong",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
@@ -87,6 +117,36 @@ export const getOnePlane = {
                             BusinessSeats: {
                                 type: 'int',
                             }
+                        }
+                    }
+                }
+            }
+        },
+        "400":{
+            description: "Something went wrong",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
                         }
                     }
                 }

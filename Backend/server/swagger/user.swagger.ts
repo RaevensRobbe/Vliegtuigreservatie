@@ -34,6 +34,36 @@ export const getAllUsers = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Something went wrong",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
@@ -85,6 +115,36 @@ export const getOneUser = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Something went wrong",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
@@ -124,6 +184,195 @@ export const getAdmin = {
                     }
                 }
             }
+        },
+        "400":{
+            description: "Something went wrong",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Catch error",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
         }
     }
 } 
+
+export const addUser = {
+    tags: ['User'],
+    description: "Add a new user",
+    operationId: 'addUser',
+    parameters: [
+        {
+            name: "body",
+            in: "body",
+            required: true,
+            example:{
+                UserId:"ekgG5tSNFpd0WYjEDxCWwT7IRly2",
+                Firstname: "Swagger",
+                Lastname: "Ui",
+                Email:"swagger.user@email.com",
+                Admin: false
+            }
+        },
+    ],
+    
+    responses: {
+        "200": {          
+            description: "Added",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            success: {
+                                type: 'boolean',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Something went wrong",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+export const updateUser = {
+    tags: ['User'],
+    description: "update a new user",
+    operationId: 'updateUser',
+    parameters: [
+        {
+            name: "body",
+            in: "body",
+            required: true,
+            example:{
+                UserId:"H45EEtAdhqSHi9AaTgNeeGAezF72",
+                Firstname: "Hadley",
+                Lastname: "Ring",
+                Email:"Hadley_Ring6226@nanoff.biz",
+                Admin: false
+            }
+        },
+    ],
+    
+    responses: {
+        "200": {          
+            description: "Updated user",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            success: {
+                                type: 'boolean',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Something went wrong",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+export const addAdmin = {
+    tags: ['User'],
+    description: "Add a new admin",
+    operationId: 'addAdmin',
+    parameters: [
+        {
+            name: "body",
+            in: "body",
+            required: true,
+            example:{
+                UserId:"ekgG5tSNFpd0WYjEDxCWwT7IRly3",
+                Firstname: "Swagger",
+                Lastname: "Admin",
+                Email:"swagger.admin@email.com",
+                Admin: true
+            }
+        },
+    ],
+    
+    responses: {
+        "200": {          
+            description: "Added",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            success: {
+                                type: 'boolean',
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        "500":{
+            description: "Something went wrong",
+            "content": {
+                "application/json": {
+                    schema: {
+                        type: "object",
+                        items: {
+                            error: {
+                                type: 'text',
+                            },
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
