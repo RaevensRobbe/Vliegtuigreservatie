@@ -176,10 +176,11 @@
   }
 
   function goBack() {
-    passengerStore.set({
+    $passengerStore = {
       fn:'',
       ln:''
-    })
+    }
+    $travelerStore = []
     goto('/flight/flightDate')
   }
 </script>
