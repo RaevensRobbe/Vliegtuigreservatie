@@ -2,21 +2,16 @@
   import {
     getAuth,
     GoogleAuthProvider,
-    sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signInWithPopup,
-    updateProfile,
   } from 'firebase/auth'
-  import { afterUpdate, onMount } from 'svelte'
-  import { form } from 'svelte-forms'
   import { fade } from 'svelte/transition'
-  import { post, get } from '../../utils/useApi'
+  import { post } from '../../utils/useApi'
   import Spinner from '../animations/spinner.svelte'
 
   import { requiredValidator, emailValidator } from '../../utils/inputValidator'
   import loginCompStore from '../../stores/loginCompStore'
-  import authStore from '../../stores/authStore'
-  import { goto } from '$app/navigation';
+  import { goto } from '$app/navigation'
 
   let validationError: boolean = true
   let email: string = ''
@@ -57,20 +52,24 @@
     signInWithEmailAndPassword(auth, email, pw)
       .then(userCredential => {
         const user = userCredential.user
-        if(user.email !== undefined) {
+        if (user.email !== undefined) {
           email = ''
           pw = ''
-          showLoginForm() 
+          showLoginForm()
         }
       })
       .catch(error => {
         loginClicked = false
         //const errorCode = error.code
         const errorMessage = error.message
-        if(error.message === 'Firebase: Error (auth/wrong-password).')
+        if (error.message === 'Firebase: Error (auth/wrong-password).')
           errors.login = 'Email or password are incorrect'
-        if(error.message === 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).')
-          errors.login = 'Account temporarily disabled due to many failed attempts'
+        if (
+          error.message ===
+          'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).'
+        )
+          errors.login =
+            'Account temporarily disabled due to many failed attempts'
         console.error(error)
       })
   }
@@ -131,12 +130,11 @@
     loginWithEmail()
   }
 
-  const forgotPassword =  () => {
+  const forgotPassword = () => {
     showLoginForm()
     console.log('clicked')
-      goto('/user/forgotPassword')
-    }
-  
+    goto('/user/forgotPassword')
+  }
 </script>
 
 <div class="absolute top-0 left-0 h-full z-10 w-full">
@@ -146,6 +144,8 @@
     <form
       on:submit|preventDefault={onSubmit}
       class="w-4/5 sm:w-3/5 md:w-3/5 lg:w-2/5 xl:w-2/5 2xl:w-2/5 3xl:w-1/5 z-10 bg-white p-8 flex flex-col"
+      in:fade
+      out:fade
     >
       <div class="flex justify-between mb-4">
         <h1 class=" text-2xl text-forest-green">Login</h1>
@@ -194,19 +194,20 @@
       {#if loginClicked}
         <Spinner />
       {:else}
-      
-       <button
-            class="text-left"
-            on:click={forgotPassword}
-        >
-            forgot password?
-      </button>
+        <button class="text-left" on:click={forgotPassword}>
+          forgot password?
+        </button>
         <button
           type="submit"
           class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white"
         >
           Login
         </button>
+        <div class="mt-4">
+          <button type="button" on:click|preventDefault={loginWithGoogle}>
+            Sign In with Google
+          </button>
+        </div>
         {#if errors.login}
           <p class="text-red-600 mt-2 mb-2">{errors.login}</p>
         {/if}
