@@ -42,6 +42,7 @@ import cors from 'cors'
 //const swaggerUi = require('swagger-ui-express')
 import swaggerUi from 'swagger-ui-express'
 import { swaggerDocument } from "./swagger"
+import helmet from "helmet"
 
 import { MongoConnectionOptions } from 'typeorm/driver/mongodb/MongoConnectionOptions'
 import { graphqlHTTP } from 'express-graphql'
@@ -62,6 +63,7 @@ const app = express(),
 // MIDDLEWARE
 app.use(express.json()) // for parsing application/json
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use(helmet());
 //app.use(authMiddleware);
 app.use(cors())
 ;(async () => {

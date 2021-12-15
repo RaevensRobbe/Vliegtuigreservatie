@@ -28,6 +28,7 @@
     "firebase-admin": "^10.0.0",
     "graphql": "^15.5.1",
     "guid-typescript": "^1.0.9",
+    "helmet": "^4.6.0",
     "mongodb": "^3.6.11",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
