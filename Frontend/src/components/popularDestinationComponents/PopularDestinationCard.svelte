@@ -5,6 +5,7 @@
   import { FlightStore } from '../../stores/flightStore'
   import type PopularDestinationGraphql from '../../models/PopularDestinationModel.type'
   import popularCompStore from '../../stores/popularCompStore'
+  import Lazy from 'svelte-lazy'
   export let popularDestination: PopularDestination
 
   function showModal() {
@@ -46,23 +47,25 @@
   class="flex flex-col bg-white shadow-md transform motion-safe:hover:scale-105 hover:shadow-lg"
   on:click={showModal}
 >
-  <!-- svelte-ignore a11y-img-redundant-alt -->
-  {#if popularDestination.Dest[0].Picture}
-    <img
-      class=" object-cover"
-      src={popularDestination.Dest[0].Picture}
-      alt="Picture of {popularDestination.Dest[0].Name}"
-    />
-  {:else}
-    <!-- If there is no image show placeholder -->
-    <div class="bg-gray-300">
+  <Lazy height={300}>
+    <!-- svelte-ignore a11y-img-redundant-alt -->
+    {#if popularDestination.Dest[0].Picture}
       <img
-        class=" object-fill opacity-0"
-        src="https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80"
-        alt=""
+        class=" object-cover"
+        src={popularDestination.Dest[0].Picture}
+        alt="Picture of {popularDestination.Dest[0].Name}"
       />
-    </div>
-  {/if}
+    {:else}
+      <!-- If there is no image show placeholder -->
+      <div class="bg-gray-300">
+        <img
+          class=" object-fill opacity-0"
+          src="https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80"
+          alt=""
+        />
+      </div>
+    {/if}
+  </Lazy>
   <span class="h-2 w-3/4 bg-forest-green block" />
   <div class="w-full flex justify-between items-center p-2 bg-white">
     <div>
