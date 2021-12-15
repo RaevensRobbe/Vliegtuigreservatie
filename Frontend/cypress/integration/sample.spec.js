@@ -3,16 +3,17 @@
 import Chance from 'chance'
 const chance = new Chance()
 
-describe('homepage', () => {
+describe('Login and register system', () => {
   const email = chance.email()
   const pw = '-Strong2001-'
   const firstname = 'John'
   const lastname = 'Doe'
-  beforeEach(() => {
-    cy.visit('http://localhost:5000')
-  })
+  // beforeEach(() => {
+  //   cy.visit('http://localhost:5000')
+  // })
 
   it('Has a title', () => {
+    cy.visit('http://localhost:5000')
     cy.contains('MCT airlines')
   })
   it('Has Login', () => {
@@ -29,6 +30,7 @@ describe('homepage', () => {
     cy.get('input[name=pw]').type(pw)
     cy.get('input[name=cpw]').type(pw)
     cy.get('#registerForm').submit()
+    cy.get('button[name=closeRegisterForm').click()
     cy.contains('My bookings')
     cy.contains('John Doe')
   })
@@ -45,7 +47,18 @@ describe('homepage', () => {
     cy.get('input[name=loginEmail]').type(email)
     cy.get('input[name=loginPw]').type(pw)
     cy.get('#loginForm').submit()
+    cy.get('button[name=closeLoginForm').click()
     cy.contains('My bookings')
     cy.contains('John Doe')
+  })
+})
+
+describe('Check bookings', () => {
+  it('navigate to bookings', () => {
+    cy.contains('My bookings').click()
+    cy.contains('Future bookings')
+    cy.contains('No future bookings found')
+    cy.contains('Previous bookings')
+    cy.contains('No previous bookings found')
   })
 })
