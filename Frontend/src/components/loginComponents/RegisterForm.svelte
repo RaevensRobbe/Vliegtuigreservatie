@@ -169,30 +169,33 @@
     <form
       on:submit|preventDefault={onSubmit}
       class="w-4/5 sm:w-3/5 md:w-3/5 lg:w-2/5 xl:w-2/5 2xl:w-2/5 3xl:w-1/5 z-10 bg-white p-8 flex flex-col"
+      id="registerForm"
     >
       <div class="flex justify-between mb-4">
         <h1 class=" text-2xl text-forest-green">Register</h1>
-        <svg
-          on:click={showRegisterForm}
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-6 h-6 fill-current text-forest-green cursor-pointer"
-          viewBox="0 0 32 32"
-        >
-          <path
-            id="Icon_material-close"
-            data-name="Icon material-close"
-            d="M39.5,10.723,36.277,7.5,23.5,20.277,10.723,7.5,7.5,10.723,20.277,23.5,7.5,36.277,10.723,39.5,23.5,26.723,36.277,39.5,39.5,36.277,26.723,23.5Z"
-            transform="translate(-7.5 -7.5)"
-          />
-        </svg>
+        <button on:click={showRegisterForm} name="closeRegisterForm">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 fill-current text-forest-green cursor-pointer"
+            viewBox="0 0 32 32"
+          >
+            <path
+              id="Icon_material-close"
+              data-name="Icon material-close"
+              d="M39.5,10.723,36.277,7.5,23.5,20.277,10.723,7.5,7.5,10.723,20.277,23.5,7.5,36.277,10.723,39.5,23.5,26.723,36.277,39.5,39.5,36.277,26.723,23.5Z"
+              transform="translate(-7.5 -7.5)"
+            />
+          </svg>
+        </button>
       </div>
 
-      <label for="email" class="font-bold"> Email </label>
+      <label for="registerEmail" class="font-bold"> Email </label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={email}
-          id="email"
+          id="registerEmail"
           type="email"
+          name="registerEmail"
           placeholder="name@acme.com"
           class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
         />
@@ -207,6 +210,7 @@
           bind:value={firstName}
           type="text"
           id="firstName"
+          name="firstName"
           placeholder="enter first name"
           class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
         />
@@ -221,6 +225,7 @@
           bind:value={lastName}
           type="text"
           id="lastName"
+          name="lastName"
           placeholder="enter last name"
           class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
         />
@@ -234,6 +239,7 @@
         <input
           bind:value={pw}
           type="password"
+          name="pw"
           id="pw"
           placeholder="enter password"
           class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
@@ -248,6 +254,7 @@
         <input
           bind:value={cpw}
           type="password"
+          name="cpw"
           id="cpw"
           placeholder="enter password"
           class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
@@ -261,6 +268,7 @@
       {:else}
         <button
           type="submit"
+          name="submitRegister"
           class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white"
         >
           Register
