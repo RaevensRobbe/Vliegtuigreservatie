@@ -1,42 +1,42 @@
-[ 
-    { 
-        "Name":"Cuba",
-        "CountryId":"ca21c510-3459-4be3-9d02-b928b5b876dc"
-    },
-    { 
-        "Name":"El Salvador",
-        "CountryId":"dd0e13ae-73a9-4df5-ad74-3e096756da41"
-    },
-    { 
-        "Name":"Romania",
-        "CountryId":"bc96884e-69a1-4a40-9e4b-8a13c1accc1b"
-    },
-    { 
-        "Name":"The Bahamas",
-        "CountryId":"8c35e121-51e6-4476-b2ce-683c747534ec"
-    },
-    { 
-        "Name":"Belgium",
-        "CountryId":"f6f62734-149c-4aee-af6a-37f2684d968a"
-    },
-    { 
-        "Name":"Congo",
-        "CountryId":"bb2f6a75-f25a-4fbb-8ddd-d026b5248d9f"
-    },
-    { 
-        "Name":"Israel",
-        "CountryId":"e3cb856b-dd08-40bf-aa10-be7b7a8ad44f"
-    },
-    { 
-        "Name":"Grenada",
-        "CountryId":"57ef0742-8c77-49b0-8dbe-2a701555d26b"
-    },
-    { 
-        "Name":"Bulgaria",
-        "CountryId":"4037d99c-be1f-4e68-a4e9-f02b377ecfab"
-    },
-    { 
-        "Name":"Malawi",
-        "CountryId":"09757e95-b33b-4397-9a8c-fd79a7fdb9e5"
-    }
+[
+  {
+    "Name": "Colorado",
+    "CountryId": "ca21c510-3459-4be3-9d02-b928b5b876dc"
+  },
+  {
+    "Name": "Spain",
+    "CountryId": "dd0e13ae-73a9-4df5-ad74-3e096756da41"
+  },
+  {
+    "Name": "France",
+    "CountryId": "bc96884e-69a1-4a40-9e4b-8a13c1accc1b"
+  },
+  {
+    "Name": "Japan",
+    "CountryId": "8c35e121-51e6-4476-b2ce-683c747534ec"
+  },
+  {
+    "Name": "Belgium",
+    "CountryId": "f6f62734-149c-4aee-af6a-37f2684d968a"
+  },
+  {
+    "Name": "United Kingdom",
+    "CountryId": "bb2f6a75-f25a-4fbb-8ddd-d026b5248d9f"
+  },
+  {
+    "Name": "Greece",
+    "CountryId": "e3cb856b-dd08-40bf-aa10-be7b7a8ad44f"
+  },
+  {
+    "Name": "Germany",
+    "CountryId": "57ef0742-8c77-49b0-8dbe-2a701555d26b"
+  },
+  {
+    "Name": "Italy",
+    "CountryId": "4037d99c-be1f-4e68-a4e9-f02b377ecfab"
+  },
+  {
+    "Name": "Netherlands",
+    "CountryId": "09757e95-b33b-4397-9a8c-fd79a7fdb9e5"
+  }
 ]

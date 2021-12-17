@@ -74,6 +74,11 @@
           {$popularCompStore.intro}
         </p>
         <p class="text-sm md:text-base">{$popularCompStore.summary}</p>
+        <p class="text-sm mt-4">
+          All text comes from <a rel="preconnect" href="www.wikipedia.org"
+            >wikipedia</a
+          >
+        </p>
       </div>
     </div>
   </div>

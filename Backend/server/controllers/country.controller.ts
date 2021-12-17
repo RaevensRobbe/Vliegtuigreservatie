@@ -70,7 +70,7 @@ export class CountryController
         ])
         .leftJoin('country.Dest', 'dest')
         .orderBy('dest.Popularity')
-        .limit(6)
+        .limit(8)
         .getMany()
       if (data.length === 0) {
         response.status(400).json({ error: 'Data is undefined' })
@@ -81,7 +81,7 @@ export class CountryController
       response.status(500).json({ error: { error } })
     }
   }
-  
+
   destination = async (
     request: Request,
     response: Response,
