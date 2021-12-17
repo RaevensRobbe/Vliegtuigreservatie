@@ -1,15 +1,15 @@
 <script lang="ts">
-    import Intertitle from '../../components/Intertitle.svelte'
-    import SearchFlightNumberComponent from '../../components/adminComponents/SearchFlightNumberComponent.svelte'
-    import type Flight from '../../models/FlightModel.type'
-    import { onMount } from 'svelte'
-    import { get } from '../../utils/useApi'
-    import BookingFlight from '../../components/bookingOverviewComponents/bookingFlight.svelte'
-    import Spinner from '../../components/animations/spinner.svelte'
-    import { goto } from '$app/navigation'
-    import authStore from '../../stores/authStore'
-    import FlightList from '../../components/adminComponents/flightList.svelte'
-    
+  import Intertitle from '../../components/Intertitle.svelte'
+  import SearchFlightNumberComponent from '../../components/adminComponents/SearchFlightNumberComponent.svelte'
+  import type Flight from '../../models/FlightModel.type'
+  import { onMount } from 'svelte'
+  import { get } from '../../utils/useApi'
+  import BookingFlight from '../../components/bookingOverviewComponents/bookingFlight.svelte'
+  import Spinner from '../../components/animations/spinner.svelte'
+  import { goto } from '$app/navigation'
+  import authStore from '../../stores/authStore'
+  import FlightList from '../../components/adminComponents/flightList.svelte'
+
   let flights: Array<Flight> = []
   let flightsLoaded: boolean = false
   let specificFlightData: Flight
@@ -65,66 +65,52 @@
     </form>
   </section>
 
-  <section
-    class="p-4 flex hover:cursor-pointer hover:font-bold"
-    on:click={goBack}
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6 my-auto"
-      viewBox="0 0 20.828 37.657"
+  <section class="m-4 md:px-6 flex gap-4">
+    <button
+      class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+      on:click={goBack}
     >
-      <path
-        id="chevron-down"
-        d="M6,9,22,25,38,9"
-        transform="translate(27 -3.172) rotate(90)"
-        fill="none"
-        stroke="#686868"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="4"
-      />
-    </svg>
-    <p class="">Go back</p>
+      Show flights
+    </button>
   </section>
   <section class="m-4 px-6">
     <Intertitle titleName="Reviews" />
     <div class="max-h-1/2 overflow-x-hidden overflow-y-scroll custom-scroll">
+      {#if searchIsActive}
+        {#if specificFlightData}
+          <FlightList flightData={specificFlightData} review={true} />
+        {:else}
+          <div class="flex justify-center m-8">
+            <h1 class="text-lg font-bold text-forest-green">
+              No flights found
+            </h1>
+          </div>
+        {/if}
+      {:else if flightsLoaded}
+        {#each flights as flight}
+          <FlightList flightData={flight} review={true} />
+        {/each}
+      {:else}
+        <Spinner />
+      {/if}
+    </div>
 
-  {#if searchIsActive}
-    {#if specificFlightData}
-      <FlightList flightData = {specificFlightData} review={true} />
-    {:else}
-      <div class='flex justify-center m-8'>
-        <h1 class="text-lg font-bold text-forest-green">No flights found</h1>
-      </div>
-    {/if}
-  {:else}
-  {#if flightsLoaded}
-    {#each flights as flight}
-      <FlightList flightData = {flight} review={true} />
-    {/each}
-    {:else}
-      <Spinner />
-    {/if}
-  {/if}
-</div>
-
-  {#if searchIsActive}
-      <div class = 'flex justify-center'>
+    {#if searchIsActive}
+      <div class="flex justify-center">
         <button
-        class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-        on:click={() => {
-          flightNumber = ''
-          searchIsActive = false;
-          specificFlightData = null
-        }}
-      >
-        Show all flights
-      </button>
+          class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+          on:click={() => {
+            flightNumber = ''
+            searchIsActive = false
+            specificFlightData = null
+          }}
+        >
+          Show all flights
+        </button>
       </div>
     {/if}
-</body>
+  </section></body
+>
 
 <style>
   .custom-scroll::-webkit-scrollbar {
