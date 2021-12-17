@@ -60,24 +60,25 @@
     let totalPersons: number = 0
 
     for (let ticket of flightData.Ticket) {
-      console.log(ticket)
+      // console.log(ticket)
       for (let persons of ticket.Persons) {
         totalPersons = totalPersons + 1
       }
     }
 
-    console.log(totalPersons)
+    // console.log(totalPersons)
     return totalPersons
   }
 
   function calcOccupationRate() {
     const seats = allSeats()
     const passengers = allPassengers()
+    // console.log(passengers + '/' + seats)
 
     occupationRate = Math.round((passengers / seats) * 100)
     occupation = `${passengers} / ${seats}`
 
-    if (occupationRate > 0 && occupationRate < 50) {
+    if (occupationRate >= 0 && occupationRate < 50) {
       color = 'text-dim-gray'
     } else if (occupationRate >= 50 && occupationRate < 75) {
       color = 'text-orange'

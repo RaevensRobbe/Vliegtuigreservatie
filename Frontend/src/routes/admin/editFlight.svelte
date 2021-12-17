@@ -30,8 +30,8 @@
   let isoDate = new Date(flightData.Date)
   console.log(new Date(isoDate))
   console.log(isoDate)
-  let date =
-    isoDate.getFullYear() + '-' + isoDate.getMonth() + '-' + isoDate.getDate()
+  let month = isoDate.getMonth() + 1
+  let date = isoDate.getFullYear() + '-' + month + '-' + isoDate.getDate()
   console.log(date)
   let time =
     ('0' + isoDate.getHours()).slice(-2) +

@@ -15,17 +15,17 @@
   let flightsLoaded: boolean = false
   let specificFlightData: Flight
   let flightNumber: string = null
-  let searchIsActive:boolean = false
+  let searchIsActive: boolean = false
 
   function handleSubmit() {
-      if(flightNumber == ''){
-        searchIsActive =false
-      }else{
-        searchIsActive = true
+    if (flightNumber == '') {
+      searchIsActive = false
+    } else {
+      searchIsActive = true
 
-        specificFlightData = flights.find(flight => flight.Name === flightNumber)
-      }
+      specificFlightData = flights.find(flight => flight.Name === flightNumber)
     }
+  }
 
   async function getSpecific() {
     flightsLoaded = false
@@ -40,6 +40,7 @@
       console.log(token)
       get('http://localhost:3001/api/v1/flight/allupcoming', token).then(
         data => {
+          console.log(data)
           flights = data
           flightsLoaded = true
         },
@@ -101,41 +102,40 @@
     </button>
   </section>
 
-
   <section class="m-4 px-6">
     <Intertitle titleName="All upcoming flights" />
     <div class="max-h-1/2 overflow-x-hidden overflow-y-scroll custom-scroll">
       {#if searchIsActive}
         {#if specificFlightData}
-          <FlightList flightData = {specificFlightData} review={false} />
+          <FlightList flightData={specificFlightData} review={false} />
         {:else}
-          <div class='flex justify-center m-8'>
-            <h1 class="text-lg font-bold text-forest-green">No flights found</h1>
+          <div class="flex justify-center m-8">
+            <h1 class="text-lg font-bold text-forest-green">
+              No flights found
+            </h1>
           </div>
         {/if}
+      {:else if flightsLoaded}
+        {#each flights as flight}
+          <FlightList flightData={flight} review={false} />
+        {/each}
       {:else}
-          {#if flightsLoaded}
-            {#each flights as flight}
-              <FlightList flightData = {flight} review={false} />
-            {/each}
-          {:else}
-            <Spinner />
-          {/if}
+        <Spinner />
       {/if}
     </div>
 
     {#if searchIsActive}
-      <div class = 'flex justify-center'>
+      <div class="flex justify-center">
         <button
-        class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-        on:click={() => {
-          flightNumber = ''
-          searchIsActive = false;
-          specificFlightData = null
-        }}
-      >
-        Show all flights
-      </button>
+          class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+          on:click={() => {
+            flightNumber = ''
+            searchIsActive = false
+            specificFlightData = null
+          }}
+        >
+          Show all flights
+        </button>
       </div>
     {/if}
   </section>
