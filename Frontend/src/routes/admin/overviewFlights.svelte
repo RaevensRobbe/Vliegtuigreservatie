@@ -10,12 +10,14 @@
   import { getAuth } from 'firebase/auth'
   import authStore from '../../stores/authStore'
   import FlightList from '../../components/adminComponents/flightList.svelte'
+  import { AllUpcoming } from './../../stores/allUpcomingStore'
 
   let flights: Array<Flight> = []
   let flightsLoaded: boolean = false
   let specificFlightData: Flight
   let flightNumber: string = null
   let searchIsActive: boolean = false
+  $AllUpcoming.previousYear = new Date().getFullYear() - 1
 
   function handleSubmit() {
     if (flightNumber == '') {
@@ -117,7 +119,16 @@
         {/if}
       {:else if flightsLoaded}
         {#each flights as flight}
-          <FlightList flightData={flight} review={false} />
+          {#if new Date(flight.Date).getFullYear() <= $AllUpcoming.previousYear}
+            <FlightList flightData={flight} review={false} />
+          {:else}
+            <p class="text-lg">
+              {($AllUpcoming.previousYear = new Date(
+                flight.Date,
+              ).getFullYear())}
+            </p>
+            <FlightList flightData={flight} review={false} />
+          {/if}
         {/each}
       {:else}
         <Spinner />
