@@ -33,7 +33,11 @@
   let date =
     isoDate.getFullYear() + '-' + isoDate.getMonth() + '-' + isoDate.getDate()
   console.log(date)
-  let time = isoDate.getHours() + ':' + isoDate.getMinutes()
+  let time =
+    ('0' + isoDate.getHours()).slice(-2) +
+    ':' +
+    ('0' + isoDate.getMinutes()).slice(-2)
+  console.log(time)
   // time = time.slice(0, time.length - 8)
   console.log(time)
 
