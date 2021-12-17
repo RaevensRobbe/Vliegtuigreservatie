@@ -56,15 +56,19 @@
     </svg>
     <p class="">Go back</p>
   </section>
-  <section class="sm:p-4 px-6">
+  <section class="sm:m-4 px-6">
     <Intertitle titleName={flightName} />
   </section>
 
   <section class="flex flex-row align-center justify-center">
-    <h1 class="mr-4 text-lg font-bold text-forest-green">{start}</h1>
+    <h1
+      class="mr-4 text-md md:text-2xl font-bold text-center text-forest-green"
+    >
+      {start}
+    </h1>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="fill-current dim-gray h-3 md:h-4 align-center"
+      class="fill-current dim-gray h-3 md:h-4 my-auto"
       viewBox="0 0 44 22.458"
     >
       <g
@@ -79,12 +83,12 @@
         />
       </g>
     </svg>
-    <h1 class="ml-4 text-lg font-bold text-forest-green">{end}</h1>
+    <h1 class="ml-4 text-md md:text-2xl font-bold text-forest-green">{end}</h1>
   </section>
 
-  <section>
+  <section class="m-4 px-6">
     {#each reviews as review}
-      {#if review && review.Review !== ""}
+      {#if review && review.Review !== ''}
         <article
           class="my-6 md:my-4 py-2 px-4 bg-white shadow-md text-center hover:shadow-lg md:mx-6"
         >
@@ -99,7 +103,7 @@
           </div>
 
           <div class="text-left flex">
-            <p class="">{review.Review}</p>
+            <p class="flex">{review.Review}</p>
           </div>
         </article>
       {:else}
