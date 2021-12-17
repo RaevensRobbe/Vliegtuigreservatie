@@ -84,7 +84,7 @@
 
   <section>
     {#each reviews as review}
-      {#if review && review.Review !== ""}
+      {#if review && review.Review !== ''}
         <article
           class="my-6 md:my-4 py-2 px-4 bg-white shadow-md text-center hover:shadow-lg md:mx-6"
         >
@@ -99,7 +99,7 @@
           </div>
 
           <div class="text-left flex">
-            <p class="">{review.Review}</p>
+            <p class="flex">{review.Review}</p>
           </div>
         </article>
       {:else}
