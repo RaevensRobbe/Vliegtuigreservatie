@@ -43,7 +43,7 @@
       </svg>
     {/if}
 
-    <p class="font-bold text-2xl text-forest-green">
+    <p class="font-bold text-lg md:text-2xl text-forest-green">
       {#if retour}
         {$FlightStore.destinationCity} - {$FlightStore.departureCity}
       {:else}

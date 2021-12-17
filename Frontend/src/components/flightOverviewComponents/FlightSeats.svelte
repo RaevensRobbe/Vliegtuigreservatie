@@ -28,7 +28,8 @@
   {#each travelers as traveler, index (traveler)}
     <!-- Check if traveler last item yes? dont show border bottom -->
     <div
-      class="grid grid-cols-3 {index == travelers.length - 1
+      class="grid grid-rows-3  md:grid-rows-0 md:grid-cols-3 justify-center  {index ==
+      travelers.length - 1
         ? ''
         : 'border-b-1'} text-dim-gray p-2"
     >
@@ -37,7 +38,7 @@
           {traveler.firstName}
           {traveler.lastName}
         </h2>
-        <p class="text-sm self-start">
+        <p class="text-sm self-center md:self-start">
           {retour ? traveler.classRet : traveler.classDep} class
         </p>
       </div>
@@ -46,7 +47,7 @@
           {retour ? traveler.seatNrRet : traveler.seatNrDep}
         </p>
       </div>
-      <p class="flex text-xl text-cyprus-green self-center">
+      <p class="flex text-xl text-cyprus-green justify-center">
         € {retour
           ? calculatePrice(
               traveler.classRet,
