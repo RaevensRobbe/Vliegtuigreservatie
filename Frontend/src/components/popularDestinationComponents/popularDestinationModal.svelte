@@ -52,7 +52,7 @@
       </div>
       {#if $popularCompStore.img}
         <img
-          class="max-h-1/2"
+          class="max-h-1/2 object-cover"
           src={$popularCompStore.img}
           alt="Picture of {$popularCompStore.name}"
         />
@@ -60,7 +60,7 @@
         <!-- If there is no image show placeholder -->
         <div class="bg-gray-300">
           <img
-            class=" object-fill opacity-0 rounded-t-lg"
+            class="object-fill opacity-0 rounded-t-lg"
             src="https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80"
             alt=""
           />
@@ -74,12 +74,15 @@
           {$popularCompStore.intro}
         </p>
         <p class="text-sm md:text-base">{$popularCompStore.summary}</p>
-        <p class="text-sm mt-4">
-          All text comes from <a rel="preconnect" href="www.wikipedia.org"
-            >wikipedia</a
-          >
-        </p>
       </div>
+      <p class="text-sm m-4 mt-auto">
+        All text comes from <a
+          rel="preconnect"
+          class="font-bold"
+          target="_blank"
+          href="https://wikipedia.org/">wikipedia</a
+        >
+      </p>
     </div>
   </div>
 </div>
