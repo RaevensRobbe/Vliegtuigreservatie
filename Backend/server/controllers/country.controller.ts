@@ -126,6 +126,7 @@ export class CountryController
           'd.Abbreviation',
         ])
         .leftJoin('c.Dest', 'd')
+        .orderBy('c.Name', 'ASC')
         .getMany()
       if (data.length === 0) {
         response.status(400).json({ error: 'Data is undefined' })
