@@ -47,5 +47,18 @@
         "adults":"Volwassenen",
         "children":"Kinderen",
         "search":"Zoeken"
+    },
+    "accountInfo":{
+        "backButton":"Terug",
+        "title":"Verander account details",
+        "intertitle1":"Verander account info",
+        "firstname":"Voornaam",
+        "lastname":"Achternaam",
+        "email":"Email",
+        "button":"Wijzigen",
+        "intertitle2":"Wijzig wachtwoord",
+        "password":"Nieuw wachtwoord",
+        "cPassword":"Bevestig nieuw wachtwoord",
+        "succes":"Data succesvol aangepast"
     }
  }

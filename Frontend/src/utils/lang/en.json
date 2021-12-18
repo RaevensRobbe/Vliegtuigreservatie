@@ -47,5 +47,18 @@
         "adults":"Adults",
         "children":"Children",
         "search":"Search"
+    },
+    "accountInfo":{
+        "backButton":"Go back",
+        "title":"Edit account details",
+        "intertitle1":"Change userdata",
+        "firstname":"First name",
+        "lastname":"Last name",
+        "email":"Email",
+        "button":"Change",
+        "intertitle2":"Change password",
+        "password":"New Password",
+        "cPassword":"Confirm new password",
+        "succes":"User succefully updated"
     }
  }
