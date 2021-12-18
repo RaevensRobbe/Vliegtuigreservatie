@@ -8,6 +8,8 @@
   import loginCompStore from '../../stores/loginCompStore'
   import RegisterForm from '../loginComponents/RegisterForm.svelte'
 
+  import { _ } from '../../utils/i18n'
+
   let menuToggle: boolean = false
   let accountdropDown: boolean = false
 
@@ -89,12 +91,12 @@
       {#if $authStore.admin}
         <button
           class="col-span-2 p-2 w-full text-left hover:bg-gray-200 border-b-1"
-          on:click={goToAdminOverview}>AdminOverview</button
+          on:click={goToAdminOverview}>{$_('header.admin')}</button
         >
       {/if}
       <button
         class="col-span-2 p-2 w-full text-left hover:bg-gray-200 border-b-1"
-        on:click={goToBookings}>My bookings</button
+        on:click={goToBookings}>{$_('header.bookings')}</button
       >
 
       <button
@@ -151,9 +153,9 @@
       {#if $authStore.isLoggedIn}
         <div class="flex text-dim-gray gap-8">
           {#if $authStore.admin}
-            <button on:click={goToAdminOverview}>AdminOverview</button>
+            <button on:click={goToAdminOverview}>{$_('header.admin')}</button>
           {/if}
-          <button on:click={goToBookings}>My bookings</button>
+          <button on:click={goToBookings}>{$_('header.bookings')}</button>
           <div class="relative inline-block">
             {#if $authStore.user.displayName}
               <button

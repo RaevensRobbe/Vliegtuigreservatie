@@ -1,0 +1,22 @@
+{
+    "home": {
+        "popular": "Populaire bestemmingen"
+    },
+    "header": {
+        "bookings": "My bookings",
+        "admin": "Admin overzicht"
+    },
+    "headerDropdown": {
+        "edit": "Bewerk Account",
+        "signOut": "Log uit"
+    },
+    "loginOverlay": {
+        "email":"Email",
+        "password":"Wachtwoord",
+        "forgot":"Wachtwoord vergeten",
+        "login":"Login",
+        "google":"Inloggen met Google",
+        "acc":"Geen account?",
+        "register":"Registreer"
+    }
+ }
