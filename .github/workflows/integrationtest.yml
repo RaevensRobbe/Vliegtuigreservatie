@@ -5,7 +5,7 @@ on:
     branches: [main, develop]
 defaults:
   run:
-    working-directory: Frontend
+    working-directory: ./Frontend
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
