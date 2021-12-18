@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { FlightStore } from './../../stores/FlightStore'
+  import { FlightStore } from './../../stores/flightStore'
 
   import { travelerStore } from './../../stores/travelerStore'
   export let retour
@@ -28,7 +28,7 @@
   {#each travelers as traveler, index (traveler)}
     <!-- Check if traveler last item yes? dont show border bottom -->
     <div
-      class="grid grid-rows-3  md:grid-rows-0 md:grid-cols-3 justify-center  {index ==
+      class="grid grid-auto-rows  md:grid-cols-3 justify-center gap-4 md:gap-0  {index ==
       travelers.length - 1
         ? ''
         : 'border-b-1'} text-dim-gray p-2"

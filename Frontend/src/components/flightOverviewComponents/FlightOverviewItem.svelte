@@ -1,7 +1,7 @@
 <script lang="ts">
   import FlightDateTime from './FlightDateTime.svelte'
   import FlightSeats from './FlightSeats.svelte'
-  import { FlightStore } from './../../stores/FlightStore'
+  import { FlightStore } from './../../stores/flightStore'
   export let retour: boolean
 </script>
 
