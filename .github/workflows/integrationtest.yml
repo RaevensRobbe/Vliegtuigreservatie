@@ -14,9 +14,13 @@ jobs:
         working-directory: ./Frontend
 
       - name: Run application
-        run: npm run dev & npx wait-on http://localhost:5000
+        run: npm run dev
         working-directory: ./Frontend
-
+        
+      - name: Wait on site
+        run: npx wait-on http://localhost:5000
+        working-directory: ./Frontend
+        
       - name: E2E tests
         run: npx cypress run
         working-directory: ./Frontend
