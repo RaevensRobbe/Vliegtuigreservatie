@@ -10,10 +10,11 @@
 
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
   
   init({
       fallbackLocale: 'en',
-      initialLocale: 'en',
+      initialLocale: $languageStore.language,
     })
 
   let menuToggle: boolean = false

@@ -60,5 +60,16 @@
         "password":"New Password",
         "cPassword":"Confirm new password",
         "succes":"User succefully updated"
+    },
+    "bookings":{
+        "title1":"Futue bookings",
+        "title2":"Previous bookings",
+        "no":"No",
+        "bookings":"bookings found"
+    },
+    "flightsComponent":{
+        "ticketsBtn":"See tickets",
+        "editFlightBtn":"Edit flight",
+        "showReviewsBtn":"Show reviews"
     }
  }

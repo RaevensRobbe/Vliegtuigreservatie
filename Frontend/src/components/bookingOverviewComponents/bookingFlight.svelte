@@ -8,6 +8,15 @@
     getTouchdownTime,
   } from './../../utils/calculateDistance'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   export let flightData: any
   export let booking: boolean
   let date: Date = new Date(flightData.Date)
@@ -103,9 +112,9 @@
 
   <p class=" flex font-bold text-lg lg:text-2xl justify-center my-auto">
     {#if booking}
-      See tickets
+      {$_('flightsComponent.ticketsBtn')}
     {:else}
-      Edit flight
+      {$_('flightsComponent.editFlightBtn')}
     {/if}
   </p>
 </div>

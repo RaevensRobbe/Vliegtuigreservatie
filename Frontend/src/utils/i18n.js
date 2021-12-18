@@ -5,6 +5,7 @@ import {
     register,
     _
   } from 'svelte-i18n';
+  import languageStore from '../stores/languageStore'
   // @ts-ignore
   register('en', () => import('./lang/en.json'))
 
@@ -17,9 +18,8 @@ import {
   let cachedLocale;
 
   function setupI18n({ withLocale: _locale } = { withLocale: 'en' }) {
-    console.log('Locale gezeik ' + _locale)
+    languageStore.set({language:_locale})
     const messsagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', _locale);
-    console.log('MessageFileURLDinge ' + messsagesFileUrl )
     return fetch(messsagesFileUrl)
         .then(response => response.json())
         .then((messages) => {

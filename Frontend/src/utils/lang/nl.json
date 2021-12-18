@@ -60,5 +60,16 @@
         "password":"Nieuw wachtwoord",
         "cPassword":"Bevestig nieuw wachtwoord",
         "succes":"Data succesvol aangepast"
+    },
+    "bookings":{
+        "title1":"Toekomstige vluchten",
+        "title2":"Verleden vluchten",
+        "no":"Geen",
+        "bookings":"Boekingen gevonden"
+    },
+    "flightsComponent":{
+        "ticketsBtn":"Toon tickets",
+        "editFlightBtn":"Bewerk vlucht",
+        "showReviewsBtn":"Toon reviews"
     }
  }

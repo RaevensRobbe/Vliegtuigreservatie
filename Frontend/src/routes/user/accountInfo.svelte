@@ -11,12 +11,13 @@
   import { goto } from '$app/navigation'
   import { fade, scale } from 'svelte/transition'
 
-  import { _ } from '../../utils/i18n'
+  import { _ , locale} from '../../utils/i18n'
   import { init } from 'svelte-i18n';
+  import languageStore from '../../stores/languageStore'
   
   init({
       fallbackLocale: 'en',
-      initialLocale: 'en',
+      initialLocale: $languageStore.language,
     })
 
   const auth = getAuth()
