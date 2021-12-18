@@ -62,6 +62,7 @@
         loginClicked = false
         //const errorCode = error.code
         const errorMessage = error.message
+        errors.login = 'Email or password are incorrect'
         if (error.message === 'Firebase: Error (auth/wrong-password).')
           errors.login = 'Email or password are incorrect'
         if (
@@ -207,14 +208,15 @@
         >
           Login
         </button>
+        {#if errors.login}
+          <p class="text-red-600 mt-2 mb-2">{errors.login}</p>
+        {/if}
         <div class="mt-4">
           <button type="button" on:click|preventDefault={loginWithGoogle}>
             Sign In with Google
           </button>
         </div>
-        {#if errors.login}
-          <p class="text-red-600 mt-2 mb-2">{errors.login}</p>
-        {/if}
+
         <div class="mt-4 flex">
           <p>No account yet?</p>
           <button
