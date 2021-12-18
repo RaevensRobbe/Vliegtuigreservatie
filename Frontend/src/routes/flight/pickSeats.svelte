@@ -4,7 +4,7 @@
   import Intertitle from '../../components/Intertitle.svelte'
   import Seat from '../../components/pickSeatsComponents/SeatComponent.svelte'
   import { travelerStore } from '../../stores/travelerStore'
-  import { FlightStore } from '../../stores/FlightStore'
+  import { FlightStore } from '../../stores/flightStore'
   import passengerStore from '../../stores/selectPassengerStore'
   import PassengersComponent from '../../components/pickSeatsComponents/PassengersComponent.svelte'
   import { goto } from '$app/navigation'
@@ -30,9 +30,9 @@
   let selectedPerson: {
     fn: string
     ln: string
-  } 
+  }
 
-  let hasRetourFlight:boolean;
+  let hasRetourFlight: boolean
   let retourFlight: boolean = false
   let clicked: boolean = false
 
@@ -177,8 +177,8 @@
 
   function goBack() {
     passengerStore.set({
-      fn:'',
-      ln:''
+      fn: '',
+      ln: '',
     })
     goto('/flight/flightDate')
   }
@@ -239,11 +239,15 @@
 
       <!-- PASSENGERGRID -->
       <div class="bg-white shadow-md">
-        <div class="grid {hasRetourFlight ? 'grid-cols-4': 'grid-cols-3'} grid-rows-1 text-dim-gray border-b-1">
+        <div
+          class="grid {hasRetourFlight
+            ? 'grid-cols-4'
+            : 'grid-cols-3'} grid-rows-1 text-dim-gray border-b-1"
+        >
           <h2 class="font-bold text-base md:text-lg  my-auto px-4 col-span-2">
             Passengers
           </h2>
-          
+
           <div
             class="flex flex-col justify-center items-center py-4 {retourFlight
               ? ''
@@ -270,9 +274,9 @@
           </div>
           {#if hasRetourFlight}
             <div
-            class="flex flex-col justify-center items-center {retourFlight
-              ? 'text-forest-green border-b-8 border-current'
-              : ''}"
+              class="flex flex-col justify-center items-center {retourFlight
+                ? 'text-forest-green border-b-8 border-current'
+                : ''}"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -295,7 +299,11 @@
             </div>
           {/if}
         </div>
-        <div class="grid {hasRetourFlight ? 'grid-cols-4': 'grid-cols-3'} grid-rows-1">
+        <div
+          class="grid {hasRetourFlight
+            ? 'grid-cols-4'
+            : 'grid-cols-3'} grid-rows-1"
+        >
           {#each $travelerStore as traveler, index (traveler)}
             {#if retourFlight}
               <PassengersComponent
@@ -304,10 +312,10 @@
                 lN={traveler.lastName}
                 seatNrDep={traveler.seatNrDep}
                 seatNrRet={traveler.seatNrRet}
-                hasRetour= {hasRetourFlight}
+                hasRetour={hasRetourFlight}
                 retour={true}
                 lastItem={index == $travelerStore.length - 1 ? true : false}
-                passengerNr = {index}
+                passengerNr={index}
               />
             {:else}
               <PassengersComponent
@@ -316,10 +324,10 @@
                 lN={traveler.lastName}
                 seatNrDep={traveler.seatNrDep}
                 seatNrRet={traveler.seatNrRet}
-                hasRetour= {hasRetourFlight}
+                hasRetour={hasRetourFlight}
                 retour={false}
                 lastItem={index == $travelerStore.length - 1 ? true : false}
-                passengerNr = {index}
+                passengerNr={index}
               />
             {/if}
           {/each}
@@ -328,37 +336,37 @@
 
       <!-- BUTTONS -->
       {#if hasRetourFlight && retourFlight}
-          <div class="flex justify-center md:justify-end">
-            <button
-              type="submit"
-              class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-              on:click={goToOverview}
-            >
-              Continue
-            </button>
-          </div>
-        {:else if hasRetourFlight && !retourFlight}
-          <div class="flex justify-center md:justify-end">
-            <button
-              on:click={nextFlight}
-              type="submit"
-              class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-            >
-              Next flight
-            </button>
-          </div>
-        {:else if !hasRetourFlight}
-          <div class="flex justify-center md:justify-end">
-            <button
-              type="submit"
-              class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-              on:click={goToOverview}
-            >
-              <!--submit button -->
-              Continue
-            </button>
-          </div>
-        {/if}
+        <div class="flex justify-center md:justify-end">
+          <button
+            type="submit"
+            class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            on:click={goToOverview}
+          >
+            Continue
+          </button>
+        </div>
+      {:else if hasRetourFlight && !retourFlight}
+        <div class="flex justify-center md:justify-end">
+          <button
+            on:click={nextFlight}
+            type="submit"
+            class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+          >
+            Next flight
+          </button>
+        </div>
+      {:else if !hasRetourFlight}
+        <div class="flex justify-center md:justify-end">
+          <button
+            type="submit"
+            class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            on:click={goToOverview}
+          >
+            <!--submit button -->
+            Continue
+          </button>
+        </div>
+      {/if}
 
       <!-- PLANELAYOUT -->
     </div>

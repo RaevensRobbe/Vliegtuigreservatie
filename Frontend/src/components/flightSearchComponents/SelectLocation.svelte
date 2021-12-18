@@ -1,7 +1,7 @@
 <script lang="ts">
   // @ts-nocheck
   import type Dest from './../../models/DestinationModel.type'
-  import { FlightStore } from '../../stores/FlightStore'
+  import { FlightStore } from '../../stores/flightStore'
   import { fade, scale } from 'svelte/transition'
 
   // export so parent receives the changes

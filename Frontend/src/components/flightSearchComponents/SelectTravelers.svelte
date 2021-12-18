@@ -1,5 +1,5 @@
 <script type="ts">
-  import { FlightStore } from './../../stores/FlightStore'
+  import { FlightStore } from './../../stores/flightStore'
   import { fade, scale } from 'svelte/transition'
 
   export let toggleTravelers: boolean

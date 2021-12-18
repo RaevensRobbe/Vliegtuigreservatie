@@ -1,7 +1,7 @@
 <script lang="ts">
   //@ts-nocheck
   import { get } from '../../utils/useApi'
-  import { FlightStore } from './../../stores/FlightStore'
+  import { FlightStore } from './../../stores/flightStore'
   import { onMount } from 'svelte'
   import {
     calculateFlightTimeLong,
