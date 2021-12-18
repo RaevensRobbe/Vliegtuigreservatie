@@ -71,5 +71,25 @@
         "ticketsBtn":"Toon tickets",
         "editFlightBtn":"Bewerk vlucht",
         "showReviewsBtn":"Toon reviews"
+    },
+    "flightDate":{
+        "gobackBtn":"Terug",
+        "intertitle1":"Kies de vertrek vlucht",
+        "intertitle2":"Kies de retour vlucht",
+        "title2":"Passagiers",
+        "intertitle3":"Vul de namen in zoals ze op uw passport of reis documenten staan",
+        "adults":"Volwassenen",
+        "children":"Kinderen",
+        "title":"Aanspreking",
+        "titlePlace":"Selecteer",
+        "firstname":"Voornaam",
+        "lastname":"Achternaam",
+        "fnPlace":"Geef voornaam in",
+        "lnPlace":"Geef achternaam in",
+        "button1":"Verder",
+        "noFlight":"No flight",
+        "noData":"Geen vluchten gevonden tussen",
+        "and":"en",
+        "loading":"Laden"
     }
  }

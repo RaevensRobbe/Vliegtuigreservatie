@@ -8,6 +8,15 @@
     getTouchdownTime,
   } from './../../utils/calculateDistance'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   let givenflights: Array<Flight>
   let controldate: Date
   let chosenflight: string
@@ -305,7 +314,7 @@
             class="bg-white border-r-1 border-l-1 flex flex-col text-center shadow-md justify-center"
           >
             <p class="text-white font-bold m-2 text-sm md:text-xl">.</p>
-            <p class="text-sm md:text-md">No flight</p>
+            <p class="text-sm md:text-md">{$_('flightDate.noFlight')}</p>
             <p class="text-white font-bold m-2 text-sm md:text-xl">.</p>
           </div>
         </div>
@@ -315,15 +324,15 @@
     <div
       class="flex flex-col p-8 justify-center text-center font-bold text-forest-green  bg-white shadow-md col-span-3 md:col-span-4 lg:col-span-7"
     >
-      <p>No flights found between</p>
+      <p>{$_('flightDate.noData')}</p>
       <p class="font-normal text-dim-gray">
-        {firstDate.toISOString().split('T')[0]} and {lastDate
+        {firstDate.toISOString().split('T')[0]} {$_('flightDate.and')} {lastDate
           .toISOString()
           .split('T')[0]}
       </p>
     </div>
   {:else}
-    <p>loading</p>
+    <p>{$_('flightDate.loading')}</p>
   {/if}
 </section>
 

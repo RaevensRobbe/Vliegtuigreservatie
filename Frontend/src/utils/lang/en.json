@@ -71,5 +71,25 @@
         "ticketsBtn":"See tickets",
         "editFlightBtn":"Edit flight",
         "showReviewsBtn":"Show reviews"
+    },
+    "flightDate":{
+        "gobackBtn":"Go back",
+        "intertitle1":"Choose your departure flight",
+        "intertitle2":"Choos your retour flight",
+        "title2":"Passengers",
+        "intertitle3":"Please enter names as they appear on passport or travel documentation",
+        "adults":"Adults",
+        "children":"Children",
+        "title":"Title",
+        "titlePlace":"Select your title",
+        "firstname":"First name",
+        "lastname":"Last name",
+        "fnPlace":"Enter your first name",
+        "lnPlace":"Enter your last name",
+        "button1":"Continue",
+        "noFlight":"No flight",
+        "noData":"No flights found between",
+        "and":"and",
+        "loading":"Loading"
     }
  }
