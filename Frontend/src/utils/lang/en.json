@@ -91,5 +91,19 @@
         "noData":"No flights found between",
         "and":"and",
         "loading":"Loading"
+    },
+    "pickSeats":{
+        "gobackBtn":"Go back",
+        "title":"Select your seat",
+        "passengers":"Passengers",
+        "selectSeat":"Select your seat",
+        "seatSelected":"Seat selected",
+        "button1":"Continue",
+        "button2":"Next flight",
+        "legend1":"Unavailable",
+        "legend2":"Available",
+        "legend3":"Selected",
+        "class1":"Business class",
+        "class2":"Economy class"
     }
  }

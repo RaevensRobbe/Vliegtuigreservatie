@@ -91,5 +91,19 @@
         "noData":"Geen vluchten gevonden tussen",
         "and":"en",
         "loading":"Laden"
+    },
+    "pickSeats":{
+        "gobackBtn":"Terug",
+        "title":"Selecteer zetels",
+        "passengers":"Passagiers",
+        "selectSeat":"Selecteer zetel",
+        "seatSelected":"Zetel geselecteerd",
+        "button1":"Verder",
+        "button2":"Volgende vlucht",
+        "legend1":"Bezet",
+        "legend2":"Beschikbaar",
+        "legend3":"Geselecteerd",
+        "class1":"Eerste klasse",
+        "class2":"Tweede klasse"
     }
  }
