@@ -8,7 +8,10 @@ import {
   // @ts-ignore
   register('en', () => import('./lang/en.json'))
 
-
+  init({
+    fallbackLocale: 'en',
+    initialLocale: 'en',
+  })
   const MESSAGE_FILE_URL_TEMPLATE = '/src/utils/lang/{locale}.json';
 
   let cachedLocale;

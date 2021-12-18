@@ -20,7 +20,22 @@
         "login":"Login",
         "google":"Inloggen met Google",
         "acc":"Geen account?",
-        "register":"Registreer"
+        "register":"Registreer",
+        "psPlace":"Geef wachtwoord in"
+    },
+    "registerOverlay": {
+        "email":"Email",
+        "firstname":"Voornaam",
+        "lastname":"Achternaam",
+        "password":"Wachtwoord",
+        "cPassword":"Bevestig wachtwoord",
+        "register":"Registreer",
+        "already":"Heeft u al een account?",
+        "login":"Login",
+        "fnPlace":"Geef voornaam in",
+        "lnPlace":"Geef achternaam in",
+        "psPlace":"Geef wachtwoord in",
+        "cPsPlace":"Bevestig wachtwoord"
     },
     "flightSearch":{
         "from":"Van",

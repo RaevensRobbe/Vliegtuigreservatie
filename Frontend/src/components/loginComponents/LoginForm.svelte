@@ -13,6 +13,8 @@
   import loginCompStore from '../../stores/loginCompStore'
   import { goto } from '$app/navigation'
 
+  import { _ } from '../../utils/i18n'
+
   let validationError: boolean = true
   let email: string = ''
   let pw: string = ''
@@ -150,7 +152,7 @@
       out:fade
     >
       <div class="flex justify-between mb-4">
-        <h1 class=" text-2xl text-forest-green">Login</h1>
+        <h1 class=" text-2xl text-forest-green">{$_('loginOverlay.login')}</h1>
         <button on:click={showLoginForm} name="closeLoginForm">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +168,7 @@
           </svg>
         </button>
       </div>
-      <label for="loginEmail" class="font-bold"> Email </label>
+      <label for="loginEmail" class="font-bold"> {$_('loginOverlay.email')} </label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={email}
@@ -181,14 +183,14 @@
         <p class="text-red-600 -mt-2 mb-2">{errors.email}</p>
       {/if}
 
-      <label for="loginPw" class="font-bold">Password</label>
+      <label for="loginPw" class="font-bold">{$_('loginOverlay.password')}</label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={pw}
           type="password"
           name="loginPw"
           id="loginPw"
-          placeholder="enter password"
+          placeholder={$_('loginOverlay.psPlace')}
           class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>
@@ -200,28 +202,28 @@
         <Spinner />
       {:else}
         <button class="text-left" on:click={forgotPassword}>
-          forgot password?
+          {$_('loginOverlay.forgot')}
         </button>
         <button
           type="submit"
           class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white"
         >
-          Login
+        {$_('loginOverlay.login')}
         </button>
         {#if errors.login}
           <p class="text-red-600 mt-2 mb-2">{errors.login}</p>
         {/if}
         <div class="mt-4">
           <button type="button" on:click|preventDefault={loginWithGoogle}>
-            Sign In with Google
+            {$_('loginOverlay.google')}
           </button>
         </div>
 
         <div class="mt-4 flex">
-          <p>No account yet?</p>
+          <p>{$_('loginOverlay.acc')}</p>
           <button
             on:click={showRegisterForm}
-            class="ml-1 font-bold text-forest-green">Register</button
+            class="ml-1 font-bold text-forest-green">{$_('loginOverlay.register')}</button
           >
         </div>
       {/if}

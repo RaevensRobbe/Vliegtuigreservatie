@@ -15,12 +15,27 @@
     },
     "loginOverlay": {
         "email":"Email",
-        "password":"PassWord",
+        "password":"Password",
         "forgot":"Forgot password",
         "login":"Login",
         "google":"Sign in with Google",
         "acc":"No account yet?",
-        "register":"Register"
+        "register":"Register",
+        "psPlace":"Enter Password"
+    },
+    "registerOverlay": {
+        "email":"Email",
+        "firstname":"First name",
+        "lastname":"Last name",
+        "password":"Password",
+        "cPassword":"Confirm Password",
+        "register":"Register",
+        "already":"Already have an account?",
+        "login":"Login",
+        "fnPlace":"Enter first name",
+        "lnPlace":"Enter last name",
+        "psPlace":"Enter password",
+        "cPsPlace":"Confirm password"
     },
     "flightSearch":{
         "from":"From",

@@ -9,6 +9,12 @@
   import RegisterForm from '../loginComponents/RegisterForm.svelte'
 
   import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: 'en',
+    })
 
   let menuToggle: boolean = false
   let accountdropDown: boolean = false
