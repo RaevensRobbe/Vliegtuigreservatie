@@ -4,7 +4,10 @@
     },
     "header": {
         "bookings": "Boekingen",
-        "admin": "Admin overzicht"
+        "admin": "Admin Overzicht",
+        "edit":"Account aanpassen",
+        "signOut":"Log uit",
+        "login":"Log in"
     },
     "headerDropdown": {
         "edit": "Bewerk Account",
@@ -18,5 +21,16 @@
         "google":"Inloggen met Google",
         "acc":"Geen account?",
         "register":"Registreer"
+    },
+    "flightSearch":{
+        "from":"Van",
+        "to":"Naar",
+        "departure":"Vertrek",
+        "destination":"Bestemming",
+        "retour":"Retour",
+        "travelers":"Reizigers",
+        "adults":"Volwassenen",
+        "children":"Kinderen",
+        "search":"Zoeken"
     }
  }

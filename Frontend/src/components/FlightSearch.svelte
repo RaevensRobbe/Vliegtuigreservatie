@@ -7,6 +7,14 @@
   import SelectTravelers from './flightSearchComponents/SelectTravelers.svelte'
   import { goto } from '$app/navigation'
 
+  import { _ } from '../utils/i18n'
+  import { init } from 'svelte-i18n';
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: 'en',
+    })
+
   let flight = $FlightStore
 
   // set today date => check if departure date
@@ -130,7 +138,7 @@
       <!--upper row -->
       <div class="flex flex-col p-4 border-b-2 lg:border-r-2 lg:border-b-0">
         <!--departure box -->
-        <p class="font-light text-xs">From</p>
+        <p class="font-light text-xs">{$_('flightSearch.from')}</p>
         <div
           class="flex mt-1 cursor-pointer"
           on:click={() => showItem('departure')}
@@ -155,7 +163,7 @@
             />
           </svg>
           {#if !departureCountry}
-            <span>Departure</span>
+            <span>{$_('flightSearch.departure')}</span>
           {:else if !departureCity}
             <span>{departureCountry}</span>
           {:else}
@@ -168,7 +176,7 @@
       </div>
       <div class="flex flex-col p-4">
         <!--destination box -->
-        <p class="font-light text-xs">To</p>
+        <p class="font-light text-xs">{$_('flightSearch.to')}</p>
         <div
           class="flex mt-1 cursor-pointer"
           on:click={() => showItem('destination')}
@@ -193,7 +201,7 @@
             />
           </svg>
           {#if !destinationCountry}
-            <span>Destination</span>
+            <span>{$_('flightSearch.destination')}</span>
           {:else if !destinationCity}
             <span>{destinationCountry}</span>
           {:else}
@@ -228,7 +236,7 @@
         class="flex flex-col 2xl:col-span-3 p-4 border-b-2 border-r-0 2xl:border-b-0 2xl:border-r-2 sm:border-b-2"
       >
         <!--departure date box -->
-        <p class="font-light text-xs">Departure</p>
+        <p class="font-light text-xs">{$_('flightSearch.departure')}</p>
         <div class="mt-1 flex">
           <svg
             id="calendar"
@@ -262,7 +270,7 @@
         class="flex flex-col 2xl:col-span-3 p-4 border-b-2 2xl:border-b-0 2xl:border-r-2 2xl:border-gray-200 sm:border-b-2"
       >
         <!--retour date box -->
-        <p class="font-light text-xs">Retour</p>
+        <p class="font-light text-xs">{$_('flightSearch.retour')}</p>
         <div class="flex mt-1">
           <svg
             id="calendar"
@@ -294,7 +302,7 @@
       </div>
       <div class="relative flex flex-col p-4 2xl:col-span-3">
         <!--passenger box -->
-        <p class="font-light text-xs">Travelers</p>
+        <p class="font-light text-xs">{$_('flightSearch.travelers')}</p>
         <div
           class="flex mt-1 cursor-pointer flex-grow items-center"
           on:click={() => showItem('travelers')}
@@ -309,7 +317,7 @@
               d="M8.339,12.6a4.849,4.849,0,0,0-3.727,1.8H2.728a3.224,3.224,0,0,1-1.94-.569A1.927,1.927,0,0,1,0,12.164Q0,7.2,1.744,7.2a2.7,2.7,0,0,1,.612.3,9.27,9.27,0,0,0,1.371.6A4.932,4.932,0,0,0,5.4,8.4a5.655,5.655,0,0,0,1.87-.323A7,7,0,0,0,7.2,9a6.192,6.192,0,0,0,1.139,3.6ZM23.4,21.557a3.5,3.5,0,0,1-1.027,2.665,3.793,3.793,0,0,1-2.728.977H7.354a3.791,3.791,0,0,1-2.728-.977A3.507,3.507,0,0,1,3.6,21.557q0-.745.049-1.456a14.363,14.363,0,0,1,.2-1.533,12,12,0,0,1,.372-1.525,7.184,7.184,0,0,1,.6-1.371,4.966,4.966,0,0,1,.871-1.139,3.656,3.656,0,0,1,1.2-.752A4.228,4.228,0,0,1,8.465,13.5a1.652,1.652,0,0,1,.6.3q.463.3,1.027.675a6.177,6.177,0,0,0,1.5.675,6.527,6.527,0,0,0,5.3-.675q.563-.373,1.027-.675a1.652,1.652,0,0,1,.6-.3,4.224,4.224,0,0,1,1.568.281,3.667,3.667,0,0,1,1.2.752,4.939,4.939,0,0,1,.871,1.139,7.247,7.247,0,0,1,.6,1.371,11.912,11.912,0,0,1,.373,1.525,14.363,14.363,0,0,1,.2,1.533q.049.71.049,1.456ZM9,3.6A3.47,3.47,0,0,1,7.945,6.145,3.465,3.465,0,0,1,5.4,7.2,3.472,3.472,0,0,1,2.854,6.145,3.467,3.467,0,0,1,1.8,3.6,3.467,3.467,0,0,1,2.854,1.054,3.472,3.472,0,0,1,5.4,0,3.465,3.465,0,0,1,7.945,1.054,3.47,3.47,0,0,1,9,3.6ZM18.9,9a5.2,5.2,0,0,1-1.582,3.818A5.2,5.2,0,0,1,13.5,14.4a5.207,5.207,0,0,1-3.818-1.582A5.2,5.2,0,0,1,8.1,9,5.2,5.2,0,0,1,9.681,5.182,5.207,5.207,0,0,1,13.5,3.6a5.2,5.2,0,0,1,3.818,1.582A5.2,5.2,0,0,1,18.9,9ZM27,12.164a1.928,1.928,0,0,1-.787,1.666,3.217,3.217,0,0,1-1.94.569H22.388a4.849,4.849,0,0,0-3.727-1.8A6.192,6.192,0,0,0,19.8,9a7,7,0,0,0-.07-.928,5.655,5.655,0,0,0,1.87.323,4.937,4.937,0,0,0,1.673-.3,9.223,9.223,0,0,0,1.371-.6,2.675,2.675,0,0,1,.612-.3Q27,7.2,27,12.163ZM25.2,3.6a3.47,3.47,0,0,1-1.054,2.545,3.6,3.6,0,0,1-5.091,0A3.467,3.467,0,0,1,18,3.6a3.467,3.467,0,0,1,1.054-2.545,3.6,3.6,0,0,1,5.091,0A3.47,3.47,0,0,1,25.2,3.6Z"
             />
           </svg>
-          <span>{adults} Adults, {children} Children</span>
+          <span>{adults} {$_('flightSearch.adults')}, {children} {$_('flightSearch.children')}</span>
         </div>
         {#if toggleTravelers}
           <SelectTravelers bind:children bind:adults bind:toggleTravelers />
@@ -323,7 +331,7 @@
         class="flex 2xl:col-span-2 p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-b-xl xl:rounded-b-xl 2xl:rounded-b-none 2xl:rounded-r-xl hover:bg-cyprus-green"
       >
         <!--submit button -->
-        Search
+        {$_('flightSearch.search')}
       </button>
     </div>
   </form>

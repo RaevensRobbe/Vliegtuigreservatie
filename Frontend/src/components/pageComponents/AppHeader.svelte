@@ -101,16 +101,16 @@
 
       <button
         class="col-span-2 p-2 w-full text-left hover:bg-gray-200 border-b-1"
-        on:click={goToAccountInfo}>Edit Account</button
+        on:click={goToAccountInfo}>{$_('header.edit')}</button
       >
       <button
         class="col-span-2 p-2 w-full text-left hover:bg-gray-200 font-bold"
-        on:click={logout}>Sign out</button
+        on:click={logout}>{$_('header.signOut')}</button
       >
     {:else}
       <button class="col-span-2 p-2 w-full text-left hover:bg-gray-200">
         <div on:click={showLoginForm}>
-          <p>Login</p>
+          <p>{$_('header.login')}</p>
         </div>
       </button>
     {/if}
@@ -171,11 +171,11 @@
               >
                 <button
                   class="text-lg text-forest-green py-4  hover:bg-gray-200 w-full px-6"
-                  on:click={goToAccountInfo}>Edit Account</button
+                  on:click={goToAccountInfo}>{$_('header.edit')}</button
                 >
                 <button
                   class="text-lg text-forest-green py-4 hover:bg-gray-200 w-full px-6"
-                  on:click={logout}>Sign out</button
+                  on:click={logout}>{$_('header.signOut')}</button
                 >
               </div>
             {/if}
@@ -185,7 +185,7 @@
         <div>
           <button
             class="font-bold text-xl text-forest-green pr-6"
-            on:click={showLoginForm}>Login</button
+            on:click={showLoginForm}>{$_('header.login')}</button
           >
         </div>
       {/if}

@@ -12,6 +12,14 @@
 
   import { get } from '../utils/useApi'
 
+  import { _ } from '../utils/i18n'
+  import { init } from 'svelte-i18n';
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: 'en',
+    })
+
   let popDestinations: PopularDestination = []
   let popDestinationsLoaded: boolean = false
   onMount(async () => {
@@ -32,7 +40,7 @@
 </Lazy>
 
 <section class="m-4 px-6 align-start">
-  <Intertitle titleName="Popular destinations" />
+  <Intertitle titleName= {$_('home.popular')} />
   <article
     class="grid grid-cols-1 md:grid-cols-2  
   lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mb-4 auto-cols-fr"

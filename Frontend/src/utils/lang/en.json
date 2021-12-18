@@ -1,22 +1,36 @@
 {
     "home": {
-        "popular": "Populaire bestemmingen"
+        "popular": "Popular destinations"
     },
     "header": {
         "bookings": "My bookings",
-        "admin": "Admin overzicht"
+        "admin": "Admin overview",
+        "edit":"Edit Account",
+        "signOut":"Sign Out",
+        "login":"Login"
     },
     "headerDropdown": {
-        "edit": "Bewerk Account",
-        "signOut": "Log uit"
+        "edit": "Edit Account",
+        "signOut": "Sign Out"
     },
     "loginOverlay": {
         "email":"Email",
-        "password":"Wachtwoord",
-        "forgot":"Wachtwoord vergeten",
+        "password":"PassWord",
+        "forgot":"Forgot password",
         "login":"Login",
-        "google":"Inloggen met Google",
-        "acc":"Geen account?",
-        "register":"Registreer"
+        "google":"Sign in with Google",
+        "acc":"No account yet?",
+        "register":"Register"
+    },
+    "flightSearch":{
+        "from":"From",
+        "to":"To",
+        "departure":"Departure",
+        "destination":"Destination",
+        "retour":"Retour",
+        "travelers":"Travelers",
+        "adults":"Adults",
+        "children":"Children",
+        "search":"Search"
     }
  }
