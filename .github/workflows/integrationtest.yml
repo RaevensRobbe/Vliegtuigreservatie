@@ -10,9 +10,12 @@ jobs:
     steps:
     - name: Install dependencies
       run: npm ci
+      working-directory: Frontend
 
     - name: Run application
       run: npm run dev & npx wait-on http://localhost:5000
+      working-directory: Frontend
 
     - name: E2E tests
       run: npx cypress run
+      working-directory: Frontend
