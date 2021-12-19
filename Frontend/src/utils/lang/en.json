@@ -202,5 +202,13 @@
         "allFlights":"Show all flights",
         "gobackBtn":"Go back",
         "flight":"Flight: "
+    },
+    "addReview":{
+        "title1":"Give a review",
+        "intertitle1":"Overall Rating",
+        "intertitle2":"Write your review",
+        "button":"Submit review",
+        "title2":"Your review",
+        "gobackBtn":"Go back"
     }
  }

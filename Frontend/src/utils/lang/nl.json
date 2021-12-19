@@ -202,5 +202,13 @@
         "allFlights":"Toon alle vluchten",
         "gobackBtn":"Terug",
         "flight":"Vlucht: "
+    },
+    "addReview":{
+        "title1":"Geef een review",
+        "intertitle1":"Score",
+        "intertitle2":"Schrijf jouw review",
+        "button":"Versturen",
+        "title2":"Jouw review",
+        "gobackBtn":"Terug"
     }
  }
