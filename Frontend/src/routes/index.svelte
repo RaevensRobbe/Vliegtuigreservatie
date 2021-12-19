@@ -9,6 +9,7 @@
   import type PopularDestination from '../models/PopularDestinationModel.type'
   import PopularDestinationModal from '../components/popularDestinationComponents/PopularDestinationModal.svelte'
   import Lazy from 'svelte-lazy'
+  import languageStore from '../stores/languageStore'
 
   import { get } from '../utils/useApi'
 
@@ -17,7 +18,7 @@
   
   init({
       fallbackLocale: 'en',
-      initialLocale: 'en',
+      initialLocale: $languageStore.language,
     })
 
   let popDestinations: PopularDestination = []

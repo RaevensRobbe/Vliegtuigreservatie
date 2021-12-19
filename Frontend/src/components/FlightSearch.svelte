@@ -6,14 +6,15 @@
   import SelectLocation from './flightSearchComponents/SelectLocation.svelte'
   import SelectTravelers from './flightSearchComponents/SelectTravelers.svelte'
   import { goto } from '$app/navigation'
+  import languageStore from '../stores/languageStore'
 
   import { _ } from '../utils/i18n'
   import { init } from 'svelte-i18n';
   
   init({
       fallbackLocale: 'en',
-      initialLocale: 'en',
-    })
+      initialLocale: $languageStore.language,
+  })
 
   let flight = $FlightStore
 

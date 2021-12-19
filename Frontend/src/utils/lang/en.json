@@ -210,5 +210,17 @@
         "button":"Submit review",
         "title2":"Your review",
         "gobackBtn":"Go back"
+    },
+    "selectTravelers":{
+        "adult":"Adults",
+        "adulttxt":"16+ years at the time of flight",
+        "children":"Children",
+        "childrentxt":"-16 at the time of flight",
+        "button":"Done"
+    },
+    "selectLocation":{
+        "pickCountry":"Choose a country",
+        "pickAirport":"Pick an airport",
+        "pickCountryFirst":"Pick a country first"
     }
  }

@@ -4,6 +4,15 @@
   import { FlightStore } from '../../stores/FlightStore'
   import { fade, scale } from 'svelte/transition'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   // export so parent receives the changes
   export let departureCity: string
   export let departureCountry: string
@@ -64,7 +73,7 @@
         class="bg-ghost-white p-4 rounded-t-xl md:rounded-tr-none md:rounded-l-xl  md:col-span-4"
       >
         <h1 class="font-bold text-forest-green text-xl mb-2">
-          Choose a country
+          {$_('selectLocation.pickCountry')}
         </h1>
         <div class="grid md:grid-cols-4 grid-flow-row grid-rows-4 gap-1">
           {#each destinationsArray as destination}
@@ -95,9 +104,9 @@
       </div>
       <!-- Choose airport -->
       <div class="p-4 bg-white rounded-b-lg md:rounded-r-lg md:rounded-bl-none">
-        <h1 class="font-bold mb-2 text-forest-green">Pick an airport</h1>
+        <h1 class="font-bold mb-2 text-forest-green">{$_('selectLocation.pickAirport')}</h1>
         {#if !departureCountry}
-          <p>Pick a country first</p>
+          <p>{$_('selectLocation.pickCountryFirst')}</p>
         {:else}
           {#each destinationsArray as destination}
             <!-- If chosen country -->

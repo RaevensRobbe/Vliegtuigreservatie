@@ -210,5 +210,17 @@
         "button":"Versturen",
         "title2":"Jouw review",
         "gobackBtn":"Terug"
+    },
+    "selectTravelers":{
+        "adult":"Volwassenen",
+        "adulttxt":"16 of ouder wanneer de vlucht vertrek",
+        "children":"Kinderen",
+        "childrentxt":"16 of jonger wanneer de vlucht vertrek",
+        "button":"Klaar"
+    },
+    "selectLocation":{
+        "pickCountry":"Kies een land",
+        "pickAirport":"Kies een luchthaven",
+        "pickCountryFirst":"Selecteer een land"
     }
  }
