@@ -54,7 +54,7 @@
 
   onMount(async () => {
     givenflights = await get(url)
-
+    console.log(givenflights)
     let i: number = 0
     let exactdate: boolean = false
     let closestAmountOfDays: number = 360
@@ -118,6 +118,7 @@
               //gives error when there are no seats taken yet
               if (totalSeats > $FlightStore.adults + $FlightStore.children) {
                 flights.push(flightInfo)
+                setChosenFlight(flightInfo.FlightId)
               } else {
                 flights.push({
                   flightId: null,
@@ -163,6 +164,11 @@
               let totalSeats: number =
                 planeInfo.EconomySeats + planeInfo.BusinessSeats
 
+              let today = new Date()
+              let flightDate = new Date(flightInfo.Date)
+              console.log(flightInfo)
+              console.log(today)
+              console.log(flightDate)
               if (availableSeats.error) {
                 //gives error when there are no seats taken yet
                 if (totalSeats > $FlightStore.adults + $FlightStore.children) {
@@ -214,12 +220,39 @@
 
   function calculateDayName(date: Date) {
     let d: Date = new Date(date)
-    return d.toLocaleString('default', { weekday: 'long' })
+    let days: Array<string> = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesdays',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ]
+    return days[d.getDay()]
   }
 
   function dateFormat(date: Date) {
     let datum: Date = new Date(date)
-    return datum.toLocaleString('default', { day: '2-digit', month: 'long' })
+    var months: array<string> = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ]
+    return (
+      datum.toLocaleString('default', { day: '2-digit' }) +
+      ' ' +
+      months[datum.getMonth()]
+    )
   }
 
   function calculatePrice(price: number) {
