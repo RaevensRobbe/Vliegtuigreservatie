@@ -119,5 +119,18 @@
         "expiry":"Expiry date",
         "security":"Security code",
         "button1":"Confirm payment"
+    },
+    "ticket":{
+        "title":"Tickets",
+        "name":"Passenger name",
+        "from":"From",
+        "to":"To",
+        "date":"Date",
+        "flight":"Flight",
+        "gate":"Gate",
+        "time":"Time",
+        "seat":"Seat",
+        "boarding":"Board till",
+        "pass":"Boarding pass"
     }
  }

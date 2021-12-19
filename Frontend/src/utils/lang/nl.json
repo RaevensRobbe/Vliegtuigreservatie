@@ -119,5 +119,18 @@
         "expiry":"Verval datum",
         "security":"Beveiligingscode",
         "button1":"Bevestigen"
+    },
+    "ticket":{
+        "title":"Tickets",
+        "name":"Passagiers naam",
+        "from":"Van",
+        "to":"Naar",
+        "date":"Datum",
+        "flight":"Vlucht",
+        "gate":"Gate",
+        "time":"Tijd",
+        "seat":"Zetel",
+        "boarding":"Instappen tot",
+        "pass":"Instapkaart"
     }
  }
