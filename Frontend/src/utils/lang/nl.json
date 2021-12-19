@@ -192,5 +192,15 @@
         "button1":"Vlucht toevoegen",
         "succes":"Vlucht succesvol toegevoegd",
         "another":"Voeg nog een vlucht toe"
+    },
+    "reviews":{
+        "searchBtn":"Zoeken",
+        "searchPlace":"Zoek vluchtnummer",
+        "title":"Reviews",
+        "button1":"Toekomstige vluchten",
+        "noFlights":"Geen vluchten gevonden",
+        "allFlights":"Toon alle vluchten",
+        "gobackBtn":"Terug",
+        "flight":"Vlucht: "
     }
  }

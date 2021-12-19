@@ -5,6 +5,14 @@
   import authStore from '../../stores/authStore'
   import { get } from '../../utils/useApi'
   import StarRating from './starRating.svelte'
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
 
   export let flightId
   let reviews: any[] = []
@@ -21,7 +29,7 @@
       ).then(data => {
         console.log(data)
         reviews = data.Ticket
-        flightName = `Flight: ${data.Name}`
+        flightName = `${data.Name}`
         start = data.Start.Name
         end = data.Destination.Name
       })
@@ -54,10 +62,10 @@
         stroke-width="4"
       />
     </svg>
-    <p class="">Go back</p>
+    <p class="">{$_('reviews.gobackBtn')}</p>
   </section>
   <section class="sm:m-4 px-6">
-    <Intertitle titleName={flightName} />
+    <Intertitle titleName= {$_('reviews.flight')}{flightName} />
   </section>
 
   <section class="flex flex-row align-center justify-center">

@@ -114,7 +114,7 @@
   </section>
 
   <section class="m-4 px-6">
-    <Intertitle titleName="All upcoming flights" />
+    <Intertitle titleName={$_('adminOverview.title')} />
     <div class="max-h-1/2 overflow-x-hidden overflow-y-scroll custom-scroll">
       {#if searchIsActive}
         {#if specificFlightData}

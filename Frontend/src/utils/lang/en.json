@@ -192,5 +192,15 @@
         "button1":"Add flight",
         "succes":"Flight succesfully added",
         "another":"Add another flight"
+    },
+    "reviews":{
+        "searchBtn":"Search",
+        "searchPlace":"Search flight number",
+        "title":"Reviews",
+        "button1":"Upcoming flights",
+        "noFlights":"No flights found",
+        "allFlights":"Show all flights",
+        "gobackBtn":"Go back",
+        "flight":"Flight: "
     }
  }
