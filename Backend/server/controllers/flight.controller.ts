@@ -135,6 +135,7 @@ export class FlightController
         .andWhere('f.DestinationId = :id2', { id2: destinationID })
         .andWhere('f.Date >= :startDate', { startDate: firstDate })
         .andWhere('f.Date <= :endDate', { endDate: lastDate })
+        .andWhere('f.Date > NOW() ')
         .orderBy('f.Date', 'ASC')
         .getMany()
       if (data.length === 0) {
