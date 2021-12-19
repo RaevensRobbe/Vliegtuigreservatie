@@ -34,7 +34,7 @@
     if ($FlightStore.departureFlight == null) {
       errors.flightSelected = 'Please select a flight first'
       return
-    } else if ($FlightStore.destinationLocationId) {
+    } else if ($FlightStore.retourDate != null) {
       if ($FlightStore.retourFlight == null) {
         errors.flightSelected = 'Please select a flight first'
         return
