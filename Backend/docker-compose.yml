@@ -16,7 +16,7 @@ services:
       - 9999:8080
 
   api:  
-      image: vliegtuigreservatiebackend
+      image: ghcr.io/demetsjelle/vliegtuigreservatiebackend
       build:
         context: .
         dockerfile: Dockerfile
