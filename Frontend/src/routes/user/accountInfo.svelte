@@ -28,7 +28,6 @@
   let userdata: any = {}
   let pw:string
   let cpw:string
-  let test:string = ''
   let loading: boolean = false
 
   onMount(async () => {
@@ -47,21 +46,16 @@
     )
     loading = false
     if (res.success) {
-      //ROBBE FIX LOADING DINGKIE
       succes = true
-      console.log('yeey')
     } else {
       errors.update = 'Please try again something went wrong'
-      console.log('NEEY')
     }
   }
 
   const changeUserData = () => {
     const displayName = `${userdata.Firstname} ${userdata.Lastname}`
-    console.log(userdata.Picture)
     updateProfile(user, {
       displayName: displayName,
-      photoURL: userdata.Picture,
     })
       .then(() => {
         updateEmail(user, userdata.Email)
@@ -130,10 +124,9 @@
 
   const changePassword = async () => {
     updatePassword(auth.currentUser, pw).then(() => {
-      //ROBBE FIX LOADING DINGKIE
       pw = ''
       cpw = ''
-      console.log('yeey')
+      succes = true
     }).catch((error) => {
       if(error.message === 'Firebase: Password should be at least 6 characters (auth/weak-password).')
         errors.updatepw ='Password to weak'
@@ -141,7 +134,6 @@
         errors.updatepw = 'Something went wrong'
       }
       console.log(error.message)
-      
     })  
   }
 
@@ -261,21 +253,6 @@
               <p class="text-red-600 -mt-2 mb-2">{errors.email}</p>
             {/if}
           </div>
-
-          <div class="flex flex-col">
-            <label for="pic" class="mb-2"> Picture </label>
-            <div class="border-b text-dim-gray mb-2 border-current">
-              <input
-                bind:value={userdata.Picture}
-                id="pic"
-                type="url"
-                class=" w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
-              />
-            </div>
-            {#if errors.email}
-              <p class="text-red-600 -mt-2 mb-2">{errors.email}</p>
-            {/if}
-          </div>
         </div>
         {#if loading}
           <Spinner />
@@ -322,57 +299,59 @@
     {/if}
   </section>
 
-  <section class="flex justify-center self-center">
-    <form
-      on:submit|preventDefault={onSubmitPassword} 
-      class="w-4/5 sm:w-3/5 md:w-4/5 lg:w-3/5 bg-white p-8 flex flex-col shadow-md"
-    >
-      <h1 class="text-2xl text-forest-green font-bold text-left mb-4">{$_('accountInfo.intertitle2')}</h1>
-      <div class="flex flex-col">
-        <label for="password" class="mb-2"> {$_('accountInfo.password')} </label>
-        <div class="border-b text-dim-gray mb-2 border-current">
-          <input
-            bind:value={pw}
-            id="password"
-            type="password"
-            class=" w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
-          />
+  {#if succes == false}
+    <section class="flex justify-center self-center">
+      <form
+        on:submit|preventDefault={onSubmitPassword} 
+        class="w-4/5 sm:w-3/5 md:w-4/5 lg:w-3/5 bg-white p-8 flex flex-col shadow-md"
+      >
+        <h1 class="text-2xl text-forest-green font-bold text-left mb-4">{$_('accountInfo.intertitle2')}</h1>
+        <div class="flex flex-col">
+          <label for="password" class="mb-2"> {$_('accountInfo.password')} </label>
+          <div class="border-b text-dim-gray mb-2 border-current">
+            <input
+              bind:value={pw}
+              id="password"
+              type="password"
+              class=" w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+            />
+          </div>
+          {#if errors.newPw}
+            <p class="text-red-600 -mt-2 mb-2">{errors.newPw}</p>
+          {/if}
         </div>
-        {#if errors.newPw}
-          <p class="text-red-600 -mt-2 mb-2">{errors.newPw}</p>
-        {/if}
-      </div>
 
-      <div class="flex flex-col">
-        <label for="cpassword" class="mb-2"> {$_('accountInfo.cPassword')} </label>
-        <div class="border-b text-dim-gray mb-2 border-current">
-          <input
-            bind:value={cpw}
-            id="cpassword"
-            type="password"
-            class=" w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
-          />
+        <div class="flex flex-col">
+          <label for="cpassword" class="mb-2"> {$_('accountInfo.cPassword')} </label>
+          <div class="border-b text-dim-gray mb-2 border-current">
+            <input
+              bind:value={cpw}
+              id="cpassword"
+              type="password"
+              class=" w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
+            />
+          </div>
+          {#if errors.cNewPw}
+            <p class="text-red-600 -mt-2 mb-2">{errors.cNewPw}</p>
+          {/if}
         </div>
-        {#if errors.cNewPw}
-          <p class="text-red-600 -mt-2 mb-2">{errors.cNewPw}</p>
-        {/if}
-      </div>
 
-      <div class="flex justify-center mt-8">
-        <button
-          type="submit"
-          class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-        >
-        {$_('accountInfo.button')}
-        </button>
-      </div>
-      <div class="flex justify-center">
-        {#if errors.updatepw}
-          <p class="text-red-600 -mt-2 mb-2">{errors.updatepw}</p>
-        {/if} 
-      </div>
+        <div class="flex justify-center mt-8">
+          <button
+            type="submit"
+            class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+          >
+          {$_('accountInfo.button')}
+          </button>
+        </div>
+        <div class="flex justify-center">
+          {#if errors.updatepw}
+            <p class="text-red-600 mt-2 mb-2">{errors.updatepw}</p>
+          {/if} 
+        </div>
 
-    </form>
-  </section>
+      </form>
+    </section>
+  {/if}
   
 </section>
