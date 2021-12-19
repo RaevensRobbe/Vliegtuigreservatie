@@ -6,6 +6,15 @@
   import Intertitle from './../../components/Intertitle.svelte'
   import { onMount } from 'svelte'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   let flight = $FlightStore
 
   onMount(async () => {
@@ -49,14 +58,14 @@
     />
   </svg>
 
-  <p class="">Go back</p>
+  <p class="">{$_('flightDate.gobackBtn')}</p>
 </section>
 
 <section class="p-4 px-6 align-start">
   <Intertitle
     titleName={flight.departureCity + ' - ' + flight.destinationCity}
   />
-  <h1 class="text-sm mb-4 md:text-xl">Choose your departure flight</h1>
+  <h1 class="text-sm mb-4 md:text-xl">{$_('flightDate.intertitle1')}</h1>
   <SelectFlightDate
     url={`http://localhost:3001/api/v1/flight/flightInfoBetween/${flight.departureLocationId}/${flight.destinationLocationId}/${flight.departureDate}`}
     retour={false}
@@ -68,7 +77,7 @@
     <Intertitle
       titleName={flight.destinationCity + ' - ' + flight.departureCity}
     />
-    <h1 class="text-sm md:text-xl mb-4">Choose your retour flight</h1>
+    <h1 class="text-sm md:text-xl mb-4">{$_('flightDate.intertitle2')}</h1>
     <SelectFlightDate
       url={`http://localhost:3001/api/v1/flight/flightInfoBetween/${flight.destinationLocationId}/${flight.departureLocationId}/${flight.retourDate}`}
       retour={true}
@@ -77,19 +86,19 @@
 {/if}
 
 <section class="p-4 px-6 align-start">
-  <Intertitle titleName="Passengers" />
+  <Intertitle titleName={$_('flightDate.title2')} />
   <p class="text-sm mb-4 md:text-xl">
-    Please enter names as they appear on passport or travel documentation
+    {$_('flightDate.intertitle3')}
   </p>
   <form on:submit|preventDefault={handleSubmit}>
     {#if $FlightStore.adults}
-      <h1 class="text-forest-green font-bold text-xl">Adults</h1>
+      <h1 class="text-forest-green font-bold text-xl">{$_('flightDate.adults')}</h1>
       {#each { length: $FlightStore.adults } as _, i}
         <PassengerInput adult={true} personnumber={i} />
       {/each}
     {/if}
     {#if $FlightStore.children}
-      <h1 class="text-forest-green font-bold text-xl mt-4">Children</h1>
+      <h1 class="text-forest-green font-bold text-xl mt-4">{$_('flightDate.children')}</h1>
       {#each { length: $FlightStore.children } as _, i}
         <PassengerInput adult={false} personnumber={$FlightStore.adults + i} />
       {/each}
@@ -101,7 +110,7 @@
         class="flex p-4 mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
         onClick={handleSubmit}
       >
-        Continue
+      {$_('flightDate.button1')}
       </button>
     </div>
   </form>

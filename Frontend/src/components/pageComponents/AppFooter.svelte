@@ -1,4 +1,7 @@
 <script>
+  import { setupI18n, locale } from '../../utils/i18n'
+
+  import LocaleSwitcher from './LocaleSwitcher.svelte'
 </script>
 
 <footer
@@ -35,5 +38,9 @@
         &copy; 2021 MCT Airlines. All rights Reserved
       </p>
     </article>
+    <LocaleSwitcher
+        value={$locale}
+        on:locale-changed={e => setupI18n({ withLocale: e.detail }) }
+    />
   </section>
 </footer>

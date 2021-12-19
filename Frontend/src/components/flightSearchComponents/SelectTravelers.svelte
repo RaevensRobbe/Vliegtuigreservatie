@@ -1,6 +1,14 @@
 <script type="ts">
   import { FlightStore } from './../../stores/FlightStore'
   import { fade, scale } from 'svelte/transition'
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
 
   export let toggleTravelers: boolean
   export let children: number
@@ -43,8 +51,8 @@
     <div class="bg-white rounded-xl shadow-md p-2">
       <div class="flex justify-between items-end mb-2">
         <div class="mr-4">
-          <p class="text-lg font-bold text-forest-green">Adults</p>
-          <p class="text-xs">16+ years at the time of flight</p>
+          <p class="text-lg font-bold text-forest-green">{$_('selectTravelers.adult')}</p>
+          <p class="text-xs">{$_('selectTravelers.adulttxt')}</p>
         </div>
         <div class="flex gap-2 align-bottom">
           <div
@@ -74,8 +82,8 @@
       </div>
       <div class="flex justify-between items-end mb-2">
         <div>
-          <p class="text-lg font-bold text-forest-green">Children</p>
-          <p class="text-xs">-16 at the time of flight</p>
+          <p class="text-lg font-bold text-forest-green">{$_('selectTravelers.children')}</p>
+          <p class="text-xs">{$_('selectTravelers.childrentxt')}</p>
         </div>
         <div class="flex gap-2 align-bottom">
           <div
@@ -103,7 +111,7 @@
         class="flex justify-end pr-2 text-lg font-bold text-forest-green cursor-pointer"
         on:click={showTravelers}
       >
-        Done
+        {$_('selectTravelers.button')}
       </p>
     </div>
   </div>

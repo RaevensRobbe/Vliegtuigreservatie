@@ -11,6 +11,16 @@
   import { goto } from '$app/navigation'
   import Spinner from '../animations/spinner.svelte'
   import { post } from '../../utils/useApi'
+
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   let number: string
   let name: string = ''
   let cvc: string = ''
@@ -247,7 +257,7 @@
     >
       <div class="flex justify-between mb-4">
         <h1 class=" text-xl md:text-2xl text-forest-green">
-          Complete transaction
+          {$_('paywall.title')}
         </h1>
         <svg
           on:click={showPaywall}
@@ -268,7 +278,7 @@
         class=" w-3/4 mx-auto my-4"
         alt="Debit credit card"
       />
-      <label for="ccn" class="font-bold">Card number</label>
+      <label for="ccn" class="font-bold">{$_('paywall.cardNr')}</label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={number}
@@ -285,7 +295,7 @@
         <p class="text-red-600 -mt-2 mb-2">{errors.number}</p>
       {/if}
 
-      <label for="name" class="font-bold">Cardholder Name</label>
+      <label for="name" class="font-bold">{$_('paywall.cardHolder')}</label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={name}
@@ -299,7 +309,7 @@
       {/if}
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <label for="expiry" class="font-bold">Expiry date</label>
+          <label for="expiry" class="font-bold">{$_('paywall.expiry')}</label>
           <div class="border-b text-dim-gray mb-2 border-current">
             <input
               bind:value={expiry}
@@ -316,7 +326,7 @@
           {/if}
         </div>
         <div>
-          <label for="securityCode" class="font-bold">Security code</label>
+          <label for="securityCode" class="font-bold">{$_('paywall.security')}</label>
           <div class="border-b text-dim-gray mb-2 border-current">
             <input
               bind:value={cvc}
@@ -339,7 +349,7 @@
           type="submit"
           class="flex mx-auto mt-2 p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
         >
-          Confirm payment
+        {$_('paywall.button1')}
         </button>
         {#if errors.transaction}
           <p class="text-red-600 -mt-2 mb-2">{errors.transaction}</p>

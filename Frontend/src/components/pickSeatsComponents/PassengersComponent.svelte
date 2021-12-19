@@ -3,6 +3,16 @@
   import { travelerStore } from '../../stores/travelerStore'
   import { fade, scale } from 'svelte/transition'
   import { onMount } from 'svelte';
+
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   export let fN: string
   export let lN: string
   export let seatNrDep: string
@@ -115,11 +125,11 @@
         {lN}
       </h1>
       {#if selectedSeat[index] === undefined}
-        <p class="text-tomato-red text-sm md:text-base">Select your seat</p>
+        <p class="text-tomato-red text-sm md:text-base">{$_('pickSeats.selectSeat')}</p>
       {:else if seatSelected}
-        <p class="text-cyprus-green text-sm md:text-base">Seat selected</p>
+        <p class="text-cyprus-green text-sm md:text-base">{$_('pickSeats.seatSelected')}</p>
       {:else}
-        <p class="text-tomato-red text-sm md:text-base">Select your seat</p>
+        <p class="text-tomato-red text-sm md:text-base">{$_('pickSeats.selectSeat')}</p>
       {/if}
     </div>
   </div>

@@ -1,0 +1,226 @@
+{
+    "home": {
+        "popular": "Popular destinations"
+    },
+    "header": {
+        "bookings": "My bookings",
+        "admin": "Admin overview",
+        "edit":"Edit Account",
+        "signOut":"Sign Out",
+        "login":"Login"
+    },
+    "headerDropdown": {
+        "edit": "Edit Account",
+        "signOut": "Sign Out"
+    },
+    "loginOverlay": {
+        "email":"Email",
+        "password":"Password",
+        "forgot":"Forgot password",
+        "login":"Login",
+        "google":"Sign in with Google",
+        "acc":"No account yet?",
+        "register":"Register",
+        "psPlace":"Enter Password"
+    },
+    "registerOverlay": {
+        "email":"Email",
+        "firstname":"First name",
+        "lastname":"Last name",
+        "password":"Password",
+        "cPassword":"Confirm Password",
+        "register":"Register",
+        "already":"Already have an account?",
+        "login":"Login",
+        "fnPlace":"Enter first name",
+        "lnPlace":"Enter last name",
+        "psPlace":"Enter password",
+        "cPsPlace":"Confirm password"
+    },
+    "flightSearch":{
+        "from":"From",
+        "to":"To",
+        "departure":"Departure",
+        "destination":"Destination",
+        "retour":"Retour",
+        "travelers":"Travelers",
+        "adults":"Adults",
+        "children":"Children",
+        "search":"Search"
+    },
+    "accountInfo":{
+        "backButton":"Go back",
+        "title":"Edit account details",
+        "intertitle1":"Change userdata",
+        "firstname":"First name",
+        "lastname":"Last name",
+        "email":"Email",
+        "button":"Change",
+        "intertitle2":"Change password",
+        "password":"New Password",
+        "cPassword":"Confirm new password",
+        "succes":"User succefully updated"
+    },
+    "bookings":{
+        "title1":"Futue bookings",
+        "title2":"Previous bookings",
+        "no":"No",
+        "bookings":"bookings found"
+    },
+    "flightsComponent":{
+        "ticketsBtn":"See tickets",
+        "editFlightBtn":"Edit flight",
+        "showReviewsBtn":"Show reviews"
+    },
+    "flightDate":{
+        "gobackBtn":"Go back",
+        "intertitle1":"Choose your departure flight",
+        "intertitle2":"Choos your retour flight",
+        "title2":"Passengers",
+        "intertitle3":"Please enter names as they appear on passport or travel documentation",
+        "adults":"Adults",
+        "children":"Children",
+        "title":"Title",
+        "titlePlace":"Select your title",
+        "firstname":"First name",
+        "lastname":"Last name",
+        "fnPlace":"Enter your first name",
+        "lnPlace":"Enter your last name",
+        "button1":"Continue",
+        "noFlight":"No flight",
+        "noData":"No flights found between",
+        "and":"and",
+        "loading":"Loading"
+    },
+    "pickSeats":{
+        "gobackBtn":"Go back",
+        "title":"Select your seat",
+        "passengers":"Passengers",
+        "selectSeat":"Select your seat",
+        "seatSelected":"Seat selected",
+        "button1":"Continue",
+        "button2":"Next flight",
+        "legend1":"Unavailable",
+        "legend2":"Available",
+        "legend3":"Selected",
+        "class1":"Business class",
+        "class2":"Economy class"
+    },
+    "flightOverview":{
+        "gobackBtn":"Go back",
+        "title":"Overview",
+        "total":"Total",
+        "button1":"Go to payment"
+    },
+    "paywall":{
+        "title":"Complete transaction",
+        "cardNr":"Card number",
+        "cardHolder":"Cardholder Name",
+        "expiry":"Expiry date",
+        "security":"Security code",
+        "button1":"Confirm payment"
+    },
+    "ticket":{
+        "title":"Tickets",
+        "name":"Passenger name",
+        "from":"From",
+        "to":"To",
+        "date":"Date",
+        "flight":"Flight",
+        "gate":"Gate",
+        "time":"Time",
+        "seat":"Seat",
+        "boarding":"Board till",
+        "pass":"Boarding pass"
+    },
+    "adminOverview":{
+        "title":"All upcoming flights",
+        "button1":"Add flight",
+        "button2":"Add admin",
+        "button3":"Reviews",
+        "searchPlace":"Search flight number",
+        "searchBtn":"Search",
+        "editBtn":"Edit flight",
+        "noFlights":"No flights found",
+        "allFlights":"Show all flights",
+        "reviewBtn":"Reviews",
+        "taken":"Taken"
+    },
+    "editFlight":{
+        "gobackBtn":"Go back",
+        "title":"Edit flight",
+        "flightName":"Flight name",
+        "plane":"Plane",
+        "gate":"Gate",
+        "departureAirport":"Departure Airport",
+        "destinationAirport":"Destination Airport",
+        "departureTime":"Departure time",
+        "button1":"Edit flight"
+    },
+    "addAdmin":{
+        "gobackBtn":"Go back",
+        "title":"Add a new admin",
+        "email":"Email",
+        "emailPlace":"name@acme.com",
+        "firstname":"First Name",
+        "fnPlace":"Enter first name",
+        "lastname":"Last Name",
+        "lnPlace":"Enter last name",
+        "password":"Password",
+        "psPlace":"Enter password",
+        "cPassword":"Confirm password",
+        "button":"Create admin",
+        "button2":"Add another admin",
+        "succes":"Admin succesfully added"
+    },
+    "addFlight":{
+        "gobackBtn":"Go back",
+        "title":"Add a new flight",
+        "flightName":"Flight name",
+        "fnPlace":"Enter flight name",
+        "plane":"Plane",
+        "planePlace":"Select the plane",
+        "gate":"Gate",
+        "gatePlace":"Enter gate number",
+        "departureAirport":"Departure Airport",
+        "airportPlace":"Select the airport",
+        "destinationAirport":"Destination Airport",
+        "departureTime":"Departure time",
+        "price":"Price",
+        "pricePlace":"Enter the price",
+        "highSeason":"HighSeason(price * 1.75)",
+        "button1":"Add flight",
+        "succes":"Flight succesfully added",
+        "another":"Add another flight"
+    },
+    "reviews":{
+        "searchBtn":"Search",
+        "searchPlace":"Search flight number",
+        "title":"Reviews",
+        "button1":"Upcoming flights",
+        "noFlights":"No flights found",
+        "allFlights":"Show all flights",
+        "gobackBtn":"Go back",
+        "flight":"Flight: "
+    },
+    "addReview":{
+        "title1":"Give a review",
+        "intertitle1":"Overall Rating",
+        "intertitle2":"Write your review",
+        "button":"Submit review",
+        "title2":"Your review",
+        "gobackBtn":"Go back"
+    },
+    "selectTravelers":{
+        "adult":"Adults",
+        "adulttxt":"16+ years at the time of flight",
+        "children":"Children",
+        "childrentxt":"-16 at the time of flight",
+        "button":"Done"
+    },
+    "selectLocation":{
+        "pickCountry":"Choose a country",
+        "pickAirport":"Pick an airport",
+        "pickCountryFirst":"Pick a country first"
+    }
+ }

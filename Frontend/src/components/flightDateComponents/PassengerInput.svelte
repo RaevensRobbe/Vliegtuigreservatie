@@ -1,6 +1,15 @@
 <script lang="ts">
   import { travelerStore } from './../../stores/travelerStore'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   export let adult: boolean
   export let personnumber: number
   //object errors add errors in here otherwise delete them
@@ -74,7 +83,7 @@
     class="grid grid-rows-3 md:mx-6 sm:grid-cols-3 sm:gap-4 sm:grid-rows-1 bg-white shadow-md p-2 mt-2 focus:ring-forest-green"
   >
     <div class="flex flex-col">
-      <label for="title{personnumber}" class="font-bold">Title</label>
+      <label for="title{personnumber}" class="font-bold">{$_('flightDate.title')}</label>
       <select
         id="title{personnumber}"
         bind:value
@@ -83,7 +92,7 @@
         required
       >
         <option value="null" selected disabled class="bg-gray-100"
-          >Select your title</option
+          >{$_('flightDate.titlePlace')}</option
         >
         {#each titles as title}
           <option value={title}>
@@ -94,7 +103,7 @@
     </div>
     <div>
       <div>
-        <label for="FirstName{personnumber}" class="font-bold">First name</label
+        <label for="FirstName{personnumber}" class="font-bold">{$_('flightDate.firstname')}</label
         >
       </div>
       <div class="border-b text-dim-gray mb-2 border-current">
@@ -103,21 +112,21 @@
           on:change={() => setStorage('FirstName')}
           id="FirstName{personnumber}"
           type="text"
-          placeholder="insert your first name"
+          placeholder={$_('flightDate.fnPlace')}
           class="w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
           required
         />
       </div>
     </div>
     <div>
-      <label class="font-bold " for="LastName{personnumber}">Last name</label>
+      <label class="font-bold " for="LastName{personnumber}">{$_('flightDate.lastname')}</label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={lastName}
           on:change={() => setStorage('LastName')}
           id="LastName{personnumber}"
           type="text"
-          placeholder="insert your last name"
+          placeholder={$_('flightDate.lnPlace')}
           class="w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
           required
         />
@@ -130,7 +139,7 @@
   >
     <div>
       <div>
-        <label class="font-bold" for="FirstName{personnumber}">First name</label
+        <label class="font-bold" for="FirstName{personnumber}">{$_('flightDate.firstname')}</label
         >
       </div>
       <div class="border-b text-dim-gray mb-2 border-current">
@@ -139,20 +148,20 @@
           on:change={() => setStorage('FirstName')}
           id="FirstName{personnumber}"
           type="text"
-          placeholder="insert your first name"
+          placeholder={$_('flightDate.fnPlace')}
           class="w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>
     </div>
     <div>
-      <label class="font-bold " for="LastName{personnumber}">Last name</label>
+      <label class="font-bold " for="LastName{personnumber}">{$_('flightDate.lastname')}</label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={lastName}
           on:change={() => setStorage('LastName')}
           id="LastName{personnumber}"
           type="text"
-          placeholder="insert your last name"
+          placeholder={$_('flightDate.lnPlace')}
           class="w-full py-1 focus:outline-none focus:ring focus:ring-forest-green text-sm md:text-md"
         />
       </div>

@@ -9,6 +9,14 @@
   import { goto } from '$app/navigation'
   import authStore from '../../stores/authStore'
   import FlightList from '../../components/adminComponents/flightList.svelte'
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
 
   let flights: Array<Flight> = []
   let flightsLoaded: boolean = false
@@ -53,14 +61,14 @@
         <input
           type="text"
           bind:value={flightNumber}
-          placeholder="Search flight number"
+          placeholder= {$_('reviews.searchPlace')}
           class="p-4 rounded-l-xl"
         />
       </div>
       <button
         class="bg-forest-green text-white font-bold text-2xl p-4 rounded-r-xl hover:bg-cyprus-green cursor-pointer"
       >
-        Search
+        {$_('reviews.searchBtn')}
       </button>
     </form>
   </section>
@@ -70,11 +78,11 @@
       class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
       on:click={goBack}
     >
-      Show flights
+      {$_('reviews.button1')}
     </button>
   </section>
   <section class="m-4 px-6">
-    <Intertitle titleName="Reviews" />
+    <Intertitle titleName= {$_('reviews.title')} />
     <div class="max-h-1/2 overflow-x-hidden overflow-y-scroll custom-scroll">
       {#if searchIsActive}
         {#if specificFlightData}
@@ -82,7 +90,7 @@
         {:else}
           <div class="flex justify-center m-8">
             <h1 class="text-lg font-bold text-forest-green">
-              No flights found
+              {$_('reviews.noFlights')}
             </h1>
           </div>
         {/if}
@@ -105,7 +113,7 @@
             specificFlightData = null
           }}
         >
-          Show all flights
+          {$_('reviews.allFlights')}
         </button>
       </div>
     {/if}

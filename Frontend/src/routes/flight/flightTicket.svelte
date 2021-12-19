@@ -7,6 +7,15 @@
   import { get } from '../../utils/useApi'
   import Spinner from '../../components/animations/spinner.svelte'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   let travelers: any = $travelerStore
   let departureFlightData: any
   let retourFlightData: any
@@ -26,7 +35,7 @@
 </script>
 
 <section class="m-4 px-6 ">
-  <Intertitle titleName="Tickets" />
+  <Intertitle titleName={$_('ticket.title')} />
   {#if loaded}
     {#each travelers as traveler}
       <Ticket

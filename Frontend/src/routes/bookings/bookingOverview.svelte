@@ -10,6 +10,15 @@
   import NoBooking from './../../components/bookingOverviewComponents/noBooking.svelte'
   import { BookingStore } from './../../stores/overviewBookingStore'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   let loaded = false
   let bookings: any = []
 
@@ -41,7 +50,7 @@
 
 {#if loaded}
   <section class="m-4 px-6">
-    <Intertitle titleName="Future bookings" />
+    <Intertitle titleName= {$_('bookings.title1')} />
     {#if futureBookings.length > 0}
       {#each futureBookings as booking}
         <BookingFlight flightData={booking} booking={true} />
@@ -52,7 +61,7 @@
   </section>
 
   <section class="m-4 px-6">
-    <Intertitle titleName="Previous bookings" />
+    <Intertitle titleName= {$_('bookings.title2')} />
     {#if previousBookings.length > 0}
       {#each previousBookings as booking}
         {#if new Date(booking.Date).getFullYear() >= $BookingStore.previousYear}

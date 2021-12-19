@@ -5,6 +5,15 @@
   import { editStore } from '../../stores/editStore'
   import { getTouchdownTime } from './../../utils/calculateDistance'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   export let flightData: any
   export let review: boolean
   console.log(flightData)
@@ -143,17 +152,17 @@
       <p class="text-lg">{flightData.Destination.Name}</p>
     </div>
     <div class="my-auto">
-      <p class="text-lg {color}">{occupation} taken</p>
+      <p class="text-lg {color}">{occupation} {$_('adminOverview.taken')}</p>
     </div>
   </div>
 
   {#if review}
     <p class=" flex font-bold text-lg lg:text-2xl justify-center my-auto">
-      See reviews
+      {$_('adminOverview.reviewBtn')}
     </p>
   {:else}
     <p class=" flex font-bold text-lg lg:text-2xl justify-center my-auto">
-      Edit flight
+      {$_('adminOverview.editBtn')}
     </p>
   {/if}
 </div>

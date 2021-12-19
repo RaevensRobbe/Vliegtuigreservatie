@@ -1,6 +1,16 @@
 <script lang="ts">
   import StarRating from './starRating.svelte'
   import { put } from '../../utils/useApi'
+
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   export let flight
   export let givenRating: number
   export let givenReview: string
@@ -36,11 +46,11 @@
   on:submit|preventDefault={handleSubmit}
 >
   <div>
-    <h1 class="text-xl font-bold">Overal Rating</h1>
+    <h1 class="text-xl font-bold"> {$_('addReview.intertitle1')} </h1>
     <StarRating bind:ratingScore={rating} {givenRating} />
   </div>
   <div>
-    <h1 class="text-xl font-bold">Write your review</h1>
+    <h1 class="text-xl font-bold"> {$_('addReview.intertitle2')} </h1>
     {#if givenReview}
       <textarea
         bind:value={givenReview}
@@ -61,7 +71,7 @@
         type="submit"
         class="flex p-4 justify-center items-center font-bold text-lg text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
       >
-        Submit review
+        {$_('addReview.button')}
       </button>
     </div>
   {/if}

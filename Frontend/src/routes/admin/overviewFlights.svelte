@@ -12,6 +12,15 @@
   import FlightList from '../../components/adminComponents/flightList.svelte'
   import { AllUpcoming } from './../../stores/allUpcomingStore'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   let flights: Array<Flight> = []
   let flightsLoaded: boolean = false
   let specificFlightData: Flight
@@ -72,14 +81,14 @@
         <input
           type="text"
           bind:value={flightNumber}
-          placeholder="Search flight number"
+          placeholder={$_('adminOverview.searchPlace')}
           class="p-4 rounded-l-xl"
         />
       </div>
       <button
         class="bg-forest-green text-white font-bold text-2xl p-4 rounded-r-xl hover:bg-cyprus-green cursor-pointer"
       >
-        Search
+      {$_('adminOverview.searchBtn')}
       </button>
     </form>
   </section>
@@ -88,24 +97,24 @@
       class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
       on:click={addFlight}
     >
-      Add flight
+      {$_('adminOverview.button1')}
     </button>
     <button
       class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
       on:click={addAdmin}
     >
-      Add admin
+      {$_('adminOverview.button2')}
     </button>
     <button
       class="flex p-4 justify-center items-center font-bold text-xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
       on:click={goToReviews}
     >
-      Reviews
+      {$_('adminOverview.button3')}
     </button>
   </section>
 
   <section class="m-4 px-6">
-    <Intertitle titleName="All upcoming flights" />
+    <Intertitle titleName={$_('adminOverview.title')} />
     <div class="max-h-1/2 overflow-x-hidden overflow-y-scroll custom-scroll">
       {#if searchIsActive}
         {#if specificFlightData}
@@ -113,7 +122,7 @@
         {:else}
           <div class="flex justify-center m-8">
             <h1 class="text-lg font-bold text-forest-green">
-              No flights found
+              {$_('adminOverview.noFlights')}
             </h1>
           </div>
         {/if}
@@ -145,7 +154,7 @@
             specificFlightData = null
           }}
         >
-          Show all flights
+          {$_('adminOverview.allFlights')}
         </button>
       </div>
     {/if}

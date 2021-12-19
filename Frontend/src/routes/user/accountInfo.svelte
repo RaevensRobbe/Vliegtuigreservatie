@@ -11,6 +11,15 @@
   import { goto } from '$app/navigation'
   import { fade, scale } from 'svelte/transition'
 
+  import { _ , locale} from '../../utils/i18n'
+  import { init } from 'svelte-i18n';
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   const auth = getAuth()
   const user = auth.currentUser
 
@@ -168,7 +177,7 @@
   }
 
   function goBack() {
-    goto('/index.svelte')
+    goto('/')
   }
 </script>
 
@@ -194,10 +203,10 @@
       />
     </svg>
 
-    <p class="">Go back</p>
+    <p class="">{$_('accountInfo.backButton')}</p>
   </section>
 
-  <Intertitle titleName="Edit account details" />
+  <Intertitle titleName={$_('accountInfo.title')} />
 
   <section class="flex justify-center self-center">
     {#if succes === false}
@@ -205,10 +214,10 @@
         on:submit|preventDefault={onSubmit}
         class="w-4/5 sm:w-3/5 md:w-4/5 lg:w-3/5 bg-white p-8 flex flex-col shadow-md"
       >
-        <h1 class="text-2xl text-forest-green font-bold text-left mb-4">Change userdata</h1>
+        <h1 class="text-2xl text-forest-green font-bold text-left mb-4">{$_('accountInfo.intertitle1')}</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="flex flex-col">
-            <label for="firstname" class="mb-2 font-bold"> First name </label>
+            <label for="firstname" class="mb-2 font-bold"> {$_('accountInfo.firstname')} </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <input
                 bind:value={userdata.Firstname}
@@ -224,7 +233,7 @@
           </div>
 
           <div class="flex flex-col">
-            <label for="lastname" class="mb-2 font-bold"> Last name </label>
+            <label for="lastname" class="mb-2 font-bold"> {$_('accountInfo.lastname')} </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <input
                 bind:value={userdata.Lastname}
@@ -239,7 +248,7 @@
           </div>
 
           <div class="flex flex-col">
-            <label for="email" class="mb-2 font-bold"> Email </label>
+            <label for="email" class="mb-2 font-bold"> {$_('accountInfo.email')} </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <input
                 bind:value={userdata.Email}
@@ -276,7 +285,7 @@
               type="submit"
               class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
             >
-              Change
+            {$_('accountInfo.button')}
             </button>
           </div>
           <div class="flex justify-center">
@@ -301,11 +310,11 @@
               />
             </g></svg
           >
-          <p class="text-lg lg:text-2xl">User succefully updated</p>
+          <p class="text-lg lg:text-2xl">{$_('accountInfo.succes')}</p>
           <div class="flex flex-col md:flex-row md:gap-4">
             <button
               class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-md lg:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-              on:click={goBack}>Go back</button
+              on:click={goBack}>{$_('accountInfo.backButton')}</button
             >
           </div>
         </div>
@@ -318,9 +327,9 @@
       on:submit|preventDefault={onSubmitPassword} 
       class="w-4/5 sm:w-3/5 md:w-4/5 lg:w-3/5 bg-white p-8 flex flex-col shadow-md"
     >
-      <h1 class="text-2xl text-forest-green font-bold text-left mb-4">Change password</h1>
+      <h1 class="text-2xl text-forest-green font-bold text-left mb-4">{$_('accountInfo.intertitle2')}</h1>
       <div class="flex flex-col">
-        <label for="password" class="mb-2"> New password </label>
+        <label for="password" class="mb-2"> {$_('accountInfo.password')} </label>
         <div class="border-b text-dim-gray mb-2 border-current">
           <input
             bind:value={pw}
@@ -335,7 +344,7 @@
       </div>
 
       <div class="flex flex-col">
-        <label for="cpassword" class="mb-2"> Confirm password </label>
+        <label for="cpassword" class="mb-2"> {$_('accountInfo.cPassword')} </label>
         <div class="border-b text-dim-gray mb-2 border-current">
           <input
             bind:value={cpw}
@@ -354,7 +363,7 @@
           type="submit"
           class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
         >
-          Change
+        {$_('accountInfo.button')}
         </button>
       </div>
       <div class="flex justify-center">

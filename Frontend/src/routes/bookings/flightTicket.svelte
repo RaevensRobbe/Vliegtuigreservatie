@@ -9,6 +9,15 @@
   import Review from '../../components/bookingOverviewComponents/review.svelte'
   import { goto } from '$app/navigation'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   let ticketData: any
   let travelerData: any = []
   let flightData: any
@@ -58,7 +67,7 @@
     />
   </svg>
 
-  <p class="">Go back</p>
+  <p class="">{$_('addReview.gobackBtn')}</p>
 </section>
 <section class="m-4 px-6 ">
   <Intertitle titleName="Tickets" />
@@ -75,9 +84,9 @@
 {#if loaded}
   <section class="m-4 px-6">
     {#if ticketData.Review}
-      <Intertitle titleName="Your review" />
+      <Intertitle titleName= {$_('addReview.title1')} />
     {:else}
-      <Intertitle titleName="Give a review" />
+      <Intertitle titleName= {$_('addReview.title2')} />
     {/if}
     <Review
       flight={$bookingTicket.ticketId}

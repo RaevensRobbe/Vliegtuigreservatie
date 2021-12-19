@@ -19,6 +19,15 @@
     requiredNumber,
   } from '../../utils/inputValidator'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   let flightData: any = $editStore[0]
   console.log($editStore)
 
@@ -186,9 +195,9 @@
       />
     </svg>
 
-    <p class="">Go back</p>
+    <p class="">{$_('editFlight.gobackBtn')}</p>
   </section>
-  <Intertitle titleName="Add a new flight" />
+  <Intertitle titleName={$_('editFlight.title')} />
   {#if succes === false}
     {#if loaded}
       <form in:fade>
@@ -197,7 +206,7 @@
         >
           <!-- Flight name -->
           <div class="flex flex-col">
-            <label for="flightName" class="font-bold"> Flight name </label>
+            <label for="flightName" class="font-bold"> {$_('editFlight.flightName')} </label>
             <div
               class="border-b-2 border-t-2 text-gray-200 mb-2 border-current"
             >
@@ -213,7 +222,7 @@
           </div>
           <!-- Plane -->
           <div class="flex flex-col">
-            <label for="plane" class="font-bold"> Plane </label>
+            <label for="plane" class="font-bold"> {$_('editFlight.plane')} </label>
             <select
               id="plane"
               bind:value={plane}
@@ -239,7 +248,7 @@
           </div>
           <!-- Gate -->
           <div class="flex flex-col">
-            <label for="gate" class="font-bold"> Gate </label>
+            <label for="gate" class="font-bold"> {$_('editFlight.gate')} </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <input
                 bind:value={gate}
@@ -256,7 +265,7 @@
           <!-- Departure airport -->
           <div class="flex flex-col">
             <label for="departureAirport" class="font-bold">
-              Departure airport
+              {$_('editFlight.departureAirport')}
             </label>
             <select
               id="departureAirport"
@@ -280,7 +289,7 @@
           <!-- Destination airport -->
           <div class="flex flex-col">
             <label for="departureAirport" class="font-bold">
-              Destination airport
+              {$_('editFlight.destinationAirport')}
             </label>
             <select
               id="departureAirport"
@@ -303,7 +312,7 @@
           <!-- Departure time -->
           <div class="flex flex-col">
             <label for="departureTime" class="font-bold">
-              Departure time
+              {$_('editFlight.departureTime')}
             </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <input type="date" bind:value={date} />
@@ -352,7 +361,7 @@
               type="button"
               class="flex p-4 mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
             >
-              Edit flight
+            {$_('editFlight.button1')}
             </button>
             <!-- <button
               on:click={deleteFlight}
@@ -392,7 +401,7 @@
         <div class="flex flex-col md:flex-row md:gap-4">
           <button
             class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-md lg:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-            on:click={goBack}>Go back</button
+            on:click={goBack}>{$_('editFlight.gobackBtn')}</button
           >
         </div>
       </div>

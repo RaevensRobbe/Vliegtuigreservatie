@@ -1,4 +1,13 @@
 <script lang="ts">
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   export let travelerData: any
   export let flightData: any
   export let retour: boolean
@@ -56,13 +65,13 @@
     </h1>
     <div class="col-span-4 md:col-span-2 my-auto">
       <div class="p-4 grid grid-rows-2 justify-items-end text-right">
-        <p>Boarding pass</p>
+        <p>{$_('ticket.pass')}</p>
         <p>{flightClass}</p>
       </div>
     </div>
     <div class="col-span-2 border-l-2 border-dashed hidden md:grid">
       <div class="p-4 grid grid-rows-2">
-        <p>Boarding pass</p>
+        <p>{$_('ticket.pass')}</p>
         <p>{flightClass}</p>
       </div>
     </div>
@@ -71,18 +80,18 @@
     <div class="col-span-7 md:col-span-3 p-4">
       <div class="grid grid-rows-3 gap-4">
         <div>
-          <p class="text-sm">Passenger name</p>
+          <p class="text-sm">{$_('ticket.name')}</p>
           <p class="text-black uppercase text-xl">
             {travelerData.firstName}
             {travelerData.lastName}
           </p>
         </div>
         <div>
-          <p class="text-sm">From</p>
+          <p class="text-sm">{$_('ticket.from')}</p>
           <p class="text-black uppercase text-xl">{flightData.Start.Name}</p>
         </div>
         <div>
-          <p class="text-sm">To</p>
+          <p class="text-sm">{$_('ticket.to')}</p>
           <p class="text-black uppercase text-xl">
             {flightData.Destination.Name}
           </p>
@@ -119,31 +128,31 @@
       <div class="grid grid-rows-3 gap-4">
         <div class="grid grid-cols-2">
           <div>
-            <p class="text-sm">Date</p>
+            <p class="text-sm">{$_('ticket.date')}</p>
             <p class="text-black uppercase text-xl">{formatedDate}</p>
           </div>
           <div>
-            <p class="text-sm">Time</p>
+            <p class="text-sm">{$_('ticket.time')}</p>
             <p class="text-black uppercase text-xl">{getDepartureTime()}</p>
           </div>
         </div>
         <div class="grid grid-cols-2">
           <div>
-            <p class="text-sm">Flight</p>
+            <p class="text-sm">{$_('ticket.flight')}</p>
             <p class="text-black uppercase text-xl">{flightData.Name}</p>
           </div>
           <div>
-            <p class="text-sm">Seat</p>
+            <p class="text-sm">{$_('ticket.seat')}</p>
             <p class="text-black uppercase text-xl">{seat}</p>
           </div>
         </div>
         <div class="grid grid-cols-2">
           <div>
-            <p class="text-sm">Gate</p>
+            <p class="text-sm">{$_('ticket.gate')}</p>
             <p class="text-black uppercase text-xl">{flightData.Gate}</p>
           </div>
           <div>
-            <p class="text-sm">Board till</p>
+            <p class="text-sm">{$_('ticket.boarding')}</p>
             <p class="text-black uppercase text-xl">{boardingTime}</p>
           </div>
         </div>
@@ -154,45 +163,45 @@
     >
       <div class="grid grid-rows-3 gap-4">
         <div>
-          <p class="text-sm">Passenger name</p>
+          <p class="text-sm">{$_('ticket.name')}</p>
           <p class="text-black uppercase">
             {travelerData.firstName}
             {travelerData.lastName}
           </p>
         </div>
         <div>
-          <p class="text-sm">From</p>
-          <p class="text-black uppercase">BRUSSEL-ZAVENTEM</p>
+          <p class="text-sm">{$_('ticket.from')}</p>
+          <p class="text-black uppercase">{flightData.Start.Name}</p>
         </div>
         <div>
-          <p class="text-sm">To</p>
-          <p class="text-black uppercase">Milan Malpensa</p>
+          <p class="text-sm">{$_('ticket.to')}</p>
+          <p class="text-black uppercase">{flightData.Destination.Name}</p>
         </div>
         <div class="grid grid-cols-3">
           <div>
-            <p class="text-sm">Time</p>
+            <p class="text-sm">{$_('ticket.time')}</p>
             <p class="text-black uppercase">{departureTime}</p>
           </div>
           <div>
-            <p class="text-sm">Seat</p>
+            <p class="text-sm">{$_('ticket.seat')}</p>
             <p class="text-black uppercase">{seat}</p>
           </div>
           <div>
-            <p class="text-sm">Board till</p>
+            <p class="text-sm">{$_('ticket.boarding')}</p>
             <p class="text-black uppercase">{boardingTime}</p>
           </div>
         </div>
         <div class="grid grid-cols-3">
           <div>
-            <p class="text-sm">Gate</p>
+            <p class="text-sm">{$_('ticket.gate')}</p>
             <p class="text-black uppercase">{flightData.Gate}</p>
           </div>
           <div>
-            <p class="text-sm">Date</p>
+            <p class="text-sm">{$_('ticket.date')}</p>
             <p class="text-black uppercase">{formatedDate}</p>
           </div>
           <div>
-            <p class="text-sm">Flight</p>
+            <p class="text-sm">{$_('ticket.flight')}</p>
             <p class="text-black uppercase">{flightData.Name}</p>
           </div>
         </div>

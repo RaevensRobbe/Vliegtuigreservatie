@@ -9,6 +9,15 @@
   import authStore from '../../stores/authStore'
   import Paywall from '../..//components/flightOverviewComponents/Paywall.svelte'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   //@ts-nocheck
   let retour: boolean = false
   if ($FlightStore.retourFlight != null) {
@@ -110,11 +119,11 @@
     />
   </svg>
 
-  <p class="">Go back</p>
+  <p class="">{$_('flightOverview.gobackBtn')}</p>
 </section>
 
 <section class="p-4 px-6 align-start">
-  <Intertitle titleName="Overview" />
+  <Intertitle titleName= {$_('flightOverview.title')} />
   <div class="flex flex-col bg-white shadow-md mx-6">
     <div class="grid {retour ? 'lg:grid-cols-2' : 'lg:grid-cols-1'} ">
       <FlightOverviewItem retour={false} />
@@ -124,7 +133,7 @@
     </div>
     <div class="border-t-1">
       <p class="m-4 text-2xl text-cyprus-green font-bold">
-        Total: €{calculatePrice()}
+        {$_('flightOverview.total')}: €{calculatePrice()}
       </p>
     </div>
   </div>
@@ -136,7 +145,7 @@
     class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
     on:click={handleSubmit}
   >
-    Go to payment
+  {$_('flightOverview.button1')}
   </button>
 </section>
 
