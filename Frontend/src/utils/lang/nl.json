@@ -142,7 +142,7 @@
         "searchBtn":"Zoeken",
         "editBtn":"Aanpassen",
         "noFlights":"Geen vluchten gevonden",
-        "allFlights":"Show all flights",
+        "allFlights":"Toon alle vluchten",
         "reviewBtn":"Reviews",
         "taken":"Bezet"
     },
@@ -172,5 +172,25 @@
         "button":"Aanmaken",
         "button2":"Voeg nog een admin toe",
         "succes":"Succesvol toegevoegd"
+    },
+    "addFlight":{
+        "gobackBtn":"Terug",
+        "title":"Nieuwe vlucht toevoegen",
+        "flightName":"Vluchtnaam",
+        "fnPlace":"Geef vluchtnaam in",
+        "plane":"Vliegtuig",
+        "planePlace":"Selecteer het vliegtuig",
+        "gate":"Gate",
+        "gatePlace":"Geef gatenummer in",
+        "departureAirport":"Vertrek luchthaven",
+        "airportPlace":"Selecteer de luchthaven",
+        "destinationAirport":"Aankomst luchthaven",
+        "departureTime":"Vertrek tijd",
+        "price":"Prijs",
+        "pricePlace":"Geef de prijs in",
+        "highSeason":"Hoogseizoen(prijs * 1.75)",
+        "button1":"Vlucht toevoegen",
+        "succes":"Vlucht succesvol toegevoegd",
+        "another":"Voeg nog een vlucht toe"
     }
  }

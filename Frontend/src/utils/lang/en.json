@@ -172,5 +172,25 @@
         "button":"Create admin",
         "button2":"Add another admin",
         "succes":"Admin succesfully added"
+    },
+    "addFlight":{
+        "gobackBtn":"Go back",
+        "title":"Add a new flight",
+        "flightName":"Flight name",
+        "fnPlace":"Enter flight name",
+        "plane":"Plane",
+        "planePlace":"Select the plane",
+        "gate":"Gate",
+        "gatePlace":"Enter gate number",
+        "departureAirport":"Departure Airport",
+        "airportPlace":"Select the airport",
+        "destinationAirport":"Destination Airport",
+        "departureTime":"Departure time",
+        "price":"Price",
+        "pricePlace":"Enter the price",
+        "highSeason":"HighSeason(price * 1.75)",
+        "button1":"Add flight",
+        "succes":"Flight succesfully added",
+        "another":"Add another flight"
     }
  }

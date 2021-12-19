@@ -19,6 +19,15 @@
     requiredNumber,
   } from '../../utils/inputValidator'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+    })
+
   let flightName: string
   let plane: string
   let gate: number = null
@@ -208,9 +217,9 @@
       />
     </svg>
 
-    <p class="">Go back</p>
+    <p class="">{$_('addFlight.gobackBtn')}</p>
   </section>
-  <Intertitle titleName="Add a new flight" />
+  <Intertitle titleName= {$_('addFlight.title')} />
   {#if succes === false}
     {#if loaded}
       <form on:submit|preventDefault={handleSubmit} in:fade>
@@ -219,13 +228,13 @@
         >
           <!-- Flight name -->
           <div class="flex flex-col">
-            <label for="flightName" class="font-bold"> Flight name </label>
+            <label for="flightName" class="font-bold"> {$_('addFlight.flightName')} </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <input
                 bind:value={flightName}
                 id="flightName"
                 type="text"
-                placeholder="Enter flightname here"
+                placeholder= {$_('addFlight.fnPlace')}
                 class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
               />
             </div>
@@ -235,14 +244,14 @@
           </div>
           <!-- Plane -->
           <div class="flex flex-col">
-            <label for="plane" class="font-bold"> Plane </label>
+            <label for="plane" class="font-bold"> {$_('addFlight.plane')} </label>
             <select
               id="plane"
               bind:value={plane}
               class="border-2 w-full text-sm md:text-md mb-2 py-1"
             >
               <option value="" selected disabled class="bg-gray-100"
-                >Select the plane</option
+                >{$_('addFlight.planePlace')}</option
               >
               {#each planes as specificPlane}
                 <option value={specificPlane.PlaneId}>
@@ -256,13 +265,13 @@
           </div>
           <!-- Gate -->
           <div class="flex flex-col">
-            <label for="gate" class="font-bold"> Gate </label>
+            <label for="gate" class="font-bold"> {$_('addFlight.gate')} </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <input
                 bind:value={gate}
                 id="gate"
                 type="number"
-                placeholder="Enter Gate number here"
+                placeholder= {$_('addFlight.gatePlace')}
                 class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
               />
             </div>
@@ -273,7 +282,7 @@
           <!-- Departure airport -->
           <div class="flex flex-col">
             <label for="departureAirport" class="font-bold">
-              Departure airport
+              {$_('addFlight.departureAirport')}
             </label>
             <select
               id="departureAirport"
@@ -281,7 +290,7 @@
               class="border-2 w-full text-sm md:text-md mb-2 py-1"
             >
               <option value="" selected disabled class="bg-gray-100"
-                >Select the airport</option
+                >{$_('addFlight.airportPlace')}</option
               >
               {#each locations as location}
                 <option value={location.DestinationId}>
@@ -296,7 +305,7 @@
           <!-- Destination airport -->
           <div class="flex flex-col">
             <label for="departureAirport" class="font-bold">
-              Destination airport
+              {$_('addFlight.destinationAirport')}
             </label>
             <select
               id="departureAirport"
@@ -304,7 +313,7 @@
               class="border-2 w-full text-sm md:text-md mb-2 py-1"
             >
               <option value="" selected disabled class="bg-gray-100"
-                >Select the airport</option
+                >{$_('addFlight.airportPlace')}</option
               >
               {#each locations as location}
                 <option value={location.DestinationId}>
@@ -319,7 +328,7 @@
           <!-- Departure time -->
           <div class="flex flex-col">
             <label for="departureTime" class="font-bold">
-              Departure time
+              {$_('addFlight.departureTime')}
             </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <input type="date" bind:value={date} />
@@ -331,7 +340,7 @@
           </div>
           <!-- Price -->
           <div class="flex flex-col">
-            <label for="price" class="font-bold"> Price </label>
+            <label for="price" class="font-bold"> {$_('addFlight.price')} </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <div class="flex">
                 <span class="text-sm md:text-md mr-2 py-1">€ </span>
@@ -339,7 +348,7 @@
                   bind:value={price}
                   id="price"
                   type="numeric"
-                  placeholder="Enter the price here"
+                  placeholder= {$_('addFlight.pricePlace')}
                   class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
                 />
               </div>
@@ -349,7 +358,7 @@
                 type="checkbox"
                 id="HighSeason"
                 bind:checked={highSeason}
-              /> HighSeason (price * 1.75)
+              /> {$_('addFlight.highSeason')}
             </label>
             {#if errors.price}
               <p class="text-red-600 mb-2">{errors.price}</p>
@@ -370,7 +379,7 @@
             type="submit"
             class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
           >
-            Add flight
+            {$_('addFlight.button1')}
           </button>
         {/if}
       </form>
@@ -394,15 +403,15 @@
             />
           </g></svg
         >
-        <p class="text-lg lg:text-2xl">Flight succesfully added</p>
+        <p class="text-lg lg:text-2xl">{$_('addFlight.succes')}</p>
         <div class="flex flex-col md:flex-row md:gap-4">
           <button
             class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-md lg:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-            on:click={addAnotherFlight}>Add another flight</button
+            on:click={addAnotherFlight}>{$_('addFlight.another')}</button
           >
           <button
             class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-md lg:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-            on:click={goBack}>Go back</button
+            on:click={goBack}>{$_('addFlight.gobackBtn')}</button
           >
         </div>
       </div>
