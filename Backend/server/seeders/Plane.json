@@ -10,14 +10,14 @@
     "PlaneId": "dedf4bf4-baf1-4641-8f7d-3835a7095cdb",
     "Name": "CeAgog",
     "Type": "A320",
-    "EconomySeats": "150",
+    "EconomySeats": "160",
     "BusinessSeats": "32"
   },
   {
     "PlaneId": "04587609-8c1b-4369-bec7-5aa4bf5abde4",
     "Name": "QyYQfD",
     "Type": "A332",
-    "EconomySeats": "150",
+    "EconomySeats": "160",
     "BusinessSeats": "32"
   },
   {
@@ -31,7 +31,7 @@
     "PlaneId": "d6a3cf84-5f70-4233-b2a6-72d74e78a327",
     "Name": "bsU0Ey",
     "Type": "A380",
-    "EconomySeats": "150",
+    "EconomySeats": "160",
     "BusinessSeats": "32"
   }
 ]

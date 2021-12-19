@@ -65,17 +65,17 @@
   const checkSelected = currentStore => {
     console.log(`currentstore ${currentStore.fn}`)
     console.log(`Nieuw ${fN}`)
-    if (currentStore.fn !== fN && currentStore.ln !== lN) {
-      selected = false
-    }else{
+    if (currentStore.fn === fN && currentStore.ln === lN) {
       selected = true
+    }else{
+      selected = false
     }
   }
 
   //Kijken welke seat bij de geselecteerde persoon staat
   const checkSelectedSeat = currentStore => {
     index = currentStore.findIndex(
-      x => x.firstName === fN,
+      x => x.firstName === fN, 
       y => y.lastName === lN,
     )
 

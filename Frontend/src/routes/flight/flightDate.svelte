@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
-  import { FlightStore } from './../../stores/flightStore'
+  import { FlightStore, FlightStore } from './../../stores/flightStore'
   import SelectFlightDate from './../../components/flightDateComponents/SelectFlightDate.svelte'
   import PassengerInput from './../../components/flightDateComponents/PassengerInput.svelte'
   import Intertitle from './../../components/Intertitle.svelte'
@@ -26,6 +26,10 @@
   function goBack() {
     $FlightStore.retourDate = null
     $FlightStore.departureDate = null
+    $FlightStore.departureFlight = null
+    $FlightStore.retourFlight = null
+    $FlightStore.departurePrice = null
+    $FlightStore.retourPrice = null
     goto('/')
   }
 
@@ -34,7 +38,7 @@
     if ($FlightStore.departureFlight == null) {
       errors.flightSelected = 'Please select a flight first'
       return
-    } else if ($FlightStore.destinationLocationId) {
+    } else if ($FlightStore.retourDate != null) {
       if ($FlightStore.retourFlight == null) {
         errors.flightSelected = 'Please select a flight first'
         return

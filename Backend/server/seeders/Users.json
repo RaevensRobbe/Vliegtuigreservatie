@@ -75,5 +75,12 @@
       "Lastname": "admin",
       "Email": "docent@howest.be",
       "Admin": true
+    },
+    {
+      "UserId": "HwHSuINfvMMvYe5wKPmRsgImDVS2",
+      "Firstname": "User",
+      "Lastname": "Howest",
+      "Email": "user@howest.be",
+      "Admin": false
     }
   ]

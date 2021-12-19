@@ -229,7 +229,7 @@
 
   function calculateDayName(date: Date) {
     let d: Date = new Date(date)
-    let days: Array<string> = [
+    let daysEn: Array<string> = [
       'Sunday',
       'Monday',
       'Tuesday',
@@ -238,12 +238,24 @@
       'Friday',
       'Saturday',
     ]
-    return days[d.getDay()]
+    let daysNl: Array<string> = [
+      'Zondag',
+      'Maandag',
+      'Dinsdag',
+      'Woensdag',
+      'Donderdag',
+      'Vrijdag',
+      'Zaterdag',
+    ]
+    if($languageStore.language === "en")
+      return daysEn[d.getDay()]
+    else if($languageStore.language === "nl")
+      return daysNl[d.getDay()]
   }
 
   function dateFormat(date: Date) {
     let datum: Date = new Date(date)
-    var months: array<string> = [
+    var monthsEn: array<string> = [
       'January',
       'February',
       'March',
@@ -257,11 +269,32 @@
       'November',
       'December',
     ]
-    return (
-      datum.toLocaleString('default', { day: '2-digit' }) +
-      ' ' +
-      months[datum.getMonth()]
-    )
+    var monthsNl: array<string> = [
+      'Januari',
+      'Februari',
+      'Maart',
+      'April',
+      'Mei',
+      'Juni',
+      'Juli',
+      'Augustus',
+      'September',
+      'Oktober',
+      'November',
+      'December',
+    ]
+    if($languageStore.language === 'en')
+      return (
+        datum.toLocaleString('default', { day: '2-digit' }) +
+        ' ' +
+        monthsEn[datum.getMonth()]
+      )
+    else if($languageStore.language === 'nl')
+      return (
+          datum.toLocaleString('default', { day: '2-digit' }) +
+          ' ' +
+          monthsNl[datum.getMonth()]
+        )
   }
 
   function calculatePrice(price: number) {
