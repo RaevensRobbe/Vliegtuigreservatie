@@ -145,5 +145,16 @@
         "allFlights":"Show all flights",
         "reviewBtn":"Reviews",
         "taken":"Taken"
+    },
+    "editFlight":{
+        "gobackBtn":"Go back",
+        "title":"Edit flight",
+        "flightName":"Flight name",
+        "plane":"Plane",
+        "gate":"Gate",
+        "departureAirport":"Departure Airport",
+        "destinationAirport":"Destination Airport",
+        "departureTime":"Departure time",
+        "button1":"Edit flight"
     }
  }

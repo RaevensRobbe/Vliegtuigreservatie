@@ -145,5 +145,16 @@
         "allFlights":"Show all flights",
         "reviewBtn":"Reviews",
         "taken":"Bezet"
+    },
+    "editFlight":{
+        "gobackBtn":"Terug",
+        "title":"Vlucht aanpassen",
+        "flightName":"Vluchtnaam",
+        "plane":"Vliegtuig",
+        "gate":"Gate",
+        "departureAirport":"Vertrek luchthaven",
+        "destinationAirport":"Aankomst luchthaven",
+        "departureTime":"Vertrek tijd",
+        "button1":"Wijzigen"
     }
  }
