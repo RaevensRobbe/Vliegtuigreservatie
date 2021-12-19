@@ -15,5 +15,17 @@ services:
     ports:
       - 9999:8080
 
+  api:  
+      image: vliegtuigreservatiebackend
+      build:
+        context: .
+        dockerfile: Dockerfile
+      ports:
+        - 3001:3001
+      env_file:
+        - docker.ormconfig.env
+      environment:
+        NODE_ENV: Production
+  
 volumes:
   database:
