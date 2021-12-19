@@ -32,15 +32,17 @@
       >
     </article>
   </section>
-  <section class="flex items-center">
+  <section class="flex my-auto flex-col gap-2">
     <article>
       <p class="text-forest-green font-bold text-sm">
         &copy; 2021 MCT Airlines. All rights Reserved
       </p>
     </article>
-    <LocaleSwitcher
+    <div class="self-end">
+      <LocaleSwitcher
         value={$locale}
-        on:locale-changed={e => setupI18n({ withLocale: e.detail }) }
-    />
+        on:locale-changed={e => setupI18n({ withLocale: e.detail })}
+      />
+    </div>
   </section>
 </footer>
