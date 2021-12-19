@@ -1,7 +1,7 @@
 <script lang="ts">
   import Ticket from './../../components/ticketComponents/ticket.svelte'
   import { travelerStore } from '../../stores/travelerStore'
-  import { FlightStore } from '../../stores/FlightStore'
+  import { FlightStore } from '../../stores/flightStore'
   import Intertitle from './../../components/Intertitle.svelte'
   import { onMount } from 'svelte'
   import { get } from '../../utils/useApi'

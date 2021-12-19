@@ -7,7 +7,7 @@
   import paywallCompStore from '../../stores/paywallCompStore'
   import authStore from '../../stores/authStore'
   import { travelerStore } from '../../stores/travelerStore'
-  import { FlightStore } from '../../stores/FlightStore'
+  import { FlightStore } from '../../stores/flightStore'
   import { goto } from '$app/navigation'
   import Spinner from '../animations/spinner.svelte'
   import { post } from '../../utils/useApi'

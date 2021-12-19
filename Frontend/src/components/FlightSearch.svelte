@@ -2,7 +2,7 @@
   //@ts-nocheck
   import { onMount } from 'svelte'
   import { get } from '../utils/useApi'
-  import { FlightStore } from '../stores/FlightStore'
+  import { FlightStore } from '../stores/flightStore'
   import SelectLocation from './flightSearchComponents/SelectLocation.svelte'
   import SelectTravelers from './flightSearchComponents/SelectTravelers.svelte'
   import { goto } from '$app/navigation'

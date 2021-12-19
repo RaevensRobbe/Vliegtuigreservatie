@@ -1,5 +1,5 @@
 <script type="ts">
-  import { FlightStore } from './../../stores/FlightStore'
+  import { FlightStore } from './../../stores/flightStore'
   import { fade, scale } from 'svelte/transition'
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'

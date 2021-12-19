@@ -1,13 +1,10 @@
 <script lang="ts">
   import Intertitle from '../../components/Intertitle.svelte'
-  import SearchFlightNumberComponent from '../../components/adminComponents/SearchFlightNumberComponent.svelte'
   import type Flight from '../../models/FlightModel.type'
   import { onMount } from 'svelte'
   import { get } from '../../utils/useApi'
-  import BookingFlight from '../../components/bookingOverviewComponents/bookingFlight.svelte'
   import Spinner from '../../components/animations/spinner.svelte'
   import { goto } from '$app/navigation'
-  import { getAuth } from 'firebase/auth'
   import authStore from '../../stores/authStore'
   import FlightList from '../../components/adminComponents/flightList.svelte'
   import { AllUpcoming } from './../../stores/allUpcomingStore'

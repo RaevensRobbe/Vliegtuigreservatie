@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
-  import { FlightStore } from './../../stores/FlightStore'
+  import { FlightStore } from './../../stores/flightStore'
   import SelectFlightDate from './../../components/flightDateComponents/SelectFlightDate.svelte'
   import PassengerInput from './../../components/flightDateComponents/PassengerInput.svelte'
   import Intertitle from './../../components/Intertitle.svelte'
@@ -17,6 +17,8 @@
 
   let flight = $FlightStore
 
+  let errors: any = {}
+
   onMount(async () => {
     // console.log($FlightStore)
   })
@@ -29,6 +31,15 @@
 
   function handleSubmit() {
     // console.log(flight)
+    if ($FlightStore.departureFlight == null) {
+      errors.flightSelected = 'Please select a flight first'
+      return
+    } else if ($FlightStore.destinationLocationId) {
+      if ($FlightStore.retourFlight == null) {
+        errors.flightSelected = 'Please select a flight first'
+        return
+      }
+    }
     goto('/flight/pickSeats')
   }
 </script>
@@ -102,6 +113,11 @@
       {#each { length: $FlightStore.children } as _, i}
         <PassengerInput adult={false} personnumber={$FlightStore.adults + i} />
       {/each}
+    {/if}
+    {#if errors.flightSelected}
+      <div class="flex justify-center mt-4">
+        <p class="text-red-500 text-sm">{errors.flightSelected}</p>
+      </div>
     {/if}
     <div class="flex justify-center">
       <!--submit button -->

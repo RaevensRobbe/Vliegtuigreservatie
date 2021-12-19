@@ -2,7 +2,7 @@
   import { goto } from '$app/navigation'
   import FlightOverviewItem from './../../components/flightOverviewComponents/FlightOverviewItem.svelte'
   import Intertitle from './../../components/Intertitle.svelte'
-  import { FlightStore } from './../../stores/FlightStore'
+  import { FlightStore } from './../../stores/flightStore'
   import loginCompStore from '../../stores/loginCompStore'
   import paywallCompStore from '../../stores/paywallCompStore'
   import { travelerStore } from './../../stores/travelerStore'
