@@ -105,5 +105,19 @@
         "legend3":"Selected",
         "class1":"Business class",
         "class2":"Economy class"
+    },
+    "flightOverview":{
+        "gobackBtn":"Go back",
+        "title":"Overview",
+        "total":"Total",
+        "button1":"Go to payment"
+    },
+    "paywall":{
+        "title":"Complete transaction",
+        "cardNr":"Card number",
+        "cardHolder":"Cardholder Name",
+        "expiry":"Expiry date",
+        "security":"Security code",
+        "button1":"Confirm payment"
     }
  }

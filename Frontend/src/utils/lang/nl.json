@@ -105,5 +105,19 @@
         "legend3":"Geselecteerd",
         "class1":"Eerste klasse",
         "class2":"Tweede klasse"
+    },
+    "flightOverview":{
+        "gobackBtn":"Terug",
+        "title":"Overzicht",
+        "total":"Totaal",
+        "button1":"Verder naar betalen"
+    },
+    "paywall":{
+        "title":"Betalen",
+        "cardNr":"Kaartnummer",
+        "cardHolder":"Naam kaarthouder",
+        "expiry":"Verval datum",
+        "security":"Beveiligingscode",
+        "button1":"Bevestigen"
     }
  }
