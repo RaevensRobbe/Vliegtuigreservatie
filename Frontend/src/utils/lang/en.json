@@ -156,5 +156,21 @@
         "destinationAirport":"Destination Airport",
         "departureTime":"Departure time",
         "button1":"Edit flight"
+    },
+    "addAdmin":{
+        "gobackBtn":"Go back",
+        "title":"Add a new admin",
+        "email":"Email",
+        "emailPlace":"name@acme.com",
+        "firstname":"First Name",
+        "fnPlace":"Enter first name",
+        "lastname":"Last Name",
+        "lnPlace":"Enter last name",
+        "password":"Password",
+        "psPlace":"Enter password",
+        "cPassword":"Confirm password",
+        "button":"Create admin",
+        "button2":"Add another admin",
+        "succes":"Admin succesfully added"
     }
  }

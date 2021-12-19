@@ -12,6 +12,15 @@
   import authstore from '../../stores/authStore'
   import { post } from '../../utils/useApi'
 
+  import { _ } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
+  import languageStore from '../../stores/languageStore'
+  
+  init({
+      fallbackLocale: 'en',
+      initialLocale: $languageStore.language,
+  })
+
   let email: string
   let firstName: string
   let lastName: string
@@ -167,22 +176,22 @@
       />
     </svg>
 
-    <p class="">Go back</p>
+    <p class="">{$_('addAdmin.gobackBtn')}</p>
   </section>
-  <Intertitle titleName="Add a new admin" />
+  <Intertitle titleName={$_('addAdmin.title')}/>
   {#if succes === false}
     <form on:submit|preventDefault={onSubmit} in:fade>
       <section
         class="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-white shadow-md w-3/4 mx-auto p-4"
       >
         <div class="lg:col-span-2">
-          <label for="email" class="font-bold"> Email </label>
+          <label for="email" class="font-bold"> {$_('addAdmin.email')} </label>
           <div class="border-b text-dim-gray mb-2 border-current">
             <input
               bind:value={email}
               id="email"
               type="email"
-              placeholder="name@acme.com"
+              placeholder={$_('addAdmin.emailPlace')}
               class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
@@ -191,13 +200,13 @@
           {/if}
         </div>
         <div>
-          <label for="firstName" class="font-bold">First Name</label>
+          <label for="firstName" class="font-bold"> {$_('addAdmin.firstname')} </label>
           <div class="border-b text-dim-gray mb-2 border-current">
             <input
               bind:value={firstName}
               type="text"
               id="firstName"
-              placeholder="enter first name"
+              placeholder={$_('addAdmin.fnPlace')}
               class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
@@ -206,13 +215,13 @@
           {/if}
         </div>
         <div>
-          <label for="lastName" class="font-bold">Last Name</label>
+          <label for="lastName" class="font-bold"> {$_('addAdmin.lastname')} </label>
           <div class="border-b text-dim-gray mb-2 border-current">
             <input
               bind:value={lastName}
               type="text"
               id="lastName"
-              placeholder="enter last name"
+              placeholder= {$_('addAdmin.lnPlace')}
               class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
@@ -221,13 +230,13 @@
           {/if}
         </div>
         <div>
-          <label for="pw" class="font-bold">Password</label>
+          <label for="pw" class="font-bold"> {$_('addAdmin.password')} </label>
           <div class="border-b text-dim-gray mb-2 border-current">
             <input
               bind:value={pw}
               type="password"
               id="pw"
-              placeholder="enter password"
+              placeholder= {$_('addAdmin.psPlace')}
               class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
@@ -236,13 +245,13 @@
           {/if}
         </div>
         <div>
-          <label for="cpw" class="font-bold">Confirm Password</label>
+          <label for="cpw" class="font-bold"> {$_('addAdmin.cPassword')} </label>
           <div class="border-b text-dim-gray mb-2 border-current">
             <input
               bind:value={cpw}
               type="password"
               id="cpw"
-              placeholder="enter password"
+              placeholder= {$_('addAdmin.psPlace')}
               class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
@@ -265,7 +274,7 @@
           type="submit"
           class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
         >
-          Create admin
+          {$_('addAdmin.button')}
         </button>
       {/if}
     </form>
@@ -284,15 +293,15 @@
             />
           </g></svg
         >
-        <p class="text-lg lg:text-2xl">Admin succesfully added</p>
+        <p class="text-lg lg:text-2xl">{$_('addAdmin.succes')}</p>
         <div class="flex flex-col md:flex-row md:gap-4">
           <button
             class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-md lg:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-            on:click={addAnotherAdmin}>Add another admin</button
+            on:click={addAnotherAdmin}>{$_('addAdmin.button2')}</button
           >
           <button
             class="flex p-4 mx-auto mt-4 justify-center items-center font-bold text-md lg:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-            on:click={goBack}>Go back</button
+            on:click={goBack}>{$_('addAdmin.gobackBtn')}</button
           >
         </div>
       </div>

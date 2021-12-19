@@ -156,5 +156,21 @@
         "destinationAirport":"Aankomst luchthaven",
         "departureTime":"Vertrek tijd",
         "button1":"Wijzigen"
+    },
+    "addAdmin":{
+        "gobackBtn":"Terug",
+        "title":"Admin toevoegen",
+        "email":"Email",
+        "emailPlace":"naam@acme.com",
+        "firstname":"Voornaam",
+        "fnPlace":"Geef voornaam in",
+        "lastname":"Achternaam",
+        "lnPlace":"Geef achternaam in",
+        "password":"Wachtwoord",
+        "psPlace":"Geef wachtwoord in",
+        "cPassword":"Bevestig wachtwoord",
+        "button":"Aanmaken",
+        "button2":"Voeg nog een admin toe",
+        "succes":"Succesvol toegevoegd"
     }
  }
