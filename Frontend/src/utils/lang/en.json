@@ -132,5 +132,18 @@
         "seat":"Seat",
         "boarding":"Board till",
         "pass":"Boarding pass"
+    },
+    "adminOverview":{
+        "title":"All upcoming flights",
+        "button1":"Add flight",
+        "button2":"Add admin",
+        "button3":"Reviews",
+        "searchPlace":"Search flight number",
+        "searchBtn":"Search",
+        "editBtn":"Edit flight",
+        "noFlights":"No flights found",
+        "allFlights":"Show all flights",
+        "reviewBtn":"Reviews",
+        "taken":"Taken"
     }
  }

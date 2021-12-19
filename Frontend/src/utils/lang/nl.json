@@ -132,5 +132,18 @@
         "seat":"Zetel",
         "boarding":"Instappen tot",
         "pass":"Instapkaart"
+    },
+    "adminOverview":{
+        "title":"Toekomstige vluchten",
+        "button1":"Vlucht toevoegen",
+        "button2":"Admin toevoegen",
+        "button3":"Reviews",
+        "searchPlace":"Zoek vluchtnummer",
+        "searchBtn":"Zoeken",
+        "editBtn":"Aanpassen",
+        "noFlights":"Geen vluchten gevonden",
+        "allFlights":"Show all flights",
+        "reviewBtn":"Reviews",
+        "taken":"Bezet"
     }
  }
