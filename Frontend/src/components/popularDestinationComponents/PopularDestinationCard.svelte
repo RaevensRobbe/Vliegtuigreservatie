@@ -83,7 +83,7 @@
             fill="#fc5757"
           />
         </svg>
-        <p>520 km</p>
+        <p>See more</p>
       </div>
     </div>
   </div>
