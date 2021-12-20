@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
-  import { FlightStore, FlightStore } from './../../stores/flightStore'
+  import { FlightStore } from './../../stores/flightStore'
   import SelectFlightDate from './../../components/flightDateComponents/SelectFlightDate.svelte'
   import PassengerInput from './../../components/flightDateComponents/PassengerInput.svelte'
   import Intertitle from './../../components/Intertitle.svelte'
