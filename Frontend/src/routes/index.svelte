@@ -24,7 +24,7 @@
   let popDestinations: PopularDestination = []
   let popDestinationsLoaded: boolean = false
   onMount(async () => {
-    popDestinations = await get('http://localhost:3001/api/v1/country/popular')
+    popDestinations = await get('/country/popular')
     popDestinationsLoaded = true
   })
 </script>

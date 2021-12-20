@@ -122,11 +122,7 @@
   }
 
   const createUser = async (data, token) => {
-    const result = await post(
-      'http://localhost:3001/api/v1/user/createAdmin',
-      data,
-      token,
-    )
+    const result = await post('/user/createAdmin', data, token)
     submitted = false
     if (result.succes) {
       succes = true

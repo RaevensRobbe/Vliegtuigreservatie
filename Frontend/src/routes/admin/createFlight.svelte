@@ -51,8 +51,8 @@
   let errors: any = {}
 
   onMount(async () => {
-    locations = await get('http://localhost:3001/api/v1/destination/all')
-    planes = await get('http://localhost:3001/api/v1/plane/all')
+    locations = await get('/destination/all')
+    planes = await get('/plane/all')
 
     loaded = true
   })
@@ -175,11 +175,7 @@
       Gate: gate,
     }
 
-    let call: any = await post(
-      'http://localhost:3001/api/v1/flight',
-      data,
-      token,
-    )
+    let call: any = await post('/flight', data, token)
 
     if (call.success === true) {
       succes = true

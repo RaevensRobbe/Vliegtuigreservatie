@@ -9,9 +9,7 @@
     getSpecific()
   }
   async function getSpecific() {
-    specificFlight = await get(
-      `http://localhost:3001/api/v1/flight/flightnr/${flightNumber}`,
-    )
+    specificFlight = await get(`/flight/flightnr/${flightNumber}`)
   }
 </script>
 

@@ -22,10 +22,7 @@
 
   onMount(async () => {
     $authStore.user.getIdToken(true).then(token => {
-      get(
-        `http://localhost:3001/api/v1/flight/reviews/${flightId}`,
-        token,
-      ).then(data => {
+      get(`/flight/reviews/${flightId}`, token).then(data => {
         reviews = data.Ticket
         flightName = `${data.Name}`
         start = data.Start.Name

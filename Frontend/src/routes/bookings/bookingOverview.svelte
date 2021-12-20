@@ -29,7 +29,7 @@
 
   onMount(async () => {
     bookings = await get(
-      `http://localhost:3001/api/v1/flight/userFlights/${$authStore.user.uid}`, // tT6Rcds5rlMFLpRcaSGOtH0ttYW2 => user with most data
+      `/flight/userFlights/${$authStore.user.uid}`, // tT6Rcds5rlMFLpRcaSGOtH0ttYW2 => user with most data
     )
     if (bookings.error) {
     } else {

@@ -77,7 +77,7 @@
   />
   <h1 class="text-sm mb-4 md:text-xl">{$_('flightDate.intertitle1')}</h1>
   <SelectFlightDate
-    url={`http://localhost:3001/api/v1/flight/flightInfoBetween/${flight.departureLocationId}/${flight.destinationLocationId}/${flight.departureDate}`}
+    url={`/flight/flightInfoBetween/${flight.departureLocationId}/${flight.destinationLocationId}/${flight.departureDate}`}
     retour={false}
   />
 </section>
@@ -89,7 +89,7 @@
     />
     <h1 class="text-sm md:text-xl mb-4">{$_('flightDate.intertitle2')}</h1>
     <SelectFlightDate
-      url={`http://localhost:3001/api/v1/flight/flightInfoBetween/${flight.destinationLocationId}/${flight.departureLocationId}/${flight.retourDate}`}
+      url={`/flight/flightInfoBetween/${flight.destinationLocationId}/${flight.departureLocationId}/${flight.retourDate}`}
       retour={true}
     />
   </section>

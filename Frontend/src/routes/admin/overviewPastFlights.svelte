@@ -34,12 +34,10 @@
 
   onMount(async () => {
     $authStore.user.getIdToken(true).then(token => {
-      get('http://localhost:3001/api/v1/flight/pastFlights', token).then(
-        data => {
-          flights = data
-          flightsLoaded = true
-        },
-      )
+      get('/flight/pastFlights', token).then(data => {
+        flights = data
+        flightsLoaded = true
+      })
     })
   })
 

@@ -71,10 +71,7 @@
   }
 
   async function CreateUser(data) {
-    const res: any = await post(
-      'http://localhost:3001/api/v1/user/createUser',
-      data,
-    )
+    const res: any = await post('/user/createUser', data)
     registerClicked = false
     if (res.info === 'User already exists' || res.succes === true) {
       showRegisterForm()
