@@ -23,9 +23,7 @@
   let flightData: any
   let loaded: boolean = false
   onMount(async () => {
-    ticketData = await get(
-      `http://localhost:3001/api/v1/ticket/${$bookingTicket.ticketId}`,
-    )
+    ticketData = await get(`/ticket/${$bookingTicket.ticketId}`)
 
     ticketData.Persons.forEach((person, index) => {
       var nameParts = person.split(' ')

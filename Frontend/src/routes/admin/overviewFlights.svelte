@@ -37,20 +37,16 @@
 
   async function getSpecific() {
     flightsLoaded = false
-    specificFlightData = await get(
-      `http://localhost:3001/api/v1/flight/flightnr/${flightNumber}`,
-    )
+    specificFlightData = await get(`/flight/flightnr/${flightNumber}`)
     flightsLoaded = true
   }
 
   onMount(async () => {
     $authStore.user.getIdToken(true).then(token => {
-      get('http://localhost:3001/api/v1/flight/allupcoming', token).then(
-        data => {
-          flights = data
-          flightsLoaded = true
-        },
-      )
+      get('/flight/allupcoming', token).then(data => {
+        flights = data
+        flightsLoaded = true
+      })
     })
   })
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
-  import { FlightStore, FlightStore } from './../../stores/flightStore'
+  import { FlightStore } from './../../stores/flightStore'
   import SelectFlightDate from './../../components/flightDateComponents/SelectFlightDate.svelte'
   import PassengerInput from './../../components/flightDateComponents/PassengerInput.svelte'
   import Intertitle from './../../components/Intertitle.svelte'
@@ -77,7 +77,7 @@
   />
   <h1 class="text-sm mb-4 md:text-xl">{$_('flightDate.intertitle1')}</h1>
   <SelectFlightDate
-    url={`http://localhost:3001/api/v1/flight/flightInfoBetween/${flight.departureLocationId}/${flight.destinationLocationId}/${flight.departureDate}`}
+    url={`/flight/flightInfoBetween/${flight.departureLocationId}/${flight.destinationLocationId}/${flight.departureDate}`}
     retour={false}
   />
 </section>
@@ -89,7 +89,7 @@
     />
     <h1 class="text-sm md:text-xl mb-4">{$_('flightDate.intertitle2')}</h1>
     <SelectFlightDate
-      url={`http://localhost:3001/api/v1/flight/flightInfoBetween/${flight.destinationLocationId}/${flight.departureLocationId}/${flight.retourDate}`}
+      url={`/flight/flightInfoBetween/${flight.destinationLocationId}/${flight.departureLocationId}/${flight.retourDate}`}
       retour={true}
     />
   </section>

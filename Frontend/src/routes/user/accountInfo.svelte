@@ -40,17 +40,12 @@
   let loading: boolean = false
 
   onMount(async () => {
-    const getData = await get(
-      `http://localhost:3001/api/v1/user/data/${$authStore.user.uid}`,
-    )
+    const getData = await get(`/user/data/${$authStore.user.uid}`)
     userdata = getData
   })
 
   async function updateUser(data) {
-    const res = await put(
-      `http://localhost:3001/api/v1/user/updateUser/${$authStore.user.uid}`,
-      data,
-    )
+    const res = await put(`/user/updateUser/${$authStore.user.uid}`, data)
     loading = false
     if (res.success) {
       succes = true

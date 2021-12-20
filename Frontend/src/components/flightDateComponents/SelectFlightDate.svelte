@@ -111,13 +111,11 @@
           // if j == 0 => middlepoint selected date / closest to selected date
           if (j === 0) {
             let flightInfo: Flight = await get(
-              `http://localhost:3001/api/v1/flight/${givenflights[position].FlightId}`,
+              `/flight/${givenflights[position].FlightId}`,
             )
-            let planeInfo = await get(
-              `http://localhost:3001/api/v1/plane/${flightInfo.PlaneId}`,
-            )
+            let planeInfo = await get(`/plane/${flightInfo.PlaneId}`)
             let availableSeats = await get(
-              `http://localhost:3001/api/v1/flight/takenSeats/${givenflights[position].FlightId}`,
+              `/flight/takenSeats/${givenflights[position].FlightId}`,
             )
 
             let totalSeats: number =
@@ -157,18 +155,12 @@
           } else {
             if (givenflights[position + j]?.FlightId !== undefined) {
               let flightInfo: Flight = await get(
-                `http://localhost:3001/api/v1/flight/${
-                  givenflights[position + j].FlightId
-                }`,
+                `/flight/${givenflights[position + j].FlightId}`,
               )
               let availableSeats = await get(
-                `http://localhost:3001/api/v1/flight/takenSeats/${
-                  givenflights[position + j].FlightId
-                }`,
+                `/flight/takenSeats/${givenflights[position + j].FlightId}`,
               )
-              let planeInfo = await get(
-                `http://localhost:3001/api/v1/plane/${flightInfo.PlaneId}`,
-              )
+              let planeInfo = await get(`/plane/${flightInfo.PlaneId}`)
               let totalSeats: number =
                 planeInfo.EconomySeats + planeInfo.BusinessSeats
 

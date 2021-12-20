@@ -141,10 +141,7 @@
     }
 
     async function addToDB(data: any, retour: boolean) {
-      let call: any = await post(
-        'http://localhost:3001/api/v1/ticket/createTicket',
-        data,
-      )
+      let call: any = await post('/ticket/createTicket', data)
 
       if ($FlightStore.retourFlight !== null) {
         if (retour) {

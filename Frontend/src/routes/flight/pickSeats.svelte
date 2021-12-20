@@ -48,24 +48,16 @@
   const GetData = async () => {
     let getData: Flight
     if (retourFlight) {
-      getData = await get(
-        `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.retourFlight}`,
-      )
+      getData = await get(`/flight/takenSeats/${$FlightStore.retourFlight}`)
       //@ts-ignore
       if (getData.error === 'Data is undefined') {
-        getData = await get(
-          `http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.retourFlight}`,
-        )
+        getData = await get(`/flight/seatsInfo/${$FlightStore.retourFlight}`)
       }
     } else {
-      getData = await get(
-        `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.departureFlight}`,
-      )
+      getData = await get(`/flight/takenSeats/${$FlightStore.departureFlight}`)
       //@ts-ignore
       if (getData.error === 'Data is undefined') {
-        getData = await get(
-          `http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.departureFlight}`,
-        )
+        getData = await get(`/flight/seatsInfo/${$FlightStore.departureFlight}`)
       }
     }
 

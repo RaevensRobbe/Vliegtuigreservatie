@@ -58,8 +58,8 @@
   let errors: any = {}
 
   onMount(async () => {
-    locations = await get('http://localhost:3001/api/v1/destination/all')
-    planes = await get('http://localhost:3001/api/v1/plane/all')
+    locations = await get('/destination/all')
+    planes = await get('/plane/all')
     loaded = true
   })
 
@@ -142,7 +142,7 @@
     }
 
     const result = await put(
-      `http://localhost:3001/api/v1/flight/updateFlight/${flightData.FlightId}`,
+      `/flight/updateFlight/${flightData.FlightId}`,
       data,
       token,
     )

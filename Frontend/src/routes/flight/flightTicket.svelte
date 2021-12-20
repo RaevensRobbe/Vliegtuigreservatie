@@ -10,11 +10,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   let travelers: any = $travelerStore
   let departureFlightData: any
@@ -22,13 +22,9 @@
   let loaded: boolean = false
 
   onMount(async () => {
-    departureFlightData = await get(
-      `http://localhost:3001/api/v1/flight/${$FlightStore.departureFlight}`,
-    )
+    departureFlightData = await get(`/flight/${$FlightStore.departureFlight}`)
     if ($FlightStore.retourFlight) {
-      retourFlightData = await get(
-        `http://localhost:3001/api/v1/flight/${$FlightStore.retourFlight}`,
-      )
+      retourFlightData = await get(`/flight/${$FlightStore.retourFlight}`)
     }
     loaded = true
   })

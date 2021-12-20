@@ -11,11 +11,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   export let flightData: any
   export let booking: boolean
@@ -24,7 +24,10 @@
 
   function getDepartureTime() {
     let tempDate = new Date(flightData.Date)
-    return tempDate.getHours() + ":" + tempDate.getMinutes()
+    // return tempDate.getHours() + ':' + tempDate.getMinutes()
+    let hours = ('0' + tempDate.getHours()).slice(-2)
+    let minutes = ('0' + tempDate.getMinutes()).slice(-2)
+    return hours + ':' + minutes
   }
 
   function getDay() {

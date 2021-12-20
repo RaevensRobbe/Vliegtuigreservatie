@@ -5,11 +5,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   export let flight
   export let givenRating: number
@@ -33,10 +33,7 @@
       Rating: rating,
       Review: reviewText,
     }
-    let call: any = await put(
-      `http://localhost:3001/api/v1/ticket/review/${flight}`,
-      data,
-    )
+    let call: any = await put(`/ticket/review/${flight}`, data)
     givenReview = reviewText
   }
 </script>
@@ -46,11 +43,11 @@
   on:submit|preventDefault={handleSubmit}
 >
   <div>
-    <h1 class="text-xl font-bold"> {$_('addReview.intertitle1')} </h1>
+    <h1 class="text-xl font-bold">{$_('addReview.intertitle1')}</h1>
     <StarRating bind:ratingScore={rating} {givenRating} />
   </div>
   <div>
-    <h1 class="text-xl font-bold"> {$_('addReview.intertitle2')} </h1>
+    <h1 class="text-xl font-bold">{$_('addReview.intertitle2')}</h1>
     {#if givenReview}
       <textarea
         bind:value={givenReview}
