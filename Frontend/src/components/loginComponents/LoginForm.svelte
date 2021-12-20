@@ -44,9 +44,7 @@
 
         CreateUser(data)
       })
-    } catch (error) {
-      console.error(error)
-    }
+    } catch (error) {}
   }
 
   const loginWithEmail = () => {
@@ -73,7 +71,6 @@
         )
           errors.login =
             'Account temporarily disabled due to many failed attempts'
-        console.error(error)
       })
   }
 
@@ -83,7 +80,6 @@
       'http://localhost:3001/api/v1/user/createUser',
       data,
     )
-    console.log(res)
     loginClicked = false
     if (res.info === 'User already exists' || res.succes === true) {
       showLoginForm()
@@ -135,7 +131,6 @@
 
   const forgotPassword = () => {
     showLoginForm()
-    console.log('clicked')
     goto('/user/forgotPassword')
   }
 </script>
@@ -168,7 +163,9 @@
           </svg>
         </button>
       </div>
-      <label for="loginEmail" class="font-bold"> {$_('loginOverlay.email')} </label>
+      <label for="loginEmail" class="font-bold">
+        {$_('loginOverlay.email')}
+      </label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={email}
@@ -183,7 +180,9 @@
         <p class="text-red-600 -mt-2 mb-2">{errors.email}</p>
       {/if}
 
-      <label for="loginPw" class="font-bold">{$_('loginOverlay.password')}</label>
+      <label for="loginPw" class="font-bold"
+        >{$_('loginOverlay.password')}</label
+      >
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={pw}
@@ -208,7 +207,7 @@
           type="submit"
           class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white"
         >
-        {$_('loginOverlay.login')}
+          {$_('loginOverlay.login')}
         </button>
         {#if errors.login}
           <p class="text-red-600 mt-2 mb-2">{errors.login}</p>
@@ -223,7 +222,8 @@
           <p>{$_('loginOverlay.acc')}</p>
           <button
             on:click={showRegisterForm}
-            class="ml-1 font-bold text-forest-green">{$_('loginOverlay.register')}</button
+            class="ml-1 font-bold text-forest-green"
+            >{$_('loginOverlay.register')}</button
           >
         </div>
       {/if}

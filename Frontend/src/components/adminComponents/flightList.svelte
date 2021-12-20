@@ -8,15 +8,14 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   export let flightData: any
   export let review: boolean
-  console.log(flightData)
 
   let date: Date = new Date(flightData.Date)
   let departureTime: string = getDepartureTime()
@@ -61,7 +60,6 @@
     } else {
       totalSeats = 0
     }
-    console.log(totalSeats)
     return totalSeats
   }
 
@@ -69,20 +67,17 @@
     let totalPersons: number = 0
 
     for (let ticket of flightData.Ticket) {
-      // console.log(ticket)
       for (let persons of ticket.Persons) {
         totalPersons = totalPersons + 1
       }
     }
 
-    // console.log(totalPersons)
     return totalPersons
   }
 
   function calcOccupationRate() {
     const seats = allSeats()
     const passengers = allPassengers()
-    // console.log(passengers + '/' + seats)
 
     occupationRate = Math.round((passengers / seats) * 100)
     occupation = `${passengers} / ${seats}`

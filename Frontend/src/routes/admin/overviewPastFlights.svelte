@@ -10,11 +10,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   let flights: Array<Flight> = []
   let flightsLoaded: boolean = false
@@ -34,7 +34,6 @@
 
   onMount(async () => {
     $authStore.user.getIdToken(true).then(token => {
-      console.log(token)
       get('http://localhost:3001/api/v1/flight/pastFlights', token).then(
         data => {
           flights = data
@@ -59,7 +58,7 @@
         <input
           type="text"
           bind:value={flightNumber}
-          placeholder= {$_('reviews.searchPlace')}
+          placeholder={$_('reviews.searchPlace')}
           class="p-4 rounded-l-xl"
         />
       </div>
@@ -80,7 +79,7 @@
     </button>
   </section>
   <section class="m-4 px-6">
-    <Intertitle titleName= {$_('reviews.title')} />
+    <Intertitle titleName={$_('reviews.title')} />
     <div class="max-h-1/2 overflow-x-hidden overflow-y-scroll custom-scroll">
       {#if searchIsActive}
         {#if specificFlightData}

@@ -12,11 +12,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   let flights: Array<Flight> = []
   let flightsLoaded: boolean = false
@@ -45,10 +45,8 @@
 
   onMount(async () => {
     $authStore.user.getIdToken(true).then(token => {
-      console.log(token)
       get('http://localhost:3001/api/v1/flight/allupcoming', token).then(
         data => {
-          console.log(data)
           flights = data
           flightsLoaded = true
         },
@@ -85,7 +83,7 @@
       <button
         class="bg-forest-green text-white font-bold text-2xl p-4 rounded-r-xl hover:bg-cyprus-green cursor-pointer"
       >
-      {$_('adminOverview.searchBtn')}
+        {$_('adminOverview.searchBtn')}
       </button>
     </form>
   </section>

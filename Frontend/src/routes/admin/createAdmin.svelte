@@ -15,10 +15,10 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
   })
 
   let email: string
@@ -129,12 +129,8 @@
     )
     submitted = false
     if (result.succes) {
-      //Robbe fix loading dingkie
-      console.log('Succes')
       succes = true
     } else {
-      //Robbe fixt error
-      console.log('Error')
       failed = true
     }
   }
@@ -178,7 +174,7 @@
 
     <p class="">{$_('addAdmin.gobackBtn')}</p>
   </section>
-  <Intertitle titleName={$_('addAdmin.title')}/>
+  <Intertitle titleName={$_('addAdmin.title')} />
   {#if succes === false}
     <form on:submit|preventDefault={onSubmit} in:fade>
       <section
@@ -200,7 +196,9 @@
           {/if}
         </div>
         <div>
-          <label for="firstName" class="font-bold"> {$_('addAdmin.firstname')} </label>
+          <label for="firstName" class="font-bold">
+            {$_('addAdmin.firstname')}
+          </label>
           <div class="border-b text-dim-gray mb-2 border-current">
             <input
               bind:value={firstName}
@@ -215,13 +213,15 @@
           {/if}
         </div>
         <div>
-          <label for="lastName" class="font-bold"> {$_('addAdmin.lastname')} </label>
+          <label for="lastName" class="font-bold">
+            {$_('addAdmin.lastname')}
+          </label>
           <div class="border-b text-dim-gray mb-2 border-current">
             <input
               bind:value={lastName}
               type="text"
               id="lastName"
-              placeholder= {$_('addAdmin.lnPlace')}
+              placeholder={$_('addAdmin.lnPlace')}
               class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
@@ -236,7 +236,7 @@
               bind:value={pw}
               type="password"
               id="pw"
-              placeholder= {$_('addAdmin.psPlace')}
+              placeholder={$_('addAdmin.psPlace')}
               class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>
@@ -245,13 +245,15 @@
           {/if}
         </div>
         <div>
-          <label for="cpw" class="font-bold"> {$_('addAdmin.cPassword')} </label>
+          <label for="cpw" class="font-bold">
+            {$_('addAdmin.cPassword')}
+          </label>
           <div class="border-b text-dim-gray mb-2 border-current">
             <input
               bind:value={cpw}
               type="password"
               id="cpw"
-              placeholder= {$_('addAdmin.psPlace')}
+              placeholder={$_('addAdmin.psPlace')}
               class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
             />
           </div>

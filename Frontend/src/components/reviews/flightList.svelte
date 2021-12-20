@@ -5,7 +5,6 @@
   import { getTouchdownTime } from './../../utils/calculateDistance'
 
   export let flightData: any
-  // console.log(flightData)
 
   let date: Date = new Date(flightData.Date)
   let departureTime: string = getDepartureTime()

@@ -15,11 +15,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   let number: string
   let name: string = ''
@@ -145,13 +145,9 @@
         'http://localhost:3001/api/v1/ticket/createTicket',
         data,
       )
-      console.log(call)
-      console.log($FlightStore.retourFlight)
 
       if ($FlightStore.retourFlight !== null) {
-        console.log('Has retour flight')
         if (retour) {
-          console.log('in retour loop')
           if (call.success == true) {
             showPaywall
             goto('/flight/flightTicket')
@@ -160,7 +156,6 @@
           }
         }
       } else {
-        console.log('No retour flight')
         if (call.success == true) {
           showPaywall
           goto('/flight/flightTicket')
@@ -168,41 +163,7 @@
           errors.transaction = 'Please try again transaction failed'
         }
       }
-      // console.log(call.success)
-      // if (retour) {
-      //   if (call.succes) {
-      //     retourCheck = true
-      //     console.log('go to next page')
-      //     goToNextPage()
-      //   }
-      // } else {
-      //   if (call.succes) {
-      //     departureCheck = true
-      //     console.log('go to next page')
-      //     goToNextPage()
-      //   }
-      // }
     }
-
-    // async function goToNextPage() {
-    //   console.log(`retour ${$FlightStore.retourFlight}`)
-    //   console.log(`departure check ${departureCheck}`)
-    //   console.log(`retour check ${retourCheck}`)
-
-    //   if ($FlightStore.retourFlight) {
-    //     console.log(`retour ${$FlightStore.retourFlight}`)
-    //     if (departureCheck && retourCheck) {
-    //       //Go to ticket page
-    //       goto('/flight/flightTicket')
-    //     }
-    //   }
-    //   if (!$FlightStore.retourFlight) {
-    //     if (departureCheck) {
-    //       //Go to ticket page
-    //       goto('/flight/flightTicket')
-    //     }
-    //   }
-    // }
   }
 
   function showPaywall() {
@@ -229,7 +190,6 @@
     prevLength = lengthccn
   }
   function checkExpiry() {
-    console.log('Checking')
     let lengthExpiry = expiry.length
 
     if (prevLength <= lengthExpiry) {
@@ -326,7 +286,9 @@
           {/if}
         </div>
         <div>
-          <label for="securityCode" class="font-bold">{$_('paywall.security')}</label>
+          <label for="securityCode" class="font-bold"
+            >{$_('paywall.security')}</label
+          >
           <div class="border-b text-dim-gray mb-2 border-current">
             <input
               bind:value={cvc}
@@ -349,7 +311,7 @@
           type="submit"
           class="flex mx-auto mt-2 p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
         >
-        {$_('paywall.button1')}
+          {$_('paywall.button1')}
         </button>
         {#if errors.transaction}
           <p class="text-red-600 -mt-2 mb-2">{errors.transaction}</p>

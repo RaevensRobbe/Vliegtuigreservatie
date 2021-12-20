@@ -5,7 +5,6 @@
   function switchLocale(event) {
     event.preventDefault()
     dispatch('locale-changed', event.target.value)
-    console.log(event.target.value)
   }
 </script>
 

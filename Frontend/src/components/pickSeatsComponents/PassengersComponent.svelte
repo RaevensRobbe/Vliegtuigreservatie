@@ -2,16 +2,16 @@
   import passengerStore from '../../stores/selectPassengerStore'
   import { travelerStore } from '../../stores/travelerStore'
   import { fade, scale } from 'svelte/transition'
-  import { onMount } from 'svelte';
+  import { onMount } from 'svelte'
 
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   export let fN: string
   export let lN: string
@@ -35,7 +35,7 @@
   }
 
   onMount(async () => {
-    if (passengerNr === 0){
+    if (passengerNr === 0) {
       selectedPerson.fn = fN
       selectedPerson.ln = lN
       $passengerStore = {
@@ -47,7 +47,6 @@
 
   const clicked = () => {
     selected = !selected
-    //console.log(selected)
     setSelectedPassenger()
   }
 
@@ -63,11 +62,9 @@
 
   //Checken of de geselecteerde persoon dezelfde is al in de store
   const checkSelected = currentStore => {
-    console.log(`currentstore ${currentStore.fn}`)
-    console.log(`Nieuw ${fN}`)
     if (currentStore.fn === fN && currentStore.ln === lN) {
       selected = true
-    }else{
+    } else {
       selected = false
     }
   }
@@ -75,7 +72,7 @@
   //Kijken welke seat bij de geselecteerde persoon staat
   const checkSelectedSeat = currentStore => {
     index = currentStore.findIndex(
-      x => x.firstName === fN, 
+      x => x.firstName === fN,
       y => y.lastName === lN,
     )
 
@@ -83,7 +80,6 @@
       seatSelected = false
     }
 
-    //console.log(index)
     if (currentStore[index] === undefined) {
       return
     } else {
@@ -114,7 +110,7 @@
     : ''} cursor-pointer"
   on:click={clicked}
 >
-  <div class={lastItem? '' : 'border-b-1'}>
+  <div class={lastItem ? '' : 'border-b-1'}>
     <div class="p-4">
       <h1
         class="text-forest-green text-lg md:text-2xl {selected
@@ -125,11 +121,17 @@
         {lN}
       </h1>
       {#if selectedSeat[index] === undefined}
-        <p class="text-tomato-red text-sm md:text-base">{$_('pickSeats.selectSeat')}</p>
+        <p class="text-tomato-red text-sm md:text-base">
+          {$_('pickSeats.selectSeat')}
+        </p>
       {:else if seatSelected}
-        <p class="text-cyprus-green text-sm md:text-base">{$_('pickSeats.seatSelected')}</p>
+        <p class="text-cyprus-green text-sm md:text-base">
+          {$_('pickSeats.seatSelected')}
+        </p>
       {:else}
-        <p class="text-tomato-red text-sm md:text-base">{$_('pickSeats.selectSeat')}</p>
+        <p class="text-tomato-red text-sm md:text-base">
+          {$_('pickSeats.selectSeat')}
+        </p>
       {/if}
     </div>
   </div>
@@ -157,9 +159,9 @@
 </div>
 {#if hasRetour}
   <div
-    class="{retour ? 'bg-whisper-gray' : 'bg-white'} flex justify-center {lastItem
-      ? ''
-      : 'border-b-1'}"
+    class="{retour
+      ? 'bg-whisper-gray'
+      : 'bg-white'} flex justify-center {lastItem ? '' : 'border-b-1'}"
   >
     <div class="flex justify-center my-auto">
       <div

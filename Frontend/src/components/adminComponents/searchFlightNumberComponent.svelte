@@ -9,7 +9,6 @@
     getSpecific()
   }
   async function getSpecific() {
-    console.log('start call')
     specificFlight = await get(
       `http://localhost:3001/api/v1/flight/flightnr/${flightNumber}`,
     )

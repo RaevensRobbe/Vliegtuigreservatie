@@ -8,11 +8,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   export let flightId
   let reviews: any[] = []
@@ -22,12 +22,10 @@
 
   onMount(async () => {
     $authStore.user.getIdToken(true).then(token => {
-      console.log(token)
       get(
         `http://localhost:3001/api/v1/flight/reviews/${flightId}`,
         token,
       ).then(data => {
-        console.log(data)
         reviews = data.Ticket
         flightName = `${data.Name}`
         start = data.Start.Name
@@ -65,7 +63,7 @@
     <p class="">{$_('reviews.gobackBtn')}</p>
   </section>
   <section class="sm:m-4 px-6">
-    <Intertitle titleName= {$_('reviews.flight')}{flightName} />
+    <Intertitle titleName="{$_('reviews.flight')}{flightName}" />
   </section>
 
   <section class="flex flex-row align-center justify-center">

@@ -12,11 +12,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   //@ts-nocheck
   let retour: boolean = false
@@ -27,7 +27,6 @@
   let travelers: any = $travelerStore
 
   function calculatePrice() {
-    console.log($FlightStore)
     // children pay 0.75 of the full price
     let retourPrice: number
     let totalRetourPrice: number = 0
@@ -43,7 +42,6 @@
         if (traveler.classRet === 'Business') {
           passengerPrice = passengerPrice * 4
         }
-        console.log(totalRetourPrice)
         totalRetourPrice += passengerPrice
       })
     }
@@ -62,8 +60,6 @@
       }
       totalDeparturePrice += passengerPrice
     })
-
-    console.log(totalRetourPrice + ' + ' + totalDeparturePrice)
 
     let totalprice: number =
       Math.round((totalRetourPrice + totalDeparturePrice) * 100) / 100
@@ -123,7 +119,7 @@
 </section>
 
 <section class="p-4 px-6 align-start">
-  <Intertitle titleName= {$_('flightOverview.title')} />
+  <Intertitle titleName={$_('flightOverview.title')} />
   <div class="flex flex-col bg-white shadow-md mx-6">
     <div class="grid {retour ? 'lg:grid-cols-2' : 'lg:grid-cols-1'} ">
       <FlightOverviewItem retour={false} />
@@ -145,7 +141,7 @@
     class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
     on:click={handleSubmit}
   >
-  {$_('flightOverview.button1')}
+    {$_('flightOverview.button1')}
   </button>
 </section>
 

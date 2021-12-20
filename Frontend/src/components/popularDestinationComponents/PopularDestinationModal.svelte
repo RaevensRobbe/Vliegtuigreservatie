@@ -3,8 +3,6 @@
   import type PopularDestinationGraphql from './../../models/PopularDestinationModel.type'
   import { fade, scale } from 'svelte/transition'
 
-  console.log($popularCompStore)
-
   function closeModal() {
     popularCompStore.set({
       showPopular: false,

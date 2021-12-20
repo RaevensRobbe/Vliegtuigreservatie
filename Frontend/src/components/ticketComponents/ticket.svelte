@@ -2,11 +2,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   export let travelerData: any
   export let flightData: any
@@ -40,7 +40,6 @@
     var oldDateObj = new Date(flightData.Date)
     var newDateObj = new Date(flightData.Date)
     newDateObj.setMinutes(oldDateObj.getMinutes() - 30)
-    console.log(newDateObj)
     //.slice 2 gives back last 2 characters => you can always add 0 in front if its higher than 10 it wil not show the 0 in front
     let hours = ('0' + newDateObj.getHours()).slice(-2)
     let minutes = ('0' + newDateObj.getMinutes()).slice(-2)

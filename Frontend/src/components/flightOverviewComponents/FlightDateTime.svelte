@@ -9,26 +9,18 @@
   let flightDate: Date
   let departureTime: string
 
-  console.log($FlightStore)
-
   if (retour) {
     startLocation = $FlightStore.destinationCity
     endLocation = $FlightStore.departureCity
     flightDate = $FlightStore.retourDate
-    console.log('retour' + $FlightStore.retourDate)
   } else {
     startLocation = $FlightStore.departureCity
     endLocation = $FlightStore.destinationCity
     flightDate = $FlightStore.departureDate
-    console.log('departurte' + $FlightStore.departureDate)
   }
 
-  console.log('Flightdate: ' + flightDate)
-
   function dateFormat(date: Date) {
-    console.log(date)
     let datum = new Date(date)
-    console.log(datum)
     return datum.toLocaleString('default', { day: '2-digit', month: 'long' })
   }
 

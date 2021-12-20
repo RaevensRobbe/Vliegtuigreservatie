@@ -22,14 +22,13 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   let flightData: any = $editStore[0]
-  console.log($editStore)
 
   let flightName: string = flightData.Name
   let plane: string = flightData.PlaneId
@@ -37,18 +36,12 @@
   let departureAirport: string = flightData.StartId
   let destinationAirport: string = flightData.DestinationId
   let isoDate = new Date(flightData.Date)
-  console.log(new Date(isoDate))
-  console.log(isoDate)
   let month = isoDate.getMonth() + 1
   let date = isoDate.getFullYear() + '-' + month + '-' + isoDate.getDate()
-  console.log(date)
   let time =
     ('0' + isoDate.getHours()).slice(-2) +
     ':' +
     ('0' + isoDate.getMinutes()).slice(-2)
-  console.log(time)
-  // time = time.slice(0, time.length - 8)
-  console.log(time)
 
   let price: number = flightData.Price
 
@@ -68,12 +61,10 @@
     locations = await get('http://localhost:3001/api/v1/destination/all')
     planes = await get('http://localhost:3001/api/v1/plane/all')
     loaded = true
-    console.log(flightData.FlightId)
   })
 
   function handleSubmit() {
     departureTime = new Date(date + 'T' + time)
-    console.log(departureTime)
     if (
       requiredNumber(gate) &&
       requiredValidator(departureTime.toString()) &&
@@ -137,7 +128,6 @@
 
   async function addToDB() {
     $authStore.user.getIdToken(true).then(token => {
-      console.log(token)
       UpdateFlight(token)
     })
     submitted = false
@@ -150,7 +140,7 @@
       price: price,
       gate: gate,
     }
-    console.log(data)
+
     const result = await put(
       `http://localhost:3001/api/v1/flight/updateFlight/${flightData.FlightId}`,
       data,
@@ -158,13 +148,9 @@
     )
     submitted = false
     if (result.success) {
-      //Robbe fix loading dingkie
       succes = true
-      console.log('Yeey')
     } else {
-      //Robbe fix error
       failed = true
-      console.log('Neey')
     }
   }
 
@@ -206,7 +192,9 @@
         >
           <!-- Flight name -->
           <div class="flex flex-col">
-            <label for="flightName" class="font-bold"> {$_('editFlight.flightName')} </label>
+            <label for="flightName" class="font-bold">
+              {$_('editFlight.flightName')}
+            </label>
             <div
               class="border-b-2 border-t-2 text-gray-200 mb-2 border-current"
             >
@@ -222,7 +210,9 @@
           </div>
           <!-- Plane -->
           <div class="flex flex-col">
-            <label for="plane" class="font-bold"> {$_('editFlight.plane')} </label>
+            <label for="plane" class="font-bold">
+              {$_('editFlight.plane')}
+            </label>
             <select
               id="plane"
               bind:value={plane}
@@ -248,7 +238,9 @@
           </div>
           <!-- Gate -->
           <div class="flex flex-col">
-            <label for="gate" class="font-bold"> {$_('editFlight.gate')} </label>
+            <label for="gate" class="font-bold">
+              {$_('editFlight.gate')}
+            </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <input
                 bind:value={gate}
@@ -361,7 +353,7 @@
               type="button"
               class="flex p-4 mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
             >
-            {$_('editFlight.button1')}
+              {$_('editFlight.button1')}
             </button>
             <!-- <button
               on:click={deleteFlight}

@@ -12,11 +12,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   let ticketData: any
   let travelerData: any = []
@@ -37,7 +37,6 @@
       })
     })
     flightData = ticketData.Flight
-    // console.log(ticketData.Review)
     loaded = true
   })
 
@@ -84,9 +83,9 @@
 {#if loaded}
   <section class="m-4 px-6">
     {#if ticketData.Review}
-      <Intertitle titleName= {$_('addReview.title1')} />
+      <Intertitle titleName={$_('addReview.title1')} />
     {:else}
-      <Intertitle titleName= {$_('addReview.title2')} />
+      <Intertitle titleName={$_('addReview.title2')} />
     {/if}
     <Review
       flight={$bookingTicket.ticketId}

@@ -5,7 +5,6 @@
   export let retour
 
   let travelers: any = $travelerStore
-  console.log(travelers)
 
   function calculatePrice(travelerclass: string, price: number, title: string) {
     // children pay 0.75 of the full price
@@ -14,7 +13,6 @@
       calculatedPrice = price * 0.75
     }
     if (travelerclass === 'Business') {
-      console.log('Business')
       calculatedPrice = calculatedPrice * 4
     }
 

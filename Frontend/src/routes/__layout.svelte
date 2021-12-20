@@ -21,25 +21,25 @@
 
     getAuth().onAuthStateChanged((user: User) => {
       let admin = false
-      if(user){
-        user.getIdTokenResult()
-        .then((idTokenResult) => {
-          //console.log(idTokenResult)
-          if (idTokenResult.claims.role == 'admin') {
-            admin = true
-          } else {
-            admin = false
-          }
-      }).then(() =>{
-        authStore.set({
-          isLoggedIn: user !== null,
-          user,
-          firebaseControlled: true,
-          admin: admin,
-        })
-        //console.log($authStore)
-      })
-      }else{
+      if (user) {
+        user
+          .getIdTokenResult()
+          .then(idTokenResult => {
+            if (idTokenResult.claims.role == 'admin') {
+              admin = true
+            } else {
+              admin = false
+            }
+          })
+          .then(() => {
+            authStore.set({
+              isLoggedIn: user !== null,
+              user,
+              firebaseControlled: true,
+              admin: admin,
+            })
+          })
+      } else {
         authStore.set({
           isLoggedIn: user !== null,
           user,

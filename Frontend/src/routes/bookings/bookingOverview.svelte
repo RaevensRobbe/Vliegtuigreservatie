@@ -13,11 +13,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   let loaded = false
   let bookings: any = []
@@ -31,7 +31,6 @@
     bookings = await get(
       `http://localhost:3001/api/v1/flight/userFlights/${$authStore.user.uid}`, // tT6Rcds5rlMFLpRcaSGOtH0ttYW2 => user with most data
     )
-    console.log(bookings)
     if (bookings.error) {
     } else {
       bookings.forEach(booking => {
@@ -50,7 +49,7 @@
 
 {#if loaded}
   <section class="m-4 px-6">
-    <Intertitle titleName= {$_('bookings.title1')} />
+    <Intertitle titleName={$_('bookings.title1')} />
     {#if futureBookings.length > 0}
       {#each futureBookings as booking}
         <BookingFlight flightData={booking} booking={true} />
@@ -61,7 +60,7 @@
   </section>
 
   <section class="m-4 px-6">
-    <Intertitle titleName= {$_('bookings.title2')} />
+    <Intertitle titleName={$_('bookings.title2')} />
     {#if previousBookings.length > 0}
       {#each previousBookings as booking}
         {#if new Date(booking.Date).getFullYear() >= $BookingStore.previousYear}

@@ -7,11 +7,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   // export so parent receives the changes
   export let departureCity: string
@@ -44,8 +44,6 @@
   }
 
   export let destinationsArray: Dest
-
-  console.log(destinationsArray)
 </script>
 
 <div
@@ -104,7 +102,9 @@
       </div>
       <!-- Choose airport -->
       <div class="p-4 bg-white rounded-b-lg md:rounded-r-lg md:rounded-bl-none">
-        <h1 class="font-bold mb-2 text-forest-green">{$_('selectLocation.pickAirport')}</h1>
+        <h1 class="font-bold mb-2 text-forest-green">
+          {$_('selectLocation.pickAirport')}
+        </h1>
         {#if !departureCountry}
           <p>{$_('selectLocation.pickCountryFirst')}</p>
         {:else}

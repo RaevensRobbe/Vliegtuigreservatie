@@ -13,11 +13,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   let economySeats: number = 0
   let businessSeats: number = 0
@@ -51,29 +51,21 @@
       getData = await get(
         `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.retourFlight}`,
       )
-      console.log('retour')
-      console.log(getData)
       //@ts-ignore
       if (getData.error === 'Data is undefined') {
         getData = await get(
           `http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.retourFlight}`,
         )
-        console.log('retour no data')
-        console.log(getData)
       }
     } else {
       getData = await get(
         `http://localhost:3001/api/v1/flight/takenSeats/${$FlightStore.departureFlight}`,
       )
-      console.log('departure')
-      console.log(getData)
       //@ts-ignore
       if (getData.error === 'Data is undefined') {
         getData = await get(
           `http://localhost:3001/api/v1/flight/seatsInfo/${$FlightStore.departureFlight}`,
         )
-        console.log('departure no data')
-        console.log(getData)
       }
     }
 
@@ -116,13 +108,10 @@
   }
 
   onMount(async () => {
-    console.log($FlightStore)
     if ($FlightStore.retourFlight === null) {
       hasRetourFlight = false
-      //retourFlight = false
     } else {
       hasRetourFlight = true
-      //retourFlight = true
     }
 
     GetData()
@@ -136,7 +125,6 @@
       ecoCols = ecoParts * ecoRowLenght + 1
       columnsLetterEco = ['A', 'B', 'C', '', 'D', 'E', 'F']
     } else {
-      console.log('120+')
       ecoParts = 3
       ecoRows = eco / (ecoParts * ecoRowLenght)
       ecoCols = ecoParts * ecoRowLenght + 2
@@ -345,37 +333,37 @@
 
       <!-- BUTTONS -->
       {#if hasRetourFlight && retourFlight}
-          <div class="flex justify-center md:justify-end">
-            <button
-              type="submit"
-              class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-              on:click={goToOverview}
-            >
-              {$_('pickSeats.button1')}
-            </button>
-          </div>
-        {:else if hasRetourFlight && !retourFlight}
-          <div class="flex justify-center md:justify-end">
-            <button
-              on:click={nextFlight}
-              type="submit"
-              class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-            >
-              {$_('pickSeats.button2')}
-            </button>
-          </div>
-        {:else if !hasRetourFlight}
-          <div class="flex justify-center md:justify-end">
-            <button
-              type="submit"
-              class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
-              on:click={goToOverview}
-            >
-              <!--submit button -->
-              {$_('pickSeats.button1')}
-            </button>
-          </div>
-        {/if}
+        <div class="flex justify-center md:justify-end">
+          <button
+            type="submit"
+            class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            on:click={goToOverview}
+          >
+            {$_('pickSeats.button1')}
+          </button>
+        </div>
+      {:else if hasRetourFlight && !retourFlight}
+        <div class="flex justify-center md:justify-end">
+          <button
+            on:click={nextFlight}
+            type="submit"
+            class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+          >
+            {$_('pickSeats.button2')}
+          </button>
+        </div>
+      {:else if !hasRetourFlight}
+        <div class="flex justify-center md:justify-end">
+          <button
+            type="submit"
+            class="flex p-2 md:p-4 my-4 justify-center items-center font-bold text-lg md:text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
+            on:click={goToOverview}
+          >
+            <!--submit button -->
+            {$_('pickSeats.button1')}
+          </button>
+        </div>
+      {/if}
 
       <!-- PLANELAYOUT -->
     </div>
@@ -401,28 +389,33 @@
                   /></svg
                 >
               </div>
-              <p class="font-semibold text-sm md:text-base">{$_('pickSeats.legend1')}</p>
+              <p class="font-semibold text-sm md:text-base">
+                {$_('pickSeats.legend1')}
+              </p>
             </div>
             <div class="flex items-center gap-2 flex-col lg:flex-row">
               <div
                 class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-white border border-forest-green"
               />
-              <p class="font-semibold text-sm md:text-base">{$_('pickSeats.legend2')}</p>
+              <p class="font-semibold text-sm md:text-base">
+                {$_('pickSeats.legend2')}
+              </p>
             </div>
 
             <div class="flex items-center gap-2 flex-col lg:flex-row">
               <div
                 class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-forest-green border"
               />
-              <p class="font-semibold text-sm md:text-base">{$_('pickSeats.legend3')}</p>
+              <p class="font-semibold text-sm md:text-base">
+                {$_('pickSeats.legend3')}
+              </p>
             </div>
           </div>
           <section class="bg-white p-4 shadow-md">
             {#if busCols !== 0 && busRows !== 0}
               <h2 class="p-1 text-white bg-forest-green text-center my-2">
-                {$_('pickSeats.class1')}: <span class="font-bold"
-                  >€{$FlightStore.retourPrice}</span
-                >
+                {$_('pickSeats.class1')}:
+                <span class="font-bold">€{$FlightStore.retourPrice}</span>
               </h2>
               <div>
                 <div
@@ -475,9 +468,8 @@
 
             {#if ecoCols !== 0 && ecoRows !== 0}
               <h2 class="p-1 text-white bg-forest-green text-center my-2">
-                {$_('pickSeats.class2')}: <span class="font-bold"
-                  >€{$FlightStore.retourPrice}</span
-                >
+                {$_('pickSeats.class2')}:
+                <span class="font-bold">€{$FlightStore.retourPrice}</span>
               </h2>
               <div>
                 <div>
@@ -551,27 +543,33 @@
                   /></svg
                 >
               </div>
-              <p class="font-semibold text-sm md:text-base">{$_('pickSeats.legend1')}</p>
+              <p class="font-semibold text-sm md:text-base">
+                {$_('pickSeats.legend1')}
+              </p>
             </div>
             <div class="flex items-center gap-2 flex-col lg:flex-row">
               <div
                 class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-white border border-forest-green"
               />
-              <p class="font-semibold text-sm md:text-base">{$_('pickSeats.legend2')}</p>
+              <p class="font-semibold text-sm md:text-base">
+                {$_('pickSeats.legend2')}
+              </p>
             </div>
 
             <div class="flex items-center gap-2 flex-col lg:flex-row">
               <div
                 class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-forest-green border"
               />
-              <p class="font-semibold text-sm md:text-base">{$_('pickSeats.legend3')}</p>
+              <p class="font-semibold text-sm md:text-base">
+                {$_('pickSeats.legend3')}
+              </p>
             </div>
           </div>
           <section class="bg-white p-4 shadow-md">
             {#if busCols !== 0 && busRows !== 0}
               <h2 class="p-1 text-white bg-forest-green text-center my-2">
-                {$_('pickSeats.class1')}: <span class="font-bold"
-                  >€{$FlightStore.departurePrice * 4}</span
+                {$_('pickSeats.class1')}:
+                <span class="font-bold">€{$FlightStore.departurePrice * 4}</span
                 >
               </h2>
               <div>
@@ -627,9 +625,8 @@
 
             {#if ecoCols !== 0 && ecoRows !== 0}
               <h2 class="p-1 text-white bg-forest-green text-center my-2">
-                {$_('pickSeats.class2')}: <span class="font-bold"
-                  >€{$FlightStore.departurePrice}</span
-                >
+                {$_('pickSeats.class2')}:
+                <span class="font-bold">€{$FlightStore.departurePrice}</span>
               </h2>
               <div>
                 <div>

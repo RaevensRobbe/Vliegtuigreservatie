@@ -1,24 +1,33 @@
 <script lang="ts">
-  import { emailValidator, requiredValidator, confirmValidator } from '../../utils/inputValidator'
+  import {
+    emailValidator,
+    requiredValidator,
+    confirmValidator,
+  } from '../../utils/inputValidator'
   import Intertitle from '../../components/Intertitle.svelte'
   import { onMount } from 'svelte'
   import { get, post } from '../../utils/useApi'
   import authStore from '../../stores/authStore'
-  import { updateCurrentUser, updateEmail, updatePassword, updateProfile } from '@firebase/auth'
+  import {
+    updateCurrentUser,
+    updateEmail,
+    updatePassword,
+    updateProfile,
+  } from '@firebase/auth'
   import { getAuth } from 'firebase/auth'
   import { put } from '../../utils/useApi'
   import Spinner from '../../components/animations/spinner.svelte'
   import { goto } from '$app/navigation'
   import { fade, scale } from 'svelte/transition'
 
-  import { _ , locale} from '../../utils/i18n'
-  import { init } from 'svelte-i18n';
+  import { _, locale } from '../../utils/i18n'
+  import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   const auth = getAuth()
   const user = auth.currentUser
@@ -26,17 +35,15 @@
   let errors: any = {}
   let succes: boolean = false
   let userdata: any = {}
-  let pw:string
-  let cpw:string
+  let pw: string
+  let cpw: string
   let loading: boolean = false
 
   onMount(async () => {
-    console.log($authStore.user.uid)
     const getData = await get(
       `http://localhost:3001/api/v1/user/data/${$authStore.user.uid}`,
     )
     userdata = getData
-    console.log(userdata)
   })
 
   async function updateUser(data) {
@@ -61,7 +68,6 @@
         updateEmail(user, userdata.Email)
           .then(() => {
             $authStore.user = user
-            console.log(user.photoURL)
             const data: { firstname: string; lastname: string; email: string } =
               {
                 firstname: userdata.Firstname,
@@ -71,13 +77,11 @@
             updateUser(data)
           })
           .catch(error => {
-            console.error(error)
             errors.update = 'Please try again something went wrong'
             loading = false
           })
       })
       .catch(error => {
-        console.error(error)
         errors.update = 'Please try again something went wrong'
         loading = false
       })
@@ -89,11 +93,10 @@
       requiredValidator(userdata.Firstname) &&
       requiredValidator(userdata.Lastname)
     ) {
-      console.log(errors)
       errors.firstname = 'Firstname is required'
       errors.lastname = 'Lastname is required'
       errors.email = 'Email is required'
-      
+
       return
     }
 
@@ -123,35 +126,37 @@
   }
 
   const changePassword = async () => {
-    updatePassword(auth.currentUser, pw).then(() => {
-      pw = ''
-      cpw = ''
-      succes = true
-    }).catch((error) => {
-      if(error.message === 'Firebase: Password should be at least 6 characters (auth/weak-password).')
-        errors.updatepw ='Password to weak'
-      else{
-        errors.updatepw = 'Something went wrong'
-      }
-      console.log(error.message)
-    })  
+    updatePassword(auth.currentUser, pw)
+      .then(() => {
+        pw = ''
+        cpw = ''
+        succes = true
+      })
+      .catch(error => {
+        if (
+          error.message ===
+          'Firebase: Password should be at least 6 characters (auth/weak-password).'
+        )
+          errors.updatepw = 'Password to weak'
+        else {
+          errors.updatepw = 'Something went wrong'
+        }
+      })
   }
 
   const onSubmitPassword = () => {
-    console.log(pw)
-    if(requiredValidator(pw) && requiredValidator(cpw)){
-      console.log('test2')
+    if (requiredValidator(pw) && requiredValidator(cpw)) {
       errors.newPw = 'New password is required'
       errors.cNewPw = 'Confirm password is required'
-      return 
-    }else{
+      return
+    } else {
       errors.newPw = ''
       errors.cNewPw = ''
     }
-    if(!confirmValidator(pw, cpw)){
+    if (!confirmValidator(pw, cpw)) {
       errors.cNewPw = 'Passwords dont match'
-      return 
-    }else{
+      return
+    } else {
       errors.cNewPw = ''
     }
 
@@ -206,10 +211,14 @@
         on:submit|preventDefault={onSubmit}
         class="w-4/5 sm:w-3/5 md:w-4/5 lg:w-3/5 bg-white p-8 flex flex-col shadow-md"
       >
-        <h1 class="text-2xl text-forest-green font-bold text-left mb-4">{$_('accountInfo.intertitle1')}</h1>
+        <h1 class="text-2xl text-forest-green font-bold text-left mb-4">
+          {$_('accountInfo.intertitle1')}
+        </h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="flex flex-col">
-            <label for="firstname" class="mb-2 font-bold"> {$_('accountInfo.firstname')} </label>
+            <label for="firstname" class="mb-2 font-bold">
+              {$_('accountInfo.firstname')}
+            </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <input
                 bind:value={userdata.Firstname}
@@ -225,7 +234,9 @@
           </div>
 
           <div class="flex flex-col">
-            <label for="lastname" class="mb-2 font-bold"> {$_('accountInfo.lastname')} </label>
+            <label for="lastname" class="mb-2 font-bold">
+              {$_('accountInfo.lastname')}
+            </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <input
                 bind:value={userdata.Lastname}
@@ -240,7 +251,9 @@
           </div>
 
           <div class="flex flex-col">
-            <label for="email" class="mb-2 font-bold"> {$_('accountInfo.email')} </label>
+            <label for="email" class="mb-2 font-bold">
+              {$_('accountInfo.email')}
+            </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <input
                 bind:value={userdata.Email}
@@ -262,7 +275,7 @@
               type="submit"
               class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
             >
-            {$_('accountInfo.button')}
+              {$_('accountInfo.button')}
             </button>
           </div>
           <div class="flex justify-center">
@@ -302,12 +315,16 @@
   {#if succes == false}
     <section class="flex justify-center self-center">
       <form
-        on:submit|preventDefault={onSubmitPassword} 
+        on:submit|preventDefault={onSubmitPassword}
         class="w-4/5 sm:w-3/5 md:w-4/5 lg:w-3/5 bg-white p-8 flex flex-col shadow-md"
       >
-        <h1 class="text-2xl text-forest-green font-bold text-left mb-4">{$_('accountInfo.intertitle2')}</h1>
+        <h1 class="text-2xl text-forest-green font-bold text-left mb-4">
+          {$_('accountInfo.intertitle2')}
+        </h1>
         <div class="flex flex-col">
-          <label for="password" class="mb-2"> {$_('accountInfo.password')} </label>
+          <label for="password" class="mb-2">
+            {$_('accountInfo.password')}
+          </label>
           <div class="border-b text-dim-gray mb-2 border-current">
             <input
               bind:value={pw}
@@ -322,7 +339,9 @@
         </div>
 
         <div class="flex flex-col">
-          <label for="cpassword" class="mb-2"> {$_('accountInfo.cPassword')} </label>
+          <label for="cpassword" class="mb-2">
+            {$_('accountInfo.cPassword')}
+          </label>
           <div class="border-b text-dim-gray mb-2 border-current">
             <input
               bind:value={cpw}
@@ -341,17 +360,15 @@
             type="submit"
             class="flex p-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
           >
-          {$_('accountInfo.button')}
+            {$_('accountInfo.button')}
           </button>
         </div>
         <div class="flex justify-center">
           {#if errors.updatepw}
             <p class="text-red-600 mt-2 mb-2">{errors.updatepw}</p>
-          {/if} 
+          {/if}
         </div>
-
       </form>
     </section>
   {/if}
-  
 </section>

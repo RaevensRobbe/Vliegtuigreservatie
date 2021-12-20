@@ -11,11 +11,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   let givenflights: Array<Flight>
   let controldate: Date
@@ -63,7 +63,6 @@
 
   onMount(async () => {
     givenflights = await get(url)
-    console.log(givenflights)
     let i: number = 0
     let exactdate: boolean = false
     let closestAmountOfDays: number = 360
@@ -175,9 +174,6 @@
 
               let today = new Date()
               let flightDate = new Date(flightInfo.Date)
-              console.log(flightInfo)
-              console.log(today)
-              console.log(flightDate)
               if (availableSeats.error) {
                 //gives error when there are no seats taken yet
                 if (totalSeats > $FlightStore.adults + $FlightStore.children) {
@@ -247,10 +243,8 @@
       'Vrijdag',
       'Zaterdag',
     ]
-    if($languageStore.language === "en")
-      return daysEn[d.getDay()]
-    else if($languageStore.language === "nl")
-      return daysNl[d.getDay()]
+    if ($languageStore.language === 'en') return daysEn[d.getDay()]
+    else if ($languageStore.language === 'nl') return daysNl[d.getDay()]
   }
 
   function dateFormat(date: Date) {
@@ -283,18 +277,18 @@
       'November',
       'December',
     ]
-    if($languageStore.language === 'en')
+    if ($languageStore.language === 'en')
       return (
         datum.toLocaleString('default', { day: '2-digit' }) +
         ' ' +
         monthsEn[datum.getMonth()]
       )
-    else if($languageStore.language === 'nl')
+    else if ($languageStore.language === 'nl')
       return (
-          datum.toLocaleString('default', { day: '2-digit' }) +
-          ' ' +
-          monthsNl[datum.getMonth()]
-        )
+        datum.toLocaleString('default', { day: '2-digit' }) +
+        ' ' +
+        monthsNl[datum.getMonth()]
+      )
   }
 
   function calculatePrice(price: number) {
@@ -392,9 +386,9 @@
     >
       <p>{$_('flightDate.noData')}</p>
       <p class="font-normal text-dim-gray">
-        {firstDate.toISOString().split('T')[0]} {$_('flightDate.and')} {lastDate
-          .toISOString()
-          .split('T')[0]}
+        {firstDate.toISOString().split('T')[0]}
+        {$_('flightDate.and')}
+        {lastDate.toISOString().split('T')[0]}
       </p>
     </div>
   {:else}

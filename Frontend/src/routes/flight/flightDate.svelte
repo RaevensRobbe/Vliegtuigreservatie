@@ -9,19 +9,15 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   let flight = $FlightStore
 
   let errors: any = {}
-
-  onMount(async () => {
-    // console.log($FlightStore)
-  })
 
   function goBack() {
     $FlightStore.retourDate = null
@@ -34,7 +30,6 @@
   }
 
   function handleSubmit() {
-    // console.log(flight)
     if ($FlightStore.departureFlight == null) {
       errors.flightSelected = 'Please select a flight first'
       return
@@ -107,13 +102,17 @@
   </p>
   <form on:submit|preventDefault={handleSubmit}>
     {#if $FlightStore.adults}
-      <h1 class="text-forest-green font-bold text-xl">{$_('flightDate.adults')}</h1>
+      <h1 class="text-forest-green font-bold text-xl">
+        {$_('flightDate.adults')}
+      </h1>
       {#each { length: $FlightStore.adults } as _, i}
         <PassengerInput adult={true} personnumber={i} />
       {/each}
     {/if}
     {#if $FlightStore.children}
-      <h1 class="text-forest-green font-bold text-xl mt-4">{$_('flightDate.children')}</h1>
+      <h1 class="text-forest-green font-bold text-xl mt-4">
+        {$_('flightDate.children')}
+      </h1>
       {#each { length: $FlightStore.children } as _, i}
         <PassengerInput adult={false} personnumber={$FlightStore.adults + i} />
       {/each}
@@ -130,7 +129,7 @@
         class="flex p-4 mt-4 justify-center items-center font-bold text-2xl text-white bg-forest-green rounded-xl hover:bg-cyprus-green"
         onClick={handleSubmit}
       >
-      {$_('flightDate.button1')}
+        {$_('flightDate.button1')}
       </button>
     </div>
   </form>

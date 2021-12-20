@@ -22,11 +22,11 @@
   import { _ } from '../../utils/i18n'
   import { init } from 'svelte-i18n'
   import languageStore from '../../stores/languageStore'
-  
+
   init({
-      fallbackLocale: 'en',
-      initialLocale: $languageStore.language,
-    })
+    fallbackLocale: 'en',
+    initialLocale: $languageStore.language,
+  })
 
   let flightName: string
   let plane: string
@@ -180,7 +180,6 @@
       data,
       token,
     )
-    console.log(call)
 
     if (call.success === true) {
       succes = true
@@ -219,7 +218,7 @@
 
     <p class="">{$_('addFlight.gobackBtn')}</p>
   </section>
-  <Intertitle titleName= {$_('addFlight.title')} />
+  <Intertitle titleName={$_('addFlight.title')} />
   {#if succes === false}
     {#if loaded}
       <form on:submit|preventDefault={handleSubmit} in:fade>
@@ -228,13 +227,15 @@
         >
           <!-- Flight name -->
           <div class="flex flex-col">
-            <label for="flightName" class="font-bold"> {$_('addFlight.flightName')} </label>
+            <label for="flightName" class="font-bold">
+              {$_('addFlight.flightName')}
+            </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <input
                 bind:value={flightName}
                 id="flightName"
                 type="text"
-                placeholder= {$_('addFlight.fnPlace')}
+                placeholder={$_('addFlight.fnPlace')}
                 class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
               />
             </div>
@@ -244,7 +245,9 @@
           </div>
           <!-- Plane -->
           <div class="flex flex-col">
-            <label for="plane" class="font-bold"> {$_('addFlight.plane')} </label>
+            <label for="plane" class="font-bold">
+              {$_('addFlight.plane')}
+            </label>
             <select
               id="plane"
               bind:value={plane}
@@ -271,7 +274,7 @@
                 bind:value={gate}
                 id="gate"
                 type="number"
-                placeholder= {$_('addFlight.gatePlace')}
+                placeholder={$_('addFlight.gatePlace')}
                 class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
               />
             </div>
@@ -340,7 +343,9 @@
           </div>
           <!-- Price -->
           <div class="flex flex-col">
-            <label for="price" class="font-bold"> {$_('addFlight.price')} </label>
+            <label for="price" class="font-bold">
+              {$_('addFlight.price')}
+            </label>
             <div class="border-b text-dim-gray mb-2 border-current">
               <div class="flex">
                 <span class="text-sm md:text-md mr-2 py-1">€ </span>
@@ -348,7 +353,7 @@
                   bind:value={price}
                   id="price"
                   type="numeric"
-                  placeholder= {$_('addFlight.pricePlace')}
+                  placeholder={$_('addFlight.pricePlace')}
                   class="w-full focus:outline-none py-1 focus:ring focus:ring-forest-green text-sm md:text-md"
                 />
               </div>
@@ -358,7 +363,8 @@
                 type="checkbox"
                 id="HighSeason"
                 bind:checked={highSeason}
-              /> {$_('addFlight.highSeason')}
+              />
+              {$_('addFlight.highSeason')}
             </label>
             {#if errors.price}
               <p class="text-red-600 mb-2">{errors.price}</p>

@@ -14,20 +14,17 @@
   export let classType: string
   export let retour: boolean
 
-  let selectUser:boolean
+  let selectUser: boolean
   let initials: string
   let selected: boolean = false
   let index: number = 0
 
-  onMount(() => {
-    //console.log(row, column)
-  })
   const clicked = () => {
-    if(person.fn === "" && person.ln === ""){
+    if (person.fn === '' && person.ln === '') {
       selectUser = true
-      console.log('yeet')
+
       return
-    }else{
+    } else {
       selectUser = false
       initials = `${person.fn[0]}${person.ln[0]}`
       selected = !selected
@@ -45,7 +42,6 @@
 
     let seatDep: string
     let seatRet: string
-    console.log(person)
 
     if (retour) {
       if (prevData.seatNrRet == selectedSeat) {
@@ -77,8 +73,6 @@
         classRet: prevData.classRet,
       }
     }
-
-    // console.log($travelerStore[index])
   }
 
   const checkSelected = (currentStore, index) => {

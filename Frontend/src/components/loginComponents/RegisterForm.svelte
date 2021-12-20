@@ -59,9 +59,7 @@
             }
             CreateUser(data)
           })
-          .catch(error => {
-            console.error(error)
-          })
+          .catch(error => {})
       })
       .catch(error => {
         const errorCode = error.code
@@ -69,7 +67,6 @@
         if (errorMessage == 'Firebase: Error (auth/email-already-in-use).') {
           errors.email = 'Email already in use'
         }
-        console.error(error)
       })
   }
 
@@ -78,7 +75,6 @@
       'http://localhost:3001/api/v1/user/createUser',
       data,
     )
-    //console.log(res)
     registerClicked = false
     if (res.info === 'User already exists' || res.succes === true) {
       showRegisterForm()
@@ -174,7 +170,9 @@
       id="registerForm"
     >
       <div class="flex justify-between mb-4">
-        <h1 class=" text-2xl text-forest-green">{$_('registerOverlay.register')}</h1>
+        <h1 class=" text-2xl text-forest-green">
+          {$_('registerOverlay.register')}
+        </h1>
         <button on:click={showRegisterForm} name="closeRegisterForm">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -191,7 +189,9 @@
         </button>
       </div>
 
-      <label for="registerEmail" class="font-bold"> {$_('registerOverlay.email')} </label>
+      <label for="registerEmail" class="font-bold">
+        {$_('registerOverlay.email')}
+      </label>
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={email}
@@ -206,7 +206,9 @@
         <p class="text-red-600 -mt-2 mb-2">{errors.email}</p>
       {/if}
 
-      <label for="firstName" class="font-bold">{$_('registerOverlay.firstname')}</label>
+      <label for="firstName" class="font-bold"
+        >{$_('registerOverlay.firstname')}</label
+      >
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={firstName}
@@ -221,7 +223,9 @@
         <p class="text-red-600 -mt-2 mb-2">{errors.firstname}</p>
       {/if}
 
-      <label for="lastName" class="font-bold">{$_('registerOverlay.lastname')}</label>
+      <label for="lastName" class="font-bold"
+        >{$_('registerOverlay.lastname')}</label
+      >
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={lastName}
@@ -251,7 +255,9 @@
         <p class="text-red-600 -mt-2 mb-2">{errors.pw}</p>
       {/if}
 
-      <label for="cpw" class="font-bold">{$_('registerOverlay.cPassword')}</label>
+      <label for="cpw" class="font-bold"
+        >{$_('registerOverlay.cPassword')}</label
+      >
       <div class="border-b text-dim-gray mb-2 border-current">
         <input
           bind:value={cpw}
@@ -273,14 +279,15 @@
           name="submitRegister"
           class="bg-forest-green rounded-full p-2 mt-4 font-bold text-2xl text-white"
         >
-        {$_('registerOverlay.register')}
+          {$_('registerOverlay.register')}
         </button>
 
         <div class="mt-4 flex">
           <p>{$_('registerOverlay.already')}</p>
           <button
             on:click={showLoginForm}
-            class="ml-1 font-bold text-forest-green">{$_('registerOverlay.login')}</button
+            class="ml-1 font-bold text-forest-green"
+            >{$_('registerOverlay.login')}</button
           >
         </div>
       {/if}
