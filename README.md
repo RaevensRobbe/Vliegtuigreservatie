@@ -1,6 +1,7 @@
 
 # Vliegtuigreservaties
-Project Frameworks & AVFSW
+## Project Frameworks & AVFSW
+Demets Jelle & Raevens Robbe
 
 ## Beschrijving:
 
@@ -28,97 +29,105 @@ Project Frameworks & AVFSW
 - Multilanguage en authenticatie werkend krijgen in docker (niet gelukt)
 
 ## Milestones & verdeling
+[geschatte tijd] (werkelijke tijd)
 #### 18 okt:
-  - [x]  Database structuur is klaar / basic api endpoints (Jelle)
-  - [x]  Design is klaar (Robbe)
+  - [x]  Database structuur is klaar (Jelle) [5u] (3u) 
+  - [x]  Design is klaar (Robbe) [6u] (8u)
 
 #### 25 okt:
-  - [x]  Homepage api endpoints (Jelle)
-  - [x]  Homepage (general layout) (Robbe)
+  - [x]  Opzetten api + Homepage api endpoints (Jelle) [10u] (14.5u)
+  - [x]  Opzetten svelte + Homepage (general layout) (Robbe) [2u] (6u)
 
 #### 01 nov:
-  - [x]  Login / registratie / logout (Jelle)
+  - [x]  Login / registratie / logout (Jelle) [10u] (13.50u)
 
 ### 07 nov:
-  - [x]  Edit account (Jelle)
-  - [x]  Homepage (components) (Robbe)
+  - [x]  Edit account (Jelle) [8u] (8.35u)
+  - [x]  Homepage (components) (Robbe) [15u] (25u)
 
 ### 15 nov:
-  - [x]  Select flight date pagina (Robbe)
-  - [x]  API endpoints tickets (Jelle en Robbe)
-  - [x]  Bevestig vlucht pagina (Robbe)
+  - [x]  Select flight date pagina (Robbe) [10u] (22u)
+  - [x]  API endpoints tickets (Jelle en Robbe) [2u] (2u)
+  - [x]  Bevestig vlucht pagina (Robbe) [5u] (7u)
 
 ### 22 nov:
-  - [x]  Pick your seats pagina (Jelle)
-  - [x]  Overzicht vluchten pagina (Robbe)
-  - [x]  Ticket pagina (Robbe)
+  - [x]  Pick your seats pagina (Jelle) [48u] (52.5u)
+  - [x]  Overzicht vluchten pagina (Robbe) [4u] (6u)
+  - [x]  Ticket pagina (Robbe) [2u] (8u)
 
 ### 29 nov:
-  - [x]  API endpoints tickets (Jelle)
-  - [x]  Reviews (Robbe)
-  - [x]  GraphQL (backend ok frontend nog niet) (Robbe)
+  - [x]  Reviews (Robbe) [4u] (7u)
+  - [x]  GraphQL (backend ok frontend nog niet) (Robbe) [2u] (6u)
 
 ### 06 dec:
-  - [x]  Admin overview Flights (Robbe)
-  - [x]  Admin add flight (Robbe)
-  - [X]  Admin edit flight (Jelle)
-  - [x]  GraphQL (frontend popular destination cards) (Robbe)
+  - [x]  Admin overview Flights (Robbe) [6u] (8u)
+  - [x]  Admin add flight (Robbe) [2u] (1.5u)
+  - [X]  Admin edit flight (Jelle) [3u] (2.5u)
+  - [x]  GraphQL (frontend popular destination cards) (Robbe) [9u] (8u)
 
 ### 13 dec:
-  - [x]  Testing (Robbe)
-  - [x]  Fixes & bugs zoeken (Robbe)
-  - [x]  Swagger (Jelle)
+  - [x]  Testing (Robbe) [4u] (20u)
+  - [x]  Fixes & bugs zoeken (Robbe) [10u] (6u)
+  - [x]  Swagger (Jelle) [4] (7)
 
 ### 21 dec:
-  - [x]  Multilanguage (Jelle)
-  - [x]  PWA (Robbe)
-  - [x]  Fixes (Jelle & Robbe)
-  - [x]  Deployment (Jelle)
-  - [x]  Documentatie (Jelle & Robbe)
+  - [x]  Multilanguage (Jelle) [10] (20)
+  - [x]  PWA (Robbe) [6u] (3u)
+  - [x]  Fixes (Jelle & Robbe) [10u] (8u)
+  - [x]  Deployment (Jelle) [10] (13)
+  - [x]  Documentatie (Jelle & Robbe) [2u] (1.5u)
+
+Totale werktijd: 311.5 uur
+
 ---
 
 ## Checklist backend
 Backend API
-- [ ]  NodeJS Express API die via docker gehost wordt op kubernetes
+- [X]  NodeJS Express API die via docker gehost wordt op kubernetes
 
 Database
-- [ ]  SQL
-- [ ]  Realitme
+- [X]  SQL
+- [X]  Realitme
 
 Auth
-- [ ]  Firebase
-- [ ]  Minimaal 2 rollen
-- [ ]  admin is voorzien
+- [X]  Firebase
+- [X]  Minimaal 2 rollen
+- [X]  admin is voorzien
 
 Kwetsbaarheid
-- [ ]  CORS
-- [ ]  Extra beveiliging tegen Cross Site Forgery, Cross Site Scripting
+- [X]  CORS
+- [X]  Extra beveiliging tegen Cross Site Forgery, Cross Site Scripting
 
 API Docs
-- [ ]  Backend documenteerd zichzelf (GraphQL en Swagger)
-- [ ]  Statuscodes bij foutcondities worden gedocumenteerd
+- [X]  Backend documenteerd zichzelf (GraphQL en Swagger)
+- [X]  Statuscodes bij foutcondities worden gedocumenteerd
 
 Framework
-- [ ]  Kies een goede manier om je project te structureren
-- [ ]  Via een seeder wordt de database bij opstarten van de applicatie automatisch aangemaakt
+- [X]  Kies een goede manier om je project te structureren
+- [X]  Via een seeder wordt de database bij opstarten van de applicatie automatisch aangemaakt
 
 Microservices
-- [ ]  Gebruik logische microservices in Docker / Kubernetes
-- [ ]  Eén service maakt gebruik van gRPC of GraphQL.
+- [X]  Gebruik logische microservices in Docker / Kubernetes
+- [X]  Eén service maakt gebruik van gRPC of GraphQL.
 
 FoutControle
-- [ ]  Crashen van de applicatie wordt verhinderd door het gebruik van een try/catch
-- [ ]  Foutboodschappen worden altijd via een JSON aan de front bezorgd.
+- [X]  Crashen van de applicatie wordt verhinderd door het gebruik van een try/catch
+- [X]  Foutboodschappen worden altijd via een JSON aan de front bezorgd.
 
 Source controle
-- [ ]  Source controle gebeurt via GitHub door regelmatig te pushen
+- [X]  Source controle gebeurt via GitHub door regelmatig te pushen
 
 Staging / Deployment
-- [ ]  De applicatie draait volledig in Docker. 
+- [X]  De applicatie draait volledig in Docker. 
+
+> Applicatie draait in Docker, graphql en admin authentication werkt niet
+
 - [ ]  Container wordt automatisch via GitHub Actions gebuild en gepushed naar een Image 
 
 Registry (DockerHub / Harbor) (met versiebeheer van de Container tags)
-- [ ]  Image beschikbaar op DockerHub / Harbor 
+- [X]  Image beschikbaar op DockerHub / Harbor 
+
+>https://hub.docker.com/repository/docker/robberaevens/vliegtuigreservaties-backend
 
 ### Checklist frontend
 Framework
