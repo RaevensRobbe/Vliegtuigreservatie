@@ -20,6 +20,11 @@ Demets Jelle & Raevens Robbe
 - user@howest.be
 - P@ssw0rd
 
+#### Extra info
+> Om het project volledig te testen is het best dat je de 'Api' service in docker uitschakeld.
+
+> Run 'npm run dev' in zowel de frontend als backend map.
+
 ## Grootste behaalde succes
 - Select seat pagina
 - Select flight date pagina
