@@ -100,6 +100,8 @@ Kwetsbaarheid
 
 API Docs
 - [X]  Backend documenteerd zichzelf (GraphQL en Swagger)
+
+> Swagger kan je vinden op: localhost:port/api-docs/
 - [X]  Statuscodes bij foutcondities worden gedocumenteerd
 
 Framework
