@@ -69,7 +69,6 @@ export class UserController extends CrudController<User> implements IUserControl
 
     createUser = async (request: Request, response: Response, next: NextFunction) => {
      try{
-      console.log(`data van frontend ${request.body}`);
       let result:any
 
       if(request.body.data === null){
@@ -150,7 +149,6 @@ export class UserController extends CrudController<User> implements IUserControl
     createAdminUser = async (request: Request, response: Response, next: NextFunction) => {
       try{
         let result:any
-        console.log(request.body.data)
         const { firstName, lastName, email, password, role } = request.body.data
  
         if (!firstName || !lastName || !email || !password || !role) {
@@ -172,7 +170,6 @@ export class UserController extends CrudController<User> implements IUserControl
           Email: email,
           Admin: true 
         }
-        console.log(newUser)
         const newDbUser = await this.repository.create(newUser);
         result = await this.repository.save(newDbUser); 
 

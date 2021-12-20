@@ -46,11 +46,6 @@ export class CountryController
     }
   }
 
-  // popularDestinations = async (request:Request, response:Response, next:NextFunction) => {
-  //     const test = await this.repository.find({select:["Name"], join:{alias:"country", leftJoinAndSelect:{Destination:"country.Dest"}},});
-  //     response.send(test);
-  // }
-
   popularDestinations = async (
     request: Request,
     response: Response,

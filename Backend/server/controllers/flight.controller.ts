@@ -174,7 +174,6 @@ export class FlightController
         .innerJoin('f.Start', 's')
         .where('f.FlightId = :id', { id: flightID })
         .getOne()
-      //console.log(data)
       if (data === undefined) {
         response.status(400).json({ error: 'Data is undefined' })
       } else {
@@ -401,8 +400,6 @@ export class FlightController
         const create = await this.repository.create(newFlight)
         result = await this.repository.save(create)
 
-        //console.log('created')
-        //console.log(result)
         if (result === {}) {
           return response.status(500).json({ error: 'Something went wrong' })
         } else {

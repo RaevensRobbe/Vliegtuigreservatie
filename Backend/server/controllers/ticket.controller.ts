@@ -62,7 +62,6 @@ export class TicketController
     next: NextFunction,
   ) => {
     try {
-      console.log(`data van frontend ${req.body}`)
       let result
       if (req.body === null) {
         response.status(400).json({ error: 'No data has been provided' })
