@@ -24,7 +24,7 @@ COPY ["package.json", "package-lock.json", "tsconfig.json", "./"]
 RUN npm ci --only=production
 COPY --from=build-container /app/build .
 
-EXPOSE 8000
+EXPOSE 3000
 
 CMD ["node", "index.js"]
 

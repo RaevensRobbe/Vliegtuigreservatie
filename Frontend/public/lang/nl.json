@@ -1,0 +1,226 @@
+{
+    "home": {
+        "popular": "Populaire bestemmingen"
+    },
+    "header": {
+        "bookings": "Boekingen",
+        "admin": "Admin Overzicht",
+        "edit":"Account aanpassen",
+        "signOut":"Log uit",
+        "login":"Log in"
+    },
+    "headerDropdown": {
+        "edit": "Bewerk Account",
+        "signOut": "Log uit"
+    },
+    "loginOverlay": {
+        "email":"Email",
+        "password":"Wachtwoord",
+        "forgot":"Wachtwoord vergeten",
+        "login":"Login",
+        "google":"Inloggen met Google",
+        "acc":"Geen account?",
+        "register":"Registreer",
+        "psPlace":"Geef wachtwoord in"
+    },
+    "registerOverlay": {
+        "email":"Email",
+        "firstname":"Voornaam",
+        "lastname":"Achternaam",
+        "password":"Wachtwoord",
+        "cPassword":"Bevestig wachtwoord",
+        "register":"Registreer",
+        "already":"Heeft u al een account?",
+        "login":"Login",
+        "fnPlace":"Geef voornaam in",
+        "lnPlace":"Geef achternaam in",
+        "psPlace":"Geef wachtwoord in",
+        "cPsPlace":"Bevestig wachtwoord"
+    },
+    "flightSearch":{
+        "from":"Van",
+        "to":"Naar",
+        "departure":"Vertrek",
+        "destination":"Bestemming",
+        "retour":"Retour",
+        "travelers":"Reizigers",
+        "adults":"Volwassenen",
+        "children":"Kinderen",
+        "search":"Zoeken"
+    },
+    "accountInfo":{
+        "backButton":"Terug",
+        "title":"Verander account details",
+        "intertitle1":"Verander account info",
+        "firstname":"Voornaam",
+        "lastname":"Achternaam",
+        "email":"Email",
+        "button":"Wijzigen",
+        "intertitle2":"Wijzig wachtwoord",
+        "password":"Nieuw wachtwoord",
+        "cPassword":"Bevestig nieuw wachtwoord",
+        "succes":"Data succesvol aangepast"
+    },
+    "bookings":{
+        "title1":"Toekomstige vluchten",
+        "title2":"Verleden vluchten",
+        "no":"Geen",
+        "bookings":"Boekingen gevonden"
+    },
+    "flightsComponent":{
+        "ticketsBtn":"Toon tickets",
+        "editFlightBtn":"Bewerk vlucht",
+        "showReviewsBtn":"Toon reviews"
+    },
+    "flightDate":{
+        "gobackBtn":"Terug",
+        "intertitle1":"Kies de vertrek vlucht",
+        "intertitle2":"Kies de retour vlucht",
+        "title2":"Passagiers",
+        "intertitle3":"Vul de namen in zoals ze op uw passport of reis documenten staan",
+        "adults":"Volwassenen",
+        "children":"Kinderen",
+        "title":"Aanspreking",
+        "titlePlace":"Selecteer",
+        "firstname":"Voornaam",
+        "lastname":"Achternaam",
+        "fnPlace":"Geef voornaam in",
+        "lnPlace":"Geef achternaam in",
+        "button1":"Verder",
+        "noFlight":"Geen vlucht",
+        "noData":"Geen vluchten gevonden tussen",
+        "and":"en",
+        "loading":"Laden"
+    },
+    "pickSeats":{
+        "gobackBtn":"Terug",
+        "title":"Selecteer zetels",
+        "passengers":"Passagiers",
+        "selectSeat":"Selecteer zetel",
+        "seatSelected":"Zetel geselecteerd",
+        "button1":"Verder",
+        "button2":"Volgende vlucht",
+        "legend1":"Bezet",
+        "legend2":"Beschikbaar",
+        "legend3":"Geselecteerd",
+        "class1":"Eerste klasse",
+        "class2":"Tweede klasse"
+    },
+    "flightOverview":{
+        "gobackBtn":"Terug",
+        "title":"Overzicht",
+        "total":"Totaal",
+        "button1":"Verder naar betalen"
+    },
+    "paywall":{
+        "title":"Betalen",
+        "cardNr":"Kaartnummer",
+        "cardHolder":"Naam kaarthouder",
+        "expiry":"Verval datum",
+        "security":"Beveiligingscode",
+        "button1":"Bevestigen"
+    },
+    "ticket":{
+        "title":"Tickets",
+        "name":"Passagiers naam",
+        "from":"Van",
+        "to":"Naar",
+        "date":"Datum",
+        "flight":"Vlucht",
+        "gate":"Gate",
+        "time":"Tijd",
+        "seat":"Zetel",
+        "boarding":"Instappen tot",
+        "pass":"Instapkaart"
+    },
+    "adminOverview":{
+        "title":"Toekomstige vluchten",
+        "button1":"Vlucht toevoegen",
+        "button2":"Admin toevoegen",
+        "button3":"Reviews",
+        "searchPlace":"Zoek vluchtnummer",
+        "searchBtn":"Zoeken",
+        "editBtn":"Aanpassen",
+        "noFlights":"Geen vluchten gevonden",
+        "allFlights":"Toon alle vluchten",
+        "reviewBtn":"Reviews",
+        "taken":"Bezet"
+    },
+    "editFlight":{
+        "gobackBtn":"Terug",
+        "title":"Vlucht aanpassen",
+        "flightName":"Vluchtnaam",
+        "plane":"Vliegtuig",
+        "gate":"Gate",
+        "departureAirport":"Vertrek luchthaven",
+        "destinationAirport":"Aankomst luchthaven",
+        "departureTime":"Vertrek tijd",
+        "button1":"Wijzigen"
+    },
+    "addAdmin":{
+        "gobackBtn":"Terug",
+        "title":"Admin toevoegen",
+        "email":"Email",
+        "emailPlace":"naam@acme.com",
+        "firstname":"Voornaam",
+        "fnPlace":"Geef voornaam in",
+        "lastname":"Achternaam",
+        "lnPlace":"Geef achternaam in",
+        "password":"Wachtwoord",
+        "psPlace":"Geef wachtwoord in",
+        "cPassword":"Bevestig wachtwoord",
+        "button":"Aanmaken",
+        "button2":"Voeg nog een admin toe",
+        "succes":"Succesvol toegevoegd"
+    },
+    "addFlight":{
+        "gobackBtn":"Terug",
+        "title":"Nieuwe vlucht toevoegen",
+        "flightName":"Vluchtnaam",
+        "fnPlace":"Geef vluchtnaam in",
+        "plane":"Vliegtuig",
+        "planePlace":"Selecteer het vliegtuig",
+        "gate":"Gate",
+        "gatePlace":"Geef gatenummer in",
+        "departureAirport":"Vertrek luchthaven",
+        "airportPlace":"Selecteer de luchthaven",
+        "destinationAirport":"Aankomst luchthaven",
+        "departureTime":"Vertrek tijd",
+        "price":"Prijs",
+        "pricePlace":"Geef de prijs in",
+        "highSeason":"Hoogseizoen(prijs * 1.75)",
+        "button1":"Vlucht toevoegen",
+        "succes":"Vlucht succesvol toegevoegd",
+        "another":"Voeg nog een vlucht toe"
+    },
+    "reviews":{
+        "searchBtn":"Zoeken",
+        "searchPlace":"Zoek vluchtnummer",
+        "title":"Reviews",
+        "button1":"Toekomstige vluchten",
+        "noFlights":"Geen vluchten gevonden",
+        "allFlights":"Toon alle vluchten",
+        "gobackBtn":"Terug",
+        "flight":"Vlucht: "
+    },
+    "addReview":{
+        "title1":"Geef een review",
+        "intertitle1":"Score",
+        "intertitle2":"Schrijf jouw review",
+        "button":"Versturen",
+        "title2":"Jouw review",
+        "gobackBtn":"Terug"
+    },
+    "selectTravelers":{
+        "adult":"Volwassenen",
+        "adulttxt":"16 of ouder wanneer de vlucht vertrek",
+        "children":"Kinderen",
+        "childrentxt":"16 of jonger wanneer de vlucht vertrek",
+        "button":"Klaar"
+    },
+    "selectLocation":{
+        "pickCountry":"Kies een land",
+        "pickAirport":"Kies een luchthaven",
+        "pickCountryFirst":"Selecteer een land"
+    }
+ }
