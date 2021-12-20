@@ -86,7 +86,7 @@
         }
       }
     }
-
+    console.log(takenSeatsEco)
     //Check is there is data to make grid
     if (economySeats !== 0 && businessSeats !== 0) {
       gridLayout(economySeats, businessSeats)
@@ -483,7 +483,7 @@
                           </div>
                         {:else}
                           <div>
-                            {#if includesMultiDimension(takenSeatsEco, `[${tellerEco},'${colNr}']`)}
+                            {#if includesMultiDimension(takenSeatsEco, [tellerEco,colNr])}
                               <Seat
                                 row={tellerEco}
                                 column={colNr}
@@ -586,7 +586,7 @@
                         </div>
                       {:else}
                         <div>
-                          {#if includesMultiDimension( takenSeatsBus, [tellerBus, colNr], )}
+                          {#if includesMultiDimension( takenSeatsBus, [tellerBus, colNr])}
                             <Seat
                               row={tellerBus}
                               column={colNr}
@@ -642,7 +642,7 @@
                           </div>
                         {:else}
                           <div>
-                            {#if includesMultiDimension(takenSeatsEco, `[${tellerEco},'${colNr}']`)}
+                            {#if includesMultiDimension(takenSeatsEco, [tellerEco,colNr])}
                               <Seat
                                 row={tellerEco}
                                 column={colNr}

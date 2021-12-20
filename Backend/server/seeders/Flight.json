@@ -544,5 +544,18 @@
     "Start": "f9b07a16-e7c1-45cd-9291-c05ff9293f1e",
     "PlaneId": "dedf4bf4-baf1-4641-8f7d-3835a7095cdb",
     "Plane": "dedf4bf4-baf1-4641-8f7d-3835a7095cdb"
+  },
+  {
+    "FlightId": "116ad3c8-71d7-4cfc-af67-65c4c509dad3",
+    "Name":"A 0188",
+    "Date": "2021-12-22 17:05:34",
+    "Price": "34.85",
+    "Gate": 2,
+    "DestinationId": "39a0465c-efbc-4260-b7df-1272b3bc560b",
+    "Destination": "39a0465c-efbc-4260-b7df-1272b3bc560b",
+    "StartId": "a604f5d6-78bb-4321-95f0-f2e29a20f316",
+    "Start": "a604f5d6-78bb-4321-95f0-f2e29a20f316",
+    "PlaneId": "dedf4bf4-baf1-4641-8f7d-3835a7095cdb",
+    "Plane": "e1ebd896-c6cb-41c2-a795-69635f5c9873"
   }
 ]
