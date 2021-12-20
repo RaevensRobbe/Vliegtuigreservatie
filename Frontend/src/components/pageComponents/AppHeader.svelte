@@ -46,6 +46,7 @@
   }
 
   const goToAccountInfo = async () => {
+    toggleAccountTab()
     loginCompStore.set({
       showRegister: false,
       showLogin: false,
@@ -58,6 +59,7 @@
   }
 
   function logout() {
+    toggleAccountTab()
     const auth = getAuth()
     auth.signOut()
     goto('/')
