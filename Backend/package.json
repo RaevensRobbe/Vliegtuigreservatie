@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx tsc && node dist/app.js",
-    "dev": "npx nodemon --watch server/**/* --exec ts-node server/app.ts"
+    "dev": "npx nodemon --watch server/**/* --exec ts-node server/app.ts",
+    "build": "tsc -p ."
   },
   "author": "",
   "license": "ISC",
@@ -30,9 +31,10 @@
     "guid-typescript": "^1.0.9",
     "mongodb": "^3.6.11",
     "mysql": "^2.18.1",
+    "pm2": "^5.1.2",
     "reflect-metadata": "^0.1.13",
-    "swagger-ui-express": "^4.2.0",
     "type-graphql": "^1.1.1",
+    "swagger-ui-express": "^4.2.0",
     "typeorm": "^0.2.38",
     "typeorm-extension": "^0.3.0"
   }
