@@ -14,7 +14,7 @@ import {
     initialLocale: 'en',
   })
   const MESSAGE_FILE_URL_TEMPLATE = '/src/utils/lang/{locale}.json';
-  //const MESSAGE_FILE_URL_TEMPLATE = '/public/lang/{locale}.json';
+  //const MESSAGE_FILE_URL_TEMPLATE = '/static/lang/{locale}.json';
   let cachedLocale;
 
   function setupI18n({ withLocale: _locale } = { withLocale: 'en' }) {
