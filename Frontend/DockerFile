@@ -1,0 +1,30 @@
+# front/Dockerfile
+# First, we build our app to be compiled as Javascript
+# FROM node:16.9.1-alpine as build-container
+# WORKDIR /usr/app/src
+# COPY ["package.json", "package-lock.json", "tsconfig.json", "./"]
+# RUN npm ci
+# RUN npm install http-server -g
+# COPY . .
+# RUN npm run build
+# EXPOSE 5000
+# CMD ["npm", "run", "preview"]
+
+FROM node:16.9.1-alpine as build-container
+WORKDIR /app
+COPY ["package.json", "package-lock.json", "tsconfig.json", "./"]
+RUN npm ci
+
+COPY . .
+RUN npm run build
+
+FROM node:16.9.1-alpine as production-container
+WORKDIR /app
+COPY ["package.json", "package-lock.json", "tsconfig.json", "./"]
+RUN npm ci --only=production
+COPY --from=build-container /app/build .
+
+EXPOSE 3000
+
+CMD ["node", "index.js"]
+
