@@ -1,10 +1,10 @@
 {
-  "short_name": "MCT Airlines",
-  "name": "MCT Airlines",
-  "start_url": "/",
+  "theme_color": "#008066",
   "background_color": "#008066",
   "display": "standalone",
   "scope": "/",
-  "theme_color": "#008066",
-  "description": "Booking system for flights"
+  "start_url": "/",
+  "description": "Booking system for flights",
+  "name": "MCT Airlines",
+  "short_name": "MCT Airlines"
 }
