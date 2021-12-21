@@ -92,7 +92,7 @@ Backend API
 
 Database
 - [X]  SQL
-- [X]  Realitme
+- [ ]  Realitme
 
 Auth
 - [X]  Firebase
