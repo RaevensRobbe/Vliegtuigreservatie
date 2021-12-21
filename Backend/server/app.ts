@@ -39,7 +39,7 @@ import admin from 'firebase-admin'
 import dotenv from 'dotenv'
 import authMiddleware from './auth/firebaseAuthMiddleware'
 import cors from 'cors'
-//const swaggerUi = require('swagger-ui-express')
+import helmet from 'helmet'
 import swaggerUi from 'swagger-ui-express'
 import { swaggerDocument } from "./swagger"
 
@@ -62,6 +62,7 @@ const app = express(),
 // MIDDLEWARE
 app.use(express.json()) // for parsing application/json
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use(helmet());
 //app.use(authMiddleware);
 app.use(cors())
 ;(async () => {

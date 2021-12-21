@@ -20,6 +20,11 @@ Demets Jelle & Raevens Robbe
 - user@howest.be
 - P@ssw0rd
 
+#### Extra info
+> Om het project volledig te testen is het best dat je de 'Api' service in docker uitschakeld.
+
+> Run 'npm run dev' in zowel de frontend als backend map.
+
 ## Grootste behaalde succes
 - Select seat pagina
 - Select flight date pagina
@@ -87,7 +92,7 @@ Backend API
 
 Database
 - [X]  SQL
-- [X]  Realitme
+- [ ]  Realitme
 
 Auth
 - [X]  Firebase
@@ -100,6 +105,8 @@ Kwetsbaarheid
 
 API Docs
 - [X]  Backend documenteerd zichzelf (GraphQL en Swagger)
+
+> Swagger kan je vinden op: localhost:port/api-docs/
 - [X]  Statuscodes bij foutcondities worden gedocumenteerd
 
 Framework
